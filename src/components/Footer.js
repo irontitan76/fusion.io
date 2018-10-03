@@ -93,7 +93,4 @@ export class Footer extends Component {
   }
 }
 
-Footer.defaultProps = {};
-Footer.propTypes = {};
-
 export default withStyles(styles)(Footer);

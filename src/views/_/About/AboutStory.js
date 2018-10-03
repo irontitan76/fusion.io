@@ -7,11 +7,15 @@ import withStyles from '@material-ui/core/styles/withStyles';
 import { story } from './about';
 
 const styles = theme => ({
-
+  storySubtitle: {
+    marginBottom: 50
+  }
 });
 
 class AboutStory extends Component {
   render() {
+    const { classes } = this.props;
+    
     return <Grid container id='story'>
       <Grid item xs={12}>
         <Grid alignItems='center' container justify='center'>
@@ -38,9 +42,10 @@ class AboutStory extends Component {
 
           <Typography
             align='center'
+            className={classes.storySubtitle}
             component={Grid}
             gutterBottom
-            style={{ marginBottom: 50 }}
+            item
             variant='subheading'
             md={5}
             xs={11}>
