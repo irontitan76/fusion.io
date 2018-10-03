@@ -29,6 +29,37 @@ const styles = theme => ({
 });
 
 export class BoxItem extends Component {
+  renderCardActions = () => {
+    const { item } = this.props;
+    if ( !item.CardActionsProps ) return null;
+    return <CardActions {...item.CardActionsProps} />;
+  };
+
+  renderCardContent = () => {
+    const { item } = this.props;
+    if ( !item.CardContentProps ) return null;
+    return <CardContent {...item.CardContentProps} />;
+  };
+
+  renderCardHeader = () => {
+    const { item } = this.props;
+    if ( !item.CardHeaderProps ) return null;
+    return (
+      <CardHeader
+        titleTypographyProps={{
+          variant: 'headline'
+        }}
+        {...item.CardHeaderProps}>
+      </CardHeader>
+    );
+  }
+
+  renderCardMedia = () => {
+    const { item } = this.props;
+    if ( !item.CardMediaProps ) return null;
+    return <CardMedia {...item.CardMediaProps} />;
+  }
+
   render() {
     const { classes, item, key } = this.props;
 
@@ -46,26 +77,11 @@ export class BoxItem extends Component {
           elevation={1}
           {...item.CardProps}>
 
-          {
-            item.CardMediaProps
-              ? <CardMedia {...item.CardMediaProps} />
-              : null
-          }
-
-          {
-            item.CardHeaderProps
-              ? <CardHeader
-                  titleTypographyProps={{
-                    variant: 'headline'
-                  }}
-                  {...item.CardHeaderProps}>
-                </CardHeader>
-              : null
-          }
-
-          { !!item.CardContentProps && <CardContent {...item.CardContentProps} /> }
+          { this.renderCardMedia() }
+          { this.renderCardHeader() }
+          { this.renderCardContent() }
           { !!item.isDivider && <Divider light /> }
-          { !!item.CardActionsProps && <CardActions {...item.CardActionsProps} /> }
+          { this.renderCardActions() }
 
         </Card>
 

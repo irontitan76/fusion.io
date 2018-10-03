@@ -10,7 +10,7 @@ import Footer from 'components/Footer';
 import Hero from 'components/Hero';
 import TabBar from 'components/TabBar';
 
-import { services, title } from './manifest';
+import { services, title } from './manifests/home';
 
 const styles = theme => ({
   heroContent: {

@@ -10,7 +10,7 @@ import Box from 'components/Box';
 import Footer from 'components/Footer';
 import SearchBar from 'components/SearchBar';
 
-import { careersManifest } from 'common/manifests';
+import careersManifest from './manifests/careers';
 
 const styles = theme => ({
   appBar: {

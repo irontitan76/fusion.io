@@ -97,3 +97,8 @@ export const services = {
   ],
   title: 'Our Services',
 };
+
+export default {
+  services,
+  title,
+};

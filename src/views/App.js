@@ -7,6 +7,9 @@ import MuiThemeProvider from '@material-ui/core/styles/MuiThemeProvider';
 import withStyles from '@material-ui/core/styles/withStyles';
 
 
+import About1 from 'views/_/About';
+import Home1 from 'views/_/Home';
+
 import Layout from 'views/Layout';
 import Home from 'views/_Industries';
 import AboutUs from 'views/_Industries/AboutUs';
@@ -30,7 +33,9 @@ export class App extends Component {
           <Router>
             <Layout>
               <Route exact path='/' component={Home} />
+              <Route exact path='/1' component={Home1} />
               <Route exact path='/about' component={AboutUs} />
+              <Route exact path='/about1' component={About1} />
               <Route exact path='/careers' component={Careers} />
               <Route exact path='/insights' component={Insights} />
 

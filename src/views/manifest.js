@@ -203,10 +203,7 @@ export const secondaryMenu = [
   }
 ];
 
-export default {
-  menus: {
-    primary: primaryMenu,
-    secondary: secondaryMenu
-  },
-  title,
+export const menus = {
+  primary: primaryMenu,
+  secondary: secondaryMenu
 };

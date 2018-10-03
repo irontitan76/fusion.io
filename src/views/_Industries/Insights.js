@@ -10,7 +10,7 @@ import Box from 'components/Box';
 import Footer from 'components/Footer';
 import SearchBar from 'components/SearchBar';
 
-import { insightsManifest } from 'common/manifests';
+import insightsManifest from './manifests/insights';
 
 const styles = theme => ({
   appBar: {

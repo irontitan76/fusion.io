@@ -7,7 +7,7 @@ import withStyles from '@material-ui/core/styles/withStyles';
 
 import Footer from 'components/Footer';
 import TabBar from 'components/TabBar';
-import { aboutManifest } from 'common/manifests';
+import aboutManifest from './manifests/about';
 
 const styles = theme => ({
   button: {
@@ -53,7 +53,7 @@ const styles = theme => ({
   }
 });
 
-export class Home extends Component {
+export class AboutUs extends Component {
   render() {
     const { classes } = this.props;
 
@@ -194,7 +194,7 @@ export class Home extends Component {
   }
 }
 
-Home.defaultProps = {};
-Home.propTypes = {};
+AboutUs.defaultProps = {};
+AboutUs.propTypes = {};
 
-export default withStyles(styles, { withTheme: true })(Home);
+export default withStyles(styles, { withTheme: true })(AboutUs);

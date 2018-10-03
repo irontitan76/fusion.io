@@ -1,13 +1,13 @@
 import React from 'react';
 
 import Nav from 'components/Nav';
-import { layoutManifest } from 'common/manifests';
+import { menus, title } from './manifest';
 
 export default ({ children }) => (
   <>
     <Nav
-      {...layoutManifest.menus}
-      title='FUSION' />
+      {...menus}
+      title={title} />
     { children }
   </>
 );

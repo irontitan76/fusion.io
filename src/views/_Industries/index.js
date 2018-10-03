@@ -11,7 +11,7 @@ import Carousel from 'components/Carousel';
 import Footer from 'components/Footer';
 import Hero from 'components/Hero';
 
-import { homeManifest } from 'common/manifests';
+import homeManifest from './manifests/home';
 
 const styles = theme => ({
   button: {
@@ -148,7 +148,7 @@ export class Home extends Component {
   renderOverview = () => {
     const { classes } = this.props;
     return <Box data={homeManifest.overview} style={{ paddingTop: 40 }} />;
-  }
+  };
 
   render() {
     const { classes } = this.props;

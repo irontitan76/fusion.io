@@ -1,3 +1,5 @@
+// TOO MUCH ABSTRACTION
+
 import React, { Component } from 'react';
 
 import Grid from '@material-ui/core/Grid';
@@ -20,9 +22,8 @@ const styles = theme => ({
 export class Box extends Component {
   renderItems = () => {
     const { data } = this.props;
-
     return <BoxItems items={data.items} />;
-  }
+  };
 
   render() {
     const { classes, data, ...props } = this.props;
@@ -41,9 +42,7 @@ export class Box extends Component {
   }
 }
 
-Box.defaultProps = {
-
-};
+Box.defaultProps = {};
 
 Box.propTypes = {};
 
