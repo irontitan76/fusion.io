@@ -1,7 +1,7 @@
 export const hero = {
   button: {
     label: 'Read Our Story',
-    path: '/'
+    path: '#story'
   },
   title: 'We Believe in Making the Universe Better',
   subtitle: 'Our mission is to empower every individual and \
@@ -35,7 +35,7 @@ export const values = {
     },
     {
      description: 'Challenge ideas so that better ones are borne from them. \
-       This means that here at titan, we understand that improvement can always \
+       This means that here at fusion, we understand that improvement can always \
        happen and our work is never done. Every person is open to challenges \
        and because of that, innovation is spurred.',
      icon: ['far', 'flag'],
@@ -44,7 +44,7 @@ export const values = {
      title: 'Challenge Respectfully',
     },
     {
-     description: 'Integrity is paramount at titan.io. We believe in compassion \
+     description: 'Integrity is paramount at fusion.io. We believe in compassion \
        and that is what brings people together, inspires people to win, and \
        accelerates humanity forward.',
      icon: ['far', 'hands-heart'],

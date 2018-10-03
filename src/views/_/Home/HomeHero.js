@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import Link from 'react-router-dom/Link';
-import PropTypes from 'prop-types';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import Button from '@material-ui/core/Button';
@@ -8,7 +7,7 @@ import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import withStyles from '@material-ui/core/styles/withStyles';
 
-import { hero } from '../manifests/home';
+import { hero } from './home';
 
 const styles = theme => ({
   hero: {
@@ -39,6 +38,7 @@ const styles = theme => ({
   heroIcon: {
     color: theme.palette.common.white,
     fontSize: '10rem',
+    marginBottom: theme.spacing.unit * 3,
     [theme.breakpoints.down('xs')]: {
       fontSize: '6rem'
     }
@@ -47,7 +47,7 @@ const styles = theme => ({
     color: theme.palette.common.white,
     fontSize: 26,
     fontWeight: 400,
-    marginBottom: theme.spacing.unit * 3,
+    marginBottom: theme.spacing.unit * 4,
     [theme.breakpoints.down('xs')]: {
       fontSize: 16
     }

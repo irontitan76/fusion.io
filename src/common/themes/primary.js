@@ -2,8 +2,8 @@ import { createMuiTheme } from '@material-ui/core/styles';
 
 const aqua = '#7fdbff';
 const blue = '#0074D9'; /* Medium Electric Blue */
-const gray = '#aaa';
-const green = '#2ecc40';
+const gray = '#999';
+const green = '#3d9970';
 const lime = '#01ff70';
 const maroon = '#85144b';
 const navy = '#001f3f';
@@ -25,6 +25,7 @@ export default createMuiTheme({
     lime,
     maroon,
     navy,
+    offwhite,
     olive,
     orange,
     primary: { main: blue, contrastText: offwhite },

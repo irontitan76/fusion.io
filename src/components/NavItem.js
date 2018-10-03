@@ -53,7 +53,7 @@ export class NavItem extends Component {
   }
 
   renderCollapseMenu = () => {
-    const { match, open } = this.state;
+    const { open } = this.state;
     const { classes, item } = this.props;
 
     return (

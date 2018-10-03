@@ -1,11 +1,10 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
 
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import withStyles from '@material-ui/core/styles/withStyles';
 
-import { banner } from '../manifests/about';
+import { banner } from './about';
 
 const styles = theme => ({
   author: {
@@ -29,7 +28,7 @@ const styles = theme => ({
 class AboutBanner extends Component {
   render() {
     const { classes } = this.props;
-    
+
     return <Grid container>
       <Grid className={classes.banner} item xs={12}>
         <Typography

@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid';

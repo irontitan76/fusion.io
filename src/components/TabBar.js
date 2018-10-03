@@ -126,7 +126,7 @@ export class TabBar extends Component {
                   justify='center'>
                   <Grid item xs={12}>
                     { tab.image
-                      && <img { ...tab.image } /> }
+                      && <img alt='' { ...tab.image } /> }
                   </Grid>
                 </Grid>
 

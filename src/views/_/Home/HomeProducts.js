@@ -1,14 +1,10 @@
 import React, { Component } from 'react';
-import Link from 'react-router-dom/Link';
-import PropTypes from 'prop-types';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
-import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import withStyles from '@material-ui/core/styles/withStyles';
 
-import { products } from '../manifests/home';
+import { products } from './home';
 
 const styles = theme => ({
   products: {
@@ -22,6 +18,10 @@ const styles = theme => ({
   },
   product: {
     marginBottom: theme.spacing.unit * 5,
+  },
+  productContainer: {
+    margin: 'auto',
+    width: '100%',
   },
   productItem: {
     backgroundRepeat: 'no-repeat',
