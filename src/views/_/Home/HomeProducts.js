@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Link from 'react-router-dom/Link';
 
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
@@ -7,6 +8,9 @@ import withStyles from '@material-ui/core/styles/withStyles';
 import { products } from './home';
 
 const styles = theme => ({
+  light: {
+    color: `${theme.palette.common.white} !important`,
+  },
   products: {
     marginBottom: theme.spacing.unit * 3,
   },
@@ -28,6 +32,9 @@ const styles = theme => ({
     backgroundSize: 'cover',
     padding: theme.spacing.unit * 3,
     height: 450,
+  },
+  productItemLink: {
+    textDecoration: 'none',
   },
   productItemSubtitle: {
     color: '#000',
@@ -73,28 +80,40 @@ class HomeProducts extends Component {
           {
             items.map((item, key) => {
               return <Grid item key={key} {...item.size}>
+                <Link className={classes.productItemLink} to={item.path}>
                   <Grid
-                  className={classes.productItem}
-                  container
-                  direction='column'
-                  justify='flex-end'
-                  style={{ backgroundImage: `url('${item.image.src}')` }}>
-                  <Grid item>
-                    <Typography
-                      className={classes.productItemTitle}
-                      gutterBottom
-                      variant='title'>
-                      { item.title }
-                    </Typography>
+                    className={classes.productItem}
+                    container
+                    direction='column'
+                    justify='flex-end'
+                    style={{ backgroundImage: `url('${item.image.src}')` }}>
+                    <Grid item>
+                      <Typography
+                        className={`
+                          ${classes.productItemTitle}
+                          ${item.variant === 'light'
+                            ? classes.light
+                            : ''
+                        }`}
+                        gutterBottom
+                        variant='title'>
+                        { item.title }
+                      </Typography>
 
-                    <Typography
-                      className={classes.productItemSubtitle}
-                      gutterBottom
-                      variant='subheading'>
-                      { item.subheading }
-                    </Typography>
+                      <Typography
+                        className={`
+                          ${classes.productItemSubtitle}
+                          ${item.variant === 'light'
+                            ? classes.light
+                            : ''
+                        }`}
+                        gutterBottom
+                        variant='subheading'>
+                        { item.subheading }
+                      </Typography>
+                    </Grid>
                   </Grid>
-                </Grid>
+                </Link>
               </Grid>
             })
           }

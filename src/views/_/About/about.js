@@ -20,6 +20,11 @@ export const values = {
        fame, power, or glory, but humanity.',
      icon: ['far', 'heart'],
      label: 'Innovators at Heart',
+     media: {
+       alt: 'innovators at heart',
+       src: '/images/leader2.jpg',
+       type: 'image'
+     },
      subheading: 'Approach innovation with a structured thought process',
      title: 'Innovators at Heart',
     },
@@ -30,6 +35,11 @@ export const values = {
        think strategically, but act quickly.',
      icon: ['far', 'clock'],
      label: 'Bias for Action',
+     media: {
+       alt: 'bias for action',
+       src: '/images/action.jpg',
+       type: 'image'
+     },
      subheading: 'Anticipate and respond to opportunities to improve',
      title: 'Bias for Action',
     },
@@ -40,6 +50,11 @@ export const values = {
        and because of that, innovation is spurred.',
      icon: ['far', 'flag'],
      label: 'Challenge Respectfully',
+     media: {
+       alt: 'challenge respectfully',
+       src: '/images/challenge2.jpg',
+       type: 'image'
+     },
      subheading: 'Generate ideas that challenge the status quo',
      title: 'Challenge Respectfully',
     },
@@ -49,6 +64,11 @@ export const values = {
        accelerates humanity forward.',
      icon: ['far', 'hands-heart'],
      label: 'Be Compassionate',
+     media: {
+       alt: 'be compassionate',
+       src: '/images/compassion.jpg',
+       type: 'image'
+     },
      subheading: 'Every moment is an opportunity to improve lives',
      title: 'Be Compassionate',
     },
@@ -58,6 +78,11 @@ export const values = {
        effectiveness and will always improve upon improving.',
      icon: ['far', 'handshake'],
      label: 'Collaborate Efficiently',
+     media: {
+       alt: 'collaborate efficiently',
+       src: '/images/collaborate.jpg',
+       type: 'image'
+     },
      subheading: 'Form meaningful relationships and produce results together',
      title: 'Collaborate Efficiently',
     },

@@ -3,11 +3,14 @@ import PropTypes from 'prop-types';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import AppBar from '@material-ui/core/AppBar';
+import Fade from '@material-ui/core/Fade';
 import Grid from '@material-ui/core/Grid';
 import Tab from '@material-ui/core/Tab';
 import Tabs from '@material-ui/core/Tabs';
 import Typography from '@material-ui/core/Typography';
 import withStyles from '@material-ui/core/styles/withStyles';
+
+import { breakLine } from 'common/functions';
 
 const styles = theme => ({
   description: {
@@ -26,10 +29,9 @@ const styles = theme => ({
     }
   },
   root: {
-    // backgroundColor: '#111'
+
   },
   subheading: {
-    // fontWeight: 300,
     marginBottom: theme.spacing.unit * 4
   },
   tab: {
@@ -49,18 +51,6 @@ export class TabBar extends Component {
   onChange = (event, value) => {
     this.setState({ value });
   };
-
-  breakLine = str => (
-    str.split('\n').map((i, key) => (
-      <Typography
-        align='center'
-        className={this.props.classes.descriptionText}
-        component={Grid}
-        key={key}>
-        {i}<br />
-      </Typography>
-    ))
-  );
 
   renderTabs = tabs => {
     const { value } = this.state;
@@ -96,43 +86,45 @@ export class TabBar extends Component {
             {tab.subheading}
           </Typography>
 
-          <Grid item xs={12}>
-            <Grid
-              alignItems='center'
-              container
-              justify='space-around'>
+          <Fade in timeout={{ enter: 750 }}>
+            <Grid item xs={12}>
               <Grid
-                className={classes.description}
-                item
-                md={5}
-                xs={12}>
-
+                alignItems='center'
+                container
+                justify='space-around'>
                 <Grid
-                  alignItems='center'
-                  container
-                  direction='column'
-                  justify='center'>
-                  { this.breakLine(tab.description) }
-                </Grid>
+                  className={classes.description}
+                  item
+                  md={5}
+                  xs={12}>
 
-              </Grid>
-
-              <Grid item md={5} xs={12}>
-
-                <Grid
-                  alignItems='center'
-                  container
-                  direction='column'
-                  justify='center'>
-                  <Grid item xs={12}>
-                    { tab.image
-                      && <img alt='' { ...tab.image } /> }
+                  <Grid
+                    alignItems='center'
+                    container
+                    direction='column'
+                    justify='center'>
+                    { breakLine(tab.description) }
                   </Grid>
+
                 </Grid>
 
+                <Grid item md={5} xs={12}>
+
+                  <Grid
+                    alignItems='center'
+                    container
+                    direction='column'
+                    justify='center'>
+                    <Grid item xs={12}>
+                      { (tab.media && tab.media.type === 'image')
+                        && <img alt={tab.media.alt} src={tab.media.src} /> }
+                    </Grid>
+                  </Grid>
+
+                </Grid>
               </Grid>
             </Grid>
-          </Grid>
+          </Fade>
 
         </Grid>
       )

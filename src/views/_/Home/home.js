@@ -62,39 +62,45 @@ export const products = {
         alt: 'design',
         src: './images/design-resized.jpg',
       },
+      path: '/technology/products/1',
       size: {
         md: 4,
         sm: 6,
         xs: 12
       },
       subtitle: 'A React Component Library',
-      title: 'Design System'
+      title: 'Design System',
+      variant: 'dark',
     },
     {
       image: {
         alt: 'design',
         src: './images/sf.jpg',
       },
+      path: '/technology/products/2',
       size: {
         md: 4,
         sm: 6,
         xs: 12
       },
       subtitle: 'A React Component Library',
-      title: 'Design System'
+      title: 'Design System',
+      variant: 'light',
     },
     {
       image: {
         alt: 'team',
         src: './images/team-resized.jpg',
       },
+      path: '/technology/products/3',
       size: {
         md: 8,
         sm: 12,
         xs: 12
       },
       subtitle: 'Optimally Built Teams',
-      title: 'Professional Services'
+      title: 'Professional Services',
+      variant: 'light',
     }
   ]
 };

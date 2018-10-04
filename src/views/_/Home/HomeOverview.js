@@ -58,6 +58,7 @@ class HomeOverview extends Component {
                   <FontAwesomeIcon
                     color='#0074d9'
                     icon={item.icon}
+                    size='2x'
                   />
                 }
                 title={item.title}/>
