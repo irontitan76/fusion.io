@@ -1,0 +1,16 @@
+{
+  "name": "fusion.io--cli",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "commander": "^2.18.0",
+    "inquirer": "^6.2.0"
+  },
+  "engines": {
+    "node": ">=10.4.1",
+    "npm": ">=6.1.0"
+  },
+  "scripts": {
+    "start": "node ./index.js"
+  }
+}

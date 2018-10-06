@@ -5,6 +5,7 @@ import Typography from '@material-ui/core/Typography';
 export const breakLine = str => (
   str.split('\n').map((i, key) => (
     <Typography
+      align='center'
       component={Grid}
       key={key}>
       {i}<br />

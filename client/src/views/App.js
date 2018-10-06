@@ -27,6 +27,7 @@ import Technology from 'views/Technology';
 
 // Authentication
 import Login from 'views/Login';
+import Signup from 'views/Signup';
 
 
 export class App extends Component {
@@ -47,6 +48,7 @@ export class App extends Component {
               <Route exact path='/tech' component={Technology} />
 
               <Route exact path='/login' component={Login} />
+              <Route exact path='/signup' component={Signup} />
             </Layout>
           </Router>
         </MuiThemeProvider>

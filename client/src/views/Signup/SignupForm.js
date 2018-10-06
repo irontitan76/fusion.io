@@ -5,62 +5,57 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
-import Switch from '@material-ui/core/Switch';
 import TextField from '@material-ui/core/TextField';
 import Typography from '@material-ui/core/Typography';
 import withStyles from '@material-ui/core/styles/withStyles';
 
-import { login } from 'api/session';
+import { signup } from 'api/session';
 
 const styles = theme => ({
-  loginForm: {
+  signupForm: {
     marginBottom: theme.spacing.unit * 8,
     marginTop: theme.spacing.unit * 5,
     [theme.breakpoints.down('sm')]: {
       marginTop: 0,
     },
   },
-  loginFormButton: {
+  signupFormButton: {
     marginBottom: theme.spacing.unit * 2,
   },
-  loginFormContainer: {},
-  loginFormLogo: {
+  signupFormContainer: {},
+  signupFormLogo: {
     marginBottom: theme.spacing.unit * 3,
   },
-  loginFormPaper: {
+  signupFormPaper: {
     paddingBottom: theme.spacing.unit * 3,
     paddingLeft: theme.spacing.unit * 3,
     paddingRight: theme.spacing.unit * 3,
     paddingTop: theme.spacing.unit * 3,
   },
-  loginFormSwitch: {},
-  loginFormSwitchContainer: {
+  signupFormSwitch: {},
+  signupFormSwitchContainer: {
     marginBottom: theme.spacing.unit * 2,
   },
-  loginFormTextField: {
+  signupFormTextField: {
     marginBottom: theme.spacing.unit * 3,
   },
-  loginFormTitlePaper: {
+  signupFormTitlePaper: {
     backgroundColor: '#0074D9',
     paddingBottom: theme.spacing.unit * 3,
     paddingLeft: theme.spacing.unit * 3,
     paddingRight: theme.spacing.unit * 3,
     paddingTop: theme.spacing.unit * 3,
   },
-  loginFormTitle: {},
-  loginFormTitleText: {
+  signupFormTitle: {},
+  signupFormTitleText: {
     color: '#fff',
     letterSpacing: 18,
     fontWeight: 300,
   },
 });
 
-class LoginForm extends Component {
-  state = {
-    isRemembered: false,
-    password: '',
-    username: '',
-  };
+class SignupForm extends Component {
+  state = {};
 
   onChange = event => {
     this.setState({ [event.target.name]: event.target.value });
@@ -68,45 +63,45 @@ class LoginForm extends Component {
 
   onSubmit = () => {
     const { password, username } = this.state;
-    login(password, username);
+    signup(password, username);
     window.location.pathname = '/';
   };
 
   onSwitchChange = name => event => {
     this.setState({ [name]: event.target.checked });
-  };
+  }
 
   render() {
-    const { isRemembered, password, username } = this.state;
+    const { firstName, lastName, password, passwordConfirmation, username } = this.state;
     const { classes } = this.props;
 
     return <Grid
-      className={classes.loginForm}
+      className={classes.signupForm}
       container
       justify='center'>
 
       <Grid
-        className={classes.loginFormContainer}
+        className={classes.signupFormContainer}
         item
         md={3}
         sm={6}
         xs={12}>
 
         <Paper
-          className={classes.loginFormTitlePaper}
+          className={classes.signupFormTitlePaper}
           elevation={1}>
           <Typography
             align='center'
-            className={classes.loginFormTitle}
+            className={classes.signupFormTitle}
             component='div'>
             <FontAwesomeIcon
-              className={classes.loginFormLogo}
+              className={classes.signupFormLogo}
               color='#fff'
               icon={['fal', 'atom']}
               size='6x'
             />
             <Typography
-              className={classes.loginFormTitleText}
+              className={classes.signupFormTitleText}
               variant='title'>
               FUSION
             </Typography>
@@ -114,11 +109,27 @@ class LoginForm extends Component {
         </Paper>
 
         <Paper
-          className={classes.loginFormPaper}
+          className={classes.signupFormPaper}
           elevation={1}>
           <form>
             <TextField
-              className={classes.loginFormTextField}
+              className={classes.signupFormTextField}
+              fullWidth
+              label='First name'
+              name='firstName'
+              onChange={this.onChange}
+              value={firstName}
+            />
+            <TextField
+              className={classes.signupFormTextField}
+              fullWidth
+              label='Last name'
+              name='firstName'
+              onChange={this.onChange}
+              value={lastName}
+            />
+            <TextField
+              className={classes.signupFormTextField}
               fullWidth
               label='Username'
               name='username'
@@ -126,45 +137,39 @@ class LoginForm extends Component {
               value={username}
             />
             <TextField
-              className={classes.loginFormTextField}
+              className={classes.signupFormTextField}
               fullWidth
               label='Password'
               name='password'
               onChange={this.onChange}
               value={password}
             />
+            <TextField
+              className={classes.signupFormTextField}
+              fullWidth
+              label='Confirm password'
+              name='passwordConfirmation'
+              onChange={this.onChange}
+              value={passwordConfirmation}
+            />
           </form>
 
-          <Grid
-            className={classes.loginFormSwitchContainer}
-            container
-            justify='flex-end'>
-            <Typography component={Grid} item>
-              Remember me
-              <Switch
-                className={classes.loginFormSwitch}
-                checked={isRemembered}
-                onChange={this.onSwitchChange('isRemembered')}
-              />
-            </Typography>
-          </Grid>
-
           <Button
-            className={classes.loginFormButton}
+            className={classes.signupFormButton}
             color='primary'
             fullWidth
             onClick={this.onSubmit}
             variant='raised'>
-            Login
+            Sign in
           </Button>
 
           <Button
             color='default'
             component={Link}
             fullWidth
-            to='/signup'
+            to='/login'
             variant='raised'>
-            Sign up
+            Go to Login
           </Button>
 
         </Paper>
@@ -175,4 +180,4 @@ class LoginForm extends Component {
   }
 }
 
-export default withStyles(styles)(LoginForm);
+export default withStyles(styles)(SignupForm);
