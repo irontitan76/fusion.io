@@ -26,9 +26,7 @@ const styles = theme => ({
     letterSpacing: 8,
     textDecoration: 'none'
   },
-  toolbar: {
-
-  }
+  toolbar: {}
 });
 
 export class NavBar extends Component {

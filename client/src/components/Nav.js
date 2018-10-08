@@ -45,7 +45,7 @@ Nav.propTypes = {
 };
 
 const select = state => ({
-  nav: state.nav
+  nav: state.nav,
 })
 
 export default connect(select)(Nav);

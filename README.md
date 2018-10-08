@@ -16,6 +16,11 @@
   - [npm run eject](#npm-run-eject)
 - [Supported Browsers](#supported-browsers)
 
+## Machine Dependencies
+- Text Editor: [Atom](https://atom.io/)
+- Infrastructure: [Google Cloud Console](https://cloud.google.com/sdk/install)
+- Relay: [Watchman](https://facebook.github.io/watchman/docs/install.html)
+
 ## Onboarding Overview
 
 

@@ -1,0 +1,20 @@
+scalar Date
+
+type Article {
+  _id: ID!,
+  _createdAt: Date!,
+  _modifedAt: Date,
+  _publishedAt: Date,
+  body: String,
+  subtitle: String,
+  title: String,
+}
+
+type User {
+  _id: ID!,
+  age: Int,
+  email: String!,
+  firstName: String!,
+  lastName: String!,
+  password: String!,
+}

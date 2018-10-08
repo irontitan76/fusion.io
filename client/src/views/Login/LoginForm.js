@@ -10,13 +10,11 @@ import TextField from '@material-ui/core/TextField';
 import Typography from '@material-ui/core/Typography';
 import withStyles from '@material-ui/core/styles/withStyles';
 
-import { login } from 'api/session';
-
 const styles = theme => ({
   loginForm: {
     marginBottom: theme.spacing.unit * 8,
     marginTop: theme.spacing.unit * 5,
-    [theme.breakpoints.down('sm')]: {
+    [theme.breakpoints.down('xs')]: {
       marginTop: 0,
     },
   },
@@ -26,6 +24,18 @@ const styles = theme => ({
   loginFormContainer: {},
   loginFormLogo: {
     marginBottom: theme.spacing.unit * 3,
+  },
+  loginFormInput: {
+    color: '#111',
+    '&:-webkit-autofill': {
+      '-webkit-box-shadow': 'inset 0 0 0px 9999px white'
+    }
+  },
+  loginFormMessage: {
+    boxSizing: 'border-box',
+    color: theme.palette.red,
+    marginBottom: theme.spacing.unit * 3,
+    height: 12,
   },
   loginFormPaper: {
     paddingBottom: theme.spacing.unit * 3,
@@ -68,8 +78,8 @@ class LoginForm extends Component {
 
   onSubmit = () => {
     const { password, username } = this.state;
-    login(password, username);
-    window.location.pathname = '/';
+    const { onSubmit } = this.props;
+    onSubmit(password, username);
   };
 
   onSwitchChange = name => event => {
@@ -88,8 +98,8 @@ class LoginForm extends Component {
       <Grid
         className={classes.loginFormContainer}
         item
-        md={3}
-        sm={6}
+        md={4}
+        sm={7}
         xs={12}>
 
         <Paper
@@ -120,17 +130,25 @@ class LoginForm extends Component {
             <TextField
               className={classes.loginFormTextField}
               fullWidth
+              inputProps={{
+                className: classes.loginFormInput,
+              }}
               label='Username'
               name='username'
               onChange={this.onChange}
+              type='text'
               value={username}
             />
             <TextField
               className={classes.loginFormTextField}
               fullWidth
+              inputProps={{
+                className: classes.loginFormInput,
+              }}
               label='Password'
               name='password'
               onChange={this.onChange}
+              type='password'
               value={password}
             />
           </form>
@@ -148,6 +166,12 @@ class LoginForm extends Component {
               />
             </Typography>
           </Grid>
+
+          <Typography
+            className={classes.loginFormMessage}
+            gutterBottom>
+            { this.state.message }
+          </Typography>
 
           <Button
             className={classes.loginFormButton}

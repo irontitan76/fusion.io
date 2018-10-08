@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Link from 'react-router-dom/Link';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import Grid from '@material-ui/core/Grid';
@@ -25,6 +26,10 @@ const styles = theme => ({
     color: theme.palette.common.white,
     fontWeight: 300
   },
+  footerLink: {
+    color: theme.palette.common.white,
+    textDecoration: 'none',
+  },
   footerSocial: {
     height: 125,
     paddingTop: theme.spacing.unit * 4,
@@ -35,9 +40,7 @@ const styles = theme => ({
     height: 36,
     width: 36,
   },
-  footerSocialIcon: {
-
-  },
+  footerSocialIcon: {},
   footerText: {
     color: theme.palette.common.white,
   }
@@ -83,6 +86,25 @@ export class Footer extends Component {
       //   title: 'CUSTOMER RESOURCES',
       //   list: []
       // }
+    ];
+
+    const links = [
+      {
+        label: 'Privacy',
+        path: '/company/privacy',
+      },
+      {
+        label: 'Terms of Use',
+        path: '/company/terms-of-use',
+      },
+      {
+        label: 'Cookies',
+        path: '/company/cookies',
+      },
+      {
+        label: 'Sitemap',
+        path: '/company/sitemap',
+      }
     ];
 
     const belowMedium = theme.breakpoints.down('md');
@@ -167,8 +189,14 @@ export class Footer extends Component {
             align='right'
             className={classes.footerCopyright}
             variant='body1'>
-            Privacy &nbsp;| &nbsp;Terms of Use &nbsp;| &nbsp;Cookies &nbsp;|
-            &nbsp;Sitemap
+            {
+              links.map((link, key) => <>
+                <Link className={classes.footerLink} key={key} to={link.path}>
+                  { link.label }
+                </Link>
+                { key === links.length - 1 ? null : ' \u00A0| \u00A0' }
+              </>)
+            }
           </Typography>
         </Grid>
 

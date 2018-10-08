@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import Link from 'react-router-dom/Link';
 import PropTypes from 'prop-types';
 
@@ -11,6 +12,8 @@ import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 import withStyles from '@material-ui/core/styles/withStyles';
 
+import { endSession } from 'actions/session';
+
 const styles = {
   listSize: {
     fontSize: '0.8125rem'
@@ -19,26 +22,24 @@ const styles = {
 
 export class NavUserMenu extends Component {
   state = {
-    auth: true,
     anchorEl: null,
-  };
-
-  handleChange = event => {
-    this.setState({ auth: !this.state.auth });
   };
 
   handleMenu = event => {
     this.setState({ anchorEl: event.currentTarget });
   };
 
-  handleClose = () => {
-    this.handleChange();
+  handleClick = name => {
+    const { dispatch } = this.props;
+    if ( name === 'Sign out' ) {
+      dispatch(endSession());
+    }
     this.setState({ anchorEl: null });
   };
 
   render() {
-    const { auth, anchorEl } = this.state;
-    const { classes, items } = this.props;
+    const { anchorEl } = this.state;
+    const { auth, classes, items } = this.props;
     const open = Boolean(anchorEl);
 
     return auth ? <>
@@ -54,7 +55,7 @@ export class NavUserMenu extends Component {
         anchorEl={anchorEl}
         anchorOrigin={{
           horizontal: 'left',
-          vertical: 'bottom'
+          vertical: 'top'
         }}
         open={open}
         onClose={this.handleClose}
@@ -67,7 +68,7 @@ export class NavUserMenu extends Component {
             <MenuItem
               component={Link}
               key={key}
-              onClick={this.handleClose}
+              onClick={() => this.handleClick(item.name)}
               to={item.path}
               style={{ fontSize: '.8125rem' }}>
               <ListItemIcon>
@@ -80,7 +81,13 @@ export class NavUserMenu extends Component {
           ))
         }
       </Menu>
-    </> : <Button color='inherit' component={Link} onClick={this.handleChange} to='/login'>Login</Button>
+    </> : <Button
+      color='inherit'
+      component={Link}
+      onClick={this.handleChange}
+      to='/login'>
+      Login
+    </Button>
   }
 }
 
@@ -91,4 +98,8 @@ NavUserMenu.propTypes = {
   classes: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles)(NavUserMenu);
+const select = state => ({
+  auth: state.session.auth,
+});
+
+export default withStyles(styles)(connect(select)(NavUserMenu));

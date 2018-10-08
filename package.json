@@ -3,19 +3,14 @@
   "version": "0.0.1",
   "private": true,
   "scripts": {
-    "build": "cd ./client && npm run-script lib && npm run-script build && cd ./../server && npm run-script lib",
-    "build_start": "npm run build && npm run start",
     "cli": "cd cli && npm start",
     "client": "cd client && npm start",
+    "dev": "concurrently --kill-others-on-fail \"npm run server\" \"npm run client\"",
     "server": "cd server && npm start",
     "start": "cd ./server && npm run-script start",
-    "test": "echo /",
     "install_": "npm install && cd ./client && npm install && cd ./../server && npm install"
   },
   "dependencies": {
-    "babel-plugin-relay": "^1.6.2",
-    "react-relay": "^1.6.2",
-    "relay-compiler": "^1.6.2",
-    "relay-runtime": "^1.6.2"
+    "concurrently": "^4.0.1"
   }
 }

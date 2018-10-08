@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Link from 'react-router-dom/Link';
+import withRouter from 'react-router-dom/withRouter';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import Button from '@material-ui/core/Button';
@@ -15,7 +16,7 @@ const styles = theme => ({
   signupForm: {
     marginBottom: theme.spacing.unit * 8,
     marginTop: theme.spacing.unit * 5,
-    [theme.breakpoints.down('sm')]: {
+    [theme.breakpoints.down('xs')]: {
       marginTop: 0,
     },
   },
@@ -25,6 +26,18 @@ const styles = theme => ({
   signupFormContainer: {},
   signupFormLogo: {
     marginBottom: theme.spacing.unit * 3,
+  },
+  signupFormInput: {
+    color: '#111',
+    '&:-webkit-autofill': {
+      '-webkit-box-shadow': 'inset 0 0 0px 9999px white'
+    }
+  },
+  signupFormMessage: {
+    boxSizing: 'border-box',
+    color: theme.palette.red,
+    marginBottom: theme.spacing.unit * 3,
+    height: 12,
   },
   signupFormPaper: {
     paddingBottom: theme.spacing.unit * 3,
@@ -55,24 +68,64 @@ const styles = theme => ({
 });
 
 class SignupForm extends Component {
-  state = {};
+  state = {
+    fields: {
+      firstName: { error: false, label: 'First name', message: '', type: 'text', value: '' },
+      lastName: { error: false, label: 'Last name', message: '', type: 'text', value: '' },
+      username: { error: false, label: 'Username', message: '', type: 'email', value: '' },
+      password: { error: false, label: 'Password', message: '',  type: 'password', value: '' },
+      passwordConfirmation: { error: false, label: 'Confirm Password', message: '', type: 'password', value: '' },
+    }
+  };
 
   onChange = event => {
-    this.setState({ [event.target.name]: event.target.value });
+    this.setState({
+      ...this.state,
+      fields: {
+        ...this.state.fields,
+        [event.target.name]: {
+          ...this.state.fields[event.target.name],
+          value: event.target.value
+        }
+      }
+
+    });
   };
 
-  onSubmit = () => {
-    const { password, username } = this.state;
-    signup(password, username);
-    window.location.pathname = '/';
+  onSubmit = async () => {
+    const { fields } = this.state;
+    const { history } = this.props;
+
+    if ( this.validatePassword() ) {
+      const response = await signup(fields);
+      if ( response.status !== 200 ) {
+        this.setState({
+          message: response.data.error
+        });
+      }
+      response.status === 200 && history.push('/login');
+    } else {
+      this.setState({
+        fields: {
+          ...this.state.fields,
+          passwordConfirmation: {
+            ...this.state.fields.passwordConfirmation,
+            error: true,
+            message: 'Passwords do not match',
+          }
+        }
+      });
+    }
   };
 
-  onSwitchChange = name => event => {
-    this.setState({ [name]: event.target.checked });
-  }
+  validatePassword = () => {
+    const { fields } = this.state;
+    if ( fields.password.value !== fields.passwordConfirmation.value ) return false;
+    else return true;
+  };
 
   render() {
-    const { firstName, lastName, password, passwordConfirmation, username } = this.state;
+    const { fields } = this.state;
     const { classes } = this.props;
 
     return <Grid
@@ -83,8 +136,8 @@ class SignupForm extends Component {
       <Grid
         className={classes.signupFormContainer}
         item
-        md={3}
-        sm={6}
+        md={4}
+        sm={7}
         xs={12}>
 
         <Paper
@@ -112,47 +165,33 @@ class SignupForm extends Component {
           className={classes.signupFormPaper}
           elevation={1}>
           <form>
-            <TextField
-              className={classes.signupFormTextField}
-              fullWidth
-              label='First name'
-              name='firstName'
-              onChange={this.onChange}
-              value={firstName}
-            />
-            <TextField
-              className={classes.signupFormTextField}
-              fullWidth
-              label='Last name'
-              name='firstName'
-              onChange={this.onChange}
-              value={lastName}
-            />
-            <TextField
-              className={classes.signupFormTextField}
-              fullWidth
-              label='Username'
-              name='username'
-              onChange={this.onChange}
-              value={username}
-            />
-            <TextField
-              className={classes.signupFormTextField}
-              fullWidth
-              label='Password'
-              name='password'
-              onChange={this.onChange}
-              value={password}
-            />
-            <TextField
-              className={classes.signupFormTextField}
-              fullWidth
-              label='Confirm password'
-              name='passwordConfirmation'
-              onChange={this.onChange}
-              value={passwordConfirmation}
-            />
+            {
+              Object.keys(fields).map((field, key) => {
+                return <TextField
+                  className={classes.signupFormTextField}
+                  error={fields[field].error}
+                  fullWidth
+                  helperText={fields[field].message}
+                  inputProps={{
+                    className: classes.signupFormInput,
+                  }}
+                  key={key}
+                  label={fields[field].label}
+                  name={field}
+                  onChange={this.onChange}
+                  required
+                  type={fields[field].type}
+                  value={fields[field].value}
+                />
+              })
+            }
           </form>
+
+          <Typography
+            className={classes.signupFormMessage}
+            gutterBottom>
+            { this.state.message }
+          </Typography>
 
           <Button
             className={classes.signupFormButton}
@@ -160,7 +199,7 @@ class SignupForm extends Component {
             fullWidth
             onClick={this.onSubmit}
             variant='raised'>
-            Sign in
+            Sign up
           </Button>
 
           <Button
@@ -180,4 +219,4 @@ class SignupForm extends Component {
   }
 }
 
-export default withStyles(styles)(SignupForm);
+export default withRouter(withStyles(styles)(SignupForm));

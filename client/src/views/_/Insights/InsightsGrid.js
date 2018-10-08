@@ -9,12 +9,8 @@ import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import withStyles from '@material-ui/core/styles/withStyles';
 
-import { grid } from './insights';
-
 const styles = theme => ({
-  grid: {
-
-  },
+  grid: {},
   gridCard: {
     marginBottom: theme.spacing.unit * 3,
     cursor: 'pointer',
@@ -52,14 +48,12 @@ const styles = theme => ({
       paddingRight: 0,
     }
   },
-  gridTitle: {
-
-  }
+  gridTitle: {}
 });
 
 class InsightsGrid extends Component {
   render() {
-    const { classes } = this.props;
+    const { classes, insights } = this.props;
 
     return <Grid
       className={classes.grids}
@@ -67,22 +61,31 @@ class InsightsGrid extends Component {
       justify='center'
       spacing={24}>
       {
-        grid.items.map((item, key) => (
-          <Grid
+        insights && insights.map((item, key) => {
+          const size = item.size ? item.size : {
+            md: 3,
+            sm: 6,
+            xl: 2,
+            xs: 12
+          };
+          return <Grid
             className={classes.grid}
             item
             key={key}
-            { ...item.size }>
-            <Link className={classes.gridLink} to={`./${grid.basePath}${item.slug}`}>
+            { ...size }>
+            <Link className={classes.gridLink} to={`./insights${item.slug}`}>
               <Card
                 className={classes.gridCard}
                 elevation={2}>
 
-                <CardMedia
-                  className={classes.gridMedia}
-                  component={item.media.type || 'div'}
-                  src={item.media.src}
-                />
+                {
+                  item.media ?
+                    <CardMedia
+                      className={classes.gridMedia}
+                      component={item.media.type || 'div'}
+                      src={item.media.src}
+                    /> : null
+                }
 
                 <CardHeader
                   className={classes.gridTitle}
@@ -94,14 +97,14 @@ class InsightsGrid extends Component {
                   <Typography
                     className={classes.gridContent}
                     component='p'>
-                    {item.content}
+                    {item.body}
                   </Typography>
                 </CardContent>
 
               </Card>
             </Link>
           </Grid>
-        ))
+        })
       }
     </Grid>;
   };

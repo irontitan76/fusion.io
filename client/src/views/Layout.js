@@ -5,9 +5,14 @@ import { menus, title } from './manifest';
 
 export default ({ children }) => (
   <>
-    <Nav
-      {...menus}
-      title={title} />
+    {
+      window.location.pathname !== '/login'
+      && window.location.pathname !== '/signup'
+        ? <Nav
+            {...menus}
+            title={title} />
+          : null
+    }
     { children }
   </>
 );

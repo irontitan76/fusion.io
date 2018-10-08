@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 
 import Grid from '@material-ui/core/Grid';
+import Hidden from '@material-ui/core/Hidden';
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 import withStyles from '@material-ui/core/styles/withStyles';
@@ -25,15 +26,17 @@ class Sample extends Component {
   render() {
     const { classes } = this.props;
 
-    return <Grid className={classes.sidebar} item md={4} xs={0}>
-      <Paper>
-        <Typography
-          className={classes.sidebarHeading}
-          variant='subheading'>
-          Trending
-        </Typography>
-      </Paper>
-    </Grid>;
+    return <Hidden smDown>
+      <Grid className={classes.sidebar} item md={4}>
+        <Paper>
+          <Typography
+            className={classes.sidebarHeading}
+            variant='subheading'>
+            Trending
+          </Typography>
+        </Paper>
+      </Grid>
+    </Hidden>
   }
 }
 

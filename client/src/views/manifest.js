@@ -60,7 +60,7 @@ export const primaryMenu = [
     // path: '/',
   },
   {
-    active: true,
+    active: false,
     icon: <FontAwesomeIcon
       icon={[ 'far', 'brain' ]}
       style={{
@@ -84,7 +84,7 @@ export const primaryMenu = [
     path: '/consulting'
   },
   {
-    active: true,
+    active: false,
     icon: <FontAwesomeIcon
       icon={[ 'far', 'space-shuttle' ]}
       style={{
@@ -97,7 +97,7 @@ export const primaryMenu = [
     path: '/cosmos'
   },
   {
-    active: true,
+    active: false,
     icon: <FontAwesomeIcon
       icon={[ 'far', 'solar-panel' ]}
       style={{
@@ -109,7 +109,7 @@ export const primaryMenu = [
     path: '/energy'
   },
   {
-    active: true,
+    active: false,
     icon: <FontAwesomeIcon
       icon={[ 'far', 'credit-card-blank' ]}
       style={{
@@ -121,7 +121,7 @@ export const primaryMenu = [
     path: '/finance'
   },
   {
-    active: true,
+    active: false,
     icon: <FontAwesomeIcon
       icon={[ 'far', 'dna' ]}
       style={{
@@ -133,7 +133,7 @@ export const primaryMenu = [
     path: '/health'
   },
   {
-    active: true,
+    active: false,
     icon: <FontAwesomeIcon
       icon={[ 'far', 'balance-scale' ]}
       style={{
@@ -145,7 +145,7 @@ export const primaryMenu = [
     path: '/legal'
   },
   {
-    active: true,
+    active: false,
     icon: <FontAwesomeIcon
       icon={[ 'far', 'broadcast-tower' ]}
       style={{
@@ -169,7 +169,7 @@ export const primaryMenu = [
     path: '/tech'
   },
   {
-    active: true,
+    active: false,
     icon: <FontAwesomeIcon
       icon={[ 'far', 'map-marked' ]}
       style={{
@@ -199,7 +199,7 @@ export const secondaryMenu = [
       style={{ fontSize: '1rem', width: 24 }}
     />,
     name: 'Sign out',
-    path: '/'
+    path: '/login'
   }
 ];
 
