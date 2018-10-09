@@ -9,9 +9,7 @@ import InsightsHeader from './../Insights/InsightsHeader'; // From another folde
 import Footer from 'components/Footer';
 
 const styles = theme => ({
-  insights: {
-
-  },
+  insights: {},
   insightsItem: {
     paddingLeft: theme.spacing.unit * 4,
     paddingRight: theme.spacing.unit * 4,

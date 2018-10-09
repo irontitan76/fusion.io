@@ -18,13 +18,19 @@ const styles = theme => ({
   },
   menuButton: {
     marginLeft: -12,
-    marginRight: 20
+    marginRight: 20,
+    '&:hover': {
+      color: theme.palette.blue,
+    }
   },
   title: {
     flexGrow: 1,
     fontWeight: 300,
     letterSpacing: 8,
-    textDecoration: 'none'
+    textDecoration: 'none',
+    '&:hover': {
+      color: theme.palette.blue,
+    }
   },
   toolbar: {}
 });

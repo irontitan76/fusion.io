@@ -20,9 +20,7 @@ const styles = theme => ({
   articleByline: {
     padding: theme.spacing.unit * 3
   },
-  articleBylineName: {
-
-  },
+  articleBylineName: {},
   articleBylineRole: {
     color: theme.palette.gray
   },
@@ -40,9 +38,7 @@ const styles = theme => ({
     paddingRight: theme.spacing.unit * 4,
     paddingTop: theme.spacing.unit * 3,
   },
-  articlePaper: {
-
-  },
+  articlePaper: {},
   articleSubtitle: {
     color: theme.palette.gray,
     paddingBottom: theme.spacing.unit * 3,

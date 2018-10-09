@@ -2,10 +2,10 @@ import { SESSION_END, SESSION_START } from 'actions';
 
 import { login, logout } from 'api/session';
 
-export const startSession = () => {
+export const startSession = (password, username) => {
   return async dispatch => {
     try {
-      const payload = await login();
+      const payload = await login(password, username);
       return dispatch({ type: SESSION_START, payload });
     } catch (err) {
       return dispatch({ type: SESSION_START, error: true, err });

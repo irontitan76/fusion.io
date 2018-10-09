@@ -19,6 +19,9 @@ import Home from 'views/_/Home';
 import Insight from 'views/_/Insight';
 import Insights from 'views/_/Insights';
 
+// Admin Dashboard
+import Admin from 'views/Admin';
+
 // Fusion Consulting
 import ConsultingHome from 'views/Consulting/Home';
 
@@ -28,7 +31,6 @@ import Technology from 'views/Technology';
 // Authentication
 import Login from 'views/Login';
 import Signup from 'views/Signup';
-
 
 export class App extends Component {
   render() {
@@ -42,6 +44,8 @@ export class App extends Component {
               <Route exact path='/careers' component={Careers} />
               <Route exact path='/insights' component={Insights} />
               <Route exact path='/insights/:id' component={Insight} />
+
+              <Route exact path='/admin' component={Admin} />
 
               <Route exact path='/consulting' component={ConsultingHome} />
 

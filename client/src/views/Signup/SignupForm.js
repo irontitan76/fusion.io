@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Link from 'react-router-dom/Link';
 import withRouter from 'react-router-dom/withRouter';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import validator from 'validator';
 
 import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid';
@@ -25,6 +26,7 @@ const styles = theme => ({
   },
   signupFormContainer: {},
   signupFormLogo: {
+    color: 'inherit',
     marginBottom: theme.spacing.unit * 3,
   },
   signupFormInput: {
@@ -59,9 +61,15 @@ const styles = theme => ({
     paddingRight: theme.spacing.unit * 3,
     paddingTop: theme.spacing.unit * 3,
   },
-  signupFormTitle: {},
+  signupFormTitle: {
+    color: theme.palette.common.white,
+    textDecoration: 'none',
+    '&:hover': {
+      color: theme.palette.navy,
+    }
+  },
   signupFormTitleText: {
-    color: '#fff',
+    color: 'inherit',
     letterSpacing: 18,
     fontWeight: 300,
   },
@@ -124,6 +132,17 @@ class SignupForm extends Component {
     else return true;
   };
 
+  validateForm = () => {
+    const { fields } = this.state;
+    const isFilledIn = Object.keys(fields)
+      .map(field => fields[field].value)
+      .every(val => validator.isLength(val, { min: 1 }));
+    const isPasswordConfirmed = validator.equals(fields.password.value, fields.passwordConfirmation.value);
+    const isValidEmail = validator.isEmail(fields.username.value);
+
+    return !(isFilledIn && isPasswordConfirmed && isValidEmail);
+  }
+
   render() {
     const { fields } = this.state;
     const { classes } = this.props;
@@ -146,7 +165,8 @@ class SignupForm extends Component {
           <Typography
             align='center'
             className={classes.signupFormTitle}
-            component='div'>
+            component={Link}
+            to='/'>
             <FontAwesomeIcon
               className={classes.signupFormLogo}
               color='#fff'
@@ -196,6 +216,7 @@ class SignupForm extends Component {
           <Button
             className={classes.signupFormButton}
             color='primary'
+            disabled={this.validateForm()}
             fullWidth
             onClick={this.onSubmit}
             variant='raised'>

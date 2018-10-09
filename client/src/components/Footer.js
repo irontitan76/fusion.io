@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import Link from 'react-router-dom/Link';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
@@ -29,6 +29,17 @@ const styles = theme => ({
   footerLink: {
     color: theme.palette.common.white,
     textDecoration: 'none',
+    '&:hover': {
+      color: theme.palette.blue,
+    }
+  },
+  footerListItem: {
+    padding: `${theme.spacing.unit}px 0`,
+  },
+  footerListItemText: {
+    color: '#fff',
+    fontSize: 13,
+    fontWeight: 300
   },
   footerSocial: {
     height: 125,
@@ -40,7 +51,11 @@ const styles = theme => ({
     height: 36,
     width: 36,
   },
-  footerSocialIcon: {},
+  footerSocialIcon: {
+    '&:hover': {
+      color: theme.palette.blue,
+    }
+  },
   footerText: {
     color: theme.palette.common.white,
   }
@@ -121,6 +136,7 @@ export class Footer extends Component {
             return <Grid
               className={classes.footerColumn}
               item
+              key={key}
               xs={2}>
 
               <Typography className={classes.footerText} variant='body1'>
@@ -130,15 +146,14 @@ export class Footer extends Component {
               <List>
                 {
                   menu.list.map((item, key) => {
-                    return <ListItem dense style={{ padding: '5px 0' }}>
+                    return <ListItem
+                      className={classes.footerListItem}
+                      dense
+                      key={key}>
                       <ListItemText
                         primary={item}
                         primaryTypographyProps={{
-                          style: {
-                            color: '#fff',
-                            fontSize: 13,
-                            fontWeight: 300
-                          }
+                          className: classes.footerListItemText
                         }}/>
                     </ListItem>
                   })
@@ -190,12 +205,14 @@ export class Footer extends Component {
             className={classes.footerCopyright}
             variant='body1'>
             {
-              links.map((link, key) => <>
-                <Link className={classes.footerLink} key={key} to={link.path}>
+              links.map((link, key) => <Fragment key={key}>
+                <Link
+                  className={classes.footerLink}
+                  to={link.path}>
                   { link.label }
                 </Link>
                 { key === links.length - 1 ? null : ' \u00A0| \u00A0' }
-              </>)
+              </Fragment>)
             }
           </Typography>
         </Grid>

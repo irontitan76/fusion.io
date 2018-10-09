@@ -3,8 +3,17 @@ import User from './../mongoose/User';
 
 const router = express.Router();
 
-router.get('/', (req, res) => {
+const isAdmin = () => true;
+
+router.get('/', isAdmin, (req, res) => {
   res.status(200).json({ message: 'Users' });
+});
+
+router.post('/login', (req, res) => {
+  return User.find({
+    // password: req.body.password,
+    username: req.body.username,
+  }).then(user => res.status(200).json(user))
 });
 
 router.post('/signup', (req, res) => {

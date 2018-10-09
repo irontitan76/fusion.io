@@ -13,6 +13,8 @@ export const hero = {
 };
 
 export const overview = {
+  subtitle: 'A solution portfolio that optimizes infrastructure and delivery',
+  title: 'Accelerate Innovation',
   items: [
     {
       button: {
@@ -54,8 +56,8 @@ export const overview = {
 };
 
 export const products = {
-  subtitle: '  A solution portfolio that optimizes infrastructure and delivery',
-  title: 'Accelerate Innovation',
+  subtitle: 'A solution portfolio that optimizes infrastructure and delivery',
+  title: 'Solutions That Transform',
   items: [
     {
       image: {

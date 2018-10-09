@@ -15,15 +15,9 @@ import withStyles from '@material-ui/core/styles/withStyles';
 import { grid } from './careers';
 
 const styles = theme => ({
-  team: {
-
-  },
-  teamActions: {
-
-  },
-  teamButton: {
-
-  },
+  team: {},
+  teamActions: {},
+  teamButton: {},
   teamCard: {
     backgroundColor: '#fcfcfc',
     marginBottom: theme.spacing.unit * 3,
@@ -53,9 +47,7 @@ const styles = theme => ({
       paddingRight: 0,
     }
   },
-  teamTitle: {
-
-  }
+  teamTitle: {}
 });
 
 class CareersGrid extends Component {

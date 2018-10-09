@@ -7,9 +7,7 @@ import withStyles from '@material-ui/core/styles/withStyles';
 import { hero } from './careers';
 
 const styles = theme => ({
-  hero: {
-
-  },
+  hero: {},
   heroHeading: {
     fontWeight: 300,
     padding: `${theme.spacing.unit * 12}px ${theme.spacing.unit * 3}px`

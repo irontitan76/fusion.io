@@ -14,11 +14,16 @@ import withStyles from '@material-ui/core/styles/withStyles';
 
 import { endSession } from 'actions/session';
 
-const styles = {
+const styles = theme => ({
   listSize: {
     fontSize: '0.8125rem'
+  },
+  menuLink: {
+    '&:hover': {
+      color: theme.palette.blue,
+    }
   }
-};
+});
 
 export class NavUserMenu extends Component {
   state = {
@@ -46,6 +51,7 @@ export class NavUserMenu extends Component {
       <IconButton
         aria-owns={open ? 'menu-appbar' : null}
         aria-haspopup='true'
+        className={classes.menuLink}
         onClick={this.handleMenu}
         color='inherit'>
         <AccountCircle />
@@ -82,6 +88,7 @@ export class NavUserMenu extends Component {
         }
       </Menu>
     </> : <Button
+      className={classes.menuLink}
       color='inherit'
       component={Link}
       onClick={this.handleChange}

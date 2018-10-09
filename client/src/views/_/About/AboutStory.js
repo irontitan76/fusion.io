@@ -12,10 +12,10 @@ const styles = theme => ({
   },
   storyImageContainer: {
     height: 500,
-    marginBottom: 50,
+    marginBottom: theme.spacing.unit * 5,
   },
   storySubtitle: {
-    marginBottom: 50
+    marginBottom: theme.spacing.unit * 5,
   }
 });
 
@@ -63,7 +63,7 @@ class AboutStory extends Component {
 
         </Grid>
       </Grid>
-      
+
     </Grid>;
   }
 }

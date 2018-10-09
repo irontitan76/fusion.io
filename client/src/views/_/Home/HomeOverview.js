@@ -29,6 +29,13 @@ const styles = theme => ({
   overviewCard: {
     backgroundColor: '#fbfbfb',
   },
+  overviewSubtitle: {
+    fontWeight: 300,
+  },
+  overviewTitle: {
+    color: '#111',
+    fontWeight: 900,
+  },
   overviewCardContent: {
     height: 75,
   }
@@ -37,50 +44,66 @@ const styles = theme => ({
 class HomeOverview extends Component {
   render() {
     const { classes } = this.props;
-    const { items } = overview;
+    const { items, subtitle, title } = overview;
 
     return <Grid
       className={classes.overview}
       container
       justify='space-around'
       spacing={24}>
-      {
-        items.map((item, key) => (
-          <Grid
-            className={classes.overviewItem}
-            item
-            key={key}
-            md={4}
-            xs={12}>
-            <Card className={classes.overviewCard} elevation={0}>
-              <CardHeader
-                avatar={
-                  <FontAwesomeIcon
-                    color='#0074d9'
-                    icon={item.icon}
-                    size='2x'
-                  />
-                }
-                title={item.title}/>
-              <CardContent className={classes.overviewCardContent}>
-                <Typography component='p'>
-                  {item.content}
-                </Typography>
-              </CardContent>
-              { item.divider ? <Divider light /> : null }
-              <CardActions>
-                <Button
-                  color='primary'
-                  component={Link}
-                  size='small'
-                  to={item.button.path}>
-                  {item.button.label}
-                </Button>
-              </CardActions>
-            </Card>
-          </Grid>
-        ))
-      }
+        <Grid className={classes.overviewTitleContainer} item xs={12}>
+          <Typography
+            align='center'
+            className={classes.overviewTitle}
+            variant='display1'>
+            { title }
+          </Typography>
+
+          <Typography
+            align='center'
+            className={classes.overviewSubtitle}
+            gutterBottom
+            variant='subheading'>
+            { subtitle }
+          </Typography>
+        </Grid>
+        {
+          items.map((item, key) => (
+            <Grid
+              className={classes.overviewItem}
+              item
+              key={key}
+              md={4}
+              xs={12}>
+              <Card className={classes.overviewCard} elevation={0}>
+                <CardHeader
+                  avatar={
+                    <FontAwesomeIcon
+                      color='#0074d9'
+                      icon={item.icon}
+                      size='2x'
+                    />
+                  }
+                  title={item.title}/>
+                <CardContent className={classes.overviewCardContent}>
+                  <Typography component='p'>
+                    {item.content}
+                  </Typography>
+                </CardContent>
+                { item.divider ? <Divider light /> : null }
+                <CardActions>
+                  <Button
+                    color='primary'
+                    component={Link}
+                    size='small'
+                    to={item.button.path}>
+                    {item.button.label}
+                  </Button>
+                </CardActions>
+              </Card>
+            </Grid>
+          ))
+        }
     </Grid>;
   };
 }

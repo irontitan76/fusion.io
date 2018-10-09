@@ -15,10 +15,11 @@ const styles = theme => ({
     marginBottom: theme.spacing.unit * 3,
   },
   productsSubtitle: {
-
+    fontWeight: 300,
   },
   productsTitle: {
-
+    color: '#111',
+    fontWeight: 900,
   },
   product: {
     marginBottom: theme.spacing.unit * 5,
@@ -37,7 +38,7 @@ const styles = theme => ({
     textDecoration: 'none',
   },
   productItemSubtitle: {
-    color: '#000',
+    color: '#111',
     fontWeight: 300,
     paddingBottom: theme.spacing.unit * 2,
   },
@@ -57,7 +58,6 @@ class HomeProducts extends Component {
         <Typography
           align='center'
           className={classes.productsTitle}
-          gutterBottom
           variant='display1'>
           { title }
         </Typography>

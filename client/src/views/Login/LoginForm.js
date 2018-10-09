@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Link from 'react-router-dom/Link';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import validator from 'validator';
 
 import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid';
@@ -23,6 +24,7 @@ const styles = theme => ({
   },
   loginFormContainer: {},
   loginFormLogo: {
+    color: 'inherit',
     marginBottom: theme.spacing.unit * 3,
   },
   loginFormInput: {
@@ -34,7 +36,7 @@ const styles = theme => ({
   loginFormMessage: {
     boxSizing: 'border-box',
     color: theme.palette.red,
-    marginBottom: theme.spacing.unit * 3,
+    marginBottom: theme.spacing.unit,
     height: 12,
   },
   loginFormPaper: {
@@ -45,10 +47,10 @@ const styles = theme => ({
   },
   loginFormSwitch: {},
   loginFormSwitchContainer: {
-    marginBottom: theme.spacing.unit * 2,
+    marginBottom: theme.spacing.unit,
   },
   loginFormTextField: {
-    marginBottom: theme.spacing.unit * 3,
+    marginBottom: theme.spacing.unit * 2,
   },
   loginFormTitlePaper: {
     backgroundColor: '#0074D9',
@@ -57,9 +59,15 @@ const styles = theme => ({
     paddingRight: theme.spacing.unit * 3,
     paddingTop: theme.spacing.unit * 3,
   },
-  loginFormTitle: {},
-  loginFormTitleText: {
+  loginFormTitle: {
     color: '#fff',
+    textDecoration: 'none',
+    '&:hover': {
+      color: theme.palette.navy,
+    }
+  },
+  loginFormTitleText: {
+    color: 'inherit',
     letterSpacing: 18,
     fontWeight: 300,
   },
@@ -86,6 +94,15 @@ class LoginForm extends Component {
     this.setState({ [name]: event.target.checked });
   };
 
+  validateForm = () => {
+    const { password, username } = this.state;
+    const isFilledIn = [password, username]
+      .every(val => validator.isLength(val, { min: 1 }));
+    const isValidEmail = validator.isEmail(username);
+
+    return !(isFilledIn && isValidEmail);
+  }
+
   render() {
     const { isRemembered, password, username } = this.state;
     const { classes } = this.props;
@@ -108,7 +125,8 @@ class LoginForm extends Component {
           <Typography
             align='center'
             className={classes.loginFormTitle}
-            component='div'>
+            component={Link}
+            to='/'>
             <FontAwesomeIcon
               className={classes.loginFormLogo}
               color='#fff'
@@ -176,6 +194,7 @@ class LoginForm extends Component {
           <Button
             className={classes.loginFormButton}
             color='primary'
+            disabled={this.validateForm()}
             fullWidth
             onClick={this.onSubmit}
             variant='raised'>

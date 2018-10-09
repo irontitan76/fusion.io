@@ -10,18 +10,18 @@ const styles = theme => ({
   author: {
     fontSize: 18,
     fontWeight: 300,
-    marginBottom: 50
+    marginBottom: theme.spacing.unit * 5,
   },
   banner: {
     backgroundColor: '#ddd',
     borderTop: '1px solid #aaa',
     borderBottom: '1px solid #aaa',
-    marginBottom: 48
+    marginBottom: theme.spacing.unit * 7,
   },
   quote: {
     fontSize: 20,
     fontWeight: 300,
-    padding: 50
+    padding: theme.spacing.unit * 5,
   }
 });
 
