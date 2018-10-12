@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 
 import HomeHero from './HomeHero';
+import HomeLogos from './HomeLogos';
 import HomeOverview from './HomeOverview';
 import HomeProducts from './HomeProducts';
 import Footer from 'components/Footer';
@@ -8,11 +9,14 @@ import Footer from 'components/Footer';
 class Home extends Component {
   render() {
     return <>
-      <HomeHero />
-      <HomeOverview />
-      <HomeProducts />
+      <main>
+        <HomeHero />
+        <HomeLogos />
+        <HomeOverview />
+        <HomeProducts />
+      </main>
       <Footer />
-    </>
+    </>;
   }
 }
 

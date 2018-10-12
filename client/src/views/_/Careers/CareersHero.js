@@ -30,8 +30,8 @@ class CareersHero extends Component {
           align='center'
           className={classes.heroHeading}
           paragraph
-          variant='display1'>
-          { hero.heading }
+          variant='h4'>
+          {hero.heading}
         </Typography>
       </Grid>
 

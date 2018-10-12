@@ -31,12 +31,12 @@ class Sample extends Component {
         <Paper>
           <Typography
             className={classes.sidebarHeading}
-            variant='subheading'>
+            variant='subtitle1'>
             Trending
           </Typography>
         </Paper>
       </Grid>
-    </Hidden>
+    </Hidden>;
   }
 }
 

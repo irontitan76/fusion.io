@@ -1,20 +1,75 @@
 export const hero = {
   button1: {
-    label: 'EXPLORE OUR SOLUTIONS',
-    path: '/about/solutions'
+    label: 'WHO WE ARE',
+    path: '/about'
   },
   button2: {
-    label: 'EXPLORE OUR SERVICES',
-    path: '/about/services'
+    label: 'EXPLORE OUR ORGANIZATIONS',
+    path: '/about/organizations'
   },
-  icon: [ 'fal', 'atom' ],
+  icon: [ 'fal', 'atom-alt' ],
   subtitle: 'Optimizing business through intelligent design',
   title: 'FUSION'
 };
 
+export const logos = {
+  items: [
+    {
+      icon: 'brain',
+      label: 'A.I.',
+      to: '/ai',
+    },
+    {
+      icon: 'users',
+      label: 'Consulting',
+      to: '/consulting',
+    },
+    {
+      icon: 'space-shuttle',
+      label: 'Cosmos',
+      to: '/cosmos',
+    },
+    {
+      icon: 'solar-panel',
+      label: 'Energy',
+      to: '/energy',
+    },
+    {
+      icon: 'credit-card-blank',
+      label: 'Finance',
+      to: '/finance',
+    },
+    {
+      icon: 'dna',
+      label: 'Health',
+      to: '/health',
+    },
+    {
+      icon: 'balance-scale',
+      label: 'Legal',
+      to: '/legal',
+    },
+    {
+      icon: 'broadcast-tower',
+      label: 'Media',
+      to: '/media',
+    },
+    {
+      icon: 'code',
+      label: 'Technology',
+      to: '/technology',
+    },
+    {
+      icon: 'map-marked',
+      label: 'Transport',
+      to: '/transport',
+    },
+  ]
+};
+
 export const overview = {
-  subtitle: 'A solution portfolio that optimizes infrastructure and delivery',
-  title: 'Accelerate Innovation',
+  // subtitle: 'A solution portfolio that optimizes infrastructure and delivery',
+  title: 'Together, We Accelerate Innovation',
   items: [
     {
       button: {
@@ -25,20 +80,20 @@ export const overview = {
       transform. We are a team of innovative individuals who provide insights \
       and deliver solutions across varying verticals.',
       divider: true,
-      icon: [ 'far', 'user-tie' ],
+      icon: [ 'fal', 'user-tie' ],
       title: 'Who We Are',
     },
     {
       button: {
         label: 'Read more',
-        path: '/strategy'
+        path: '/insights'
       },
       content: 'Business outcomes must be built faster than ever before. Our \
       Insight Engine lets you discover end-to-end solutions and solve the \
       complexities of your digital enterprise.',
       divider: true,
-      icon: [ 'far', 'binoculars' ],
-      title: 'Insight Engine',
+      icon: [ 'fal', 'binoculars' ],
+      title: 'Insights Engine',
     },
     {
       button: {
@@ -49,9 +104,9 @@ export const overview = {
       solutions. They work closely to provide you with the best technology \
       and people possible.',
       divider: true,
-      icon: [ 'far', 'route' ],
+      icon: [ 'fal', 'route' ],
       title: 'Contact Us',
-    }
+    },
   ]
 };
 
@@ -62,24 +117,9 @@ export const products = {
     {
       image: {
         alt: 'design',
-        src: './images/design-resized.jpg',
+        src: './images/design2.jpg',
       },
       path: '/technology/products/1',
-      size: {
-        md: 4,
-        sm: 6,
-        xs: 12
-      },
-      subtitle: 'A React Component Library',
-      title: 'Design System',
-      variant: 'dark',
-    },
-    {
-      image: {
-        alt: 'design',
-        src: './images/sf.jpg',
-      },
-      path: '/technology/products/2',
       size: {
         md: 4,
         sm: 6,
@@ -91,10 +131,25 @@ export const products = {
     },
     {
       image: {
-        alt: 'team',
-        src: './images/team-resized.jpg',
+        alt: 'design',
+        src: './images/isomorph.jpg',
       },
-      path: '/technology/products/3',
+      path: '/technology/products/2',
+      size: {
+        md: 4,
+        sm: 6,
+        xs: 12
+      },
+      subtitle: 'A React Component Library',
+      title: 'Isomorph.io',
+      variant: 'light',
+    },
+    {
+      image: {
+        alt: 'team',
+        src: './images/consult.jpg',
+      },
+      path: '/consulting/services',
       size: {
         md: 8,
         sm: 12,

@@ -10,7 +10,10 @@ import { banner } from './home';
 
 const styles = theme => ({
   banner: {
-    backgroundColor: '#f2f2f2',
+    backgroundColor: theme.palette.light,
+    borderBottom: `1px solid ${theme.palette.lightgray}`,
+    borderTop: `1px solid ${theme.palette.lightgray}`,
+    marginBottom: theme.spacing.unit * 5,
     minHeight: 175,
     paddingTop: theme.spacing.unit * 3,
   },
@@ -28,9 +31,7 @@ const styles = theme => ({
   bannerButtonContainer2: {
     marginBottom: theme.spacing.unit * 5
   },
-  bannerDescription: {
-
-  },
+  bannerDescription: {},
   bannerDescriptionText: {
     fontWeight: 300
   },
@@ -57,8 +58,8 @@ class HomeServices extends Component {
         <Typography
           align='center'
           className={classes.bannerDescriptionText}
-          variant='subheading'>
-          { description }
+          variant='subtitle1'>
+          {description}
         </Typography>
 
       </Grid>
@@ -78,7 +79,7 @@ class HomeServices extends Component {
               component={Link}
               fullWidth
               to={button1.path}
-              variant='raised'>
+              variant='contained'>
               {button1.label}
             </Button>
           </Grid>
@@ -94,7 +95,7 @@ class HomeServices extends Component {
               component={Link}
               fullWidth
               to={button2.path}
-              variant='raised'>
+              variant='contained'>
               {button2.label}
             </Button>
           </Grid>

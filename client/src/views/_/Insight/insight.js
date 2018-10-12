@@ -8,7 +8,7 @@ export const article = {
     name: 'Ross Sheppard',
     role: 'Sr. Software Engineer'
   },
-  content: <>
+  content: <div>
     <p>Every single developer and architect has their language of choice
     whether its Fortran, A, B, C, C++, C#, Python, Java, JavaScript or
     any of the countless languages developed by countless individuals
@@ -36,7 +36,7 @@ export const article = {
     screen when hovering his mouse over it within the Java-based
     WebRunner browser, the vision of the dynamic Web was put at the
     forefront of everyone’s mind. In essence, a revolution began.</p>
-  </>,
+  </div>,
   media: {
     alt: 'webapp',
     src: '/images/webapp.jpg',
@@ -44,4 +44,4 @@ export const article = {
   },
   subtitle: 'An Argument for JavaScript from a Java/JavaScript Developer',
   title: 'Java is Cold Coffee',
-}
+};

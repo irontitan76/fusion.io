@@ -11,26 +11,33 @@ import { hero } from './home';
 
 const styles = theme => ({
   hero: {
-    backgroundImage: 'url("/images/desk.jpg")',
+    backgroundImage: 'url("/images/city.jpg")',
     backgroundRepeat: 'no-repeat',
     backgroundSize: '100% 100%',
-    height: 550,
-    marginBottom: theme.spacing.unit * 4,
+    height: 750,
+    marginBottom: theme.spacing.unit * 3,
     overflow: 'hidden',
     [theme.breakpoints.down('xl')]: {
-      backgroundSize: '100% 180%',
+      backgroundSize: '100% 120%',
+    },
+    [theme.breakpoints.down('lg')]: {
+      height: 550,
     },
     [theme.breakpoints.down('xs')]: {
       backgroundSize: '180% 120%',
     }
   },
   heroButton: {
-    backgroundColor: 'rgba(0,0,0,.45)',
+    backgroundColor: 'rgba(255,255,255,.45)',
     color: '#fff',
-    marginBottom: theme.spacing.unit * 2
+    marginBottom: theme.spacing.unit * 2,
+    '&:hover': {
+      backgroundColor: 'rgba(255,255,255,.9)',
+      color: theme.palette.blue,
+    }
   },
   heroContent: {
-    backgroundColor: 'rgba(0,0,0,.4)',
+    backgroundColor: 'rgba(0,0,0,.35)',
     color: theme.palette.common.white,
     height: '100%',
     padding: `${theme.spacing.unit * 5}px ${theme.spacing.unit * 2}px`
@@ -45,8 +52,8 @@ const styles = theme => ({
   },
   heroSubtitle: {
     color: theme.palette.common.white,
-    fontSize: 26,
-    fontWeight: 400,
+    fontSize: 24,
+    fontWeight: 500,
     marginBottom: theme.spacing.unit * 4,
     [theme.breakpoints.down('xs')]: {
       fontSize: 16
@@ -83,23 +90,22 @@ class HomeHero extends Component {
 
           <FontAwesomeIcon
             className={classes.heroIcon}
-            icon={ icon }
-          />
+            icon={icon} />
 
           <Typography
             align='center'
             className={classes.heroTitle}
             gutterBottom
-            variant='display1'>
-            { title }
+            variant='h4'>
+            {title}
           </Typography>
 
           <Typography
             align='center'
             className={classes.heroSubtitle}
             gutterBottom
-            variant='display1'>
-            { subtitle }
+            variant='h4'>
+            {subtitle}
           </Typography>
 
           <Grid
@@ -115,7 +121,7 @@ class HomeHero extends Component {
                 fullWidth
                 to={ button1.path }
                 variant='outlined'>
-                { button1.label }
+                {button1.label}
               </Button>
             </Grid>
 
@@ -127,7 +133,7 @@ class HomeHero extends Component {
                 fullWidth
                 to={ button2.path }
                 variant='outlined'>
-                { button2.label }
+                {button2.label}
               </Button>
             </Grid>
           </Grid>

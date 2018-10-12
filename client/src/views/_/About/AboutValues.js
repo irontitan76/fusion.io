@@ -6,9 +6,7 @@ import withStyles from '@material-ui/core/styles/withStyles';
 import TabBar from 'components/TabBar';
 import { values } from './about';
 
-const styles = theme => ({
-
-});
+const styles = theme => ({});
 
 class AboutValues extends Component {
   render() {

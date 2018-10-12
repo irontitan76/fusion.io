@@ -71,14 +71,12 @@ class CareersGrid extends Component {
               <CardMedia
                 className={classes.teamMedia}
                 component={team.media.type || 'div'}
-                src={team.media.src}
-              />
+                src={team.media.src} />
 
               <CardHeader
                 className={classes.teamTitle}
                 title={team.title}
-                titleTypographyProps={{ variant: 'subheading' }}
-              />
+                titleTypographyProps={{ variant: 'subtitle1' }} />
 
               <CardContent>
                 <Typography
@@ -96,8 +94,16 @@ class CareersGrid extends Component {
                   className={classes.teamButton}
                   component={Link}
                   size='small'
-                  to={team.button.path}>
-                  {team.button.label}
+                  to={team.button1.path}>
+                  {team.button1.label}
+                </Button>
+                <Button
+                  color='primary'
+                  className={classes.teamButton}
+                  component={Link}
+                  size='small'
+                  to={team.button2.path}>
+                  {team.button2.label}
                 </Button>
               </CardActions>
 

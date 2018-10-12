@@ -10,13 +10,10 @@ const styles = theme => ({
   list: {
     width: 250
   },
-  root: {
-    zIndex: 1
-  },
   toolbar: theme.mixins.toolbar
 });
 
-export class NavMenu extends Component {
+export class NavMainMenu extends Component {
   render() {
     const { classes, items, onClose, open } = this.props;
 
@@ -36,16 +33,16 @@ export class NavMenu extends Component {
   }
 }
 
-NavMenu.defaultProps = {
+NavMainMenu.defaultProps = {
   classes: {},
   onClose: null,
   open: false
 };
 
-NavMenu.propTypes = {
+NavMainMenu.propTypes = {
   classes: PropTypes.object.isRequired,
   onClose: PropTypes.func.isRequired,
   open: PropTypes.bool.isRequired
 };
 
-export default withStyles(styles)(NavMenu);
+export default withStyles(styles)(NavMainMenu);

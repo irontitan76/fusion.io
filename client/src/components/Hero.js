@@ -76,7 +76,7 @@ export class Hero extends Component {
       <Typography
         align='center'
         gutterBottom
-        variant='display1'
+        variant='h4'
         {...subtitleTypographyProps}
         className={`
           ${classes.subtitle}
@@ -95,7 +95,7 @@ export class Hero extends Component {
       <Typography
         align='center'
         gutterBottom
-        variant='display1'
+        variant='h4'
         {...titleTypographyProps}
         className={`
           ${classes.title}

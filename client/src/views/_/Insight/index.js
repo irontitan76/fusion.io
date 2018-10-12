@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 
+import Fade from '@material-ui/core/Fade';
 import Grid from '@material-ui/core/Grid';
 import withStyles from '@material-ui/core/styles/withStyles';
 
@@ -7,6 +9,8 @@ import InsightArticle from './InsightArticle';
 import InsightSidebar from './InsightSidebar';
 import InsightsHeader from './../Insights/InsightsHeader'; // From another folder :(
 import Footer from 'components/Footer';
+
+import { loadInsight } from 'actions/insights';
 
 const styles = theme => ({
   insights: {},
@@ -21,22 +25,35 @@ const styles = theme => ({
 });
 
 class Insight extends Component {
+  componentDidMount() {
+    const { dispatch, match: { params } } = this.props;
+    dispatch(loadInsight(params.insightId));
+  }
+
   render() {
-    const { classes } = this.props;
+    const { classes, insight = {} } = this.props;
 
     return <>
-      <InsightsHeader />
-      <Grid
-        className={classes.insightsItem}
-        container
-        justify='space-between'
-        spacing={40}>
-        <InsightArticle />
-        <InsightSidebar />
-      </Grid>
+      <main>
+        <InsightsHeader />
+        <Fade in timeout={{ enter: 500, exit: 500 }}>
+          <Grid
+            className={classes.insightsItem}
+            container
+            justify='space-between'
+            spacing={40}>
+            <InsightArticle insight={insight} />
+            <InsightSidebar />
+          </Grid>
+        </Fade>
+      </main>
       <Footer />
-    </>
+    </>;
   }
 }
 
-export default withStyles(styles)(Insight);
+const select = state => ({
+  insight: state.insights.selected,
+});
+
+export default withStyles(styles)(connect(select)(Insight));

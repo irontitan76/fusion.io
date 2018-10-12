@@ -106,6 +106,7 @@ class SignupForm extends Component {
 
     if ( this.validatePassword() ) {
       const response = await signup(fields);
+
       if ( response.status !== 200 ) {
         this.setState({
           message: response.data.error
@@ -170,12 +171,12 @@ class SignupForm extends Component {
             <FontAwesomeIcon
               className={classes.signupFormLogo}
               color='#fff'
-              icon={['fal', 'atom']}
+              icon={['fal', 'atom-alt']}
               size='6x'
             />
             <Typography
               className={classes.signupFormTitleText}
-              variant='title'>
+              variant='h6'>
               FUSION
             </Typography>
           </Typography>
@@ -219,7 +220,7 @@ class SignupForm extends Component {
             disabled={this.validateForm()}
             fullWidth
             onClick={this.onSubmit}
-            variant='raised'>
+            variant='contained'>
             Sign up
           </Button>
 
@@ -228,7 +229,7 @@ class SignupForm extends Component {
             component={Link}
             fullWidth
             to='/login'
-            variant='raised'>
+            variant='contained'>
             Go to Login
           </Button>
 

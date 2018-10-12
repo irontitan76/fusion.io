@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-
 
 import AppBar from '@material-ui/core/AppBar';
 import Grid from '@material-ui/core/Grid';
@@ -11,6 +11,7 @@ import Typography from '@material-ui/core/Typography';
 import withStyles from '@material-ui/core/styles/withStyles';
 
 import { header } from './insights';
+import { filterInsights } from 'actions/insights';
 
 const styles = theme => ({
   header: {
@@ -29,7 +30,8 @@ const styles = theme => ({
   },
   headerTitle: {
     [theme.breakpoints.down('sm')]: {
-      padding: theme.spacing.unit * 2,
+      paddingLeft: theme.spacing.unit * 2,
+      paddingRight: theme.spacing.unit * 2,
       textAlign: 'center',
     },
   },
@@ -39,6 +41,7 @@ const styles = theme => ({
   headerPeriod: {
     color: '#0074D9',
     fontSize: 40,
+    lineHeight: .4,
   },
   headerSearchField: {
     border: '1px solid #ddd',
@@ -54,16 +57,38 @@ const styles = theme => ({
 });
 
 class InsightsHeader extends Component {
+  onChange = event => {
+    const { dispatch } = this.props;
+    const { value } = event.target;
+
+    let filter = {};
+
+    const search = value.trim().split(',');
+    search.forEach(item => {
+      const key = item.split(':')[0];
+      const value = item.split(':')[1];
+      filter[key] = value;
+    });
+
+    if ( value.length === 0 ) {
+      filter = null;
+    } else if ( value.indexOf(':') < 0 ) {
+      filter = value;
+    }
+
+    dispatch(filterInsights(filter));
+  };
+
   render() {
     const { classes } = this.props;
 
     return <AppBar className={classes.header} position='sticky'>
       <Toolbar className={classes.headerBar}>
-        <Grid container justify='space-between'>
+        <Grid alignItems='center' container justify='space-between'>
           <Grid item md={9} xs={12}>
             <Typography
               className={classes.headerTitle}
-              variant='title'>
+              variant='h6'>
               <span className={classes.headerTitleSpan}>insights</span>
               <span className={classes.headerPeriod}>.</span>
               <span className={classes.headerTitleSpan}>engine</span>
@@ -83,12 +108,13 @@ class InsightsHeader extends Component {
                   <InputAdornment position='start'>
                     <FontAwesomeIcon
                       className={classes.headerSearchIcon}
-                      icon={[ 'far', 'search' ]} />
+                      icon={[ 'fal', 'search' ]} />
                   </InputAdornment>
                 )
               }}
               margin='none'
-              placeholder={ header.search.placeholder }
+              onChange={this.onChange}
+              placeholder={header.search.placeholder}
              />
           </Grid>
         </Grid>
@@ -97,4 +123,8 @@ class InsightsHeader extends Component {
   };
 }
 
-export default withStyles(styles)(InsightsHeader);
+const select = state => ({
+  insights: state.insights,
+});
+
+export default withStyles(styles)(connect(select)(InsightsHeader));

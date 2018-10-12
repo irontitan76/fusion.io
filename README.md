@@ -16,6 +16,9 @@
   - [npm run eject](#npm-run-eject)
 - [Supported Browsers](#supported-browsers)
 
+## Notes
+- We need to give employees the option to either do consultant work or spend time actively working on products and solutions within the company.
+
 ## Machine Dependencies
 - Text Editor: [Atom](https://atom.io/)
 - Infrastructure: [Google Cloud Console](https://cloud.google.com/sdk/install)

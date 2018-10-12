@@ -9,12 +9,12 @@ class Login extends Component {
   componentDidMount() {
     const { auth, history  } = this.props;
     // Need to save auth in sessionStorage
-    if ( auth ) history.push('/');
+    if ( auth ) history.push('/profile');
   }
 
   componentWillReceiveProps(nextProps) {
     const { history } = this.props;
-    if ( nextProps.auth ) history.push('/');
+    if ( !!nextProps.auth ) history.push('/profile');
   }
 
   onSubmit = (password, username) => {

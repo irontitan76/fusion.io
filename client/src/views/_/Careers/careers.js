@@ -27,7 +27,11 @@ const size = {
 export const grid = {
   teams: [
     {
-      button: {
+      button1: {
+        label: 'Learn more',
+        path: '/teams/engineering'
+      },
+      button2: {
         label: 'See Jobs',
         path: '/careers?team=engineering'
       },
@@ -43,7 +47,11 @@ export const grid = {
       title: 'Engineering & Technology',
     },
     {
-      button: {
+      button1: {
+        label: 'Learn more',
+        path: '/teams/design'
+      },
+      button2: {
         label: 'See Jobs',
         path: '/careers?team=design'
       },
@@ -59,7 +67,11 @@ export const grid = {
       title: 'User Experience & Design',
     },
     {
-      button: {
+      button1: {
+        label: 'Learn more',
+        path: '/teams/sales'
+      },
+      button2: {
         label: 'See Jobs',
         path: '/careers?team=sales'
       },
@@ -74,7 +86,11 @@ export const grid = {
       title: 'Accounts & Sales',
     },
     {
-      button: {
+      button1: {
+        label: 'Learn more',
+        path: '/teams/finance'
+      },
+      button2: {
         label: 'See Jobs',
         path: '/careers?team=finance'
       },
@@ -90,7 +106,11 @@ export const grid = {
       title: 'Finance',
     },
     {
-      button: {
+      button1: {
+        label: 'Learn more',
+        path: '/teams/marketing'
+      },
+      button2: {
         label: 'See Jobs',
         path: '/careers?team=marketing'
       },
@@ -106,7 +126,11 @@ export const grid = {
       title: 'Marketing',
     },
     {
-      button: {
+      button1: {
+        label: 'Learn more',
+        path: '/teams/legal'
+      },
+      button2: {
         label: 'See Jobs',
         path: '/careers?team=legal'
       },
@@ -122,4 +146,4 @@ export const grid = {
       title: 'Legal & Corporate Affairs',
     },
   ],
-}
+};

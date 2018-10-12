@@ -25,7 +25,7 @@ const styles = theme => ({
     fontWeight: 300
   },
   horizontalLabel: {
-    [theme.breakpoints.down('sm')]: {
+    [theme.breakpoints.down('md')]: {
       display: 'none',
     },
   },
@@ -40,20 +40,22 @@ const styles = theme => ({
       display: 'none',
     }
   },
-  root: {
-
-  },
+  root: {},
   subheading: {
     marginBottom: theme.spacing.unit * 4,
     paddingLeft: theme.spacing.unit *4,
     paddingRight: theme.spacing.unit *4,
   },
   tab: {
+    minHeight: 585,
     paddingBottom: theme.spacing.unit * 6,
-    paddingTop: theme.spacing.unit * 6
+    paddingTop: theme.spacing.unit * 6,
+    [theme.breakpoints.down('sm')]: {
+      height: 'auto',
+    },
   },
   tabs: {
-    backgroundColor: '#111',
+    backgroundColor: '#fefefe',
   },
   title: {
     paddingLeft: theme.spacing.unit *4,
@@ -89,7 +91,7 @@ export class TabBar extends Component {
             component={Grid}
             gutterBottom
             item
-            variant='title'
+            variant='h6'
             xs={12}>
             {tab.title}
           </Typography>
@@ -100,53 +102,60 @@ export class TabBar extends Component {
             component={Grid}
             gutterBottom
             item
-            variant='subheading'
+            variant='subtitle1'
             xs={12}>
             {tab.subheading}
           </Typography>
 
-          <Fade in timeout={{ enter: 750 }}>
-            <Grid item xs={12}>
+
+          <Grid item xs={12}>
+            <Grid
+              alignItems='center'
+              container
+              justify='space-around'>
               <Grid
-                alignItems='center'
-                container
-                justify='space-around'>
-                <Grid
-                  className={classes.description}
-                  item
-                  md={5}
-                  xs={12}>
+                className={classes.description}
+                item
+                md={5}
+                xs={12}>
+
+                <Fade in timeout={{ enter: 1200, exit: 500 }}>
 
                   <Grid
                     alignItems='center'
+                    className={classes.descriptionText}
                     container
                     direction='column'
                     justify='center'>
                     { breakLine(tab.description) }
                   </Grid>
 
-                </Grid>
+                </Fade>
 
-                <Grid item md={5} xs={12}>
+              </Grid>
 
-                  <Grid
-                    alignItems='center'
-                    container
-                    direction='column'
-                    justify='center'>
-                    <Grid item xs={12}>
-                      { (tab.media && tab.media.type === 'image')
-                        && <img
+              <Grid item md={5} xs={12}>
+
+                <Grid
+                  alignItems='center'
+                  container
+                  direction='column'
+                  justify='center'>
+                  <Grid item xs={12}>
+                    { (tab.media && tab.media.type === 'image')
+                      && <Fade in timeout={{ enter: 1200, exit: 500 }}>
+                          <img
                           alt={tab.media.alt}
                           className={classes.image}
-                          src={tab.media.src} /> }
-                    </Grid>
+                          src={tab.media.src} />
+                      </Fade>
+                    }
                   </Grid>
-
                 </Grid>
+
               </Grid>
             </Grid>
-          </Fade>
+          </Grid>
 
         </Grid>
       )
@@ -184,7 +193,7 @@ export class TabBar extends Component {
         key={key}
         label={direction === 'vertical' ? header.label : undefined }
       />
-    ))
+    ));
   };
 
   render() {
@@ -203,7 +212,7 @@ export class TabBar extends Component {
               paddingBottom: 10,
               paddingTop: 10
             }}
-            variant='title'>
+            variant='h6'>
             { name }
           </Typography>
           <Tabs
@@ -212,6 +221,7 @@ export class TabBar extends Component {
             fullWidth
             indicatorColor='primary'
             onChange={this.onChange}
+            textColor='primary'
             value={value}>
             { this.renderTabsHeaders(values) }
           </Tabs>
@@ -225,6 +235,7 @@ export class TabBar extends Component {
 TabBar.defaultProps = {
   direction: 'vertical'
 };
+
 TabBar.propTypes = {
   classes: PropTypes.object.isRequired,
   name: PropTypes.string,

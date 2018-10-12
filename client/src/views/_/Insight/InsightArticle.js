@@ -7,8 +7,6 @@ import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 import withStyles from '@material-ui/core/styles/withStyles';
 
-import { article } from './insight';
-
 const styles = theme => ({
   article: {
     marginBottom: theme.spacing.unit * 5,
@@ -68,71 +66,74 @@ const styles = theme => ({
 
 class InsightArticle extends Component {
   render() {
-    const { classes } = this.props;
-    const { _createdAt, author, content, media, subtitle, title } = article;
+    const { classes, insight } = this.props;
+    const { _createdAt, author, content, media, subtitle, title } = insight;
 
-    return <Grid className={classes.article} item md={8} xs={12}>
+    let img = null;
+    if ( media && media.type === 'img' ) {
+      img = <img
+        alt={ media.alt }
+        src={ media.src }
+        height={400}
+        width='100%' />
+    }
+
+    return insight && <Grid className={classes.article} item md={8} xs={12}>
       <Paper className={classes.articlePaper} elevation={1}>
-        {
-          (media && media.type === 'image')
-            ? <img
-                alt={ media.alt }
-                src={ media.src}
-                height={400}
-                width='100%'
-                />
-            : null
-        }
+        {img}
         <Typography
           className={classes.articleDate}
           variant='body2'>
-          { _createdAt }
+          {_createdAt && _createdAt.substring(0,10)}
         </Typography>
 
         <Typography
           className={classes.articleTitle}
-          variant='display1'>
-          { title }
+          variant='h4'>
+          {title}
         </Typography>
 
         <Typography
           className={classes.articleSubtitle}
-          variant='subheading'>
-          { subtitle }
+          variant='subtitle1'>
+          {subtitle}
         </Typography>
 
         <Divider light />
 
         <Typography
           className={classes.articleContent}
-          component='div'>
-          { content }
+          component='div'
+          dangerouslySetInnerHTML={content && content.charAt(0) === '<' ? {__html: content } : undefined }>
+          {content && content.charAt(0) === '<' ? null : content}
         </Typography>
       </Paper>
-      <Paper
-        className={classes.articleByline}
-        component={Grid}
-        container
-        elevation={1}>
-        <Grid
-          className={classes.articleAvatarItem}
-          item
-          xs={1}>
-          <Avatar alt={ author.name } src={ author.avatar } />
-        </Grid>
-        <Grid item xs={9}>
-          <Typography
-            className={classes.articleBylineName}>
-            { author.name }
-          </Typography>
-          <Typography
-            className={classes.articleBylineRole}>
-            { author.role }
-          </Typography>
-        </Grid>
+      {
+        author && <Paper
+          className={classes.articleByline}
+          component={Grid}
+          container
+          elevation={1}>
+          <Grid
+            className={classes.articleAvatarItem}
+            item
+            xs={1}>
+            <Avatar alt={author.name} src={author.avatar} />
+          </Grid>
+          <Grid item xs={9}>
+            <Typography
+              className={classes.articleBylineName}>
+              {author.name}
+            </Typography>
+            <Typography
+              className={classes.articleBylineRole}>
+              {author.role}
+            </Typography>
+          </Grid>
 
-      </Paper>
-    </Grid>
+        </Paper>
+      }
+    </Grid>;
   }
 }
 

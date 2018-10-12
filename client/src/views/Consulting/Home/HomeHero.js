@@ -9,13 +9,16 @@ import { hero } from './home';
 
 const styles = theme => ({
   hero: {
-    backgroundImage: 'url("/images/teams.jpg")',
+    backgroundImage: 'url("/images/city2.jpg")',
     backgroundRepeat: 'no-repeat',
     backgroundSize: '100% 100%',
-    height: 400,
+    height: 750,
     overflow: 'hidden',
     [theme.breakpoints.down('xl')]: {
       backgroundSize: '100% 180%',
+    },
+    [theme.breakpoints.down('lg')]: {
+      height: 550,
     },
     [theme.breakpoints.down('xs')]: {
       backgroundSize: '180% 120%',
@@ -66,15 +69,15 @@ class HomeHero extends Component {
 
           <FontAwesomeIcon
             className={classes.heroIcon}
-            icon={ icon }
+            icon={icon}
           />
 
           <Typography
             align='center'
             className={classes.heroTitle}
             gutterBottom
-            variant='display1'>
-            { title }
+            variant='h4'>
+            {title}
           </Typography>
 
         </Grid>

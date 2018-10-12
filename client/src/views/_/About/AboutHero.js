@@ -9,12 +9,12 @@ import { hero } from './about';
 
 const styles = theme => ({
   hero: {
-    backgroundImage: 'url("./images/camp.jpg")',
+    backgroundImage: 'url("./images/main.jpg")',
     backgroundRepeat: 'no-repeat',
     backgroundSize: '100% 100%',
-    height: 600,
-    [theme.breakpoints.up('xl')]: {
-      height: 850,
+    height: 800,
+    [theme.breakpoints.down('lg')]: {
+      height: 550,
     },
     [theme.breakpoints.down('sm')]: {
       backgroundSize: '130% 100%'
@@ -24,7 +24,7 @@ const styles = theme => ({
     }
   },
   heroButton: {
-    backgroundColor: 'rgba(255,255,255,0.1)',
+    backgroundColor: 'rgba(255,255,255,0.3)',
     border: '1px solid white',
     color: theme.palette.common.white,
     '&:hover': {
@@ -32,16 +32,17 @@ const styles = theme => ({
     }
   },
   heroContent: {
-    backgroundColor: 'rgba(0,0,0,.6)',
+    backgroundColor: 'rgba(0,0,0,.1)',
     padding: theme.spacing.unit * 5
   },
   heroSubtitle: {
     color: '#f2f2f2',
     marginBottom: theme.spacing.unit * 3,
-    padding: theme.spacing.unit * 2
+    paddingBottom: theme.spacing.unit * 2,
+    paddingTop: theme.spacing.unit * 2
   },
   heroTitle: {
-    color: '#f2f2f2',
+    color: theme.palette.light,
     fontSize: 42,
     fontWeight: 300
   }
@@ -57,7 +58,9 @@ class AboutHero extends Component {
       container
       justify='center'>
 
-      <Grid item xl={5} md={7}>
+      <Grid item xl={8} md={7} />
+
+      <Grid item xl={3} md={4}>
         <Grid
           alignItems='center'
           className={classes.heroContent}
@@ -69,9 +72,9 @@ class AboutHero extends Component {
             className={classes.heroTitle}
             component={Grid}
             item
-            variant='display1'
+            variant='h1'
             xs={12}>
-            { hero.title }
+            {hero.title}
           </Typography>
 
           <Typography
@@ -79,18 +82,17 @@ class AboutHero extends Component {
             className={classes.heroSubtitle}
             component={Grid}
             item
-            md={12}
             xs={12}>
-            { hero.subtitle }
+            {hero.subtitle}
           </Typography>
 
-          <Grid item md={4} xs={8}>
+          <Grid item md={8} xs={8}>
             <Button
               className={classes.heroButton}
               fullWidth
               onClick={onClick}
               variant='outlined'>
-              { hero.button.label }
+              {hero.button.label}
             </Button>
           </Grid>
 

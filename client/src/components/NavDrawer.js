@@ -12,12 +12,12 @@ const styles = theme => ({
 });
 
 export class NavDrawer extends Component {
-
   render() {
     const {
       anchor,
       classes,
       content,
+      mini,
       onClose,
       open,
       ...props
@@ -29,9 +29,7 @@ export class NavDrawer extends Component {
         className={ classes.root }
         open={ open }
         onClose={ onClose }
-        transitionDuration={{
-          exit: 400
-        }}
+        transitionDuration={400}
         {...props}>
         <div className={ classes.toolbar } />
         { content }

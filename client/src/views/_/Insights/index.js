@@ -1,11 +1,13 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import queryString from 'query-string';
+import filter from 'lodash.filter';
 
 import InsightsGrid from './InsightsGrid';
 import InsightsHeader from './InsightsHeader';
 import Footer from 'components/Footer';
 
-import { loadInsights } from 'actions/insights';
+import { loadInsights, unloadInsights } from 'actions/insights';
 
 class Insights extends Component {
   componentDidMount() {
@@ -13,20 +15,32 @@ class Insights extends Component {
     dispatch(loadInsights());
   }
 
-  render() {
-    const { insights } = this.props;
+  componentWillUnmount() {
+    const { dispatch } = this.props;
+    dispatch(unloadInsights());
+  }
 
+  filterInsights = () => {
+    const { insights, location: { search } } = this.props;
+    const filters = queryString.parse(search);
+
+    return filter(insights, filters);
+  };
+
+  render() {
     return <>
-      <InsightsHeader />
-      <InsightsGrid insights={insights} />
+      <main>
+        <InsightsHeader />
+        <InsightsGrid insights={this.filterInsights()} />
+      </main>
       <Footer />
-    </>
+    </>;
   }
 }
 
 const select = state => ({
-  insights: state.insights.items
-})
+  insights: state.insights.filteredItems
+});
 
 
 export default connect(select)(Insights);

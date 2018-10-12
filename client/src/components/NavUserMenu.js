@@ -53,7 +53,7 @@ export class NavUserMenu extends Component {
         aria-haspopup='true'
         className={classes.menuLink}
         onClick={this.handleMenu}
-        color='inherit'>
+        color='default'>
         <AccountCircle />
       </IconButton>
       <Menu
@@ -80,28 +80,31 @@ export class NavUserMenu extends Component {
               <ListItemIcon>
                 { item.icon }
               </ListItemIcon>
-              <ListItemText inset primary={item.name} primaryTypographyProps={{
-                className: classes.listSize
-              }} />
+              <ListItemText
+                inset
+                primary={item.name}
+                primaryTypographyProps={{
+                  className: classes.listSize
+                }}
+              />
             </MenuItem>
           ))
         }
       </Menu>
     </> : <Button
       className={classes.menuLink}
-      color='inherit'
+      color='primary'
       component={Link}
       onClick={this.handleChange}
       to='/login'>
       Login
-    </Button>
+    </Button>;
   }
 }
 
 NavUserMenu.defaultProps = {};
 
 NavUserMenu.propTypes = {
-  // auth: PropTypes.bool.isRequired,
   classes: PropTypes.object.isRequired,
 };
 

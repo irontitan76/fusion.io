@@ -21,7 +21,7 @@ app.use('/api', api);
 /* -- Mongoose configuration -- */
 mongoose.connect(
   'mongodb://localhost:27017/local',
-  { useNewUrlParser: true }
+  { useCreateIndex: true, useNewUrlParser: true }
 );
 
 const db = mongoose.connection;

@@ -16,13 +16,16 @@ class HomeFeature extends Component {
       <Grid item xs={12}>
         <Typography
           align='center'
-          variant='title'>
+          variant='h6'>
           Features
         </Typography>
       </Grid>
 
       <Grid item>
-        <Typography variant='subheading'>Social</Typography>
+        <Typography
+          variant='subtitle1'>
+          Social
+        </Typography>
       </Grid>
     </Grid>;
   }

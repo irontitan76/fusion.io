@@ -8,20 +8,32 @@ import { banner } from './about';
 
 const styles = theme => ({
   author: {
-    fontSize: 18,
-    fontWeight: 300,
-    marginBottom: theme.spacing.unit * 5,
+    color: 'inherit',
+    [theme.breakpoints.down('sm')]: {
+      paddingBottom: theme.spacing.unit,
+    }
   },
   banner: {
-    backgroundColor: '#ddd',
+    backgroundColor: theme.palette.light,
     borderTop: '1px solid #aaa',
     borderBottom: '1px solid #aaa',
     marginBottom: theme.spacing.unit * 7,
   },
-  quote: {
-    fontSize: 20,
-    fontWeight: 300,
+  bannerContent: {
+    color: theme.palette.navy,
     padding: theme.spacing.unit * 5,
+    [theme.breakpoints.down('sm')]: {
+      paddingBottom: 0,
+    }
+  },
+  quote: {
+    color: 'inherit',
+    fontSize: 18,
+    fontWeight: 300,
+    letterSpacing: .5,
+    [theme.breakpoints.down('sm')]: {
+      paddingBottom: theme.spacing.unit * 3,
+    }
   }
 });
 
@@ -29,20 +41,35 @@ class AboutBanner extends Component {
   render() {
     const { classes } = this.props;
 
-    return <Grid container>
-      <Grid className={classes.banner} item xs={12}>
-        <Typography
-          align='center'
-          className={classes.quote}
-          variant='subheading'>
-          { banner.quote }
-        </Typography>
+    return <Grid
+      alignItems='center'
+      container
+      className={classes.banner}
+      justify='space-around'>
 
+      <Grid
+        className={classes.bannerContent}
+        item
+        md={5}
+        xs={12}>
         <Typography
           align='center'
           className={classes.author}
-          variant='subheading'>
-          { banner.author }
+          variant='h6'>
+          {banner.author}
+        </Typography>
+      </Grid>
+
+      <Grid
+        className={classes.bannerContent}
+        item
+        md={7}
+        xs={12}>
+        <Typography
+          align='left'
+          className={classes.quote}
+          variant='subtitle1'>
+          {banner.quote}
         </Typography>
       </Grid>
     </Grid>;

@@ -1,5 +1,6 @@
 const initialState = {
   auth: false,
+  user: {},
 };
 
 const session = (state = initialState, action) => {
@@ -7,12 +8,13 @@ const session = (state = initialState, action) => {
     case 'SESSION_START':
       return {
         ...state,
-        auth: action.payload
+        ...action.payload
       };
     case 'SESSION_END':
       return {
         ...state,
-        auth: !action.payload
+        auth: !action.payload,
+        user: {}
       };
     default:
       return state;

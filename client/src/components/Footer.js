@@ -128,6 +128,7 @@ export class Footer extends Component {
       <Grid
         alignItems='center'
         className={classes.footer}
+        component='footer'
         container
         justify={ belowMedium ? 'center' : 'space-between'}>
 

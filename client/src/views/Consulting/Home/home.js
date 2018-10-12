@@ -7,7 +7,7 @@ export const hero = {
     label: 'EXPLORE OUR SERVICES',
     path: '/services'
   },
-  icon: [ 'far', 'users' ],
+  icon: [ 'fal', 'users' ],
   subtitle: 'Optimizing business through intelligent design',
   title: 'FUSION CONSULTING'
 };
@@ -26,6 +26,12 @@ export const banner = {
     articles.',
 };
 
+export const reasons = {
+  strategy: 'Fusion Consulting derives its vision from the overall Fusion Strategy.',
+  subtitle: 'Our Consultants Accelerate Your Business\'s Innovation',
+  title: 'Why Us',
+};
+
 export const services = {
   items: [
     {
@@ -34,7 +40,7 @@ export const services = {
        improves a consumer ecosystem, our social engineers are visionary \
        individuals with an affinity for creating relationships between your \
        business and indviduals.',
-     icon: ['far', 'heart'],
+     icon: ['fal', 'comments'],
      label: 'Social',
      media: {
        alt: 'social',
@@ -64,9 +70,9 @@ export const services = {
         With the growing trends and potential intelligence explosion \
         upon us, data management and services are becoming a necessity. \
         Our Data Group will work with your team to ensure optimal \
-        solutions for all of your needs.' ,
+        solutions for all of your needs.',
       icon: ['fal', 'analytics'],
-      image: {
+      media: {
         alt: 'data',
         src: '/images/data.jpg',
         type: 'image'
@@ -81,9 +87,9 @@ export const services = {
         learning, and improving. You encourage and require those around you to \
         think strategically, but act quickly.',
       icon: ['fal', 'cloud'],
-      image: {
+      media: {
         alt: 'cloud',
-        src: '/images/web.jpg',
+        src: '/images/digital.jpg',
         type: 'image'
       },
       label: 'Cloud',
@@ -96,7 +102,7 @@ export const services = {
         learning, and improving. You encourage and require those around you to \
         think strategically, but act quickly.',
       icon: ['fal', 'mind-share'],
-      image: {
+      media: {
         alt: 'artificial intelligence',
         src: '/images/earth-resized.jpg',
         type: 'image'
@@ -110,8 +116,8 @@ export const services = {
         and solutions completed efficiently. You spend more time executing, \
         learning, and improving. You encourage and require those around you to \
         think strategically, but act quickly.',
-      icon: ['fal', 'mind-share'],
-      image: {
+      icon: ['fal', 'head-vr'],
+      media: {
         alt: 'reality',
         src: '/images/reality.jpg',
         type: 'image'
@@ -122,4 +128,9 @@ export const services = {
     }
   ],
   title: 'Our Services',
+};
+
+export const video = {
+  title: 'Who We Are',
+  content: 'Video placeholder',
 };

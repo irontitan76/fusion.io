@@ -14,10 +14,8 @@ export class NavItems extends Component {
   ));
 
   render() {
-    const { classes } = this.props;
-
     return (
-      <List className={classes.root} component='nav'>
+      <List component='nav'>
         { this._getItems() }
       </List>
     );

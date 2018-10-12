@@ -13,10 +13,11 @@ import NavUserMenu from 'components/NavUserMenu';
 
 const styles = theme => ({
   appBar: {
-    backgroundColor: '#111',
+    backgroundColor: '#fefefe',
     zIndex: theme.zIndex.drawer + 1,
   },
   menuButton: {
+    color: '#111',
     marginLeft: -12,
     marginRight: 20,
     '&:hover': {
@@ -24,6 +25,7 @@ const styles = theme => ({
     }
   },
   title: {
+    color: '#111',
     flexGrow: 1,
     fontWeight: 300,
     letterSpacing: 8,
@@ -54,7 +56,7 @@ export class NavBar extends Component {
             component={Link}
             color='inherit'
             to='/'
-            variant='title'>
+            variant='h6'>
             { title }
           </Typography>
           <NavUserMenu items={items} />

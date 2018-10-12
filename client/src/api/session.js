@@ -1,17 +1,15 @@
 import axios from 'axios';
-import bcrypt from 'bcryptjs';
-
-const SALT_WORK_FACTOR = 10;
 
 export const login = async (password, username) => {
   try {
-    const hashedPassword = await bcrypt.hash(password, SALT_WORK_FACTOR);
     const response = await axios.post('/api/users/login', {
+      password,
       username,
-      password: hashedPassword,
     });
 
-    return response;
+    return response.status !== 200 || !response.data._id
+      ? { auth: false, user: {} }
+      : { auth: response.status === 200, user: response.data };
   } catch (err) {
     return err.response;
   }
@@ -28,14 +26,11 @@ export const logout = async () => {
 
 export const signup = async (user) => {
   try {
-    const salt = await bcrypt.genSalt(SALT_WORK_FACTOR);
-    const hash = await bcrypt.hash(user.password.value, salt);
-
     const response = await axios.post('/api/users/signup', {
       firstName: user.firstName.value,
       lastName: user.lastName.value,
       username: user.username.value,
-      password: hash,
+      password: user.password.value,
     });
 
     return response;

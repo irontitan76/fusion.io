@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from 'react';
+import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
@@ -14,7 +14,7 @@ export class Nav extends Component {
     const { nav: { isNavOpen }, primary, secondary, title } = this.props;
 
     return (
-      <Fragment>
+      <nav>
 
         <NavBar
           onClick={ this._onClick }
@@ -27,7 +27,7 @@ export class Nav extends Component {
           open={ isNavOpen }
           items={ primary }
         />
-      </Fragment>
+      </nav>
     );
   }
 }

@@ -18,8 +18,8 @@ const styles = theme => ({
     fontWeight: 300,
   },
   productsTitle: {
-    color: '#111',
-    fontWeight: 900,
+    color: theme.palette.dark,
+    fontWeight: 700,
   },
   product: {
     marginBottom: theme.spacing.unit * 5,
@@ -38,17 +38,51 @@ const styles = theme => ({
     textDecoration: 'none',
   },
   productItemSubtitle: {
-    color: '#111',
+    color: theme.palette.dark,
     fontWeight: 300,
     paddingBottom: theme.spacing.unit * 2,
   },
   productItemTitle: {
-    color: '#000',
+    color: theme.palette.dark,
     fontWeight: 300,
   }
 });
 
 class HomeProducts extends Component {
+  renderSubheading = (subheading, variant) => {
+    const { classes } = this.props;
+
+    return <Typography
+      className={`
+        ${classes.productItemSubtitle}
+        ${this.getVariantClass(variant)}
+      `}
+      gutterBottom
+      variant='subtitle1'>
+      {subheading}
+    </Typography>;
+  };
+
+  renderTitle = (title, variant) => {
+    const { classes } = this.props;
+
+    return <Typography
+      className={`
+        ${classes.productItemTitle}
+        ${this.getVariantClass(variant)}
+      `}
+      gutterBottom
+      variant='h6'>
+      {title}
+    </Typography>;
+  };
+
+  getVariantClass = variant => {
+    const { classes } = this.props;
+    if ( variant === 'light' ) return classes.light;
+    else return '';
+  }
+
   render() {
     const { classes } = this.props;
     const { items, subtitle, title } = products;
@@ -58,16 +92,16 @@ class HomeProducts extends Component {
         <Typography
           align='center'
           className={classes.productsTitle}
-          variant='display1'>
-          { title }
+          variant='h4'>
+          {title}
         </Typography>
 
         <Typography
           align='center'
           className={classes.productsSubtitle}
           gutterBottom
-          variant='subheading'>
-          { subtitle }
+          variant='subtitle1'>
+          {subtitle}
         </Typography>
       </Grid>
 
@@ -88,29 +122,8 @@ class HomeProducts extends Component {
                     justify='flex-end'
                     style={{ backgroundImage: `url('${item.image.src}')` }}>
                     <Grid item>
-                      <Typography
-                        className={`
-                          ${classes.productItemTitle}
-                          ${item.variant === 'light'
-                            ? classes.light
-                            : ''
-                        }`}
-                        gutterBottom
-                        variant='title'>
-                        { item.title }
-                      </Typography>
-
-                      <Typography
-                        className={`
-                          ${classes.productItemSubtitle}
-                          ${item.variant === 'light'
-                            ? classes.light
-                            : ''
-                        }`}
-                        gutterBottom
-                        variant='subheading'>
-                        { item.subheading }
-                      </Typography>
+                      {this.renderTitle(item.title, item.variant)}
+                      {this.renderSubheading(item.subheading, item.variant)}
                     </Grid>
                   </Grid>
                 </Link>

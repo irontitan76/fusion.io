@@ -4,15 +4,22 @@ import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import withStyles from '@material-ui/core/styles/withStyles';
 
+import { breakLine } from 'common/functions';
 import { story } from './about';
 
 const styles = theme => ({
   story: {
-
+    marginBottom: theme.spacing.unit * 5,
+  },
+  storyContent: {
+    fontWeight: 300,
   },
   storyImageContainer: {
     height: 500,
     marginBottom: theme.spacing.unit * 5,
+    [theme.breakpoints.up('xl')]: {
+      height: 750,
+    }
   },
   storySubtitle: {
     marginBottom: theme.spacing.unit * 5,
@@ -35,7 +42,7 @@ class AboutStory extends Component {
               className={classes.storyImageContainer}
               container
               justify='center'>
-              <img alt='' { ...story.image } height='100%' width='100%'/>
+              <img alt='' {...story.image} height='100%' width='100%'/>
             </Grid>
           </Grid>
 
@@ -44,9 +51,9 @@ class AboutStory extends Component {
             component={Grid}
             gutterBottom
             item
-            variant='display1'
+            variant='h4'
             xs={12}>
-            { story.title }
+            {story.title}
           </Typography>
 
           <Typography
@@ -55,10 +62,24 @@ class AboutStory extends Component {
             component={Grid}
             gutterBottom
             item
-            variant='subheading'
+            variant='subtitle1'
+            xl={7}
             md={5}
             xs={11}>
-            { story.subtitle }
+            {story.subtitle}
+          </Typography>
+
+          <Typography
+            align='left'
+            className={classes.storyContent}
+            component={Grid}
+            gutterBottom
+            item
+            variant='body1'
+            xl={6}
+            md={8}
+            xs={11}>
+            {breakLine(story.content, 'left')}
           </Typography>
 
         </Grid>

@@ -13,7 +13,7 @@ import { search } from './careers';
 
 const styles = theme => ({
   search: {
-    backgroundColor: theme.palette.offwhite,
+    backgroundColor: theme.palette.blue,
     zIndex: 0,
   },
   searchBar: {
@@ -22,7 +22,7 @@ const styles = theme => ({
   },
   searchField: {
     backgroundColor: theme.palette.common.white,
-    border: '1px solid #ddd',
+    border: `1px solid ${theme.palette.lightgray}`,
     padding: `${theme.spacing.unit * .75}px 0px`
   },
   searchIcon: {
@@ -36,7 +36,7 @@ const styles = theme => ({
 
 class CareersSearch extends Component {
   render() {
-    const { classes } = this.props;
+    const { classes, onSearch } = this.props;
 
     return <AppBar className={classes.search} position='static'>
       <Toolbar className={classes.searchBar}>
@@ -55,18 +55,19 @@ class CareersSearch extends Component {
                   <InputAdornment position='start'>
                     <FontAwesomeIcon
                       className={classes.searchIcon}
-                      icon={[ 'far', 'search' ]} />
+                      icon={[ 'fal', 'search' ]} />
                   </InputAdornment>
                 )
               }}
               margin='none'
+              onChange={onSearch}
               placeholder={ search.placeholder }
              />
           </Grid>
         </Grid>
 
       </Toolbar>
-    </AppBar>
+    </AppBar>;
   }
 }
 

@@ -4,6 +4,9 @@ const fs = require('fs');
 const path = require('path');
 const paths = require('./paths');
 
+// TODO: THIS IS UNSECURE
+process.env.DANGEROUSLY_DISABLE_HOST_CHECK = 'true'
+
 // Make sure that including paths.js after env.js will read .env variables.
 delete require.cache[require.resolve('./paths')];
 

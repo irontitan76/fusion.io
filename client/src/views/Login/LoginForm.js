@@ -101,7 +101,7 @@ class LoginForm extends Component {
     const isValidEmail = validator.isEmail(username);
 
     return !(isFilledIn && isValidEmail);
-  }
+  };
 
   render() {
     const { isRemembered, password, username } = this.state;
@@ -130,12 +130,12 @@ class LoginForm extends Component {
             <FontAwesomeIcon
               className={classes.loginFormLogo}
               color='#fff'
-              icon={['fal', 'atom']}
+              icon={['fal', 'atom-alt']}
               size='6x'
             />
             <Typography
               className={classes.loginFormTitleText}
-              variant='title'>
+              variant='h6'>
               FUSION
             </Typography>
           </Typography>
@@ -175,7 +175,9 @@ class LoginForm extends Component {
             className={classes.loginFormSwitchContainer}
             container
             justify='flex-end'>
-            <Typography component={Grid} item>
+            <Typography
+              component={Grid}
+              item>
               Remember me
               <Switch
                 className={classes.loginFormSwitch}
@@ -197,7 +199,7 @@ class LoginForm extends Component {
             disabled={this.validateForm()}
             fullWidth
             onClick={this.onSubmit}
-            variant='raised'>
+            variant='contained'>
             Login
           </Button>
 
@@ -206,7 +208,7 @@ class LoginForm extends Component {
             component={Link}
             fullWidth
             to='/signup'
-            variant='raised'>
+            variant='contained'>
             Sign up
           </Button>
 

@@ -34,7 +34,7 @@ const styles = theme => ({
   },
   overviewTitle: {
     color: '#111',
-    fontWeight: 900,
+    fontWeight: 700,
   },
   overviewCardContent: {
     height: 75,
@@ -51,22 +51,25 @@ class HomeOverview extends Component {
       container
       justify='space-around'
       spacing={24}>
+
         <Grid className={classes.overviewTitleContainer} item xs={12}>
           <Typography
             align='center'
             className={classes.overviewTitle}
-            variant='display1'>
-            { title }
+            gutterBottom
+            variant='h4'>
+            {title}
           </Typography>
 
           <Typography
             align='center'
             className={classes.overviewSubtitle}
             gutterBottom
-            variant='subheading'>
-            { subtitle }
+            variant='subtitle1'>
+            {subtitle}
           </Typography>
         </Grid>
+
         {
           items.map((item, key) => (
             <Grid
@@ -79,10 +82,9 @@ class HomeOverview extends Component {
                 <CardHeader
                   avatar={
                     <FontAwesomeIcon
-                      color='#0074d9'
+                      color='#777'
                       icon={item.icon}
-                      size='2x'
-                    />
+                      style={{ fontSize: 26 }} />
                   }
                   title={item.title}/>
                 <CardContent className={classes.overviewCardContent}>
