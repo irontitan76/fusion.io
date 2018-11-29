@@ -27,8 +27,15 @@ export const banner = {
 };
 
 export const reasons = {
-  strategy: 'Fusion Consulting derives its vision from the overall Fusion Strategy.',
-  subtitle: 'Our Consultants Accelerate Your Business\'s Innovation',
+  strategy: 'As companies continue to spur innovation at ever-growing rates, \
+    the optimization of process, organization, technical architectures, and \
+    business hierarchies is looked over. Fusion Consulting derives its vision \
+    from the overall Fusion Strategy where a methodical, yet quick process is \
+    followed to either transform or start your business. We belive in loosely \
+    coupled systems with high cohesion in both the technical and business \
+    realms and we work with you to decide the best course for your overall \
+    vision.',
+  subtitle: '',
   title: 'Why Us',
 };
 

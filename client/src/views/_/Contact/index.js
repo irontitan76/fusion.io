@@ -6,6 +6,7 @@ import withStyles from '@material-ui/core/styles/withStyles';
 
 import ContactForm from './ContactForm';
 import ContactHeader from './ContactHeader';
+import ContactLocations from './ContactLocations';
 import Footer from 'components/Footer';
 import { fields, subtitle, title } from './contact';
 
@@ -25,6 +26,7 @@ export class Contact extends Component {
           justify='center'>
           <ContactHeader subtitle={subtitle} title={title}/>
           <ContactForm fields={fields} title={title}/>
+          <ContactLocations />
         </Grid>
       </main>
       <Footer />

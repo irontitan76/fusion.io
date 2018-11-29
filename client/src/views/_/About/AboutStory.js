@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 
 import Grid from '@material-ui/core/Grid';
+import RootRef from '@material-ui/core/RootRef';
 import Typography from '@material-ui/core/Typography';
 import withStyles from '@material-ui/core/styles/withStyles';
 
@@ -30,62 +31,64 @@ class AboutStory extends Component {
   render() {
     const { classes, storyRef } = this.props;
 
-    return <Grid
-      className={classes.story}
-      container
-      ref={ storyRef }>
+    return <RootRef rootRef={storyRef}>
+      <Grid
+        className={classes.story}
+        container
+        ref={storyRef}>
 
-      <Grid item xs={12}>
-        <Grid alignItems='center' container justify='center'>
-          <Grid item md={7} xs={12}>
-            <Grid
-              className={classes.storyImageContainer}
-              container
-              justify='center'>
-              <img alt='' {...story.image} height='100%' width='100%'/>
+        <Grid item xs={12}>
+          <Grid alignItems='center' container justify='center'>
+            <Grid item md={7} xs={12}>
+              <Grid
+                className={classes.storyImageContainer}
+                container
+                justify='center'>
+                <img alt='' {...story.image} height='100%' width='100%'/>
+              </Grid>
             </Grid>
+
+            <Typography
+              align='center'
+              component={Grid}
+              gutterBottom
+              item
+              variant='h4'
+              xs={12}>
+              {story.title}
+            </Typography>
+
+            <Typography
+              align='center'
+              className={classes.storySubtitle}
+              component={Grid}
+              gutterBottom
+              item
+              variant='subtitle1'
+              xl={7}
+              md={5}
+              xs={11}>
+              {story.subtitle}
+            </Typography>
+
+            <Typography
+              align='left'
+              className={classes.storyContent}
+              component={Grid}
+              gutterBottom
+              item
+              variant='body1'
+              xl={6}
+              md={8}
+              xs={11}>
+              {breakLine(story.content, 'left')}
+            </Typography>
+
           </Grid>
-
-          <Typography
-            align='center'
-            component={Grid}
-            gutterBottom
-            item
-            variant='h4'
-            xs={12}>
-            {story.title}
-          </Typography>
-
-          <Typography
-            align='center'
-            className={classes.storySubtitle}
-            component={Grid}
-            gutterBottom
-            item
-            variant='subtitle1'
-            xl={7}
-            md={5}
-            xs={11}>
-            {story.subtitle}
-          </Typography>
-
-          <Typography
-            align='left'
-            className={classes.storyContent}
-            component={Grid}
-            gutterBottom
-            item
-            variant='body1'
-            xl={6}
-            md={8}
-            xs={11}>
-            {breakLine(story.content, 'left')}
-          </Typography>
-
         </Grid>
-      </Grid>
 
-    </Grid>;
+      </Grid>
+    </RootRef>
   }
 }
 

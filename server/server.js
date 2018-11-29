@@ -11,7 +11,7 @@ import { makeExecutableSchema } from 'graphql-tools';
 
 import api from './api';
 
-const PORT = process.env.PORT || 3001;
+const PORT = process.env.PORT || 8081;
 const app = express();
 
 app.use(bodyParser.urlencoded({ extended:true }));

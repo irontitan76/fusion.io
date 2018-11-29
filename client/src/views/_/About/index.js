@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import ReactDOM from 'react-dom';
 
 import AboutBanner from './AboutBanner'
 import AboutHero from './AboutHero';
@@ -15,8 +14,7 @@ class About extends Component {
   }
 
   scrollToStory = () => {
-    const node = ReactDOM.findDOMNode(this.myRef.current);
-    node.scrollIntoView({ block: 'center',  behavior: 'smooth' });
+    window.scroll({ top: this.myRef.current.offsetTop, behavior: 'smooth' });
   };
 
   render() {

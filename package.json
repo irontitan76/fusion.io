@@ -4,10 +4,11 @@
   "private": true,
   "scripts": {
     "cli": "cd cli && npm start",
-    "client": "cd client && npm start",
+    "dev_client": "cd client && npm start",
     "deploy": "gcloud app deploy",
-    "dev": "concurrently --kill-others-on-fail \"npm run server\" \"npm run client\"",
-    "server": "cd server && npm run-script build && node ./build/server.js",
+    "dev": "concurrently --kill-others-on-fail \"mongod\" \"npm run dev_server\" \"npm run dev_client\"",
+    "dev_server": "cd server && npm run-script dev",
+    "server": "cd server && npm start",
     "start": "concurrently --kill-others-on-fail \"npm run server\" \"npm run client\"",
     "install_all": "npm install && cd ./client && npm install && cd ./../server && npm install",
     "update_all": "npm update && cd ./client && npm update && cd ./../server && npm update"
