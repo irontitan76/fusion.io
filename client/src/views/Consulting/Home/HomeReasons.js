@@ -13,6 +13,8 @@ const styles = theme => ({
     fontWeight: 300,
   },
   reasonsStrategyContainer: {
+    paddingLeft: theme.spacing.unit * 3,
+    paddingRight: theme.spacing.unit * 3,
     marginBottom: theme.spacing.unit * 5,
   },
   reasonsSubheading: {
@@ -58,7 +60,8 @@ class HomeReasons extends Component {
       <Grid
         className={classes.reasonsStrategyContainer}
         item
-        xs={8}>
+        md={8}
+        xs={12}>
         <Typography
           align='left'
           className={classes.reasonsBody}

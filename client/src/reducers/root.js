@@ -5,6 +5,7 @@ import insights from 'reducers/insights';
 import nav from 'reducers/nav';
 import products from 'reducers/products';
 import session from 'reducers/session';
+import standards from 'reducers/standards';
 
 export default combineReducers({
   careers,
@@ -12,4 +13,5 @@ export default combineReducers({
   nav,
   products,
   session,
+  standards,
 });
