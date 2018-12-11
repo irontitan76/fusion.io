@@ -427,7 +427,22 @@ export const standards = [
   },
   {
     id: 14,
-    content: [],
+    content: [{
+      body: '<p>\
+          Process is one of the most important aspects of\
+          the business world. An ever-decreasing time to provide products and\
+          services to customers is essential to remain competitive. This not\
+          only includes the mechanisms to deliver a\
+          solution, but the build time of the hardware platforms and setup of\
+          the software stack sitting at their foundation. Our obligation is\
+          to research market trends, survey clients and customers, provide\
+          quality deliverables, return feedback to our consumers, and deliver\
+          superior solutions to our customers. How do we do overcome such a\
+          feat? By continually reforming and modernizing processes and\
+          systems.\
+        </p>',
+      type: 'html',
+    }],
     level: 0,
     order: 14,
     parentId: null,
@@ -435,7 +450,24 @@ export const standards = [
   },
   {
     id: 15,
-    content: [],
+    content: [{
+      body: '<p>\
+          To ensure the most optimal process is followed and extended, \
+          Fusion places great importance on communication. Whenever an idea is \
+          generated, an issue found, or a clarification needed, employees are \
+          expected to quickly and articulately convey the subject at hand.\
+        \
+        <p>\
+          Communication becomes more difficult with regional and timezone \
+          differences, so this constitution outlines the systems and steps\
+          used to prevent those communication predicaments. \
+        </p>\
+        <p>\
+          One value of our company is to Challenge Respectfully. To accomplish \
+          that, an efficient form of communication must be attained.\
+        </p>',
+      type: 'html',
+    }],
     level: 2,
     order: 15,
     parentId: 14,

@@ -16,3 +16,12 @@ export const breakLine = (str, align) => (
     </Typography>
   ))
 );
+
+export const getReference = referenceString => {
+  return referenceString.toLowerCase().split(' ').join('');
+};
+
+export const scrollTo = (view, name) => {
+  if ( !view[name] ) return null;
+  window.scroll({ top: view[name].current.offsetTop, behavior: 'smooth' });
+};

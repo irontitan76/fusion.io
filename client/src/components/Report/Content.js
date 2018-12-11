@@ -9,26 +9,18 @@ const styles = theme => ({
     paddingBottom: theme.spacing.unit,
     paddingLeft: theme.spacing.unit * 2,
     paddingRight: theme.spacing.unit * 2,
-    paddingTop: theme.spacing.unit * 2,
-    '&:first-child': {
-      paddingTop: theme.spacing.unit * 6,
-    }
   },
-  strategyHeader: {
-    fontWeight: 500,
-  }
 });
 
-class StrategyHeader extends Component {
+class ReportContent extends Component {
   render() {
-    const { classes, children, variant } = this.props;
+    const { classes, children } = this.props;
 
     return <Grid className={classes.root} container justify='center'>
       <Grid item xl={5} md={6} xs={12}>
         <Typography
-          align='left'
-          className={classes.strategyHeader}
-          variant={variant}>
+          component='div'
+          variant='body1'>
           {children}
         </Typography>
       </Grid>
@@ -36,8 +28,4 @@ class StrategyHeader extends Component {
   }
 }
 
-StrategyHeader.defaultProps = {
-  variant: 'h4',
-};
-
-export default withStyles(styles)(StrategyHeader);
+export default withStyles(styles)(ReportContent);
