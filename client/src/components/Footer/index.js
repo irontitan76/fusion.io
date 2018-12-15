@@ -66,6 +66,7 @@ export class Footer extends Component {
     const { classes, theme } = this.props;
 
     const icons = {
+      'linkedin': 'http://linkedin.com/in/rosssheppard',
       'twitter': 'http://twitter.com/rshep182',
       'github': 'http://github.com/irontitan76',
       'facebook': 'http://facebook.com/rshep',

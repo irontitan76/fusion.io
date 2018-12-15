@@ -2,8 +2,11 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 import Report from 'components/Report';
-import { loadStrategies, unloadStrategies } from 'actions/strategies';
-import { strategies } from './content';
+
+import {
+  loadStrategies,
+  unloadStrategies
+} from 'actions/strategies';
 
 class Strategy extends Component {
   componentDidMount = () => {
@@ -17,6 +20,7 @@ class Strategy extends Component {
   };
 
   render() {
+    const { strategies } = this.props;
     return <Report content={strategies} />;
   }
 }

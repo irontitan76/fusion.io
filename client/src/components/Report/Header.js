@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 
 import Divider from '@material-ui/core/Divider';
 import Grid from '@material-ui/core/Grid';
-import RootRef from '@material-ui/core/RootRef';
 import Typography from '@material-ui/core/Typography';
 import withStyles from '@material-ui/core/styles/withStyles';
 
@@ -30,15 +29,15 @@ const styles = theme => ({
 
 class ReportHeader extends Component {
   render() {
-    const { classes, children, divider, reference, variant } = this.props;
+    const { classes, children, divider, id, variant } = this.props;
 
     let line = null;
     if ( divider ) {
       line = <Divider className={classes.divider} />;
     }
 
-    const content = (
-      <Grid className={classes.root} container justify='center'>
+    return  (
+      <Grid className={classes.root} container id={id} justify='center'>
         <Grid item xl={5} md={6} xs={12}>
           <Typography
             align='left'
@@ -50,14 +49,6 @@ class ReportHeader extends Component {
         </Grid>
       </Grid>
     );
-
-    if ( reference ) {
-      return <RootRef rootRef={reference}>
-        {content}
-      </RootRef>;
-    } else {
-      return content;
-    }
   }
 }
 

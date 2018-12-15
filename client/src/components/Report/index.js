@@ -1,5 +1,7 @@
 import React, { Component, Fragment } from 'react';
+import { HashLink as Link } from 'react-router-hash-link';
 import filter from 'lodash.filter';
+import includes from 'lodash.includes';
 import orderBy from 'lodash.orderby';
 
 import Footer from 'components/Footer';
@@ -7,39 +9,27 @@ import ReportContent from 'components/Report/Content';
 import ReportHeader from 'components/Report/Header';
 import ReportQuote from 'components/Report/Quote';
 
-import { getReference, scrollTo } from 'common/functions';
+import { getReference } from 'common/functions';
 
 class Report extends Component {
-  constructor(props) {
-    super(props);
-
-    props.content.forEach(section => {
-      if ( section.title ) {
-        const reference = getReference(section.title);
-        this[reference] = React.createRef();
-      }
-
-      if ( section.items ) {
-        section.items.forEach(item => {
-          if ( item.name ) {
-            const reference = getReference(item.name);
-            this[reference] = React.createRef();
-          }
-        });
-      }
-    });
-  }
-
   renderTableofContentItems = items => {
     return items.map((item, key) => {
       let containerName = getReference(item.title);
 
       return <li key={key}>
-        <span
-          onClick={() => scrollTo(this, containerName)}
-          style={{ cursor: 'pointer', textDecoration: 'underline' }}>
+        <Link
+          scroll={el => el.scrollIntoView({
+            behavior: 'smooth',
+            block: 'start'
+          })}
+          to={`#${containerName}`}
+          style={{
+            color: 'black',
+            cursor: 'pointer',
+            textDecoration: 'underline'
+          }}>
           {item.title}
-        </span>
+        </Link>
       </li>;
     });
   };
@@ -47,7 +37,7 @@ class Report extends Component {
   renderTableOfContents = () => {
     const { content } = this.props;
 
-    return content.map((section, key) => {
+    return orderBy(content, ['order'], ['asc']).map((section, key) => {
 
       if ( key === 0 || (section.level !== 0 && section.level !== 1)  ) {
         return null;
@@ -58,11 +48,19 @@ class Report extends Component {
 
       return <Fragment key={key}>
         <li>
-          <span
-            onClick={() => scrollTo(this, getReference(section.title))}
-            style={{ cursor: 'pointer', textDecoration: 'underline' }}>
+          <Link
+            scroll={el => el.scrollIntoView({
+              behavior: 'smooth',
+              block: 'start'
+            })}
+            to={`#${getReference(section.title)}`}
+            style={{
+              color: 'black',
+              cursor: 'pointer',
+              textDecoration: 'underline'
+            }}>
             {section.title}
-          </span>
+          </Link>
         </li>
         <ol>{items}</ol>
         <br />
@@ -89,6 +87,10 @@ class Report extends Component {
         return <ReportContent key={key}>
           <ol>{this.renderTableOfContents()}</ol>
         </ReportContent>;
+      case 'md':
+        return <ReportContent
+          body={content.body}
+          key={key} />;
       case 'p':
       default: {
         return <ReportContent key={key}>
@@ -112,9 +114,9 @@ class Report extends Component {
 
       const article = (
         <ReportHeader
-          divider={typeof section.divider === 'undefined' || section.divider}
+          divider={includes([0, 1, 2], section.level)}
+          id={reference}
           key={key}
-          reference={this[reference]}
           variant={headingMap[section.level]}>
           {section.title}
         </ReportHeader>
@@ -122,10 +124,16 @@ class Report extends Component {
 
       let body = null;
 
-      if ( section.content ) {
+      if ( section.content && Object.keys(section.content).length > 0 && section.content.body) {
+        body = this.renderContentItem(section.content, 0);
+      } else if ( section.content && section.content.length ) {
         body = section.content.map((item, key) => (
           this.renderContentItem(item, key))
         );
+      }
+
+      if ( section.order === 0 ) {
+        body = [ body, this.renderContentItem({ type: 'toc' }, 1) ];
       }
 
       return <Fragment key={key}>
@@ -133,6 +141,9 @@ class Report extends Component {
         {body}
       </Fragment>;
     });
+
+
+
   };
 
   render() {

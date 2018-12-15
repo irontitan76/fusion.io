@@ -6,9 +6,7 @@ class ProfileAdmin extends Component {
   render() {
     const { session } = this.props;
 
-    return <>
-      <ProfileNavigation session={session} />
-    </>;
+    return <ProfileNavigation session={session} />;
   }
 }
 

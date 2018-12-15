@@ -6,7 +6,7 @@ export const userMenu = [
   },
   {
     label: 'Posts',
-    icon: ['fal', 'scroll'],
+    icon: ['fal', 'file-alt'],
     path: '/profile/posts',
   },
   {
@@ -18,4 +18,14 @@ export const userMenu = [
 
 export const adminMenu = [
   ...userMenu,
+  {
+    label: 'Standards',
+    icon: ['fal', 'circle-notch'],
+    path: '/profile/standards',
+  },
+  {
+    label: 'Strategies',
+    icon: ['fal', 'infinity'],
+    path: '/profile/strategies',
+  }
 ];

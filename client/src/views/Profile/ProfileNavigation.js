@@ -31,11 +31,13 @@ const styles = theme => ({
   },
   drawerPaper: {
     backgroundColor: '#f8f8f8',
+    height: '100%',
     position: 'relative',
     transition: theme.transitions.create('width', {
       easing: theme.transitions.easing.sharp,
       duration: theme.transitions.duration.enteringScreen,
     }),
+    top: 0,
     whiteSpace: 'nowrap',
     width: 240,
   },

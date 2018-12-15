@@ -1,14 +1,28 @@
 import mongoose from 'mongoose';
 
 const contentSchema = new mongoose.Schema({
-  author: { type: String },
   body: { type: String },
-  quote: { type: String },
-  type: { type: String, enum: ['html', 'ol', 'quote', 'toc', 'p'] }
+  type: { type: String, enum: ['md'] }
 });
 
 const strategySchema = new mongoose.Schema({
-  content: [contentSchema],
+  content: contentSchema,
+  _createdAt: {
+    required: true,
+    type: Date,
+  },
+  _modifiedAt: {
+    default: Date.now,
+    required: true,
+    type: Date,
+  },
+  _publishedAt: {
+    type: Date,
+  },
+  id: {
+    required: true,
+    type: Number,
+  },
   level: {
     required: true,
     type: Number,
@@ -20,12 +34,15 @@ const strategySchema = new mongoose.Schema({
   parentId: {
     type: Number,
   },
+  siblingId: {
+    type: Number,
+  },
   title: {
     required: true,
     trim: true,
     type: String,
   },
-}, { collection: 'strategy' });
+}, { collection: 'strategies' });
 
 const Strategy = mongoose.model('Strategy', strategySchema);
 
