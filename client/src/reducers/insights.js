@@ -2,6 +2,7 @@ import filter from 'lodash.filter';
 
 const initialState = {
   items: [],
+  selected: {},
 };
 
 const getInsightsByStringSearch = (items, str) => {
@@ -14,11 +15,29 @@ const getInsightsByStringSearch = (items, str) => {
 
 const insights = (state = initialState, action) => {
   switch (action.type) {
+    case 'INSIGHT_CHANGE': {
+      const name = action.payload.name;
+      const value = action.payload.value;
+      return {
+        ...state,
+        selected: {
+          ...state.selected,
+          [name]: value,
+        },
+      };
+    }
     case 'INSIGHT_LOAD':
       return {
         ...state,
-        selected: action.payload[0],
+        selected: action.payload || {},
       };
+    case 'INSIGHT_UNLOAD':
+      return {
+        ...state,
+        selected: initialState.selected,
+      }
+    case 'INSIGHT_UPDATE':
+      return state;
     case 'INSIGHTS_FILTER':
       return {
         ...state,

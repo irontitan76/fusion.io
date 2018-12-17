@@ -65,6 +65,8 @@ const standards = (state = initialState, action) => {
         ...state,
         currentItem: action.payload,
       };
+    case 'STANDARD_REMOVE':
+      return state;
     case 'STANDARD_UPDATE':
       return state;
     case 'STANDARD_UNLOAD':

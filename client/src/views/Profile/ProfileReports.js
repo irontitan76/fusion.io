@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
 import Link from 'react-router-dom/Link';
 import moment from 'moment';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -18,6 +17,11 @@ import {
   loadStandards,
   unloadStandards,
 } from 'actions/standards';
+
+import {
+  loadStrategies,
+  unloadStrategies,
+} from 'actions/strategies';
 
 const styles = theme => ({
   actions: {
@@ -48,25 +52,42 @@ const styles = theme => ({
   }
 })
 
-class ProfilePosts extends Component {
+class ProfileReports extends Component {
   componentDidMount = () => {
-    const { dispatch } = this.props;
-    dispatch(loadStandards());
+    const { dispatch, match } = this.props;
+    const path = match.path.split();
+    const type = path[path.length - 1];
+
+    if ( type === '/profile/standards') {
+      dispatch(loadStandards());
+    } else if ( type === '/profile/strategies' ) {
+      dispatch(loadStrategies());
+    }
   };
 
   componentWillUnmount = () => {
-    const { dispatch } = this.props;
-    dispatch(unloadStandards());
+    const { dispatch, match } = this.props;
+    const path = match.path.split();
+    const type = path[path.length - 1];
+
+    if ( type === '/profile/standards') {
+      dispatch(unloadStandards());
+    } else if ( type === '/profile/strategies' ) {
+      dispatch(unloadStrategies());
+    }
   };
 
-  getTitleLevel = (standard) => {
-    return new Array(standard.level).join('\u00a0\u00a0\u00a0');
+  getTitleLevel = (item) => {
+    return new Array(item.level).join('\u00a0\u00a0\u00a0');
   };
 
   renderContent = () => {
-    const { classes, standards } = this.props;
+    const { classes, items, match } = this.props;
 
-    if ( standards.items.length === 0 ) {
+    const path = match.path.split();
+    const type = path[path.length - 1];
+
+    if ( items.items.length === 0 ) {
       return [
         <TableRow className={classes.tableRow} key={0}>
           <TableCell
@@ -78,26 +99,40 @@ class ProfilePosts extends Component {
       ];
     }
 
-    return standards.items
+    return items.items
       .sort((a,b) => a.order - b.order)
-      .map((standard, key) => (
-      <TableRow className={classes.tableRow} key={key}>
-        <TableCell>
-          <Link to={`/profile/standards/${standard._id}`}>
-            { standard.title }
-          </Link>
-        </TableCell>
-        <TableCell>{ standard.order }</TableCell>
-        <TableCell>{ standard.level }</TableCell>
-        <TableCell>{ moment(standard._createdAt).format('MMM Do YYYY, h:mm a') }</TableCell>
-        <TableCell>{ moment(standard._modifiedAt).format('MMM Do YYYY, h:mm a') }</TableCell>
-        <TableCell>{ standard._publishedAt || 'Unpublished' }</TableCell>
-      </TableRow>
-    ))
+      .map((item, key) => {
+        const link = `${type}/edit/${item._id}`;
+
+        return <TableRow className={classes.tableRow} key={key}>
+          <TableCell>
+            <Link to={link}>
+              { item.title }
+            </Link>
+          </TableCell>
+          <TableCell>{ item.order }</TableCell>
+          <TableCell>{ item.level }</TableCell>
+          <TableCell>{ moment(item._createdAt).format('MMM Do YYYY, h:mm a') }</TableCell>
+          <TableCell>{ moment(item._modifiedAt).format('MMM Do YYYY, h:mm a') }</TableCell>
+          <TableCell>{ item._publishedAt || 'Unpublished' }</TableCell>
+        </TableRow>;
+    })
   };
 
   render() {
-    const { classes } = this.props;
+    const { classes, match } = this.props;
+
+    const path = match.path.split();
+    const type = path[path.length - 1];
+
+    let add = '', title = '';
+    if ( type === '/profile/standards') {
+      add = 'New Standard';
+      title = 'The Fusion Standard';
+    } else if ( type === '/profile/strategies' ) {
+      add = 'New Strategy';
+      title = 'The Fusion Strategy'
+    }
 
     return <Grid
       className={classes.root}
@@ -110,7 +145,7 @@ class ProfilePosts extends Component {
             <Typography
               className={classes.title}
               variant='h6'>
-              The Fusion Standard
+              {title}
             </Typography>
           </Grid>
 
@@ -118,13 +153,13 @@ class ProfilePosts extends Component {
             <Button
               color='primary'
               component={Link}
-              to='/profile/standard'
+              to={`${type}/new`}
               variant='contained'>
               <FontAwesomeIcon
                 className={classes.icon}
                 icon={['fal', 'plus']}
               />
-              New Standard
+              {add}
             </Button>
           </Grid>
         </Grid>
@@ -157,8 +192,4 @@ class ProfilePosts extends Component {
   }
 }
 
-const select = state => ({
-  standards: state.standards,
-});
-
-export default withStyles(styles)(connect(select)(ProfilePosts));
+export default withStyles(styles)(ProfileReports);

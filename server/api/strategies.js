@@ -5,6 +5,26 @@ import mongoose from 'mongoose';
 
 const router = express.Router();
 
+router.delete('/:id', async (req, res) => {
+  const _id = req.params.id;
+  const self = await Strategy.findOne({ _id });
+
+  await Strategy.updateMany(
+    { order: { $gt: self.order }},
+    { $inc: { order: -1, id: -1 }},
+  );
+
+  const response = await Strategy.deleteOne({ _id }, (err, result) => {
+    if ( err ) {
+      console.log('-X Strategy delete failed ' + err);
+      res.status(500).json({ error: err, message: 'Strategy update failed!' });
+      return err;
+    }
+    console.log(`--- Strategy ${_id} deleted successfully`);
+    res.status(200).json({ message: 'Successfully deleted Strategy ' + _id});
+  });
+});
+
 router.get('/', async (req, res) => {
   const response = await Strategy.find({});
   await res.status(200).send(response);
@@ -71,26 +91,41 @@ router.put('/:id', async (req, res) => {
   const parent = await Strategy.findOne({ id: req.body.parentId });
   const self = await Strategy.findOne({ _id });
   const sibling = await Strategy.findOne({ id: req.body.siblingId });
-  const siblingChildrenCount = await Strategy.countDocuments({
-    parentId: req.body.siblingId
-  });
 
-
-
-  let level, order;
-  if ( sibling ) {
+  let level;
+  if ( parent ) {
     level = parent.level + 1;
-    order = sibling.order;
-    const count = await Strategy.findOne({ order: { $gt: order }, level: parent.level });
-    console.log('COUNT', count);
-    if ( siblingChildrenCount ) {
-      order = order + siblingChildrenCount + 1;
-    };
-  } else  if ( parent ){
-    level = parent.level + 1;
-    order = parent.order + 1;
   } else {
     level = 0;
+  }
+
+  let order;
+  if ( sibling ) {
+    let next;
+    next = await Strategy.findOne({
+      level: sibling.level,
+      order: { $gt: sibling.order },
+    }).sort({ order: 1 });
+
+    if ( !next ) {
+      next = await Strategy.findOne({
+        level: parent.level,
+        order: { $gt: parent.order },
+      }).sort({ order: 1 });
+    }
+
+    const nextChildren = await Strategy.countDocuments({
+      order: {
+        $gt: sibling.order,
+        $lt: (next && next.order) || await Strategy.countDocuments({})
+      },
+    });
+
+    order = sibling.order + nextChildren + 1;
+
+  } else if ( parent ){
+    order = parent.order + 1;
+  } else {
     order = 0;
   }
 
@@ -106,8 +141,8 @@ router.put('/:id', async (req, res) => {
     content: req.body.content,
     level,
     order,
-    parentId: req.body.parentId || null,
-    siblingId: req.body.siblingId || null,
+    parentId: req.body.parentId,
+    siblingId: req.body.siblingId,
     title: req.body.title,
   };
 
@@ -120,6 +155,6 @@ router.put('/:id', async (req, res) => {
     console.log(`--- Strategy ${_id} updated successfully`);
     res.status(200).json({ message: 'Successfully updated strategy ' + _id});
   });
-})
+});
 
 module.exports = router;

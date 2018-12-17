@@ -3,18 +3,23 @@ import { connect } from 'react-redux';
 
 import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid';
+import MenuItem from '@material-ui/core/MenuItem';
 import TextField from '@material-ui/core/TextField';
 import Typography from '@material-ui/core/Typography';
 import withStyles from '@material-ui/core/styles/withStyles';
 
 import {
-  addInsight,
   changeInsight,
   loadInsight,
   unloadInsight,
+  updateInsight,
 } from 'actions/insights';
 
 const styles = theme => ({
+  content: {
+    fontFamily: 'Inconsolata, Monaco, Consolas, "Courier New", Courier;',
+    fontSize: 12,
+  },
   root: {
     height: '100%',
   },
@@ -33,13 +38,13 @@ const styles = theme => ({
   }
 })
 
-class ProfilePost extends Component {
-  componentDidMount = () => {
-    const { dispatch } = this.props;
-    dispatch(loadInsight());
+class ProfilePostEdit extends Component {
+  componentDidMount() {
+    const { dispatch, match } = this.props;
+    dispatch(loadInsight(match.params.itemId));
   };
 
-  componentWillUnmount = () => {
+  componentWillUnmount() {
     const { dispatch } = this.props;
     dispatch(unloadInsight());
   };
@@ -48,11 +53,11 @@ class ProfilePost extends Component {
     const { dispatch } = this.props;
     const { name, value } = event.target;
     dispatch(changeInsight(name, value));
-  }
+  };
 
   onSubmit = () => {
-    const { dispatch, insight, user } = this.props;
-    dispatch(addInsight(insight, user));
+    const { dispatch, insight } = this.props;
+    dispatch(updateInsight(insight));
   };
 
   render() {
@@ -67,11 +72,11 @@ class ProfilePost extends Component {
         <Typography
           className={classes.title}
           variant='h6'>
-          New Insight
+          Edit Insight
         </Typography>
       </Grid>
 
-      <Grid item md={9}>
+      <Grid item md={8}>
         <Grid container>
           <Grid className={classes.postContainer} item xs={12}>
             <TextField
@@ -97,6 +102,31 @@ class ProfilePost extends Component {
               variant='outlined' />
           </Grid>
 
+          <Grid className={classes.postContainer} item xs={6}>
+            <TextField
+              fullWidth
+              label='Status'
+              name='status'
+              select
+              type='text'
+              value={insight._publishedAt ? 1 : 0}
+              variant='outlined'>
+              <MenuItem value={0}>Draft</MenuItem>
+              <MenuItem value={1}>Published</MenuItem>
+            </TextField>
+          </Grid>
+
+          <Grid className={classes.postContainer} item xs={6}>
+            <TextField
+              disabled
+              fullWidth
+              label='Slug'
+              name='slug'
+              type='text'
+              value={insight.slug || ''}
+              variant='outlined' />
+          </Grid>
+
           <Grid className={classes.postContainer} item xs={12}>
             <TextField
               InputProps={{
@@ -114,23 +144,24 @@ class ProfilePost extends Component {
               variant='outlined' />
           </Grid>
 
-          <Grid className={classes.postContainer} item md={9}>
+          <Grid className={classes.postContainer} item xs={12}>
             <Button
               color='primary'
               onClick={this.onSubmit}
               variant='contained'>
-              Submit for Review
+              Update Insight
             </Button>
           </Grid>
         </Grid>
       </Grid>
+
     </Grid>;
   }
 }
 
 const select = state => ({
+  message: state.messages,
   insight: state.insights.selected,
-  user: state.session.user,
 });
 
-export default withStyles(styles)(connect(select)(ProfilePost));
+export default withStyles(styles)(connect(select)(ProfilePostEdit));

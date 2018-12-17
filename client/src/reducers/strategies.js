@@ -65,6 +65,8 @@ const strategies = (state = initialState, action) => {
         ...state,
         currentItem: action.payload,
       };
+    case 'STRATEGY_REMOVE':
+      return state;
     case 'STRATEGY_UPDATE':
       return state;
     case 'STRATEGY_UNLOAD':

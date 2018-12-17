@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import marked from 'marked';
+import moment from 'moment';
 
 import Avatar from '@material-ui/core/Avatar';
 import Divider from '@material-ui/core/Divider';
@@ -24,10 +26,15 @@ const styles = theme => ({
   },
   articleContent: {
     padding: theme.spacing.unit * 3,
-    '& h2': {
+    '& h1,h2,h3': {
       fontWeight: 300,
-      paddingBottom: theme.spacing.unit,
-      paddingTop: theme.spacing.unit * 2.5,
+      paddingBottom: theme.spacing.unit * .5,
+      paddingTop: theme.spacing.unit * .5,
+    },
+    '& h4,h5,h6': {
+      fontWeight: 300,
+      paddingBottom: theme.spacing.unit * .25,
+      paddingTop: theme.spacing.unit * .25,
     }
   },
   articleDate: {
@@ -84,7 +91,7 @@ class InsightArticle extends Component {
         <Typography
           className={classes.articleDate}
           variant='body2'>
-          {_createdAt && _createdAt.substring(0,10)}
+          {_createdAt && moment(_createdAt).format('YYYY-MM-DD')}
         </Typography>
 
         <Typography
@@ -104,9 +111,7 @@ class InsightArticle extends Component {
         <Typography
           className={classes.articleContent}
           component='div'
-          dangerouslySetInnerHTML={content && content.charAt(0) === '<' ? {__html: content } : undefined }>
-          {content && content.charAt(0) === '<' ? null : content}
-        </Typography>
+          dangerouslySetInnerHTML={ content ? { __html: marked(content) } : undefined } />
       </Paper>
       {
         author && <Paper
@@ -127,7 +132,7 @@ class InsightArticle extends Component {
             </Typography>
             <Typography
               className={classes.articleBylineRole}>
-              {author.role}
+              {author.title}
             </Typography>
           </Grid>
 

@@ -8,6 +8,7 @@ import Typography from '@material-ui/core/Typography';
 import withStyles from '@material-ui/core/styles/withStyles';
 
 import Message from 'components/Message';
+import ReportFormDialog from './ReportFormDialog';
 
 const styles = theme => ({
   content: {
@@ -126,8 +127,10 @@ class ProfileStandard extends Component {
   render() {
     const {
       classes,
+      deleteText,
       name,
       onChange,
+      onDelete,
       onSubmit,
       section = {},
       submitText,
@@ -225,13 +228,26 @@ class ProfileStandard extends Component {
               />
             </Grid>
 
-            <Grid className={classes.standardContainer} item md={9}>
-              <Button
-                color='primary'
-                onClick={onSubmit}
-                variant='contained'>
-                {submitText}
-              </Button>
+            <Grid className={classes.standardContainer} item xs={12}>
+              <Grid container justify='space-between'>
+                <Grid item md={3} xs={12}>
+                  <Button
+                    fullWidth
+                    color='primary'
+                    onClick={onSubmit}
+                    variant='contained'>
+                    {submitText}
+                  </Button>
+                </Grid>
+                {
+                  onDelete ? <Grid item md={3} xs={12}>
+                    <ReportFormDialog
+                      deleteText={deleteText}
+                      onDelete={onDelete} />
+                  </Grid> : null
+                }
+
+              </Grid>
             </Grid>
           </Grid>
         </Grid>

@@ -13,7 +13,10 @@ import TableRow from '@material-ui/core/TableRow';
 import Typography from '@material-ui/core/Typography';
 import withStyles from '@material-ui/core/styles/withStyles';
 
-import { loadInsights } from 'actions/insights';
+import {
+  loadInsights,
+  unloadInsights,
+} from 'actions/insights';
 
 const styles = theme => ({
   actions: {
@@ -46,6 +49,11 @@ class ProfilePosts extends Component {
     dispatch(loadInsights(user._id));
   }
 
+  componentWillUnmount() {
+    const { dispatch } = this.props;
+    dispatch(unloadInsights());
+  }
+
   render() {
     const { classes, insights } = this.props;
 
@@ -60,7 +68,7 @@ class ProfilePosts extends Component {
             <Typography
               className={classes.title}
               variant='h6'>
-              Your Posts
+              Your Insights
             </Typography>
           </Grid>
 
@@ -68,13 +76,12 @@ class ProfilePosts extends Component {
             <Button
               color='primary'
               component={Link}
-              to='/profile/post'
+              to='/profile/insights/new'
               variant='contained'>
               <FontAwesomeIcon
                 className={classes.icon}
-                icon={['fal', 'plus']}
-              />
-              New Post
+                icon={['fal', 'plus']} />
+              New Insight
             </Button>
           </Grid>
         </Grid>
@@ -85,7 +92,13 @@ class ProfilePosts extends Component {
           <TableHead>
             <TableRow className={classes.tableRow}>
               {
-                ['Title', 'Content', 'Created At', 'Last Modified', 'Published At'].map((header, key) => (
+                [
+                  'Title',
+                  'Content',
+                  'Created At',
+                  'Last Modified',
+                  'Published At'
+                ].map((header, key) => (
                   <TableCell key={key}>{ header }</TableCell>
                 ))
               }
@@ -96,7 +109,7 @@ class ProfilePosts extends Component {
               insights.items.map((insight, key) => (
                 <TableRow className={classes.tableRow} key={key}>
                   <TableCell>
-                    <Link to={`/insights/${insight.slug}`}>
+                    <Link to={`/profile/insights/edit/${insight.slug}`}>
                       { insight.title }
                     </Link>
                   </TableCell>

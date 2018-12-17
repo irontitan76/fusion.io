@@ -1,5 +1,15 @@
 import axios from 'axios';
 
+export const deleteStrategy = async (_id) => {
+  try {
+    const response = await axios.delete(`/api/strategies/${_id}`);
+    return response.data;
+  } catch (err) {
+    const message = `Could not delete strategy ${_id}`;
+    return { err, message };
+  }
+};
+
 export const getStrategy = async (id) => {
   try {
     const response = await axios.get(`/api/strategies/${id}`);
@@ -26,8 +36,8 @@ export const postStrategies = async (strategy) => {
 
     const request = {
       content: strategy.content,
-      parentId: strategy.parentId,
-      siblingId: strategy.siblingId,
+      parentId: strategy.parentId === 'none' ? null : strategy.parentId,
+      siblingId: strategy.siblingId === 'none' ? null : strategy.siblingId,
       title: strategy.title,
     };
 
@@ -53,7 +63,7 @@ export const putStrategies = async (update) => {
     const response = await axios.put(path, request);
     return response.data;
   } catch (err) {
-    const message = 'Could not add strategy';
+    const message = 'Could not update strategy';
     return { err, message };
   }
 };

@@ -8,15 +8,13 @@ import Grid from '@material-ui/core/Grid';
 import ProfileAdmin from './ProfileAdmin';
 import ProfileNotifications from './ProfileNotifications';
 import ProfilePost from './ProfilePost';
+import ProfilePostEdit from './ProfilePostEdit';
 import ProfilePosts from './ProfilePosts';
 import ProfileOverview from './ProfileOverview';
+import ProfileReport from './ProfileReport';
+import ProfileReportEdit from './ProfileReportEdit';
+import ProfileReports from './ProfileReports';
 import ProfileSettings from './ProfileSettings';
-import ProfileStandard from './ProfileStandard';
-import ProfileStandardEdit from './ProfileStandardEdit';
-import ProfileStandards from './ProfileStandards';
-import ProfileStrategy from './ProfileStrategy';
-import ProfileStrategyEdit from './ProfileStrategyEdit';
-import ProfileStrategies from './ProfileStrategies';
 import ProfileUser from './ProfileUser';
 
 class Home extends Component {
@@ -39,63 +37,93 @@ class Home extends Component {
         <Route
           exact
           path={ match.path }
-          component={ProfileOverview}
-        />
+          component={ProfileOverview} />
         <Route
           exact
           path={`${match.path}/settings`}
-          component={ProfileSettings}
-        />
+          component={ProfileSettings} />
         <Route
           exact
           path={`${match.path}/notifications`}
           render={props => {
             return <ProfileNotifications
               notifications={session.user.notifications}
-              {...props}
-            />
-          }}
-        />
+              {...props} />
+          }} />
         <Route
           exact
-          path={`${match.path}/post`}
-          component={ProfilePost}
-        />
+          path={`${match.path}/insights/new`}
+          component={ProfilePost} />
         <Route
           exact
-          path={`${match.path}/posts`}
-          component={ProfilePosts}
-        />
+          path={`${match.path}/insights/edit/:itemId`}
+          component={ProfilePostEdit} />
         <Route
           exact
-          path={`${match.path}/standard`}
-          component={ProfileStandard}
-        />
+          path={`${match.path}/insights`}
+          component={ProfilePosts} />
         <Route
           exact
-          path={`${match.path}/standards/:standardId`}
-          component={ProfileStandardEdit}
-        />
+          path={`${match.path}/standards/new`}
+          render={props => {
+            const Component = connect(state => ({
+              message: state.messages,
+              item: state.standards.currentItem,
+              items: state.standards.items,
+            }))(ProfileReport);
+            return <Component {...props} />;
+          }} />
+        <Route
+          exact
+          path={`${match.path}/standards/edit/:itemId`}
+          render={props => {
+            const Component = connect(state => ({
+              message: state.messages,
+              item: state.standards.currentItem,
+              items: state.standards.items,
+            }))(ProfileReportEdit);
+            return <Component {...props} />;
+          }} />
         <Route
           exact
           path={`${match.path}/standards`}
-          component={ProfileStandards}
-        />
-        <Route
-          exact
-          path={`${match.path}/strategy`}
-          component={ProfileStrategy}
-        />
-        <Route
-          exact
-          path={`${match.path}/strategies/:strategyId`}
-          component={ProfileStrategyEdit}
-        />
-        <Route
-          exact
-          path={`${match.path}/strategies`}
-          component={ProfileStrategies}
-        />
+          render={props => {
+            const Component = connect(state => ({
+              items: state.standards,
+            }))(ProfileReports);
+            return <Component {...props} />;
+          }} />
+          <Route
+            exact
+            path={`${match.path}/strategies/new`}
+            render={props => {
+              const Component = connect(state => ({
+                message: state.messages,
+                item: state.strategies.currentItem,
+                items: state.strategies.items,
+              }))(ProfileReport);
+              return <Component {...props} />;
+            }} />
+          <Route
+            exact
+            path={`${match.path}/strategies/edit/:itemId`}
+            render={props => {
+              const Component = connect(state => ({
+                message: state.messages,
+                item: state.strategies.currentItem,
+                items: state.strategies.items,
+              }))(ProfileReportEdit);
+              return <Component {...props} />;
+            }} />
+          <Route
+            exact
+            path={`${match.path}/strategies`}
+            render={props => {
+              const Component = connect(state => ({
+                items: state.strategies,
+              }))(ProfileReports);
+              return <Component {...props} />;
+            }} />
       </Grid>
     </Grid>;
   }

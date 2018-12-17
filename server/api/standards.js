@@ -5,6 +5,26 @@ import mongoose from 'mongoose';
 
 const router = express.Router();
 
+router.delete('/:id', async (req, res) => {
+  const _id = req.params.id;
+  const self = await Standard.findOne({ _id });
+
+  await Standard.updateMany(
+    { order: { $gt: self.order }},
+    { $inc: { order: -1, id: -1 }},
+  );
+
+  const response = await Standard.deleteOne({ _id }, (err, result) => {
+    if ( err ) {
+      console.log('-X Standard delete failed ' + err);
+      res.status(500).json({ error: err, message: 'Standard update failed!' });
+      return err;
+    }
+    console.log(`--- Standard ${_id} deleted successfully`);
+    res.status(200).json({ message: 'Successfully deleted Standard ' + _id});
+  });
+});
+
 router.get('/', async (req, res) => {
   const response = await Standard.find({});
   await res.status(200).send(response);
@@ -81,18 +101,27 @@ router.put('/:id', async (req, res) => {
 
   let order;
   if ( sibling ) {
-    order = sibling.order;
-
-    const nextSibling = await Standard.findOne({
+    let next;
+    next = await Standard.findOne({
       level: sibling.level,
-      order: { $gt: order },
+      order: { $gt: sibling.order },
     }).sort({ order: 1 });
 
-    const siblingChildrenCount = await Standard.countDocuments({
-      order: { $gt: order, $lt: nextSibling.order },
+    if ( !next ) {
+      next = await Standard.findOne({
+        level: parent.level,
+        order: { $gt: parent.order },
+      }).sort({ order: 1 });
+    }
+
+    const nextChildren = await Standard.countDocuments({
+      order: {
+        $gt: sibling.order,
+        $lt: (next && next.order) || await Standard.countDocuments({})
+      },
     });
 
-    order = order + siblingChildrenCount + 1;
+    order = sibling.order + nextChildren + 1;
 
   } else if ( parent ){
     order = parent.order + 1;
@@ -126,6 +155,6 @@ router.put('/:id', async (req, res) => {
     console.log(`--- Standard ${_id} updated successfully`);
     res.status(200).json({ message: 'Successfully updated standard ' + _id});
   });
-})
+});
 
 module.exports = router;

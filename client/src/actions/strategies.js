@@ -3,6 +3,7 @@ import {
   NEW_STRATEGY_CHANGE,
   NEW_STRATEGY_LOAD,
   NEW_STRATEGY_UNLOAD,
+  STRATEGY_REMOVE,
   STRATEGY_LOAD,
   STRATEGY_UNLOAD,
   STRATEGY_UPDATE,
@@ -11,6 +12,7 @@ import {
 } from 'actions';
 
 import {
+  deleteStrategy,
   getStrategy,
   getStrategies,
   postStrategies,
@@ -67,6 +69,17 @@ export const loadStrategies = () => {
       return dispatch({ type: STRATEGIES_LOAD, payload });
     } catch (err) {
       return dispatch({ type: STRATEGIES_LOAD, error: true, err });
+    }
+  };
+};
+
+export const removeStrategy = (_id) => {
+  return async dispatch => {
+    try {
+      const payload = await deleteStrategy(_id);
+      return dispatch({ type: STRATEGY_REMOVE, payload });
+    } catch (err) {
+      return dispatch({ type: STRATEGY_REMOVE, error: true, err });
     }
   };
 };

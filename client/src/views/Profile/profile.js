@@ -5,9 +5,9 @@ export const userMenu = [
     path: '/profile/notifications'
   },
   {
-    label: 'Posts',
+    label: 'Insights',
     icon: ['fal', 'file-alt'],
-    path: '/profile/posts',
+    path: '/profile/insights',
   },
   {
     label: 'Settings',

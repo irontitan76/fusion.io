@@ -3,6 +3,7 @@ import {
   NEW_STANDARD_CHANGE,
   NEW_STANDARD_LOAD,
   NEW_STANDARD_UNLOAD,
+  STANDARD_REMOVE,
   STANDARD_LOAD,
   STANDARD_UNLOAD,
   STANDARD_UPDATE,
@@ -11,6 +12,7 @@ import {
 } from 'actions';
 
 import {
+  deleteStandard,
   getStandard,
   getStandards,
   postStandards,
@@ -67,6 +69,17 @@ export const loadStandards = () => {
       return dispatch({ type: STANDARDS_LOAD, payload });
     } catch (err) {
       return dispatch({ type: STANDARDS_LOAD, error: true, err });
+    }
+  };
+};
+
+export const removeStandard = (_id) => {
+  return async dispatch => {
+    try {
+      const payload = await deleteStandard(_id);
+      return dispatch({ type: STANDARD_REMOVE, payload });
+    } catch (err) {
+      return dispatch({ type: STANDARD_REMOVE, error: true, err });
     }
   };
 };

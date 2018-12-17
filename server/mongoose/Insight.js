@@ -2,6 +2,17 @@ import mongoose from 'mongoose';
 
 const { Buffer, ObjectId } = mongoose.Schema.Types;
 
+function generateSlug() {
+  let slug = '';
+  let chars = 'abcdefghijklmnopqrstuvwxyz0123456789';
+
+  for ( let i = 0; i < 5; i++ ) {
+    slug += chars.charAt(Math.floor(Math.random() * chars.length));
+  }
+
+  return slug;
+}
+
 const mediaSchema = new mongoose.Schema({
   alt: { type: String },
   src: { type: String },
@@ -20,7 +31,12 @@ const insightSchema = new mongoose.Schema({
     _publishedAt: {
       type: Date
     },
-    // authorId: ObjectId,
+    author: {
+      _id: ObjectId,
+      avatar: String,
+      name: String,
+      title: String
+    },
     brief: {
       required: 'A short description is required',
       trim: true,
@@ -60,6 +76,11 @@ const insightSchema = new mongoose.Schema({
       type: String,
     },
 }, { collection: 'insights' });
+
+insightSchema.pre('save', function (next) {
+  this.slug = generateSlug();
+  next();
+});
 
 const Insight = mongoose.model('Insight', insightSchema);
 
