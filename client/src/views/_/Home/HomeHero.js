@@ -113,25 +113,25 @@ class HomeHero extends Component {
             justify='center'
             spacing={24}>
 
-            <Grid item lg={4} sm={6} xl={3} xs={10}>
+            <Grid item lg={3} sm={6} xl={3} xs={10}>
               <Button
                 className={classes.heroButton}
                 color='default'
                 component={Link}
                 fullWidth
-                to={ button1.path }
+                to={button1.path}
                 variant='outlined'>
                 {button1.label}
               </Button>
             </Grid>
 
-            <Grid item lg={4} sm={6} xl={3} xs={10}>
+            <Grid item lg={3} sm={6} xl={3} xs={10}>
               <Button
                 className={classes.heroButton}
                 color='default'
                 component={Link}
                 fullWidth
-                to={ button2.path }
+                to={button2.path}
                 variant='outlined'>
                 {button2.label}
               </Button>

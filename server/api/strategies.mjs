@@ -1,5 +1,5 @@
 import express from 'express';
-import Standard from './../mongoose/Standard';
+import Strategy from './../mongoose/Strategy';
 
 import mongoose from 'mongoose';
 
@@ -7,41 +7,41 @@ const router = express.Router();
 
 router.delete('/:id', async (req, res) => {
   const _id = req.params.id;
-  const self = await Standard.findOne({ _id });
+  const self = await Strategy.findOne({ _id });
 
-  await Standard.updateMany(
+  await Strategy.updateMany(
     { order: { $gt: self.order }},
     { $inc: { order: -1, id: -1 }},
   );
 
-  const response = await Standard.deleteOne({ _id }, (err, result) => {
+  const response = await Strategy.deleteOne({ _id }, (err, result) => {
     if ( err ) {
-      console.log('-X Standard delete failed ' + err);
-      res.status(500).json({ error: err, message: 'Standard update failed!' });
+      console.log('-X Strategy delete failed ' + err);
+      res.status(500).json({ error: err, message: 'Strategy update failed!' });
       return err;
     }
-    console.log(`--- Standard ${_id} deleted successfully`);
-    res.status(200).json({ message: 'Successfully deleted Standard ' + _id});
+    console.log(`--- Strategy ${_id} deleted successfully`);
+    res.status(200).json({ message: 'Successfully deleted Strategy ' + _id});
   });
 });
 
 router.get('/', async (req, res) => {
-  const response = await Standard.find({});
+  const response = await Strategy.find({});
   await res.status(200).send(response);
 });
 
 router.get('/:id', async (req, res) => {
-  const response = await Standard.findOne({ _id: req.params.id });
+  const response = await Strategy.findOne({ _id: req.params.id });
   await res.status(200).send(response);
 });
 
 router.post('/', async (req, res) => {
-  const parent = await Standard.findOne({ id: req.body.parentId });
-  const sibling = await Standard.findOne({ id: req.body.siblingId });
-  const siblingChildrenCount = await Standard.countDocuments({
+  const parent = await Strategy.findOne({ id: req.body.parentId });
+  const sibling = await Strategy.findOne({ id: req.body.siblingId });
+  const siblingChildrenCount = await Strategy.countDocuments({
     parentId: req.body.siblingId
   });
-  const count = await Standard.countDocuments() + 1;
+  const count = await Strategy.countDocuments() + 1;
 
   let level, order;
   if ( sibling ) {
@@ -55,7 +55,7 @@ router.post('/', async (req, res) => {
     order = 0;
   }
 
-  await Standard.updateMany(
+  await Strategy.updateMany(
     { order: { $gte: order }},
     { $inc: { order: 1 }},
     { multi: true }
@@ -63,7 +63,7 @@ router.post('/', async (req, res) => {
 
   const now = new Date();
 
-  const standard = new Standard({
+  const strategy = new Strategy({
     _createdAt: now,
     _modifiedAt: now,
     id: count,
@@ -75,22 +75,22 @@ router.post('/', async (req, res) => {
     title: req.body.title,
   });
 
-  standard.save((err, result) => {
+  strategy.save((err, result) => {
     if (err) {
-      console.log('-X Standard save failed ' + err);
-      res.status(500).json({ error: err, message: 'Standard save failed!' });
+      console.log('-X Strategy save failed ' + err);
+      res.status(500).json({ error: err, message: 'Strategy save failed!' });
       return err;
     }
-    console.log(`--- Standard ${standard._id} saved successfully`);
-    res.status(200).json({ message: 'Successfully saved a new standard' });
+    console.log(`--- Strategy ${strategy._id} saved successfully`);
+    res.status(200).json({ message: 'Successfully saved a new strategy' });
   })
 });
 
 router.put('/:id', async (req, res) => {
   const _id = req.params.id;
-  const parent = await Standard.findOne({ id: req.body.parentId });
-  const self = await Standard.findOne({ _id });
-  const sibling = await Standard.findOne({ id: req.body.siblingId });
+  const parent = await Strategy.findOne({ id: req.body.parentId });
+  const self = await Strategy.findOne({ _id });
+  const sibling = await Strategy.findOne({ id: req.body.siblingId });
 
   let level;
   if ( parent ) {
@@ -102,22 +102,22 @@ router.put('/:id', async (req, res) => {
   let order;
   if ( sibling ) {
     let next;
-    next = await Standard.findOne({
+    next = await Strategy.findOne({
       level: sibling.level,
       order: { $gt: sibling.order },
     }).sort({ order: 1 });
 
     if ( !next ) {
-      next = await Standard.findOne({
+      next = await Strategy.findOne({
         level: parent.level,
         order: { $gt: parent.order },
       }).sort({ order: 1 });
     }
 
-    const nextChildren = await Standard.countDocuments({
+    const nextChildren = await Strategy.countDocuments({
       order: {
         $gt: sibling.order,
-        $lt: (next && next.order) || await Standard.countDocuments({})
+        $lt: (next && next.order) || await Strategy.countDocuments({})
       },
     });
 
@@ -129,14 +129,14 @@ router.put('/:id', async (req, res) => {
     order = 0;
   }
 
-  await Standard.updateMany(
+  await Strategy.updateMany(
     { order: { $gt: self.order, $lte: order }},
     { $inc: { order: -1 }},
   );
 
   const now = new Date();
 
-  const standard = {
+  const strategy = {
     _modifiedAt: now,
     content: req.body.content,
     level,
@@ -146,15 +146,15 @@ router.put('/:id', async (req, res) => {
     title: req.body.title,
   };
 
-  await Standard.updateOne({ _id }, { $set: standard }, (err, result) => {
+  await Strategy.updateOne({ _id }, { $set: strategy }, (err, result) => {
     if (err) {
-      console.log('-X Standard update failed ' + err);
-      res.status(500).json({ error: err, message: 'Standard update failed!' });
+      console.log('-X Strategy update failed ' + err);
+      res.status(500).json({ error: err, message: 'Strategy update failed!' });
       return err;
     }
-    console.log(`--- Standard ${_id} updated successfully`);
-    res.status(200).json({ message: 'Successfully updated standard ' + _id});
+    console.log(`--- Strategy ${_id} updated successfully`);
+    res.status(200).json({ message: 'Successfully updated strategy ' + _id});
   });
 });
 
-module.exports = router;
+export default router;

@@ -121,7 +121,7 @@ class Team extends Component {
 
             <Typography
               className={classes.teamDescriptionText}
-              variant='body1'>
+              variant='body2'>
               {description}
             </Typography>
 
@@ -160,7 +160,7 @@ class Team extends Component {
                           className={classes.teamRoleCardContent}>
                           <Typography
                             className={classes.teamDescriptionText}
-                            variant='body1'>
+                            variant='body2'>
                             {role.description}
                           </Typography>
                         </CardContent>

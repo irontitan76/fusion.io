@@ -18,6 +18,7 @@ export const breakLine = (str, align) => (
 );
 
 export const getReference = referenceString => {
+  if ( !referenceString ) return '';
   return referenceString.toLowerCase().split(' ').join('');
 };
 

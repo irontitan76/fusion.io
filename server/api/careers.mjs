@@ -8,4 +8,4 @@ router.get('/', async (req, res) => {
   await res.status(200).send(response);
 });
 
-module.exports = router;
+export default router;

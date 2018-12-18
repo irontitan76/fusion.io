@@ -3,8 +3,8 @@ import PropTypes from 'prop-types';
 
 import withStyles from '@material-ui/core/styles/withStyles';
 
-import NavDrawer from 'components/NavDrawer';
-import NavItems from 'components/NavItems';
+import NavDrawer from './NavDrawer';
+import NavItems from './NavItems';
 
 const styles = theme => ({
   list: {
@@ -25,10 +25,9 @@ export class NavMainMenu extends Component {
 
     return (
       <NavDrawer
-        content={ menu }
-        onClose={ onClose }
-        open={ open }
-      />
+        content={menu}
+        onClose={onClose}
+        open={open} />
     );
   }
 }

@@ -9,7 +9,7 @@ import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import withStyles from '@material-ui/core/styles/withStyles';
 
-import NavUserMenu from 'components/NavUserMenu';
+import NavUserMenu from './NavUserMenu';
 
 const styles = theme => ({
   appBar: {

@@ -18,12 +18,12 @@ export const banner = {
     path: '/contact'
   },
   button2: {
-    label: 'Read Our Articles',
+    label: 'Read Our Insights',
     path: '/insights?group=consulting'
   },
   description: 'To learn more about how Fusion Consulting can help you with \
     your next digital transformation, contact us or see our consultant \
-    articles.',
+    insights.',
 };
 
 export const reasons = {
@@ -73,7 +73,7 @@ export const services = {
       title: 'Web',
     },
     {
-      description: 'Everything is data, and data is borne from other data. \
+      description: 'Everything is data. Also, data is borne from other data. \
         With the growing trends and potential intelligence explosion \
         upon us, data management and services are becoming a necessity. \
         Our Data Group will work with your team to ensure optimal \
@@ -89,10 +89,10 @@ export const services = {
       title: 'Data',
     },
     {
-      description: 'Having a bias for action means you take action. Get projects \
-        and solutions completed efficiently. You spend more time executing, \
-        learning, and improving. You encourage and require those around you to \
-        think strategically, but act quickly.',
+      description: 'Cloud-based services are pervasive throughout every \
+        industry vertical. Our team empowers your organization to diminish \
+        capital expenses, increment business adaptability, and increase \
+        overall efficiency.',
       icon: ['fal', 'cloud'],
       media: {
         alt: 'cloud',
@@ -104,10 +104,10 @@ export const services = {
       title: 'Cloud',
     },
     {
-      description: 'Having a bias for action means you take action. Get projects \
-        and solutions completed efficiently. You spend more time executing, \
-        learning, and improving. You encourage and require those around you to \
-        think strategically, but act quickly.',
+      description: 'Our AI Group gathers insights about the benefits, dangers, \
+        and pathways of artificial intelligence. As a leader in data analytics,\
+        machine learning, and deep learning, we ensure your business is \
+        ahead of the curve.',
       icon: ['fal', 'mind-share'],
       media: {
         alt: 'artificial intelligence',
@@ -119,10 +119,8 @@ export const services = {
       title: 'AI',
     },
     {
-      description: 'Having a bias for action means you take action. Get projects \
-        and solutions completed efficiently. You spend more time executing, \
-        learning, and improving. You encourage and require those around you to \
-        think strategically, but act quickly.',
+      description: 'Our Reality Group works to transform entertainment by \
+        employing the latest technologies and creative ideas.',
       icon: ['fal', 'head-vr'],
       media: {
         alt: 'reality',

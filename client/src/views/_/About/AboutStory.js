@@ -77,7 +77,7 @@ class AboutStory extends Component {
               component={Grid}
               gutterBottom
               item
-              variant='body1'
+              variant='body2'
               xl={6}
               md={8}
               xs={11}>

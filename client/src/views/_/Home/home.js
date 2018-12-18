@@ -4,8 +4,8 @@ export const hero = {
     path: '/about'
   },
   button2: {
-    label: 'EXPLORE OUR ORGANIZATIONS',
-    path: '/about/organizations'
+    label: 'VIEW OUR STRATEGY',
+    path: '/strategy'
   },
   icon: [ 'fal', 'atom-alt' ],
   subtitle: 'Optimizing business through intelligent design',

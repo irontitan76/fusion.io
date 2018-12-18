@@ -9,7 +9,7 @@ import { reasons } from './home';
 const styles = theme => ({
   reasons: {},
   reasonsBody: {
-    fontSize: 18,
+    fontSize: 16,
     fontWeight: 300,
   },
   reasonsStrategyContainer: {
@@ -65,13 +65,13 @@ class HomeReasons extends Component {
         <Typography
           align='left'
           className={classes.reasonsBody}
-          variant='body1'>
+          variant='body2'>
           {strategy}
         </Typography>
         <Typography
           className={classes.reasonsBody}
           component='div'
-          variant='body1'>
+          variant='body2'>
           <ul>
             <li>Our services deliver your project from ideation to the hands of customers fast and reliably</li>
             <li>With solution offerings for Web, Cloud, Data, A.I., Social and Reality, we provide the layers necessary to build success</li>

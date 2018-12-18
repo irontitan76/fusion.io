@@ -82,7 +82,18 @@ module.exports = function(proxy, allowedHost) {
       disableDotRule: true,
     },
     public: allowedHost,
-    proxy,
+    proxy: {
+      ...proxy,
+      '/images' : {
+        target: 'http://localhost:8081',
+        pathRewrite: {
+          '^/images' : '/api/images/resize',
+        },
+        secure: false,
+        logLevel: 'debug',
+      },
+      '/api': 'http://localhost:8081',
+    },
     before(app, server) {
       if (fs.existsSync(paths.proxySetup)) {
         // This registers user provided middleware for proxy reasons

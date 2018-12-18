@@ -7,7 +7,6 @@ import orderBy from 'lodash.orderby';
 import Footer from 'components/Footer';
 import ReportContent from 'components/Report/Content';
 import ReportHeader from 'components/Report/Header';
-import ReportQuote from 'components/Report/Quote';
 
 import { getReference } from 'common/functions';
 
@@ -70,19 +69,6 @@ class Report extends Component {
 
   renderContentItem = (content, key) => {
     switch ( content.type ) {
-      case 'html':
-        return <ReportContent key={key}>
-          <div dangerouslySetInnerHTML={{
-            __html: content.body.replace(/[\\]/g, '')
-          }} />
-        </ReportContent>;
-      case 'ol':
-        return null;
-      case 'quote':
-        return <ReportQuote
-          author={content.author}
-          key={key}
-          quote={content.quote} />;
       case 'toc':
         return <ReportContent key={key}>
           <ol>{this.renderTableOfContents()}</ol>
@@ -91,7 +77,6 @@ class Report extends Component {
         return <ReportContent
           body={content.body}
           key={key} />;
-      case 'p':
       default: {
         return <ReportContent key={key}>
           {content.body.replace(/[\\]/g, '')}
@@ -103,13 +88,17 @@ class Report extends Component {
   renderContent = () => {
     const { content } = this.props;
 
+    const headingMap = {
+      0: 'h1',
+      1: 'h1',
+      2: 'h2',
+      3: 'h3',
+      4: 'h4',
+      5: 'h5',
+      6: 'h6',
+    };
+
     return orderBy(content, ['order'], ['asc']).map((section, key) => {
-      const headingMap = {
-        0: 'h4',
-        1: 'h4',
-        2: 'h5',
-        3: 'h6',
-      };
       const reference = getReference(section.title);
 
       const article = (

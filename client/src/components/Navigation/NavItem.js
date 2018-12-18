@@ -87,9 +87,53 @@ export class NavItem extends Component {
     if ( path && !open ) return !open;
   }
 
+  renderListItem = (child, key) => {
+    const { classes } = this.props;
+
+    if ( !!child.active ) {
+      const selected = child.path === window.location.pathname;
+      const className = `${classes.nested} ${selected ? classes.selected : ''}`;
+
+      let icon = null;
+      if ( child.icon ) {
+        icon = <ListItemIcon
+          style={{ color: 'inherit' }}>
+          { child.icon }
+        </ListItemIcon>;
+      }
+
+      return <ListItem
+        button
+        classes={{ selected: classes.selected, }}
+        className={className}
+        component={Link}
+        key={key}
+        onClick={child.onClick || this.handleClose}
+        selected={selected}
+        to={child.path}>
+        {icon}
+        <ListItemText
+          inset
+          primary={child.name}
+          primaryTypographyProps={{
+            style: { color: 'inherit', fontSize: '.8125rem' }
+          }} />
+      </ListItem>;
+    }
+
+    return null;
+  };
+
+  renderListItems = () => {
+    const { item: { children } } = this.props;
+    return children.map((child, key) => {
+      return this.renderListItem(child, key);
+    });
+  };
+
   renderCollapseMenu = () => {
     const { open } = this.state;
-    const { classes, item } = this.props;
+    const { classes } = this.props;
 
     return (
       <Collapse
@@ -100,47 +144,7 @@ export class NavItem extends Component {
           className={classes.list}
           component='div'
           disablePadding>
-          {
-            item.children.map((child, key) => {
-              if ( !!child.active ) {
-                const selected = child.path === window.location.pathname;
-                return <ListItem
-                  button
-                  classes={{
-                    selected: classes.selected,
-                  }}
-                  className={
-                    `${classes.nested}
-                     ${selected
-                       ? classes.selected
-                       : ''}`
-                  }
-                  component={Link}
-                  key={key}
-                  onClick={child.onClick || this.handleClose}
-                  selected={selected}
-                  to={child.path}>
-                  {
-                    child.icon
-                      ? <ListItemIcon
-                          style={{ color: 'inherit' }}>
-                          { child.icon }
-                        </ListItemIcon>
-                      : null
-                  }
-                  <ListItemText
-                    inset
-                    primary={child.name}
-                    primaryTypographyProps={{
-                      style: { color: 'inherit', fontSize: '.8125rem' }
-                    }}
-                  />
-                </ListItem>
-              } else {
-                return null
-              }
-            })
-          }
+          {this.renderListItems()}
         </List>
       </Collapse>
     );
@@ -152,11 +156,11 @@ export class NavItem extends Component {
 
     let collapseIcon = null;
     if ( item.children ) {
+      const className = `${classes.collapseButton}
+        ${!!open ? classes.collapseButtonRotate : ''}`;
+
       collapseIcon = <FontAwesomeIcon
-        className={`
-          ${classes.collapseButton}
-          ${!!open ? classes.collapseButtonRotate : ''}
-          `}
+        className={className}
         icon={[ 'fal', 'chevron-up' ]}
         style={{ color: '#ccc' }} />
     }
@@ -169,9 +173,7 @@ export class NavItem extends Component {
       return <>
         <ListItem
           button
-          classes={{
-            selected: classes.selected,
-          }}
+          classes={{ selected: classes.selected }}
           className={
             `${classes.item}
              ${item.path === window.location.pathname

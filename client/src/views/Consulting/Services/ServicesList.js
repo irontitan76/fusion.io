@@ -26,7 +26,7 @@ class ServicesList extends Component {
         xs={12}>
 
         <Typography
-          variant='body1'>
+          variant='body2'>
           Services List
         </Typography>
 

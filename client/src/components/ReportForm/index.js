@@ -179,11 +179,7 @@ class ProfileStandard extends Component {
                 onChange={onChange}
                 placeholder='Select the parent section'
                 select
-                SelectProps={{
-                  MenuProps: {
-                    className: classes.selectMenu,
-                  },
-                }}
+                SelectProps={{ MenuProps: { className: classes.selectMenu } }}
                 value={parent}
                 variant='outlined'>
                 {parents.items}
@@ -199,11 +195,7 @@ class ProfileStandard extends Component {
                 onChange={onChange}
                 placeholder='Select the parent section'
                 select
-                SelectProps={{
-                  MenuProps: {
-                    className: classes.selectMenu,
-                  },
-                }}
+                SelectProps={{ MenuProps: { className: classes.selectMenu } }}
                 value={sibling}
                 variant='outlined'>
                 {siblings.items}

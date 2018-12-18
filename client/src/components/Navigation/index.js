@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
-import NavBar from 'components/NavBar';
-import NavMainMenu from 'components/NavMainMenu';
+import NavBar from './NavBar';
+import NavMainMenu from './NavMainMenu';
 
 import { toggleNav } from 'actions/nav';
 
@@ -19,14 +19,12 @@ export class Nav extends Component {
         <NavBar
           onClick={ this._onClick }
           items={ secondary }
-          title={ title }
-        />
+          title={ title } />
 
         <NavMainMenu
           onClose={ this._onClick }
           open={ isNavOpen }
-          items={ primary }
-        />
+          items={ primary } />
       </nav>
     );
   }

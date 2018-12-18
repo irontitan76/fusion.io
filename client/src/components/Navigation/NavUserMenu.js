@@ -85,8 +85,7 @@ export class NavUserMenu extends Component {
                 primary={item.name}
                 primaryTypographyProps={{
                   className: classes.listSize
-                }}
-              />
+                }} />
             </MenuItem>
           ))
         }
@@ -101,8 +100,6 @@ export class NavUserMenu extends Component {
     </Button>;
   }
 }
-
-NavUserMenu.defaultProps = {};
 
 NavUserMenu.propTypes = {
   classes: PropTypes.object.isRequired,

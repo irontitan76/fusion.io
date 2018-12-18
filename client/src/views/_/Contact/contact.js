@@ -1,5 +1,6 @@
 export const title = 'Contact Us';
-export const subtitle = 'Fill out the form below and we\'ll put you in contact with one of our account representatives';
+export const subtitle = 'Fill out the form below and we\'ll put you in contact\
+ with one of our account representatives';
 
 export const fields = [
   {

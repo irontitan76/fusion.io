@@ -141,7 +141,7 @@ export class Footer extends Component {
               key={key}
               xs={2}>
 
-              <Typography className={classes.footerText} variant='body1'>
+              <Typography className={classes.footerText} variant='body2'>
                 { menu.title }
               </Typography>
 
@@ -170,7 +170,7 @@ export class Footer extends Component {
           <Typography
             align={ belowMedium ? 'center' : 'right' }
             className={classes.footerText}
-            variant='body1'>
+            variant='body2'>
             FOLLOW FUSION
           </Typography>
           <Typography
@@ -196,7 +196,7 @@ export class Footer extends Component {
         <Grid item xs={6}>
           <Typography
             className={classes.footerCopyright}
-            variant='body1'>
+            variant='body2'>
             © Copyright 2018 Fusion Industries, Inc.
           </Typography>
         </Grid>
@@ -205,7 +205,7 @@ export class Footer extends Component {
           <Typography
             align='right'
             className={classes.footerCopyright}
-            variant='body1'>
+            variant='body2'>
             {
               links.map((link, key) => <Fragment key={key}>
                 <Link

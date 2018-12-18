@@ -30,6 +30,15 @@ const styles = theme => ({
 class ReportHeader extends Component {
   render() {
     const { classes, children, divider, id, variant } = this.props;
+    
+    const headingSizeMap = {
+      'h1': 36,
+      'h2': 28,
+      'h3': 22,
+      'h4': 18,
+      'h5': 16,
+      'h6': 14,
+    };
 
     let line = null;
     if ( divider ) {
@@ -42,6 +51,9 @@ class ReportHeader extends Component {
           <Typography
             align='left'
             className={classes.reportHeader}
+            style={{
+              fontSize: headingSizeMap[variant],
+            }}
             variant={variant}>
             {children}
           </Typography>

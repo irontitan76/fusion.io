@@ -11,7 +11,7 @@ const styles = theme => ({
       borderBottom: '1px solid rgba(0, 0, 0, 0.12)',
       borderTop: '1px solid rgba(0, 0, 0, 0.12)',
       fontWeight: 500,
-      fontSize: 16,
+      fontSize: 14,
       marginBottom: 16,
       marginLeft: 0,
       marginRight: 0,
@@ -38,7 +38,7 @@ class ReportContent extends Component {
           className={classes.contentBody}
           component='div'
           dangerouslySetInnerHTML={ body ? { __html: marked(body) } : undefined }
-          variant='body1'>
+          variant='body2'>
           {children}
         </Typography>
       </Grid>

@@ -1,6 +1,6 @@
 import React from 'react';
 
-import Nav from 'components/Nav';
+import Navigation from 'components/Navigation';
 import { menus, title } from './layout';
 
 export default ({ children }) => (
@@ -8,7 +8,7 @@ export default ({ children }) => (
     {
       window.location.pathname !== '/login'
       && window.location.pathname !== '/signup'
-        ? <Nav
+        ? <Navigation
             {...menus}
             title={title} />
           : null

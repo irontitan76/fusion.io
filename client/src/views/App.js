@@ -52,9 +52,12 @@ export class App extends Component {
           <Router>
             <Scroll>
               <Route
-                render={({ location }) => (
-                <Layout>
-                  <Fade key={location.key} in timeout={400}>
+                render={({ location }) => <Layout>
+                  <Fade
+                    key={location.pathname}
+                    in
+                    style={{ height: '100%' }}
+                    timeout={400}>
                     <div>
                       <Switch location={location}>
                         <Route exact path='/' component={CompanyHome} />
@@ -86,8 +89,7 @@ export class App extends Component {
                       </Switch>
                     </div>
                   </Fade>
-                </Layout>
-              )} />
+                </Layout>} />
             </Scroll>
           </Router>
         </MuiThemeProvider>

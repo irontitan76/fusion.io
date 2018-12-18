@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import List from '@material-ui/core/List';
 import withStyles from '@material-ui/core/styles/withStyles';
 
-import NavItem from 'components/NavItem';
+import NavItem from './NavItem';
 
 const styles = {};
 
@@ -14,11 +14,9 @@ export class NavItems extends Component {
   ));
 
   render() {
-    return (
-      <List component='nav'>
-        { this._getItems() }
-      </List>
-    );
+    return <List component='nav'>
+      { this._getItems() }
+    </List>;
   }
 }
 

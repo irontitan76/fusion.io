@@ -78,7 +78,8 @@ class ProfileReports extends Component {
   };
 
   getTitleLevel = (item) => {
-    return new Array(item.level).join('\u00a0\u00a0\u00a0');
+    const isValidLevel = item.level !== 0 && item.level !== 1;
+    return isValidLevel ? [new Array(item.level).join('\u2014'), '\u00a0\u00a0'] : null;
   };
 
   renderContent = () => {
@@ -106,6 +107,7 @@ class ProfileReports extends Component {
 
         return <TableRow className={classes.tableRow} key={key}>
           <TableCell>
+            {this.getTitleLevel(item)}
             <Link to={link}>
               { item.title }
             </Link>

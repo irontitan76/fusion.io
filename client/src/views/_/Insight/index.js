@@ -21,7 +21,7 @@ const styles = theme => ({
       paddingLeft: 0,
       paddingRight: 0,
     },
-  }
+  },
 });
 
 class Insight extends Component {
