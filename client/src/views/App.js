@@ -42,6 +42,10 @@ import TechnologyHome from 'views/Technology/Home';
 
 // Authentication
 import Login from 'views/Login';
+import Cookies from 'views/Policy/cookies';
+import PrivacyPolicy from 'views/Policy/privacy';
+import SiteMap from 'views/Policy/sitemap';
+import TermsOfUse from 'views/Policy/terms';
 import Signup from 'views/Signup';
 
 export class App extends Component {
@@ -52,44 +56,52 @@ export class App extends Component {
           <Router>
             <Scroll>
               <Route
-                render={({ location }) => <Layout>
-                  <Fade
-                    key={location.pathname}
-                    in
-                    style={{ height: '100%' }}
-                    timeout={400}>
-                    <div>
-                      <Switch location={location}>
-                        <Route exact path='/' component={CompanyHome} />
-                        <Route exact path='/about' component={About} />
-                        <Route exact path='/about/orgs' render={() => (
-                          <Redirect to='/about/organizations' />
-                        )} />
-                        <Route exact path='/about/organizations' component={Organizations} />
-                        <Route exact path='/standard' component={Standard} />
-                        <Route exact path='/strategy' component={Strategy} />
-                        <Route exact path='/careers' component={Careers} />
-                        <Route exact path='/contact' component={Contact} />
-                        <Route exact path='/insights' component={Insights} />
-                        <Route exact path='/insights/:insightId' component={Insight} />
-                        <Route exact path='/teams/:teamId' component={Team} />
+                render={({ location }) => {
+                  return <Layout>
+                    <Fade
+                      key={location.pathname.split('/')[0]}
+                      in
+                      style={{ height: '100%' }}
+                      timeout={400}>
+                      <div>
+                        <Switch location={location}>
+                          <Route exact path='/' component={CompanyHome} />
+                          <Route exact path='/about' component={About} />
+                          <Route exact path='/about/orgs' render={() => (
+                            <Redirect to='/about/organizations' />
+                          )} />
+                          <Route exact path='/about/organizations' component={Organizations} />
+                          <Route exact path='/standard' component={Standard} />
+                          <Route exact path='/strategy' component={Strategy} />
+                          <Route exact path='/careers' component={Careers} />
+                          <Route exact path='/contact' component={Contact} />
+                          <Route exact path='/insights' component={Insights} />
+                          <Route exact path='/insights/:insightId' component={Insight} />
+                          <Route exact path='/teams/:teamId' component={Team} />
 
-                        <Route path='/profile' component={Profile} />
+                          <Route exact path='/company/cookies' component={Cookies} />
+                          <Route exact path='/company/privacy' component={PrivacyPolicy} />
+                          <Route exact path='/company/sitemap' component={SiteMap} />
+                          <Route exact path='/company/terms-of-use' component={TermsOfUse} />
 
-                        <Route exact path='/consulting' component={ConsultingHome} />
-                        <Route exact path='/consulting/services' component={ConsultingServices} />
-                        <Route exact path='/consulting/solutions' component={ConsultingSolutions} />
+                          <Route path='/profile' component={Profile} />
 
-                        <Route exact path='/tech' render={() => <Redirect to='/technology' />} />
-                        <Route exact path='/technology' component={TechnologyHome} />
+                          <Route exact path='/consulting' component={ConsultingHome} />
+                          <Route exact path='/consulting/services' component={ConsultingServices} />
+                          <Route exact path='/consulting/solutions' component={ConsultingSolutions} />
 
-                        <Route exact path='/login' component={Login} />
-                        <Route exact path='/signup' component={Signup} />
-                        <Route component={NotFound} />
-                      </Switch>
-                    </div>
-                  </Fade>
-                </Layout>} />
+                          <Route exact path='/tech' render={() => <Redirect to='/technology' />} />
+                          <Route exact path='/technology' component={TechnologyHome} />
+
+                          <Route exact path='/login' component={Login} />
+                          <Route exact path='/signup' component={Signup} />
+
+                          <Route component={NotFound} />
+                        </Switch>
+                      </div>
+                    </Fade>
+                  </Layout>
+                }} />
             </Scroll>
           </Router>
         </MuiThemeProvider>

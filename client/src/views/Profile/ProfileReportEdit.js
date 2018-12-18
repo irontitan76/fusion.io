@@ -104,8 +104,6 @@ class ProfileReportEdit extends Component {
           return setTimeout(() => history.push('/profile/strategies'), 1000);
         })
       );
-
-
     }
   };
 

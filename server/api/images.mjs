@@ -36,7 +36,7 @@ router.get('/resize/:imageId/:width?/:height?', async (req, res) => {
       width = width || null;
 
       if ( err ) {
-        console.error(err);
+        console.error(`${now} - The image ${imageId} could not be formatted`);
         return err;
       }
 

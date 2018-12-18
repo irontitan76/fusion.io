@@ -25,13 +25,16 @@ mongoose.connect(
   { useCreateIndex: true, useNewUrlParser: true }
 );
 
+const d = new Date();
+const now = d.toISOString();
+
 const db = mongoose.connection;
 db.on('error', () => {
-  console.log('--- FAILED to connect to mongoose');
+  console.log(`${now} - FAILED to connect to mongoose`);
 });
 
 db.once('open', () => {
- console.log('-- Connected to mongoose');
+ console.log(`${now} - Connected to mongoose`);
 });
 
 /* -- Graphql Configuration -- */
@@ -42,4 +45,4 @@ db.once('open', () => {
 // app.use('/graphql', graphqlHTTP(req => ({ schema, graphiql:true })));
 
 /* -- Server start -- */
-app.listen(PORT, () => console.log(`Server is running on ${PORT}...`));
+app.listen(PORT, () => console.log(`${now} - Server is running on ${PORT}...`));

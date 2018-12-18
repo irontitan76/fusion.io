@@ -4,8 +4,7 @@
   "private": true,
   "scripts": {
     "deploy": "gcloud app deploy",
-    "dev": "node --experimental-modules server.mjs",
-    "test": "node --experimental-modules server.mjs",
+    "dev": "nodemon --experimental-modules server.mjs",
     "start": "NODE_ENV=production node ./build/server.mjs"
   },
   "dependencies": {

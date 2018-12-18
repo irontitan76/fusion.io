@@ -69,8 +69,7 @@ class HomeHero extends Component {
 
           <FontAwesomeIcon
             className={classes.heroIcon}
-            icon={icon}
-          />
+            icon={icon} />
 
           <Typography
             align='center'

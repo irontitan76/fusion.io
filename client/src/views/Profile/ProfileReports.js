@@ -108,7 +108,7 @@ class ProfileReports extends Component {
         return <TableRow className={classes.tableRow} key={key}>
           <TableCell>
             {this.getTitleLevel(item)}
-            <Link to={link}>
+            <Link to={{ pathname: link, }}>
               { item.title }
             </Link>
           </TableCell>

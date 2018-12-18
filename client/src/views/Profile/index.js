@@ -34,94 +34,71 @@ class Home extends Component {
     return <Grid container style={{ height: '100%' }}>
       { userType }
       <Grid item style={{ flex: 1, overflowY: 'scroll' }}>
-        <Route
-          exact
-          path={ match.path }
-          component={ProfileOverview} />
-        <Route
-          exact
-          path={`${match.path}/settings`}
-          component={ProfileSettings} />
-        <Route
-          exact
-          path={`${match.path}/notifications`}
+        <Route exact path={ match.path } component={ProfileOverview} />
+        <Route exact path={`${match.path}/settings`} component={ProfileSettings} />
+        <Route exact path={`${match.path}/notifications`}
           render={props => {
             return <ProfileNotifications
               notifications={session.user.notifications}
               {...props} />
           }} />
-        <Route
-          exact
-          path={`${match.path}/insights/new`}
-          component={ProfilePost} />
-        <Route
-          exact
-          path={`${match.path}/insights/edit/:itemId`}
-          component={ProfilePostEdit} />
-        <Route
-          exact
-          path={`${match.path}/insights`}
-          component={ProfilePosts} />
-        <Route
-          exact
-          path={`${match.path}/standards/new`}
+        <Route exact path={`${match.path}/insights/new`} component={ProfilePost} />
+        <Route exact path={`${match.path}/insights/edit/:itemId`} component={ProfilePostEdit} />
+        <Route exact path={`${match.path}/insights`} component={ProfilePosts} />
+        <Route exact path={`${match.path}/standards/new`}
           render={props => {
-            const Component = connect(state => ({
+            const select = state => ({
               message: state.messages,
               item: state.standards.currentItem,
               items: state.standards.items,
-            }))(ProfileReport);
+            });
+            const Component = connect(select)(ProfileReport);
             return <Component {...props} />;
           }} />
-        <Route
-          exact
-          path={`${match.path}/standards/edit/:itemId`}
+        <Route exact path={`${match.path}/standards/edit/:itemId`}
           render={props => {
-            const Component = connect(state => ({
+            const select = state => ({
               message: state.messages,
               item: state.standards.currentItem,
               items: state.standards.items,
-            }))(ProfileReportEdit);
+            });
+            const Component = connect(select)(ProfileReportEdit);
             return <Component {...props} />;
           }} />
-        <Route
-          exact
-          path={`${match.path}/standards`}
+        <Route exact path={`${match.path}/standards`}
           render={props => {
-            const Component = connect(state => ({
+            const select = state => ({
               items: state.standards,
-            }))(ProfileReports);
+            });
+            const Component = connect(select)(ProfileReports);
             return <Component {...props} />;
           }} />
-          <Route
-            exact
-            path={`${match.path}/strategies/new`}
+          <Route exact path={`${match.path}/strategies/new`}
             render={props => {
-              const Component = connect(state => ({
+              const select = state => ({
                 message: state.messages,
                 item: state.strategies.currentItem,
                 items: state.strategies.items,
-              }))(ProfileReport);
+              });
+              const Component = connect(select)(ProfileReport);
               return <Component {...props} />;
             }} />
-          <Route
-            exact
-            path={`${match.path}/strategies/edit/:itemId`}
+          <Route exact path={`${match.path}/strategies/edit/:itemId`}
             render={props => {
-              const Component = connect(state => ({
+              const select = state => ({
                 message: state.messages,
                 item: state.strategies.currentItem,
                 items: state.strategies.items,
-              }))(ProfileReportEdit);
+              });
+              const Component = connect(select)(ProfileReportEdit);
               return <Component {...props} />;
             }} />
-          <Route
-            exact
-            path={`${match.path}/strategies`}
+          <Route exact path={`${match.path}/strategies`}
             render={props => {
-              const Component = connect(state => ({
+              const select = state => ({
                 items: state.strategies,
-              }))(ProfileReports);
+              });
+              const Component = connect(select)(ProfileReports);
               return <Component {...props} />;
             }} />
       </Grid>
