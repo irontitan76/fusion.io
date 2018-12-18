@@ -23,18 +23,16 @@ export class NavDrawer extends Component {
       ...props
     } = this.props;
 
-    return (
-      <Drawer
-        anchor={ anchor }
-        className={ classes.root }
-        open={ open }
-        onClose={ onClose }
-        transitionDuration={400}
-        {...props}>
-        <div className={ classes.toolbar } />
-        { content }
-      </Drawer>
-    );
+    return <Drawer
+      anchor={anchor}
+      className={classes.root}
+      open={open}
+      onClose={onClose}
+      transitionDuration={400}
+      {...props}>
+      <div className={classes.toolbar} />
+      {content}
+    </Drawer>;
   }
 }
 

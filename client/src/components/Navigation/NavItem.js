@@ -135,19 +135,17 @@ export class NavItem extends Component {
     const { open } = this.state;
     const { classes } = this.props;
 
-    return (
-      <Collapse
-        in={open}
-        timeout='auto'
-        unmountOnExit>
-        <List
-          className={classes.list}
-          component='div'
-          disablePadding>
-          {this.renderListItems()}
-        </List>
-      </Collapse>
-    );
+    return <Collapse
+      in={open}
+      timeout='auto'
+      unmountOnExit>
+      <List
+        className={classes.list}
+        component='div'
+        disablePadding>
+        {this.renderListItems()}
+      </List>
+    </Collapse>;
   };
 
   render() {

@@ -42,9 +42,64 @@ const styles = theme => ({
 });
 
 class HomeOverview extends Component {
+  renderItem = (item, key) => {
+    const { classes } = this.props;
+
+    const avatar = <FontAwesomeIcon
+      color='#777'
+      icon={item.icon}
+      style={{ fontSize: 26 }} />;
+    const divider = item.divider ? <Divider light /> : null;
+
+    return <Grid
+      className={classes.overviewItem}
+      item
+      key={key}
+      md={4}
+      xs={12}>
+
+      <Card
+        className={classes.overviewCard}
+        elevation={0}>
+
+        <CardHeader
+          avatar={avatar}
+          title={item.title}/>
+
+        <CardContent
+          className={classes.overviewCardContent}>
+          <Typography
+            component='p'>
+            {item.content}
+          </Typography>
+        </CardContent>
+
+        {divider}
+
+        <CardActions>
+          <Button
+            color='primary'
+            component={Link}
+            size='small'
+            to={item.button.path}>
+            {item.button.label}
+          </Button>
+        </CardActions>
+
+      </Card>
+    </Grid>;
+  }
+
+  renderItems = () => {
+    const { items } = overview;
+
+    if (!items) return null;
+    return items.map((item, key) => this.renderItem(item, key));
+  };
+
   render() {
     const { classes } = this.props;
-    const { items, subtitle, title } = overview;
+    const { subtitle, title } = overview;
 
     return <Grid
       className={classes.overview}
@@ -70,42 +125,7 @@ class HomeOverview extends Component {
           </Typography>
         </Grid>
 
-        {
-          items.map((item, key) => (
-            <Grid
-              className={classes.overviewItem}
-              item
-              key={key}
-              md={4}
-              xs={12}>
-              <Card className={classes.overviewCard} elevation={0}>
-                <CardHeader
-                  avatar={
-                    <FontAwesomeIcon
-                      color='#777'
-                      icon={item.icon}
-                      style={{ fontSize: 26 }} />
-                  }
-                  title={item.title}/>
-                <CardContent className={classes.overviewCardContent}>
-                  <Typography component='p'>
-                    {item.content}
-                  </Typography>
-                </CardContent>
-                { item.divider ? <Divider light /> : null }
-                <CardActions>
-                  <Button
-                    color='primary'
-                    component={Link}
-                    size='small'
-                    to={item.button.path}>
-                    {item.button.label}
-                  </Button>
-                </CardActions>
-              </Card>
-            </Grid>
-          ))
-        }
+        {this.renderItems()}
     </Grid>;
   };
 }

@@ -23,9 +23,7 @@ class Login extends Component {
   };
 
   render() {
-    return <>
-      <LoginForm onSubmit={this.onSubmit}/>
-    </>;
+    return <LoginForm onSubmit={this.onSubmit}/>;
   }
 }
 

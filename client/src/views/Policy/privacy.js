@@ -9,7 +9,7 @@ class Privacy extends Component {
     return <>
       <main>
         <ReportHeader
-          divider={true}
+          divider
           variant='h1'>
           Privacy Policy
         </ReportHeader>

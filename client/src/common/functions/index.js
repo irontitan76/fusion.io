@@ -8,16 +8,18 @@ export const breakLine = (str, align) => (
       align={align || 'center'}
       component={Grid}
       key={key}
-      style={{
-        fontSize: 'inherit',
-        fontWeight: 'inherit',
-      }}>
+      style={
+        {
+          fontSize: 'inherit',
+          fontWeight: 'inherit',
+        }
+      }>
       {i}<br />
     </Typography>
   ))
 );
 
-export const getReference = referenceString => {
+export const getReference = (referenceString) => {
   if ( !referenceString ) return '';
   return referenceString.toLowerCase().split(' ').join('');
 };

@@ -144,7 +144,4 @@ class HomeHero extends Component {
   };
 }
 
-HomeHero.defaultProps ={};
-HomeHero.propTypes = {};
-
 export default withStyles(styles)(HomeHero);

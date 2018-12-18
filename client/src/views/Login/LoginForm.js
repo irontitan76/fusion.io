@@ -131,8 +131,7 @@ class LoginForm extends Component {
               className={classes.loginFormLogo}
               color='#fff'
               icon={['fal', 'atom-alt']}
-              size='6x'
-            />
+              size='6x' />
             <Typography
               className={classes.loginFormTitleText}
               variant='h6'>
@@ -148,27 +147,21 @@ class LoginForm extends Component {
             <TextField
               className={classes.loginFormTextField}
               fullWidth
-              inputProps={{
-                className: classes.loginFormInput,
-              }}
+              inputProps={{ className: classes.loginFormInput }}
               label='Username'
               name='username'
               onChange={this.onChange}
               type='text'
-              value={username}
-            />
+              value={username} />
             <TextField
               className={classes.loginFormTextField}
               fullWidth
-              inputProps={{
-                className: classes.loginFormInput,
-              }}
+              inputProps={{ className: classes.loginFormInput }}
               label='Password'
               name='password'
               onChange={this.onChange}
               type='password'
-              value={password}
-            />
+              value={password} />
           </form>
 
           <Grid
@@ -182,8 +175,7 @@ class LoginForm extends Component {
               <Switch
                 className={classes.loginFormSwitch}
                 checked={isRemembered}
-                onChange={this.onSwitchChange('isRemembered')}
-              />
+                onChange={this.onSwitchChange('isRemembered')} />
             </Typography>
           </Grid>
 

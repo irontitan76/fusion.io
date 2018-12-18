@@ -7,7 +7,7 @@ const nav = (state = initialState, action) => {
     case 'NAV_TOGGLE':
       return {
         ...state,
-        isNavOpen: !state.isNavOpen
+        isNavOpen: !state.isNavOpen,
       };
     default:
       return state;

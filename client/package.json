@@ -96,7 +96,12 @@
     ],
     "rules": {
       "no-multi-str": 0,
-      "react/jsx-no-duplicate-props": 0
+      "react/jsx-no-duplicate-props": 0,
+      "react/jsx-filename-extension": 0,
+      "import/no-unresolved": 0,
+      "no-underscore-dangle": 0,
+      "react/jsx-closing-bracket-location": 0,
+      "eol-last": 0
     }
   },
   "browserslist": [

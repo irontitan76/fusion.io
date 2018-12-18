@@ -46,9 +46,7 @@ class CareersSearch extends Component {
             <TextField
               className={classes.searchField}
               fullWidth
-              inputProps={{
-                className: classes.searchInput
-              }}
+              inputProps={{ className: classes.searchInput }}
               InputProps={{
                 disableUnderline: true,
                 startAdornment: (
@@ -61,8 +59,7 @@ class CareersSearch extends Component {
               }}
               margin='none'
               onChange={onSearch}
-              placeholder={ search.placeholder }
-             />
+              placeholder={ search.placeholder } />
           </Grid>
         </Grid>
 

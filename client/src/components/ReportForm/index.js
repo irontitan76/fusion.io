@@ -70,8 +70,10 @@ class ProfileStandard extends Component {
     const { section = {}, sections = [] } = this.props;
 
     let items = sections
-      .filter(item => {
-        return (item.parentId === section.parentId) && (item.id !== section.id)
+      .filter((item) => {
+        const isSibling = item.parentId === section.parentId;
+        const isNotSelf = item.id !== section.id;
+        return isSibling && isNotSelf;
       })
       .map((item, key) => {
         return <MenuItem key={key} value={item.id}>
@@ -113,7 +115,6 @@ class ProfileStandard extends Component {
         case 'md':
         default:
           result = '';
-          break;
       }
 
       if ( index !== content.length - 1 ) {
@@ -204,9 +205,7 @@ class ProfileStandard extends Component {
 
             <Grid className={classes.standardContainer} item xs={12}>
               <TextField
-                InputProps={{
-                  className: classes.content,
-                }}
+                InputProps={{ className: classes.content }}
                 fullWidth
                 label='Content'
                 multiline
@@ -238,7 +237,6 @@ class ProfileStandard extends Component {
                       onDelete={onDelete} />
                   </Grid> : null
                 }
-
               </Grid>
             </Grid>
           </Grid>

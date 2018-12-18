@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-export const getInsights = async userId => {
+export const getInsights = async (userId) => {
   try {
     let params = '';
     if ( userId ) {
@@ -14,7 +14,7 @@ export const getInsights = async userId => {
   }
 };
 
-export const getInsight = async slug => {
+export const getInsight = async (slug) => {
   try {
     const response = await axios.get(`/api/insights/${slug}`);
     return response.data;

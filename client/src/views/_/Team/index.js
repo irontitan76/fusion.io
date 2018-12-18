@@ -70,10 +70,46 @@ const styles = theme => ({
 });
 
 class Team extends Component {
+  renderRole = (role, key) => {
+    const { classes } = this.props;
+
+    return <Grid item key={key} md={3} xs={12}>
+      <Card className={classes.teamRoleCard} elevation={0}>
+        <CardHeader
+          className={classes.teamRoleCardHeader}
+          title={role.name}
+          titleTypographyProps={{
+            className: classes.teamRoleCardHeaderTitle,
+            variant: 'subtitle1'
+          }}/>
+        <CardContent
+          className={classes.teamRoleCardContent}>
+          <Typography
+            className={classes.teamDescriptionText}
+            variant='body2'>
+            {role.description}
+          </Typography>
+        </CardContent>
+      </Card>
+    </Grid>;
+  };
+
+  renderRoles = () => {
+    const { match } = this.props;
+    const { roles } = teams[match.params.teamId];
+
+    if (!roles) return null;
+    return roles.map((role, key) => this.renderRole(role, key));
+  };
+
   render() {
     const { classes, match, theme } = this.props;
     const {
-      bg, color, description, name, roles, slogan
+      bg,
+      color,
+      description,
+      name,
+      slogan
     } = teams[match.params.teamId];
 
     return <>
@@ -145,29 +181,7 @@ class Team extends Component {
             </Typography>
 
             <Grid alignItems='center' container justify='flex-start' spacing={24}>
-                {
-                  roles && roles.map((role, key) => (
-                    <Grid item key={key} md={3} xs={12}>
-                      <Card className={classes.teamRoleCard} elevation={0}>
-                        <CardHeader
-                          className={classes.teamRoleCardHeader}
-                          title={role.name}
-                          titleTypographyProps={{
-                            className: classes.teamRoleCardHeaderTitle,
-                            variant: 'subtitle1'
-                          }}/>
-                        <CardContent
-                          className={classes.teamRoleCardContent}>
-                          <Typography
-                            className={classes.teamDescriptionText}
-                            variant='body2'>
-                            {role.description}
-                          </Typography>
-                        </CardContent>
-                      </Card>
-                    </Grid>
-                  ))
-                }
+              {this.renderRoles()}
             </Grid>
 
           </Grid>

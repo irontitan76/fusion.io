@@ -57,10 +57,65 @@ const styles = theme => ({
 });
 
 class InsightsGrid extends Component {
+  renderInsight = (insight, key) => {
+    const { classes } = this.props;
+
+    const size = insight.size ? insight.size : {
+      md: 3,
+      sm: 6,
+      xl: 2,
+      xs: 12
+    };
+
+    const media = insight.media ?
+      <CardMedia
+        className={classes.gridMedia}
+        component={insight.media.type || 'div'}
+        src={insight.media.src} /> : null;
+
+    return <Grid
+      className={classes.grid}
+      item
+      key={key}
+      {...size}>
+      <Link className={classes.gridLink} to={`./insights/${insight.slug}`}>
+        <Card
+          className={classes.gridCard}
+          elevation={2}>
+          {media}
+          <CardHeader
+            className={classes.gridTitle}
+            title={insight.title}
+            titleTypographyProps={{ variant: 'subtitle1' }} />
+
+          <CardContent>
+            <Typography
+              className={classes.gridContent}
+              component='p'>
+              {insight.brief}
+            </Typography>
+          </CardContent>
+
+        </Card>
+      </Link>
+    </Grid>
+  };
+
+  renderInsights = () => {
+    const { insights } = this.props;
+
+    if (!insights) return null;
+    return insights.map((insight, key) => this.renderInsight(insight, key));
+  };
+
   render() {
     const { classes, insights } = this.props;
 
-    if ( typeof insights === 'undefined' || insights.length === 0 || insights.err) {
+    const isInsights = (typeof insights === 'undefined')
+      || (insights.length === 0)
+      || insights.err;
+
+    if ( isInsights ) {
       return <Grid
         container
         justify='center'
@@ -93,50 +148,7 @@ class InsightsGrid extends Component {
       container
       justify='center'
       spacing={24}>
-      {
-        insights && insights.map((item, key) => {
-          const size = item.size ? item.size : {
-            md: 3,
-            sm: 6,
-            xl: 2,
-            xs: 12
-          };
-          return <Grid
-            className={classes.grid}
-            item
-            key={key}
-            {...size}>
-            <Link className={classes.gridLink} to={`./insights/${item.slug}`}>
-              <Card
-                className={classes.gridCard}
-                elevation={2}>
-
-                {
-                  item.media ?
-                    <CardMedia
-                      className={classes.gridMedia}
-                      component={item.media.type || 'div'}
-                      src={item.media.src} /> : null
-                }
-
-                <CardHeader
-                  className={classes.gridTitle}
-                  title={item.title}
-                  titleTypographyProps={{ variant: 'subtitle1' }} />
-
-                <CardContent>
-                  <Typography
-                    className={classes.gridContent}
-                    component='p'>
-                    {item.brief}
-                  </Typography>
-                </CardContent>
-
-              </Card>
-            </Link>
-          </Grid>
-        })
-      }
+      {this.renderInsights()}
     </Grid>;
   };
 }

@@ -72,7 +72,7 @@ export class TabBar extends Component {
     this.setState({ value });
   };
 
-  renderTabs = tabs => {
+  renderTabs = (tabs) => {
     const { value } = this.state;
     const { classes } = this.props;
 
@@ -169,26 +169,26 @@ export class TabBar extends Component {
       <Tab
         classes={{ label: classes.label }}
         icon={
-          direction === 'vertical' ? <FontAwesomeIcon
-            className={classes.icon}
-            icon={header.icon}
-          /> : <>
-            <Grid alignItems='center' container justify='center'>
-              <Grid item xs={5}>
-                <Grid container alignItems='center'>
-                  <Grid item xs={2}>
-                    <FontAwesomeIcon
-                      className={classes.icon}
-                      icon={header.icon}
-                    />
-                  </Grid>
-                  <Grid className={classes.horizontalLabel} item xs={10}>
-                    {header.label}
-                  </Grid>
+          direction === 'vertical'
+            ? <FontAwesomeIcon
+                className={classes.icon}
+                icon={header.icon} />
+            : <>
+                <Grid alignItems='center' container justify='center'>
+                  <Grid item xs={5}>
+                    <Grid container alignItems='center'>
+                      <Grid item xs={2}>
+                        <FontAwesomeIcon
+                          className={classes.icon}
+                          icon={header.icon} />
+                      </Grid>
+                      <Grid className={classes.horizontalLabel} item xs={10}>
+                        {header.label}
+                      </Grid>
+                    </Grid>
+                    </Grid>
                 </Grid>
-                </Grid>
-            </Grid>
-          </>
+              </>
         }
         key={key}
         label={direction === 'vertical' ? header.label : undefined }
@@ -233,7 +233,7 @@ export class TabBar extends Component {
 }
 
 TabBar.defaultProps = {
-  direction: 'vertical'
+  direction: 'vertical',
 };
 
 TabBar.propTypes = {

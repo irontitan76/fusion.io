@@ -7,10 +7,9 @@ const standards = (state = initialState, action) => {
   switch (action.type) {
     case 'NEW_STANDARD_CHANGE': {
       const { currentItem } = state;
-      const name = action.payload.name;
-      const value = action.payload.value;
+      const { name, value } = action.payload;
 
-      if ( name === 'content' ) {
+      if (name === 'content') {
         return {
           ...state,
           currentItem: {
@@ -18,19 +17,20 @@ const standards = (state = initialState, action) => {
             content: {
               body: value,
               type: 'md',
-            }
-          }
+            },
+          },
         };
-      } else if ( name === 'parentId' ) {
+      } else if (name === 'parentId') {
+        const siblingId = value === currentItem.parentId
+          ? currentItem.siblingId
+          : null;
         return {
           ...state,
           currentItem: {
             ...currentItem,
             parentId: value,
-            siblingId: value === currentItem.parentId
-              ? currentItem.siblingId
-              : null,
-          }
+            siblingId,
+          },
         };
       } else {
         return {
@@ -38,7 +38,7 @@ const standards = (state = initialState, action) => {
           currentItem: {
             ...currentItem,
             [name]: value,
-          }
+          },
         };
       }
     }
@@ -53,7 +53,7 @@ const standards = (state = initialState, action) => {
           parentId: 0,
           siblingId: null,
           title: '',
-        }
+        },
       };
       case 'NEW_STANDARD_UNLOAD':
         return {

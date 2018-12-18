@@ -41,28 +41,26 @@ export class NavBar extends Component {
   render() {
     const { classes, items, onClick, title } = this.props;
 
-    return (
-      <AppBar className={classes.appBar} position='sticky'>
-        <Toolbar className={classes.toolbar}>
-          <IconButton
-            aria-label='Menu'
-            className={classes.menuButton}
-            color='inherit'
-            onClick={onClick}>
-            <MenuIcon />
-          </IconButton>
-          <Typography
-            className={classes.title}
-            component={Link}
-            color='inherit'
-            to='/'
-            variant='h6'>
-            { title }
-          </Typography>
-          <NavUserMenu items={items} />
-        </Toolbar>
-      </AppBar>
-    );
+    return <AppBar className={classes.appBar} position='sticky'>
+      <Toolbar className={classes.toolbar}>
+        <IconButton
+          aria-label='Menu'
+          className={classes.menuButton}
+          color='inherit'
+          onClick={onClick}>
+          <MenuIcon />
+        </IconButton>
+        <Typography
+          className={classes.title}
+          component={Link}
+          color='inherit'
+          to='/'
+          variant='h6'>
+          { title }
+        </Typography>
+        <NavUserMenu items={items} />
+      </Toolbar>
+    </AppBar>;
   }
 }
 

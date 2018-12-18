@@ -8,10 +8,8 @@ export default ({ children }) => (
     {
       window.location.pathname !== '/login'
       && window.location.pathname !== '/signup'
-        ? <Navigation
-            {...menus}
-            title={title} />
-          : null
+        ? <Navigation {...menus} title={title} />
+        : null
     }
     { children }
   </>

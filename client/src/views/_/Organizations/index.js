@@ -18,9 +18,7 @@ const styles = theme => ({
     paddingTop: theme.spacing.unit * 3,
   },
   orgContainer: {},
-  orgContent: {
-    // height: 300,
-  },
+  orgContent: {},
   orgIcon: {
     paddingRight: theme.spacing.unit * 2,
   },

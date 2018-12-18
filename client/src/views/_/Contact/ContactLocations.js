@@ -24,7 +24,7 @@ export class ContactLocations extends Component {
       <Grid item xs={12} md={6}>
         <Typography
           gutterBottom
-          variant='title'>
+          variant='h6'>
           Our locations
         </Typography>
         <Typography

@@ -52,11 +52,13 @@ class HomeProducts extends Component {
   renderSubheading = (subheading, variant) => {
     const { classes } = this.props;
 
+    const className = `
+      ${classes.productItemSubtitle}
+      ${this.getVariantClass(variant)}
+    `;
+
     return <Typography
-      className={`
-        ${classes.productItemSubtitle}
-        ${this.getVariantClass(variant)}
-      `}
+      className={className}
       gutterBottom
       variant='subtitle1'>
       {subheading}
@@ -66,26 +68,53 @@ class HomeProducts extends Component {
   renderTitle = (title, variant) => {
     const { classes } = this.props;
 
+    const className = `
+      ${classes.productItemTitle}
+      ${this.getVariantClass(variant)}
+    `;
+
     return <Typography
-      className={`
-        ${classes.productItemTitle}
-        ${this.getVariantClass(variant)}
-      `}
+      className={className}
       gutterBottom
       variant='h6'>
       {title}
     </Typography>;
   };
 
-  getVariantClass = variant => {
+  renderItem = (item, key) => {
+    const { classes } = this.props;
+
+    return <Grid item key={key} {...item.size}>
+      <Link className={classes.productItemLink} to={item.path}>
+        <Grid
+          className={classes.productItem}
+          container
+          direction='column'
+          justify='flex-end'
+          style={{ backgroundImage: `url('${item.image.src}')` }}>
+          <Grid item>
+            {this.renderTitle(item.title, item.variant)}
+            {this.renderSubheading(item.subheading, item.variant)}
+          </Grid>
+        </Grid>
+      </Link>
+    </Grid>;
+  };
+
+  renderItems = () => {
+    const { items } = products;
+    return items.map((item, key) => this.renderItem(item, key));
+  };
+
+  getVariantClass = (variant) => {
     const { classes } = this.props;
     if ( variant === 'light' ) return classes.light;
     else return '';
-  }
+  };
 
   render() {
     const { classes } = this.props;
-    const { items, subtitle, title } = products;
+    const { subtitle, title } = products;
 
     return <>
       <Grid className={classes.products} item xs={12}>
@@ -111,25 +140,7 @@ class HomeProducts extends Component {
           container
           justify='center'
           spacing={40}>
-          {
-            items.map((item, key) => {
-              return <Grid item key={key} {...item.size}>
-                <Link className={classes.productItemLink} to={item.path}>
-                  <Grid
-                    className={classes.productItem}
-                    container
-                    direction='column'
-                    justify='flex-end'
-                    style={{ backgroundImage: `url('${item.image.src}')` }}>
-                    <Grid item>
-                      {this.renderTitle(item.title, item.variant)}
-                      {this.renderSubheading(item.subheading, item.variant)}
-                    </Grid>
-                  </Grid>
-                </Link>
-              </Grid>
-            })
-          }
+          {this.renderItems()}
         </Grid>
       </Grid>
     </>;

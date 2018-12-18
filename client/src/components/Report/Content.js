@@ -37,7 +37,9 @@ class ReportContent extends Component {
         <Typography
           className={classes.contentBody}
           component='div'
-          dangerouslySetInnerHTML={ body ? { __html: marked(body) } : undefined }
+          dangerouslySetInnerHTML={
+            body ? { __html: marked(body) } : undefined
+          }
           variant='body2'>
           {children}
         </Typography>

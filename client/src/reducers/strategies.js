@@ -7,10 +7,9 @@ const strategies = (state = initialState, action) => {
   switch (action.type) {
     case 'NEW_STRATEGY_CHANGE': {
       const { currentItem } = state;
-      const name = action.payload.name;
-      const value = action.payload.value;
+      const { name, value } = action.payload;
 
-      if ( name === 'content' ) {
+      if (name === 'content') {
         return {
           ...state,
           currentItem: {
@@ -19,9 +18,9 @@ const strategies = (state = initialState, action) => {
               body: value,
               type: 'md',
             }
-          }
+          },
         };
-      } else if ( name === 'parentId' ) {
+      } else if (name === 'parentId') {
         return {
           ...state,
           currentItem: {
@@ -30,7 +29,7 @@ const strategies = (state = initialState, action) => {
             siblingId: value === currentItem.parentId
               ? currentItem.siblingId
               : null,
-          }
+          },
         };
       } else {
         return {
@@ -38,7 +37,7 @@ const strategies = (state = initialState, action) => {
           currentItem: {
             ...currentItem,
             [name]: value,
-          }
+          },
         };
       }
     }
@@ -53,7 +52,7 @@ const strategies = (state = initialState, action) => {
           parentId: 0,
           siblingId: null,
           title: '',
-        }
+        },
       };
       case 'NEW_STRATEGY_UNLOAD':
         return {

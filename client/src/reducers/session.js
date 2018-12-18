@@ -8,13 +8,13 @@ const session = (state = initialState, action) => {
     case 'SESSION_START':
       return {
         ...state,
-        ...action.payload
+        ...action.payload,
       };
     case 'SESSION_END':
       return {
         ...state,
         auth: !action.payload,
-        user: {}
+        user: {},
       };
     default:
       return state;

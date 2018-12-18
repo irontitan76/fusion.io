@@ -10,6 +10,8 @@ import ReportHeader from 'components/Report/Header';
 
 import { getReference } from 'common/functions';
 
+const scroll = el => el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+
 class Report extends Component {
   renderTableofContentItems = items => {
     return items.map((item, key) => {
@@ -17,10 +19,7 @@ class Report extends Component {
 
       return <li key={key}>
         <Link
-          scroll={el => el.scrollIntoView({
-            behavior: 'smooth',
-            block: 'start'
-          })}
+          scroll={scroll}
           to={`#${containerName}`}
           style={{
             color: 'black',
@@ -37,8 +36,9 @@ class Report extends Component {
     const { content } = this.props;
 
     return orderBy(content, ['order'], ['asc']).map((section, key) => {
+      const isValidLevel = section.level !== 0 && section.level !== 1;
 
-      if ( key === 0 || (section.level !== 0 && section.level !== 1)  ) {
+      if ( key === 0 || isValidLevel  ) {
         return null;
       }
 
@@ -48,10 +48,7 @@ class Report extends Component {
       return <Fragment key={key}>
         <li>
           <Link
-            scroll={el => el.scrollIntoView({
-              behavior: 'smooth',
-              block: 'start'
-            })}
+            scroll={scroll}
             to={`#${getReference(section.title)}`}
             style={{
               color: 'black',
@@ -67,21 +64,15 @@ class Report extends Component {
     });
   };
 
-  renderContentItem = (content, key) => {
+  renderContentItem = (content) => {
     switch ( content.type ) {
       case 'toc':
-        return <ReportContent key={key}>
+        return <ReportContent key={1}>
           <ol>{this.renderTableOfContents()}</ol>
         </ReportContent>;
       case 'md':
-        return <ReportContent
-          body={content.body}
-          key={key} />;
-      default: {
-        return <ReportContent key={key}>
-          {content.body.replace(/[\\]/g, '')}
-        </ReportContent>;
-      }
+      default:
+        return <ReportContent body={content.body} key={0} />;
     }
   };
 
@@ -111,16 +102,7 @@ class Report extends Component {
         </ReportHeader>
       );
 
-      let body = null;
-
-      if ( section.content && Object.keys(section.content).length > 0 && section.content.body) {
-        body = this.renderContentItem(section.content, 0);
-      } else if ( section.content && section.content.length ) {
-        body = section.content.map((item, key) => (
-          this.renderContentItem(item, key))
-        );
-      }
-
+      let body = this.renderContentItem(section.content);;
       if ( section.order === 0 ) {
         body = [ body, this.renderContentItem({ type: 'toc' }, 1) ];
       }
@@ -130,9 +112,6 @@ class Report extends Component {
         {body}
       </Fragment>;
     });
-
-
-
   };
 
   render() {

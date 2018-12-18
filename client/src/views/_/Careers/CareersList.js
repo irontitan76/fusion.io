@@ -51,6 +51,7 @@ class CareersList extends Component {
   renderHeaders = () => {
     const { headers } = this.props;
 
+    if (!headers) return null;
     return headers.map((header, key) => {
       return <TableCell key={key}>{header.name}</TableCell>
     })

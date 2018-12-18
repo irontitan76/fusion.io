@@ -5,12 +5,12 @@ import Fade from '@material-ui/core/Fade';
 import Grid from '@material-ui/core/Grid';
 import withStyles from '@material-ui/core/styles/withStyles';
 
+import Footer from 'components/Footer';
+import { loadInsight } from 'actions/insights';
+
 import InsightArticle from './InsightArticle';
 import InsightSidebar from './InsightSidebar';
-import InsightsHeader from './../Insights/InsightsHeader'; // From another folder :(
-import Footer from 'components/Footer';
-
-import { loadInsight } from 'actions/insights';
+import InsightsHeader from '../Insights/InsightsHeader'; // From another folder :(
 
 const styles = theme => ({
   insights: {},

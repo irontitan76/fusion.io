@@ -30,7 +30,7 @@ const styles = theme => ({
 class ReportHeader extends Component {
   render() {
     const { classes, children, divider, id, variant } = this.props;
-    
+
     const headingSizeMap = {
       'h1': 36,
       'h2': 28,
@@ -51,9 +51,7 @@ class ReportHeader extends Component {
           <Typography
             align='left'
             className={classes.reportHeader}
-            style={{
-              fontSize: headingSizeMap[variant],
-            }}
+            style={{ fontSize: headingSizeMap[variant], }}
             variant={variant}>
             {children}
           </Typography>

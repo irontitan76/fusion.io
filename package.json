@@ -18,5 +18,8 @@
     "lodash.omit": "^4.5.0",
     "lodash.orderby": "^4.6.0",
     "validator": "^10.8.0"
+  },
+  "devDependencies": {
+    "eslint-config-airbnb": "^17.1.0"
   }
 }

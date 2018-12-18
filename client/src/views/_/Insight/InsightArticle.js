@@ -72,9 +72,39 @@ const styles = theme => ({
 });
 
 class InsightArticle extends Component {
+  renderAuthor = () => {
+    const { author, classes } = this.props;
+
+    if (!author) return null;
+
+    return <Paper
+      className={classes.articleByline}
+      component={Grid}
+      container
+      elevation={1}>
+      <Grid
+        className={classes.articleAvatarItem}
+        item
+        xs={1}>
+        <Avatar alt={author.name} src={author.avatar} />
+      </Grid>
+      <Grid item xs={9}>
+        <Typography
+          className={classes.articleBylineName}>
+          {author.name}
+        </Typography>
+        <Typography
+          className={classes.articleBylineRole}>
+          {author.title}
+        </Typography>
+      </Grid>
+
+    </Paper>;
+  };
+
   render() {
     const { classes, insight } = this.props;
-    const { _createdAt, author, content, media, subtitle, title } = insight;
+    const { _createdAt, content, media, subtitle, title } = insight;
 
     let img = null;
     if ( media && media.type === 'img' ) {
@@ -85,13 +115,16 @@ class InsightArticle extends Component {
         width='100%' />
     }
 
+    const createdAt = moment(_createdAt).format('YYYY-MM-DD');
+    const html = content ? { __html: marked(content) } : undefined;
+
     return insight && <Grid className={classes.article} item md={8} xs={12}>
       <Paper className={classes.articlePaper} elevation={1}>
         {img}
         <Typography
           className={classes.articleDate}
           variant='body2'>
-          {_createdAt && moment(_createdAt).format('YYYY-MM-DD')}
+          {createdAt}
         </Typography>
 
         <Typography
@@ -111,33 +144,9 @@ class InsightArticle extends Component {
         <Typography
           className={classes.articleContent}
           component='div'
-          dangerouslySetInnerHTML={ content ? { __html: marked(content) } : undefined } />
+          dangerouslySetInnerHTML={html} />
       </Paper>
-      {
-        author && <Paper
-          className={classes.articleByline}
-          component={Grid}
-          container
-          elevation={1}>
-          <Grid
-            className={classes.articleAvatarItem}
-            item
-            xs={1}>
-            <Avatar alt={author.name} src={author.avatar} />
-          </Grid>
-          <Grid item xs={9}>
-            <Typography
-              className={classes.articleBylineName}>
-              {author.name}
-            </Typography>
-            <Typography
-              className={classes.articleBylineRole}>
-              {author.title}
-            </Typography>
-          </Grid>
-
-        </Paper>
-      }
+      {this.renderAuthor()}
     </Grid>;
   }
 }

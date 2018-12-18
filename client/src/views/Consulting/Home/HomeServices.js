@@ -10,8 +10,7 @@ class HomeServices extends Component {
     return <TabBar
       direction='horizontal'
       name={title}
-      values={items}
-    />;
+      values={items} />;
   };
 }
 

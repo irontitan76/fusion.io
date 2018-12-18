@@ -98,9 +98,7 @@ class InsightsHeader extends Component {
             <TextField
               className={classes.headerSearchField}
               fullWidth
-              inputProps={{
-                className: classes.headerSearchInput
-              }}
+              inputProps={{ className: classes.headerSearchInput }}
               InputProps={{
                 disableUnderline: true,
                 startAdornment: (

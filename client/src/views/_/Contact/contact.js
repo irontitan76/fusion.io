@@ -6,18 +6,16 @@ export const fields = [
   {
     label: 'Business Need',
     required: true,
-    SelectProps: {
-      children: [
-        {
-          label: 'Consulting',
-          value: 0,
-        },
-        {
-          label: 'Technology',
-          value: 1,
-        },
-      ]
-    },
+    options: [
+      {
+        label: 'Consulting',
+        value: 0,
+      },
+      {
+        label: 'Technology',
+        value: 1,
+      },
+    ],
     select: true,
     type: 'select'
   },

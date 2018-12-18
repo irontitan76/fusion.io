@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 
 import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid';
+import MenuItem from '@material-ui/core/MenuItem';
 import TextField from '@material-ui/core/TextField';
 import withStyles from '@material-ui/core/styles/withStyles';
 
@@ -19,8 +20,35 @@ const styles = theme => ({
 });
 
 export class ContactForm extends Component {
+  renderFields = () => {
+    const { classes, fields } = this.props;
+
+    return fields.map((field, key) => {
+      let options = null;
+      if (field.select && field.options ) {
+        options = field.options.map((option) => {
+          return <MenuItem key={option.label} value={option.value}>
+            {option.label}
+          </MenuItem>;
+        });
+      }
+
+      return <TextField
+        className={classes.contactTextField}
+        fullWidth
+        key={key}
+        label={field.label}
+        required={field.required}
+        type={field.type}
+        value={field.type === 'select' ? 0 : undefined}
+        {...field}>
+        {options}
+      </TextField>
+    });
+  };
+
   render() {
-    const { classes, fields, title } = this.props;
+    const { classes, title } = this.props;
 
     return <Grid
       className={classes.contactContent}
@@ -35,19 +63,7 @@ export class ContactForm extends Component {
           md={6}
           xs={12}>
           <form>
-            {
-              fields.map((field, key) => (
-                <TextField
-                  className={classes.contactTextField}
-                  fullWidth
-                  key={key}
-                  label={field.label}
-                  required={field.required}
-                  type={field.type}
-                  {...field}
-                />
-              ))
-            }
+            {this.renderFields()}
             <Grid container justify='flex-end'>
               <Button
                 color='primary'

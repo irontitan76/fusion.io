@@ -31,6 +31,32 @@ const styles = theme => ({
 });
 
 class HomeLogos extends Component {
+  renderLogos = () => {
+    const { classes } = this.props;
+    const { items } = logos;
+
+    return items.map((item, key) => (
+      <Grid
+        className={classes.logo}
+        item
+        key={key}
+        md={1}
+        xs={3}>
+        <Typography
+          align='center'
+          component={Link}
+          to={item.to}
+          style={{ textDecoration: 'none' }}>
+          <FontAwesomeIcon
+            color='#0074D9'
+            icon={[ 'fal', item.icon] }
+            size='2x'
+            style={{ marginBottom: 20 }} />
+          <Typography>{item.label}</Typography>
+        </Typography>
+      </Grid>
+    ));
+  }
   render() {
     const { classes } = this.props;
 
@@ -40,39 +66,11 @@ class HomeLogos extends Component {
         container
         justify='space-around'
         spacing={24}>
-
-          <Grid item xs={12}>
-            <Grid container justify='space-evenly'>
-              {
-                logos.items.map((item, key) => (
-                  <Grid
-                    className={classes.logo}
-                    item
-                    key={key}
-                    md={1}
-                    xs={3}>
-                    <Typography
-                      align='center'
-                      component={Link}
-                      to={item.to}
-                      style={{
-                        textDecoration: 'none'
-                      }}>
-                      <FontAwesomeIcon
-                        color='#0074D9'
-                        icon={[ 'fal', item.icon] }
-                        size='2x'
-                        style={{
-                          marginBottom: 20,
-                        }} />
-                      <Typography>{item.label}</Typography>
-                    </Typography>
-                  </Grid>
-                ))
-              }
-            </Grid>
+        <Grid item xs={12}>
+          <Grid container justify='space-evenly'>
+            {this.renderLogos()}
           </Grid>
-
+        </Grid>
       </Grid>
     </Hidden>;
   };

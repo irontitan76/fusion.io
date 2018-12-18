@@ -30,11 +30,11 @@ export class NavUserMenu extends Component {
     anchorEl: null,
   };
 
-  handleMenu = event => {
+  handleMenu = (event) => {
     this.setState({ anchorEl: event.currentTarget });
   };
 
-  handleClick = name => {
+  handleClick = (name) => {
     const { dispatch } = this.props;
     if ( name === 'Sign out' ) {
       dispatch(endSession());
@@ -47,7 +47,33 @@ export class NavUserMenu extends Component {
     const { auth, classes, items } = this.props;
     const open = Boolean(anchorEl);
 
-    return auth ? <>
+    if (!auth) {
+      return <Button
+        className={classes.menuLink}
+        color='primary'
+        component={Link}
+        onClick={this.handleChange}
+        to='/login'>
+        Login
+      </Button>;
+    }
+
+    const menuItems = items.map((item, key) => (
+      <MenuItem
+        component={Link}
+        key={key}
+        onClick={() => this.handleClick(item.name)}
+        to={item.path}
+        style={{ fontSize: '.8125rem' }}>
+        <ListItemIcon>{ item.icon }</ListItemIcon>
+        <ListItemText
+          inset
+          primary={item.name}
+          primaryTypographyProps={{ className: classes.listSize }} />
+      </MenuItem>
+    ));
+
+    return <>
       <IconButton
         aria-owns={open ? 'menu-appbar' : null}
         aria-haspopup='true'
@@ -59,45 +85,13 @@ export class NavUserMenu extends Component {
       <Menu
         id='menu-appbar'
         anchorEl={anchorEl}
-        anchorOrigin={{
-          horizontal: 'left',
-          vertical: 'top'
-        }}
+        anchorOrigin={{ horizontal: 'left', vertical: 'top' }}
         open={open}
         onClose={this.handleClose}
-        transformOrigin={{
-          horizontal: 'right',
-          vertical: 'top'
-        }}>
-        {
-          items.map((item, key) => (
-            <MenuItem
-              component={Link}
-              key={key}
-              onClick={() => this.handleClick(item.name)}
-              to={item.path}
-              style={{ fontSize: '.8125rem' }}>
-              <ListItemIcon>
-                { item.icon }
-              </ListItemIcon>
-              <ListItemText
-                inset
-                primary={item.name}
-                primaryTypographyProps={{
-                  className: classes.listSize
-                }} />
-            </MenuItem>
-          ))
-        }
+        transformOrigin={{ horizontal: 'right', vertical: 'top' }}>
+        {menuItems}
       </Menu>
-    </> : <Button
-      className={classes.menuLink}
-      color='primary'
-      component={Link}
-      onClick={this.handleChange}
-      to='/login'>
-      Login
-    </Button>;
+    </>;
   }
 }
 

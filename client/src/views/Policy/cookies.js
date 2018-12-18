@@ -9,7 +9,7 @@ class Cookies extends Component {
     return <>
       <main>
         <ReportHeader
-          divider={true}
+          divider
           variant='h1'>
           Cookie Policy
         </ReportHeader>

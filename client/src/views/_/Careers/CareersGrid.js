@@ -51,6 +51,66 @@ const styles = theme => ({
 });
 
 class CareersGrid extends Component {
+  renderTeam = (team, key) => {
+    const { classes } = this.props;
+
+    return <Grid
+      className={classes.team}
+      item
+      key={key}
+      { ...team.size }>
+      <Card className={classes.teamCard} elevation={2}>
+
+        <CardMedia
+          className={classes.teamMedia}
+          component={team.media.type || 'div'}
+          src={team.media.src} />
+
+        <CardHeader
+          className={classes.teamTitle}
+          title={team.title}
+          titleTypographyProps={{ variant: 'subtitle1' }} />
+
+        <CardContent>
+          <Typography
+            className={classes.teamContent}
+            component='p'>
+            {team.content}
+          </Typography>
+        </CardContent>
+
+        { team.divider ? <Divider light /> : null }
+
+        <CardActions className={classes.teamActions}>
+          <Button
+            color='primary'
+            className={classes.teamButton}
+            component={Link}
+            size='small'
+            to={team.button1.path}>
+            {team.button1.label}
+          </Button>
+          <Button
+            color='primary'
+            className={classes.teamButton}
+            component={Link}
+            size='small'
+            to={team.button2.path}>
+            {team.button2.label}
+          </Button>
+        </CardActions>
+
+      </Card>
+    </Grid>;
+  };
+
+  renderTeams = () => {
+    const { teams } = grid;
+
+    if (!teams) return null;
+    return teams.map((team, key) => this.renderTeam(team, key));
+  };
+
   render() {
     const { classes } = this.props;
 
@@ -59,58 +119,7 @@ class CareersGrid extends Component {
       container
       justify='center'
       spacing={24}>
-      {
-        grid.teams.map((team, key) => (
-          <Grid
-            className={classes.team}
-            item
-            key={key}
-            { ...team.size }>
-            <Card className={classes.teamCard} elevation={2}>
-
-              <CardMedia
-                className={classes.teamMedia}
-                component={team.media.type || 'div'}
-                src={team.media.src} />
-
-              <CardHeader
-                className={classes.teamTitle}
-                title={team.title}
-                titleTypographyProps={{ variant: 'subtitle1' }} />
-
-              <CardContent>
-                <Typography
-                  className={classes.teamContent}
-                  component='p'>
-                  {team.content}
-                </Typography>
-              </CardContent>
-
-              { team.divider ? <Divider light /> : null }
-
-              <CardActions className={classes.teamActions}>
-                <Button
-                  color='primary'
-                  className={classes.teamButton}
-                  component={Link}
-                  size='small'
-                  to={team.button1.path}>
-                  {team.button1.label}
-                </Button>
-                <Button
-                  color='primary'
-                  className={classes.teamButton}
-                  component={Link}
-                  size='small'
-                  to={team.button2.path}>
-                  {team.button2.label}
-                </Button>
-              </CardActions>
-
-            </Card>
-          </Grid>
-        ))
-      }
+      {this.renderTeams()}
     </Grid>;
   }
 }
