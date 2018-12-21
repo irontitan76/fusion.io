@@ -19,7 +19,7 @@ import {
 export const addInsight = (insight, user) => {
   return async dispatch => {
     try {
-      const payload = postInsights(insight, user);
+      const payload = await postInsights(insight, user);
       return dispatch({ type: INSIGHT_ADD, payload });
     } catch (err) {
       return dispatch({ type: INSIGHT_ADD, error: true, err });
@@ -27,10 +27,11 @@ export const addInsight = (insight, user) => {
   };
 };
 
-export const filterInsights = filter => {
+export const filterInsights = (filter) => {
   return async dispatch => {
     try {
-      return dispatch({ type: INSIGHTS_FILTER, filter });
+      const payload = await getInsights({ search: filter }, null);
+      return dispatch({ type: INSIGHTS_FILTER, payload });
     } catch (err) {
       return dispatch({ type: INSIGHTS_FILTER, error: true, err });
     }
@@ -64,7 +65,7 @@ export const loadInsight = slug => {
 export const loadInsights = userId => {
   return async dispatch => {
     try {
-      const payload = await getInsights(userId);
+      const payload = await getInsights(null, userId);
       return dispatch({ type: INSIGHTS_LOAD, payload });
     } catch (err) {
       return dispatch({ type: INSIGHTS_LOAD, error: true, err });

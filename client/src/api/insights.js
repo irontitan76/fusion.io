@@ -1,10 +1,11 @@
 import axios from 'axios';
+import queryString from 'query-string';
 
-export const getInsights = async (userId) => {
+export const getInsights = async (params, userId) => {
   try {
-    let params = '';
+    params = `?${queryString.stringify(params)}` || '';
     if ( userId ) {
-      params = `?userId=${userId}`;
+      params = `?userId=${userId}&${params}`;
     }
     const response = await axios.get(`/api/insights${params}`);
     return response.data;

@@ -15,10 +15,13 @@ import { signup } from 'api/session';
 
 const styles = theme => ({
   signupForm: {
-    marginBottom: theme.spacing.unit * 8,
-    marginTop: theme.spacing.unit * 5,
+    paddingBottom: theme.spacing.unit * 8,
+    paddingTop: theme.spacing.unit * 5,
+    [theme.breakpoints.up('lg')]: {
+      paddingTop: theme.spacing.unit * 20,
+    },
     [theme.breakpoints.down('xs')]: {
-      marginTop: 0,
+      paddingTop: 0,
     },
   },
   signupFormButton: {
@@ -156,6 +159,7 @@ class SignupForm extends Component {
       <Grid
         className={classes.signupFormContainer}
         item
+        lg={3}
         md={4}
         sm={7}
         xs={12}>

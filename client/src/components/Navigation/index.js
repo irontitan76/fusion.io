@@ -13,20 +13,16 @@ export class Nav extends Component {
   render() {
     const { nav: { isNavOpen }, primary, secondary, title } = this.props;
 
-    return (
-      <nav>
-
-        <NavBar
-          onClick={ this._onClick }
-          items={ secondary }
-          title={ title } />
-
-        <NavMainMenu
-          onClose={ this._onClick }
-          open={ isNavOpen }
-          items={ primary } />
-      </nav>
-    );
+    return <nav>
+      <NavBar
+        onClick={ this._onClick }
+        items={ secondary }
+        title={ title } />
+      <NavMainMenu
+        onClose={ this._onClick }
+        open={ isNavOpen }
+        items={ primary } />
+    </nav>;
   }
 }
 

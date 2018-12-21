@@ -15,10 +15,10 @@ const styles = theme => ({
   gridCard: {
     marginBottom: theme.spacing.unit * 3,
     cursor: 'pointer',
-    transition: 'box-shadow .3s ease-out',
+    transition: 'box-shadow .2s ease-out',
     '&:hover': {
       boxShadow: '1px 8px 20px grey',
-      transition: 'box-shadow .3s ease-in'
+      transition: 'box-shadow .2s ease-in'
     }
   },
   gridContent: {

@@ -38,6 +38,12 @@ class CareersSearch extends Component {
   render() {
     const { classes, onSearch } = this.props;
 
+    const icon = <InputAdornment position='start'>
+      <FontAwesomeIcon
+        className={classes.searchIcon}
+        icon={[ 'fal', 'search' ]} />
+    </InputAdornment>;
+
     return <AppBar className={classes.search} position='static'>
       <Toolbar className={classes.searchBar}>
 
@@ -47,16 +53,7 @@ class CareersSearch extends Component {
               className={classes.searchField}
               fullWidth
               inputProps={{ className: classes.searchInput }}
-              InputProps={{
-                disableUnderline: true,
-                startAdornment: (
-                  <InputAdornment position='start'>
-                    <FontAwesomeIcon
-                      className={classes.searchIcon}
-                      icon={[ 'fal', 'search' ]} />
-                  </InputAdornment>
-                )
-              }}
+              InputProps={{ disableUnderline: true, startAdornment: icon }}
               margin='none'
               onChange={onSearch}
               placeholder={ search.placeholder } />

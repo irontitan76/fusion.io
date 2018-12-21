@@ -82,6 +82,22 @@ insightSchema.pre('save', function (next) {
   next();
 });
 
+const autoIndex = process.env.NODE_ENV !== 'production';
+insightSchema.set('autoIndex', autoIndex, {
+  collation: {
+    locale: 'en',
+    strength: 1,
+  }
+});
+
+insightSchema.index({
+  author: 'text',
+  brief: 'text',
+  slug: 'text',
+  subtitle: 'text',
+  title: 'text',
+});
+
 const Insight = mongoose.model('Insight', insightSchema);
 
 export default Insight;

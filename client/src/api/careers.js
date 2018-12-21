@@ -1,8 +1,11 @@
 import axios from 'axios';
+import queryString from 'query-string';
 
-export const getCareers = async () => {
+export const getCareers = async (query) => {
   try {
-    const response = await axios.get('/api/careers');
+    query = `?${queryString.stringify(query)}` || '';
+
+    const response = await axios.get(`/api/careers${query}`);
     return response.data;
   } catch (err) {
     const message = 'Could not fetch careers';

@@ -35,12 +35,10 @@ class HomeVideo extends Component {
           {title}
         </Typography>
       </Grid>
-      <Grid className={classes.homeVideo} item md={9} xs={12}>
-        <Typography
-          align='center'
-          style={{ paddingBottom: 50, paddingTop: 50 }}>
-          {video.content}
-        </Typography>
+      <Grid className={classes.homeVideo} item>
+        <video height='100%'controls>
+          <source src='./fusion-full.mov' type='video/mp4' />
+        </video>
       </Grid>
     </Grid>;
   }

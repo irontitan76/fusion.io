@@ -15,17 +15,21 @@ export const fields = [
         label: 'Technology',
         value: 1,
       },
+      {
+        label: 'Other',
+        value: 2,
+      },
     ],
     select: true,
     type: 'select'
   },
   {
-    label: 'First name',
+    label: 'First Name',
     required: true,
     type: 'text',
   },
   {
-    label: 'Last name',
+    label: 'Last Name',
     required: true,
     type: 'text',
   },
@@ -40,12 +44,12 @@ export const fields = [
     type: 'text',
   },
   {
-    label: 'Email address',
+    label: 'Email Address',
     required: true,
     type: 'email',
   },
   {
-    label: 'Phone number',
+    label: 'Phone Number',
     required: false,
     type: 'text',
   },

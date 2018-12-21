@@ -22,6 +22,10 @@ const styles = theme => ({
       paddingRight: 0,
     },
   },
+  main: {
+    minHeight: '100%',
+    overflowX: 'hidden',
+  },
 });
 
 class Insight extends Component {
@@ -34,13 +38,13 @@ class Insight extends Component {
     const { classes, insight = {} } = this.props;
 
     return <>
-      <main>
+      <main className={classes.main}>
         <InsightsHeader />
         <Fade in timeout={{ enter: 500, exit: 500 }}>
           <Grid
             className={classes.insightsItem}
             container
-            justify='space-between'
+            justify='center'
             spacing={40}>
             <InsightArticle insight={insight} />
             <InsightSidebar />

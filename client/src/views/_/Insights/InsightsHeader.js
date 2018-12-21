@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import Link from 'react-router-dom/Link';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import AppBar from '@material-ui/core/AppBar';
@@ -28,9 +29,12 @@ const styles = theme => ({
     },
   },
   headerTitle: {
+    textDecoration: 'none',
     [theme.breakpoints.down('sm')]: {
+      paddingBottom: theme.spacing.unit * 2,
       paddingLeft: theme.spacing.unit * 2,
       paddingRight: theme.spacing.unit * 2,
+      paddingTop: theme.spacing.unit * 2,
       textAlign: 'center',
     },
   },
@@ -81,12 +85,20 @@ class InsightsHeader extends Component {
   render() {
     const { classes } = this.props;
 
+    const searchIcon = <InputAdornment position='start'>
+      <FontAwesomeIcon
+        className={classes.headerSearchIcon}
+        icon={[ 'fal', 'search' ]} />
+    </InputAdornment>;
+
     return <AppBar className={classes.header} position='sticky'>
       <Toolbar className={classes.headerBar}>
         <Grid alignItems='center' container justify='space-between'>
           <Grid item md={9} xs={12}>
             <Typography
               className={classes.headerTitle}
+              component={Link}
+              to='/insights'
               variant='h6'>
               <span className={classes.headerTitleSpan}>insights</span>
               <span className={classes.headerPeriod}>.</span>
@@ -94,26 +106,18 @@ class InsightsHeader extends Component {
             </Typography>
           </Grid>
 
-          <Grid item md={3} xs={12}>
-            <TextField
-              className={classes.headerSearchField}
-              fullWidth
-              inputProps={{ className: classes.headerSearchInput }}
-              InputProps={{
-                disableUnderline: true,
-                startAdornment: (
-                  <InputAdornment position='start'>
-                    <FontAwesomeIcon
-                      className={classes.headerSearchIcon}
-                      icon={[ 'fal', 'search' ]} />
-                  </InputAdornment>
-                )
-              }}
-              margin='none'
-              onChange={this.onChange}
-              placeholder='Search insights...'
-             />
-          </Grid>
+          <TextField
+            className={classes.headerSearchField}
+            component={Grid}
+            fullWidth
+            inputProps={{ className: classes.headerSearchInput }}
+            InputProps={{ disableUnderline: true, startAdornment: searchIcon }}
+            item
+            margin='none'
+            md={3}
+            onChange={this.onChange}
+            placeholder='Search insights...'
+            xs={12} />
         </Grid>
       </Toolbar>
     </AppBar>;

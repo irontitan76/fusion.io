@@ -1,30 +1,60 @@
-<div style='text-align: center; margin: 0 auto'>
-  <h1 style='margin-bottom: 0'>Fusion Industries</h1>
-  <h3 style='font-weight: 300; margin-top: 0'>Optimizing business through intelligent design</h3>
+<div style='text-align: center;'>
+
+<img src='./client/public/atom-alt.svg' height='150' style='margin-bottom: 0;' />
+
+<h1 style='font-weight: 300; letter-spacing: 10px; margin-top: 10px; margin-bottom: 0;'>FUSION INDUSTRIES</h1>
+
+<h4 style='font-weight: 500; margin-top: 0;'>
+  Optimizing business through intelligent design
+</h4>
+
 </div>
 
-<p style='text-align: center'>Note: This project was bootstrapped with <a href='https://github.com/facebookincubator/create-react-app'>Create React App</a>.
+<h2 style='border-bottom: 4px solid #0074D9; display: inline-block;'>Table of Contents</h2>
 
-## Table of Contents
-
-- [Onboarding Overview](#onboarding-overview)
-- [Folder Structure](#folder-structure)
-- [Available Scripts](#available-scripts)
-  - [npm start](#npm-start)
-  - [npm test](#npm-test)
-  - [npm run build](#npm-run-build)
-  - [npm run eject](#npm-run-eject)
+- [Notes](#notes)
+- [Our Team](#our-team)
+- [Our Standard](#our-standard)
+  - [Folder Structure](#folder-structure)
+  - [Paradigms](#paradigms)
+  - [Organization](#organization)
+  - [Process](#process)
+- [Workstation Setup](#onboarding)
+  - [Aliases](#aliases)
+  - [Atom](#atom)
+  - [Git](#git)
+  - [GitHub](#github)
+  - [Google Cloud](#google-cloud)
+  - [GraphicsMagick](#graphicsmagick)
+  - [Node](#node)
+- [Common Dependencies](#common-dependencies)
+  - [Concurrently](#concurrently)
+  - [Lodash](#lodash)
+  - [Validator](#validator)
+- [Client Dependencies](#client-dependencies)
+  - [React](#react)
+  - [Redux](#redux)
+  - [Material UI](#material-ui)
+  - [Webpack](#webpack)
+- [Server Dependencies](#server-dependencies)
+  - [Express](#express)
+  - [GraphQL](#graphql)
+  - [Mongoose](#mongoose)
+  - [gm](#gm)
+- [Developer Workflow](#developer-workflow)
+  - [Available Scripts](#available-scripts)
+  - [Adding Client Features](#adding-client-features)
+  - [Adding Server Features](#adding-server-features)
+  - [Linting](#linting)
+  - [Unit Testing](#unit-testing)
+  - [E2E Testing](#e2e-testing)
 - [Supported Browsers](#supported-browsers)
 
-## Notes
+<h2 id='notes' style='border-bottom: 4px solid #0074D9; display: inline-block;'>Notes</h2>
+
 - We need to give employees the option to either do consultant work or spend time actively working on products and solutions within the company.
 
-## Machine Dependencies
-- Text Editor: [Atom](https://atom.io/)
-- Infrastructure: [Google Cloud Console](https://cloud.google.com/sdk/install)
-- Relay: [Watchman](https://facebook.github.io/watchman/docs/install.html)
-
-## Onboarding Overview
+<h2 id='notes' style='border-bottom: 4px solid #0074D9; display: inline-block;'>Onboarding</h2>
 
 
 ## Folder Structure

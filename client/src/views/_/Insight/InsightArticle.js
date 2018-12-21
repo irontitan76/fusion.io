@@ -8,6 +8,7 @@ import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 import withStyles from '@material-ui/core/styles/withStyles';
+import withWidth, { isWidthUp } from '@material-ui/core/withWidth';
 
 const styles = theme => ({
   article: {
@@ -103,7 +104,7 @@ class InsightArticle extends Component {
   };
 
   render() {
-    const { classes, insight } = this.props;
+    const { classes, insight, width } = this.props;
     const { _createdAt, content, media, subtitle, title } = insight;
 
     let img = null;
@@ -118,8 +119,10 @@ class InsightArticle extends Component {
     const createdAt = moment(_createdAt).format('YYYY-MM-DD');
     const html = content ? { __html: marked(content) } : undefined;
 
-    return insight && <Grid className={classes.article} item md={8} xs={12}>
-      <Paper className={classes.articlePaper} elevation={1}>
+    return insight && <Grid className={classes.article} item md={8} xl={5} xs={12}>
+      <Paper
+        className={classes.articlePaper}
+        elevation={isWidthUp('md', width) ? 1 : 0}>
         {img}
         <Typography
           className={classes.articleDate}
@@ -151,4 +154,4 @@ class InsightArticle extends Component {
   }
 }
 
-export default withStyles(styles)(InsightArticle);
+export default withStyles(styles)(withWidth()(InsightArticle));

@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 import Link from 'react-router-dom/Link';
 import PropTypes from 'prop-types';
 
-import AccountCircle from '@material-ui/icons/AccountCircle';
 import Button from '@material-ui/core/Button';
 import IconButton from '@material-ui/core/IconButton';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
@@ -17,6 +16,11 @@ import { endSession } from 'actions/session';
 const styles = theme => ({
   listSize: {
     fontSize: '0.8125rem'
+  },
+  menuButton: {
+    '&:hover': {
+      height: 'auto',
+      width: 'auto',   }
   },
   menuLink: {
     '&:hover': {
@@ -77,10 +81,16 @@ export class NavUserMenu extends Component {
       <IconButton
         aria-owns={open ? 'menu-appbar' : null}
         aria-haspopup='true'
-        className={classes.menuLink}
+        className={classes.menuButton}
         onClick={this.handleMenu}
         color='default'>
-        <AccountCircle />
+        <img
+          alt='avatar'
+          height='30px'
+          onClick={this.handleMenu}
+          src='./images/city.jpg'
+          style={{ borderRadius: '50%' }}
+          width='30px' />
       </IconButton>
       <Menu
         id='menu-appbar'

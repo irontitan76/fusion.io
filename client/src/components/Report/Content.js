@@ -31,7 +31,7 @@ const styles = theme => ({
 class ReportContent extends Component {
   render() {
     const { body, classes, children } = this.props;
-
+console.log(body)
     return <Grid className={classes.root} container justify='center'>
       <Grid item xl={5} md={6} xs={12}>
         <Typography

@@ -9,26 +9,33 @@ import { hero } from './home';
 
 const styles = theme => ({
   hero: {
-    backgroundImage: 'url("/images/city4.jpg")',
+    backgroundImage: 'url("/images/minimal.jpg")',
     backgroundRepeat: 'no-repeat',
     backgroundSize: '100% 100%',
-    height: 750,
+    border: '1px solid #ddd',
+    height: 600,
+    marginBottom: theme.spacing.unit * 7,
+    marginTop: theme.spacing.unit * 7,
     overflow: 'hidden',
     [theme.breakpoints.down('xl')]: {
       backgroundSize: '100% 130%',
     },
     [theme.breakpoints.down('lg')]: {
-      height: 550,
+      height: 450,
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       backgroundSize: '180% 120%',
+      marginTop: 0,
     }
   },
   heroContent: {
     backgroundColor: 'rgba(0,0,0,.25)',
     color: theme.palette.common.white,
     height: '100%',
-    padding: `${theme.spacing.unit * 5}px ${theme.spacing.unit * 2}px`
+    paddingBottom: theme.spacing.unit * 12,
+    paddingLeft: theme.spacing.unit * 2,
+    paddingRight: theme.spacing.unit * 2,
+    paddingTop: theme.spacing.unit,
   },
   heroIcon: {
     color: theme.palette.common.white,
@@ -55,11 +62,8 @@ class HomeHero extends Component {
     const { classes } = this.props;
     const { icon, title } = hero;
 
-    return <Grid
-      className={classes.hero}
-      container
-      justify='center'>
-      <Grid item xs={12}>
+    return <Grid container justify='center'>
+      <Grid className={classes.hero} item lg={11} md={10} xs={12} xl={8}>
         <Grid
           alignItems='center'
           className={classes.heroContent}
@@ -69,15 +73,14 @@ class HomeHero extends Component {
 
           <FontAwesomeIcon
             className={classes.heroIcon}
-            icon={ icon }
-          />
+            icon={icon} />
 
           <Typography
             align='center'
             className={classes.heroTitle}
             gutterBottom
             variant='h4'>
-            { title }
+            {title}
           </Typography>
 
         </Grid>

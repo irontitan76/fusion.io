@@ -49,6 +49,18 @@ const careerSchema = new mongoose.Schema({
     },
 }, { collection: 'careers' });
 
+const autoIndex = process.env.NODE_ENV !== 'production';
+careerSchema.set('autoIndex', autoIndex);
+
+careerSchema.index({
+  brief: 'text',
+  description: 'text',
+  location: 'text',
+  org: 'text',
+  role: 'text',
+  team: 'text',
+});
+
 const Career = mongoose.model('Career', careerSchema);
 
 export default Career;

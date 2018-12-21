@@ -1,12 +1,17 @@
 import React, { Component } from 'react';
 
 import HomeHero from './HomeHero';
+import HomeHighlights from './HomeHighlights';
 import Footer from 'components/Footer';
+
 
 class Home extends Component {
   render() {
     return <>
-      <HomeHero />
+      <main style={{ minHeight: '100%' }}>
+        <HomeHero />
+        <HomeHighlights />
+      </main>
       <Footer />
     </>;
   }

@@ -27,7 +27,7 @@ class Sample extends Component {
     const { classes } = this.props;
 
     return <Hidden smDown>
-      <Grid className={classes.sidebar} item md={4}>
+      <Grid className={classes.sidebar} item md={4} xl={3}>
         <Paper>
           <Typography
             className={classes.sidebarHeading}

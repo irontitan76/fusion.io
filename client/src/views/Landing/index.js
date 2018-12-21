@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
@@ -8,8 +9,12 @@ import Footer from 'components/Footer';
 
 const styles = theme => ({
   heading: {
+    alignItems: 'center',
     color: '#fff',
+    display: 'flex',
+    flexDirection: 'column',
     fontWeight: 300,
+    letterSpacing: 15,
   },
   headingContainer: {
     paddingBottom: theme.spacing.unit * 7,
@@ -18,7 +23,11 @@ const styles = theme => ({
   infoContainer: {
     height: '100vh',
     paddingTop: theme.spacing.unit * 5,
-  }
+  },
+  logo: {
+    fontSize: 64,
+    marginBottom: theme.spacing.unit * 3,
+  },
 });
 
 class Landing extends Component {
@@ -27,44 +36,52 @@ class Landing extends Component {
 
     const locationMap = {
       '/ai': {
-        theme: theme.palette.ai,
-        name: 'Fusion A.I.',
         info: 'Fusion A.I. is the 3rd phase in the Fusion Strategy.',
+        logo: [ 'fal', 'mind-share' ],
+        name: 'Fusion AI',
+        theme: theme.palette.ai,
       },
       '/cosmos': {
-        theme: theme.palette.cosmos,
-        name: 'Fusion Cosmos',
         info: 'Fusion Cosmos is the 10th phase in the Fusion Strategy.',
+        name: 'Fusion Cosmos',
+        logo: [ 'fal', 'space-shuttle' ],
+        theme: theme.palette.cosmos,
       },
       '/energy': {
-        theme: theme.palette.energy,
-        name: 'Fusion Energy',
         info: 'Fusion Energy is the 8th phase in the Fusion Strategy',
+        name: 'Fusion Energy',
+        logo: [ 'fal', 'solar-panel' ],
+        theme: theme.palette.energy,
       },
       '/finance': {
-        theme: theme.palette.finance,
-        name: 'Fusion Finance',
         info: 'Fusion Finance is the 5th phase in the Fusion Strategy.',
+        name: 'Fusion Finance',
+        logo: [ 'fal', 'credit-card-blank' ],
+        theme: theme.palette.finance,
       },
       '/health': {
-        theme: theme.palette.health,
-        name: 'Fusion Health',
         info: 'Fusion Health is the 7th phase in the Fusion Strategy.',
+        name: 'Fusion Health',
+        logo: [ 'fal', 'dna' ],
+        theme: theme.palette.health,
       },
       '/legal': {
-        theme: theme.palette.legal,
-        name: 'Fusion Legal',
         info: 'Fusion Legal is the 6th phase in the Fusion Strategy.',
+        name: 'Fusion Legal',
+        logo: [ 'fal', 'balance-scale' ],
+        theme: theme.palette.legal,
       },
       '/media': {
-        theme: theme.palette.media,
-        name: 'Fusion Media',
         info: 'Fusion Media is the 4th phase in the Fusion Strategy.',
+        name: 'Fusion Media',
+        logo: [ 'fal', 'broadcast-tower' ],
+        theme: theme.palette.media,
       },
       '/transport': {
-        theme: theme.palette.transport,
-        name: 'Fusion Transport',
         info: 'Fusion Transport is the 9th phase in the Fusion Strategy.',
+        name: 'Fusion Transport',
+        logo: [ 'fal', 'map-marked' ],
+        theme: theme.palette.transport,
       },
     };
 
@@ -78,11 +95,18 @@ class Landing extends Component {
             item
             style={{ backgroundColor: org.theme.main }}
             xs={12}>
+
             <Typography
               align='center'
               className={classes.heading}
-              variant='h2'>
-              {org.name}
+              component='div'
+              variant='h3'>
+              {
+                org.logo && <FontAwesomeIcon
+                className={classes.logo}
+                icon={org.logo} />
+              }
+              {org.name.toUpperCase()}
             </Typography>
           </Grid>
         </Grid>

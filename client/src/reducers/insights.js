@@ -1,16 +1,6 @@
-import filter from 'lodash.filter';
-
 const initialState = {
   items: [],
   selected: {},
-};
-
-const getInsightsByStringSearch = (items, str) => {
-  let results = [];
-  items.forEach(item => {
-    JSON.stringify(item).toLowerCase().indexOf(str) > -1 && results.push(item);
-  });
-  return results;
 };
 
 const insights = (state = initialState, action) => {
@@ -41,11 +31,7 @@ const insights = (state = initialState, action) => {
     case 'INSIGHTS_FILTER':
       return {
         ...state,
-        filteredItems: typeof action.filter === 'object'
-          ? filter(state.items, action.filter)
-          : typeof action.filter === 'string'
-              ? getInsightsByStringSearch(state.items, action.filter.toLowerCase())
-              : state.items
+        filteredItems: action.payload,
       };
     case 'INSIGHTS_LOAD':
       return {

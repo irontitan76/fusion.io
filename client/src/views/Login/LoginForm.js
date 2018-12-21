@@ -13,10 +13,13 @@ import withStyles from '@material-ui/core/styles/withStyles';
 
 const styles = theme => ({
   loginForm: {
-    marginBottom: theme.spacing.unit * 8,
-    marginTop: theme.spacing.unit * 5,
+    paddingBottom: theme.spacing.unit * 8,
+    paddingTop: theme.spacing.unit * 7,
+    [theme.breakpoints.up('xl')]: {
+      paddingTop: theme.spacing.unit * 20,
+    },
     [theme.breakpoints.down('xs')]: {
-      marginTop: 0,
+      paddingTop: 0,
     },
   },
   loginFormButton: {
@@ -54,10 +57,10 @@ const styles = theme => ({
   },
   loginFormTitlePaper: {
     backgroundColor: '#0074D9',
-    paddingBottom: theme.spacing.unit * 3,
+    paddingBottom: theme.spacing.unit * 8,
     paddingLeft: theme.spacing.unit * 3,
     paddingRight: theme.spacing.unit * 3,
-    paddingTop: theme.spacing.unit * 3,
+    paddingTop: theme.spacing.unit * 8,
   },
   loginFormTitle: {
     color: '#fff',
@@ -117,6 +120,7 @@ class LoginForm extends Component {
         item
         md={4}
         sm={7}
+        xl={3}
         xs={12}>
 
         <Paper

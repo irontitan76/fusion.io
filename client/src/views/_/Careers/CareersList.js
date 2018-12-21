@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
 
 import Button from '@material-ui/core/Button';
+import CircularProgress from '@material-ui/core/CircularProgress';
 import Grid from '@material-ui/core/Grid';
 import Fade from '@material-ui/core/Fade';
 import Table from '@material-ui/core/Table';
@@ -12,12 +12,20 @@ import TableRow from '@material-ui/core/TableRow';
 import Typography from '@material-ui/core/Typography';
 import withStyles from '@material-ui/core/styles/withStyles';
 
-import { loadCareers, unloadCareers } from 'actions/careers';
+import MenuItem from '@material-ui/core/MenuItem';
+import TextField from '@material-ui/core/TextField';
 
 const styles = theme => ({
   careersList: {
-    paddingLeft: theme.spacing.unit * 2,
-    paddingRight: theme.spacing.unit * 2,
+    paddingLeft: theme.spacing.unit * 4,
+    paddingRight: theme.spacing.unit * 4,
+  },
+  careersListFilter: {
+    marginBottom: theme.spacing.unit * 3,
+  },
+  careersListFilters: {
+    paddingBottom: theme.spacing.unit * 4,
+    paddingTop: 0,
   },
   careersListNoMoreFound: {
     color: '#777',
@@ -38,14 +46,61 @@ const styles = theme => ({
 });
 
 class CareersList extends Component {
-  componentDidMount = () => {
-    const { dispatch } = this.props;
-    dispatch(loadCareers());
+  state = {
+    'org': {
+      name: 'org',
+      label: 'Organization',
+      items: ['All organizations', 'Fusion A.I.', 'Fusion Consulting', 'Fusion Cosmos', 'Fusion Energy', 'Fusion Finance', 'Fusion Health', 'Fusion Legal', 'Fusion Media', 'Fusion Technology', 'Fusion Transport'],
+      value: 'All organizations',
+    },
+    'team': {
+      name: 'team',
+      label: 'Team',
+      items: ['All teams', 'Engineering & Technology', 'User Experience & Design', 'Accounts & Sales', 'Finance', 'Marketing', 'Legal & Corporate Affairs'],
+      value: 'All teams',
+    },
+    'location': {
+      name: 'location',
+      label: 'Location',
+      items: ['Any location', 'Austin, TX', 'Remote'],
+      value: 'Any location',
+    }
   };
 
-  componentWillUnmount = () => {
-    const { dispatch } = this.props;
-    dispatch(unloadCareers());
+  onChange = event => {
+    const { onChange } = this.props;
+    const { name, value } = event.target;
+
+    this.setState({
+      [name]: {
+        ...this.state[name],
+        value,
+      }}, onChange(event));
+  };
+
+  renderFilters = () => {
+    const { state } = this;
+    const { classes } = this.props;
+
+    return Object.keys(state).map((searcher, key) => {
+      return <Grid item key={state[searcher].name}>
+        <TextField
+          className={classes.careersListFilter}
+          fullWidth
+          inputProps={{ name: state[searcher].name, id: state[searcher].name }}
+          label={state[searcher].label}
+          name={state[searcher].name}
+          onChange={this.onChange}
+          select
+          value={state[searcher].value}>
+            {
+              state[searcher].items.map((item, index) => (
+                <MenuItem key={item} value={item}>{item}</MenuItem>)
+              )
+            }
+        </TextField>
+      </Grid>;
+    });
   };
 
   renderHeaders = () => {
@@ -53,16 +108,25 @@ class CareersList extends Component {
 
     if (!headers) return null;
     return headers.map((header, key) => {
-      return <TableCell key={key}>{header.name}</TableCell>
+      return <TableCell key={key}>
+        {header.name}
+      </TableCell>
     })
   };
 
   renderRolesRows = () => {
-    const { careers, classes } = this.props;
+    const { careers, classes, isFetching } = this.props;
+
+    let content = null;
+    if ( isFetching ) {
+      content = <CircularProgress />
+    } else {
+      content = 'No roles available';
+    }
 
     if ( careers.roles.length === 0 ) {
       return <TableRow>
-        <TableCell colSpan={5}>No roles available</TableCell>
+        <TableCell colSpan={5}>{content}</TableCell>
       </TableRow>
     }
 
@@ -95,20 +159,37 @@ class CareersList extends Component {
       <Grid
         className={classes.careersList}
         container
-        justify='center'>
+        spacing={40}>
 
-        <Grid item md={10}>
+        <Grid item md={3}>
+
+          <Grid
+            className={classes.careersListFilters}
+            container
+            direction='column'
+            style={{
+              backgroundColor: 'rgb(250,251,252)',
+              border: '1px solid #ccc',
+              padding: 40,
+              paddingTop: 0,
+              marginTop: 20,
+            }}>
+            <Typography
+              className={classes.careersListTitle}
+              variant='h5'>
+              Filter
+            </Typography>
+            {this.renderFilters()}
+          </Grid>
+        </Grid>
+
+        <Grid item md={9}>
           <Typography
             className={classes.careersListTitle}
             variant='h4'>
-            Open Positions
+            Open Requisitions
           </Typography>
-        </Grid>
 
-        <Grid
-          className={classes.careersListTable}
-          item
-          md={10}>
           <Table>
 
             <TableHead>
@@ -136,8 +217,4 @@ CareersList.defaultProps = {
   ]
 };
 
-const select = state => ({
-  careers: state.careers,
-});
-
-export default withStyles(styles)(connect(select)(CareersList));
+export default withStyles(styles)(CareersList);

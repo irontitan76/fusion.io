@@ -116,7 +116,7 @@ class Report extends Component {
 
   render() {
     return <>
-      <main>
+      <main style={{ minHeight: 'calc(100vh + 150px)' }}>
         {this.renderContent()}
       </main>
       <Footer />

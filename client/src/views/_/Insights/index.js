@@ -29,7 +29,7 @@ class Insights extends Component {
 
   render() {
     return <>
-      <main>
+      <main style={{ minHeight: '100%', }}>
         <InsightsHeader />
         <InsightsGrid insights={this.filterInsights()} />
       </main>
