@@ -9,6 +9,7 @@ import withStyles from '@material-ui/core/styles/withStyles';
 
 import Message from 'components/Message';
 import ReportFormDialog from './ReportFormDialog';
+import ReportFormSidebar from './ReportFormSidebar';
 
 const styles = theme => ({
   content: {
@@ -221,7 +222,7 @@ class ProfileStandard extends Component {
 
             <Grid className={classes.standardContainer} item xs={12}>
               <Grid container justify='space-between'>
-                <Grid item md={3} xs={12}>
+                <Grid item>
                   <Button
                     fullWidth
                     color='primary'
@@ -231,7 +232,7 @@ class ProfileStandard extends Component {
                   </Button>
                 </Grid>
                 {
-                  onDelete ? <Grid item md={3} xs={12}>
+                  onDelete ? <Grid item>
                     <ReportFormDialog
                       deleteText={deleteText}
                       onDelete={onDelete} />
@@ -241,6 +242,8 @@ class ProfileStandard extends Component {
             </Grid>
           </Grid>
         </Grid>
+
+        <ReportFormSidebar />
       </Grid>
 
       <Message />

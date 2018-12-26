@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import marked from 'marked';
+import Markdown from 'react-markdown';
 
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
@@ -30,18 +30,15 @@ const styles = theme => ({
 
 class ReportContent extends Component {
   render() {
-    const { body, classes, children } = this.props;
-console.log(body)
+    const { body, classes } = this.props;
+
     return <Grid className={classes.root} container justify='center'>
       <Grid item xl={5} md={6} xs={12}>
         <Typography
           className={classes.contentBody}
           component='div'
-          dangerouslySetInnerHTML={
-            body ? { __html: marked(body) } : undefined
-          }
           variant='body2'>
-          {children}
+          <Markdown source={body} />
         </Typography>
       </Grid>
     </Grid>;

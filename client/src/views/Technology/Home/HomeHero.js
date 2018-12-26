@@ -14,8 +14,8 @@ const styles = theme => ({
     backgroundSize: '100% 100%',
     border: '1px solid #ddd',
     height: 600,
-    marginBottom: theme.spacing.unit * 7,
-    marginTop: theme.spacing.unit * 7,
+    marginBottom: theme.spacing.unit * 5,
+    marginTop: theme.spacing.unit * 5,
     overflow: 'hidden',
     [theme.breakpoints.down('xl')]: {
       backgroundSize: '100% 130%',

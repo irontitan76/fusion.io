@@ -9,11 +9,6 @@ export const userMenu = [
     icon: ['fal', 'file-alt'],
     path: '/profile/insights',
   },
-  {
-    label: 'Settings',
-    icon: ['fal', 'cog'],
-    path: '/profile/settings',
-  },
 ];
 
 export const adminMenu = [
@@ -28,4 +23,12 @@ export const adminMenu = [
     icon: ['fal', 'infinity'],
     path: '/profile/strategies',
   }
+];
+
+export const settingsMenu = [
+  {
+    label: 'Settings',
+    icon: ['fal', 'cog'],
+    path: '/profile/settings',
+  },
 ];

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import marked from 'marked';
+import Markdown from 'react-markdown';
 import moment from 'moment';
 
 import Avatar from '@material-ui/core/Avatar';
@@ -117,7 +117,7 @@ class InsightArticle extends Component {
     }
 
     const createdAt = moment(_createdAt).format('YYYY-MM-DD');
-    const html = content ? { __html: marked(content) } : undefined;
+    const html = <Markdown source={content} />;
 
     return insight && <Grid className={classes.article} item md={8} xl={5} xs={12}>
       <Paper
@@ -146,8 +146,9 @@ class InsightArticle extends Component {
 
         <Typography
           className={classes.articleContent}
-          component='div'
-          dangerouslySetInnerHTML={html} />
+          component='div'>
+          {html}
+        </Typography>
       </Paper>
       {this.renderAuthor()}
     </Grid>;

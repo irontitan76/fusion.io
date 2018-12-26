@@ -30,7 +30,7 @@ const styles = theme => ({
     paddingLeft: 0,
   },
   media: {
-    height: 250,
+    height: 175,
   }
 });
 

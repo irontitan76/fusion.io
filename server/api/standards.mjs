@@ -17,7 +17,7 @@ router.delete('/:id', async (req, res) => {
   const response = await Standard.deleteOne({ _id }, (err, result) => {
     if ( err ) {
       console.log('-X Standard delete failed ' + err);
-      res.status(500).json({ error: err, message: 'Standard update failed!' });
+      res.status(500).json({ error: err, message: 'Standard delete failed!' });
       return err;
     }
     console.log(`--- Standard ${_id} deleted successfully`);

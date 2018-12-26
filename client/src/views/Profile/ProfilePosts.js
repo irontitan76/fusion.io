@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Link from 'react-router-dom/Link';
+import moment from 'moment';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import Button from '@material-ui/core/Button';
@@ -114,9 +115,9 @@ class ProfilePosts extends Component {
                     </Link>
                   </TableCell>
                   <TableCell>{ insight.brief }...</TableCell>
-                  <TableCell>{ insight._createdAt }</TableCell>
-                  <TableCell>{ insight._modifiedAt }</TableCell>
-                  <TableCell>{ insight._publishedAt || 'Unpublished' }</TableCell>
+                  <TableCell>{ moment(insight._createdAt).format('MMM Do YYYY, h:mm a') }</TableCell>
+                  <TableCell>{ moment(insight._modifiedAt).format('MMM Do YYYY, h:mm a') }</TableCell>
+                  <TableCell>{ moment(insight._publishedAt).format('MMM Do YYYY, h:mm a') || 'Unpublished' }</TableCell>
                 </TableRow>
               ))
             }

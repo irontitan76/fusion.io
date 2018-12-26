@@ -50,52 +50,81 @@
   - [E2E Testing](#e2e-testing)
 - [Supported Browsers](#supported-browsers)
 
-<h2 id='notes' style='border-bottom: 4px solid #0074D9; display: inline-block;'>Notes</h2>
+<div>
+  <h2 id='notes' style='border-bottom: 4px solid #0074D9; display: inline-block;'>Notes</h2>
+</div>
 
 - We need to give employees the option to either do consultant work or spend time actively working on products and solutions within the company.
 
-<h2 id='notes' style='border-bottom: 4px solid #0074D9; display: inline-block;'>Onboarding</h2>
+<div>
+  <h2 id='our-team' style='border-bottom: 4px solid #0074D9; display: inline-block;'>Our Team</h2>
+</div>
 
+<div>
+  <h2 id='our-standard' style='border-bottom: 4px solid #0074D9; display: inline-block;'>Our Standard</h2>
+</div>
+Our development standard is a subset of the what is outlined at
 
-## Folder Structure
+[The Fusion Standard](http://localhost:8080/standard)
 
-After creation, your project should look like this:
+<div>
+  <h3 id='folder-structure' style='border-bottom: 4px solid #0074D9; display: inline-block;'>Folder Structure</h3>
+</div>
+
+There are three overarching services within Fusion:
+
+#### CLI
+The cli/ folder contains the developer's suite of tools for faster development, deployment, and more.
+
+#### Client
+The client/ folder contains the following folders and is the React-based UI for all of the Fusion organizations.
 
 ```
-fusion-io/
-  node_modules/
-  package.json
-  public/
-    index.html
-    images/
-    favicon.ico
-    manifest.json
-  src/
-    actions/
-    api/
-    common/
-      assets/
-      functions/
-      themes/
-    components/
-      Footer.js
-      Nav.js
+public/
+  index.html
+  images/
+  favicon.ico
+  manifest.json
+src/
+  actions/
+  api/
+  common/
+    assets/
+    functions/
+    themes/
+  components/
+    Footer.js
+    Nav.js
+    ...
+  reducers/
+  views/
+    view1/
+      view1Component1.js
+      view1Component2.js
       ...
-    reducers/
-    views/
-      view1/
-        view1Component1.js
-        view1Component2.js
-        ...
-    index.js
-    registerServiceWorker.js
-    store.js
-  .gitignore
-  .npmrc
-  app.yaml
-  package-lock.json
-  package.json
-  README.md
+  index.js
+  registerServiceWorker.js
+  store.js
+app.yaml
+package-lock.json
+package.json
+```
+
+
+#### Server
+The server/ folder contains the following folders and is built atop Node and Express.
+```
+  server/
+    api/
+    assets/
+      images/
+    graphql/
+      schemas/
+    mongoose/
+    app.yaml
+    package-lock.json
+    package.json
+    server.mjs
 ```
 
 For the project to build, **these files must exist with exact filenames**:
@@ -106,7 +135,7 @@ For the project to build, **these files must exist with exact filenames**:
 You can delete or rename the other files.
 
 You may create subdirectories inside `src`. For faster rebuilds, only files inside `src` are processed by Webpack.<br>
-You need to **put any JS and CSS files inside `src`**, otherwise Webpack won’t see them.
+You need to **put any JS files inside `src`**, otherwise Webpack won’t see them.
 
 Only files inside `public` can be used from `public/index.html`.<br>
 Read instructions below for using assets from JavaScript and HTML.

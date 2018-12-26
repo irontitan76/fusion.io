@@ -17,7 +17,7 @@ export const getInsights = async (params, userId) => {
 
 export const getInsight = async (slug) => {
   try {
-    const response = await axios.get(`/api/insights/${slug}`);
+    const response = await axios.get(`/api/insights/slug/${slug}`);
     return response.data;
   } catch (err) {
     const message = 'Could not fetch articles';

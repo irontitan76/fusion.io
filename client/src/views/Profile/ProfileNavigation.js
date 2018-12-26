@@ -14,7 +14,7 @@ import withStyles from '@material-ui/core/styles/withStyles';
 
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 
-import { adminMenu, userMenu } from './profile';
+import { adminMenu, settingsMenu, userMenu } from './profile';
 
 const styles = theme => ({
   badge: {
@@ -103,9 +103,11 @@ class ProfileNavigation extends Component {
     const { open } = this.state;
     const { classes, session } = this.props;
 
-    const menuItems = session.user.role === 'admin'
+    let menuItems = session.user.role === 'admin'
       ? adminMenu
       : userMenu;
+
+    menuItems = [ ...menuItems, ...settingsMenu ];
 
     const notifications = filter(session.user.notifications, notification => {
       if ( !notification.isNotified ) return notification;

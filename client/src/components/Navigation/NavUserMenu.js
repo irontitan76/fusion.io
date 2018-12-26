@@ -46,6 +46,10 @@ export class NavUserMenu extends Component {
     this.setState({ anchorEl: null });
   };
 
+  handleClose = () => {
+    this.setState({ anchorEl: null });
+  };
+
   render() {
     const { anchorEl } = this.state;
     const { auth, classes, items } = this.props;

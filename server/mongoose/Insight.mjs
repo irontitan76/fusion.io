@@ -13,6 +13,12 @@ function generateSlug() {
   return slug;
 }
 
+const authorSchema = new mongoose.Schema({
+  avatar: { type: String },
+  name: { type: String },
+  title: { type: String },
+});
+
 const mediaSchema = new mongoose.Schema({
   alt: { type: String },
   src: { type: String },
@@ -31,12 +37,7 @@ const insightSchema = new mongoose.Schema({
     _publishedAt: {
       type: Date
     },
-    author: {
-      _id: ObjectId,
-      avatar: String,
-      name: String,
-      title: String
-    },
+    author: authorSchema,
     brief: {
       required: 'A short description is required',
       trim: true,

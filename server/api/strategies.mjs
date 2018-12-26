@@ -17,7 +17,7 @@ router.delete('/:id', async (req, res) => {
   const response = await Strategy.deleteOne({ _id }, (err, result) => {
     if ( err ) {
       console.log('-X Strategy delete failed ' + err);
-      res.status(500).json({ error: err, message: 'Strategy update failed!' });
+      res.status(500).json({ error: err, message: 'Strategy delete failed!' });
       return err;
     }
     console.log(`--- Strategy ${_id} deleted successfully`);

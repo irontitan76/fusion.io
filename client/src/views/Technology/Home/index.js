@@ -11,6 +11,7 @@ class Home extends Component {
       <main style={{ minHeight: '100%' }}>
         <HomeHero />
         <HomeHighlights />
+        <div style={{ minHeight: 500 }} />
       </main>
       <Footer />
     </>;
