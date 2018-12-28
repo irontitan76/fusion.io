@@ -9,8 +9,6 @@ import TextField from '@material-ui/core/TextField';
 import Toolbar from '@material-ui/core/Toolbar';
 import withStyles from '@material-ui/core/styles/withStyles';
 
-import { search } from './careers';
-
 const styles = theme => ({
   search: {
     backgroundColor: theme.palette.blue,
@@ -56,7 +54,7 @@ class CareersSearch extends Component {
               InputProps={{ disableUnderline: true, startAdornment: icon }}
               margin='none'
               onChange={onSearch}
-              placeholder={ search.placeholder } />
+              placeholder='Search jobs...' />
           </Grid>
         </Grid>
 

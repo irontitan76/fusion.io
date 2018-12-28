@@ -19,6 +19,7 @@ import NotFound from 'views/NotFound';
 
 // Fusion _
 import About from 'views/_/About';
+import Career from 'views/_/Career';
 import Careers from 'views/_/Careers';
 import CompanyHome from 'views/_/Home';
 import Contact from 'views/_/Contact';
@@ -78,6 +79,7 @@ const App = () => {
                         <Route exact path='/standard' component={Standard} />
                         <Route exact path='/strategy' component={Strategy} />
                         <Route exact path='/careers' component={Careers} />
+                        <Route exact path='/careers/:careerId' component={Career} />
                         <Route exact path='/contact' component={Contact} />
                         <Route exact path='/insights' component={Insights} />
                         <Route exact path='/insights/:insightId' component={Insight} />

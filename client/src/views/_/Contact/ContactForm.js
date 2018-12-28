@@ -6,6 +6,66 @@ import MenuItem from '@material-ui/core/MenuItem';
 import TextField from '@material-ui/core/TextField';
 import withStyles from '@material-ui/core/styles/withStyles';
 
+const fields = [
+  {
+    label: 'Business Need',
+    required: true,
+    options: [
+      {
+        label: 'Consulting',
+        value: 0,
+      },
+      {
+        label: 'Technology',
+        value: 1,
+      },
+      {
+        label: 'Other',
+        value: 2,
+      },
+    ],
+    select: true,
+    type: 'select'
+  },
+  {
+    label: 'First Name',
+    required: true,
+    type: 'text',
+  },
+  {
+    label: 'Last Name',
+    required: true,
+    type: 'text',
+  },
+  {
+    label: 'Company',
+    required: true,
+    type: 'text',
+  },
+  {
+    label: 'Role / Title',
+    required: true,
+    type: 'text',
+  },
+  {
+    label: 'Email Address',
+    required: true,
+    type: 'email',
+  },
+  {
+    label: 'Phone Number',
+    required: false,
+    type: 'text',
+  },
+  {
+    label: 'Comments',
+    multiline: true,
+    required: false,
+    rows: 10,
+    type: 'text',
+  }
+];
+
 const styles = theme => ({
   contactContent: {
     backgroundColor: theme.palette.offwhite,
@@ -21,7 +81,7 @@ const styles = theme => ({
 
 export class ContactForm extends Component {
   renderFields = () => {
-    const { classes, fields } = this.props;
+    const { classes } = this.props;
 
     return fields.map((field, key) => {
       let options = null;

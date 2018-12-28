@@ -2,6 +2,8 @@
 export const NAV_TOGGLE = 'NAV_TOGGLE';
 
 // CAREERS
+export const CAREER_LOAD = 'CAREER_LOAD';
+export const CAREER_UNLOAD = 'CAREER_UNLOAD';
 export const CAREERS_LOAD = 'CAREERS_LOAD';
 export const CAREERS_UNLOAD = 'CAREERS_UNLOAD';
 

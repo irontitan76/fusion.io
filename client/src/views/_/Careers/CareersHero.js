@@ -4,8 +4,6 @@ import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import withStyles from '@material-ui/core/styles/withStyles';
 
-import { hero } from './careers';
-
 const styles = theme => ({
   hero: {},
   heroHeading: {
@@ -31,7 +29,14 @@ class CareersHero extends Component {
           className={classes.heroHeading}
           paragraph
           variant='h4'>
-          {hero.heading}
+          <span style={{ color: '#ff4136', fontWeight: 500 }}>Find </span>
+          a job you love,
+          <span style={{ color: '#0074d9', fontWeight: 500 }}> create </span>
+          the future you want,
+          <span style={{ color: '#ffdc00', fontWeight: 500 }}> explore </span>
+          your unique passion, and
+          <span style={{ color: '#3d9970', fontWeight: 500 }}> empower </span>
+          billions.
         </Typography>
       </Grid>
 

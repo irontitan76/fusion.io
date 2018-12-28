@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Link from 'react-router-dom/Link';
 
 import Button from '@material-ui/core/Button';
 import CircularProgress from '@material-ui/core/CircularProgress';
@@ -136,7 +137,15 @@ class CareersList extends Component {
         <TableCell>{role.org}</TableCell>
         <TableCell>{role.team}</TableCell>
         <TableCell>{`${role.location.city} ${role.location.state}`}</TableCell>
-        <TableCell><Button color='primary' variant='text'>Apply</Button></TableCell>
+        <TableCell>
+          <Button
+            color='primary'
+            component={Link}
+            to={`/careers/${role._id}`}
+            variant='text'>
+            Apply
+          </Button>
+        </TableCell>
       </TableRow>
     });
 
