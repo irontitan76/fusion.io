@@ -96,7 +96,6 @@ class Report extends Component {
         <ReportHeader
           divider={includes([0, 1, 2], section.level)}
           id={reference}
-          key={key}
           variant={headingMap[section.level]}>
           {section.title}
         </ReportHeader>
@@ -104,7 +103,7 @@ class Report extends Component {
 
       let body = this.renderContentItem(section.content);;
       if ( section.order === 0 ) {
-        body = [ body, this.renderContentItem({ type: 'toc' }, 1) ];
+        body = [ body, this.renderContentItem({ type: 'toc' }) ];
       }
 
       return <Fragment key={key}>

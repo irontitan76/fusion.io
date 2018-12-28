@@ -30,7 +30,7 @@ const styles = theme => ({
 
 class ReportContent extends Component {
   render() {
-    const { body, classes } = this.props;
+    const { body, classes, children } = this.props;
 
     return <Grid className={classes.root} container justify='center'>
       <Grid item xl={5} md={6} xs={12}>
@@ -39,6 +39,7 @@ class ReportContent extends Component {
           component='div'
           variant='body2'>
           <Markdown source={body} />
+          {children}
         </Typography>
       </Grid>
     </Grid>;

@@ -14,6 +14,11 @@ import Typography from '@material-ui/core/Typography';
 import withStyles from '@material-ui/core/styles/withStyles';
 
 import {
+  loadPolicies,
+  unloadPolicies,
+} from 'actions/policies';
+
+import {
   loadStandards,
   unloadStandards,
 } from 'actions/standards';
@@ -62,6 +67,8 @@ class ProfileReports extends Component {
       dispatch(loadStandards());
     } else if ( type === '/profile/strategies' ) {
       dispatch(loadStrategies());
+    } else if ( type === '/profile/policies' ) {
+      dispatch(loadPolicies());
     }
   };
 
@@ -74,6 +81,8 @@ class ProfileReports extends Component {
       dispatch(unloadStandards());
     } else if ( type === '/profile/strategies' ) {
       dispatch(unloadStrategies());
+    } else if ( type === '/profile/policies' ) {
+      dispatch(unloadPolicies());
     }
   };
 
@@ -133,7 +142,10 @@ class ProfileReports extends Component {
       title = 'The Fusion Standard';
     } else if ( type === '/profile/strategies' ) {
       add = 'New Strategy';
-      title = 'The Fusion Strategy'
+      title = 'The Fusion Strategy';
+    } else if ( type === '/profile/policies' ) {
+      add = 'New Policy';
+      title = 'Our Policies';
     }
 
     return <Grid
@@ -159,8 +171,7 @@ class ProfileReports extends Component {
               variant='contained'>
               <FontAwesomeIcon
                 className={classes.icon}
-                icon={['fal', 'plus']}
-              />
+                icon={['fal', 'plus']} />
               {add}
             </Button>
           </Grid>
@@ -168,7 +179,7 @@ class ProfileReports extends Component {
       </Grid>
 
       <Grid item xs={12}>
-        <Table>
+        <Table padding='dense'>
           <TableHead>
             <TableRow className={classes.tableRow}>
               {

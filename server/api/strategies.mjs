@@ -17,22 +17,55 @@ router.delete('/:id', async (req, res) => {
   const response = await Strategy.deleteOne({ _id }, (err, result) => {
     if ( err ) {
       console.log('-X Strategy delete failed ' + err);
-      res.status(500).json({ error: err, message: 'Strategy delete failed!' });
+      res.status(500).json({
+        error: err,
+        message: 'Strategy delete failed!',
+      });
       return err;
     }
     console.log(`--- Strategy ${_id} deleted successfully`);
-    res.status(200).json({ message: 'Successfully deleted Strategy ' + _id});
+    res.status(200).json({
+      message: 'Successfully deleted Strategy ' + _id,
+    });
   });
 });
 
 router.get('/', async (req, res) => {
-  const response = await Strategy.find({});
-  await res.status(200).send(response);
+  await Strategy.find({}, (err, result) => {
+    if ( err ) {
+      console.log('-X Strategies find failed ' + err);
+      res.status(500).json({
+        error: err,
+        message: 'Strategies find failed!',
+      });
+      return err;
+    }
+    console.log(`--- Strategies found successfully`);
+    res.status(200).json({
+      items: result,
+      message: 'Successfully found Strategies',
+    });
+  });
 });
 
-router.get('/:id', async (req, res) => {
-  const response = await Strategy.findOne({ _id: req.params.id });
-  await res.status(200).send(response);
+router.get('/:_id', async (req, res) => {
+  const _id = req.params._id;
+
+  await Strategy.findOne({ _id }, (err, result) => {
+    if ( err ) {
+      console.log(`-X Strategy ${_id} find failed ${err}`);
+      res.status(500).json({
+        error: err,
+        message: `Strategy ${id} find failed!`,
+      });
+      return err;
+    }
+    console.log(`--- Strategy ${_id} found successfully`);
+    res.status(200).json({
+      item: result,
+      message: `Successfully found Strategy ${_id}`,
+    });
+  });
 });
 
 router.post('/', async (req, res) => {
@@ -78,11 +111,16 @@ router.post('/', async (req, res) => {
   strategy.save((err, result) => {
     if (err) {
       console.log('-X Strategy save failed ' + err);
-      res.status(500).json({ error: err, message: 'Strategy save failed!' });
+      res.status(500).json({
+        error: err,
+        message: 'Strategy save failed!',
+      });
       return err;
     }
     console.log(`--- Strategy ${strategy._id} saved successfully`);
-    res.status(200).json({ message: 'Successfully saved a new strategy' });
+    res.status(200).json({
+      message: 'Successfully saved a new strategy',
+    });
   })
 });
 
@@ -149,11 +187,16 @@ router.put('/:id', async (req, res) => {
   await Strategy.updateOne({ _id }, { $set: strategy }, (err, result) => {
     if (err) {
       console.log('-X Strategy update failed ' + err);
-      res.status(500).json({ error: err, message: 'Strategy update failed!' });
+      res.status(500).json({
+        error: err,
+        message: 'Strategy update failed!',
+      });
       return err;
     }
     console.log(`--- Strategy ${_id} updated successfully`);
-    res.status(200).json({ message: 'Successfully updated strategy ' + _id});
+    res.status(200).json({
+      message: 'Successfully updated strategy ' + _id,
+    });
   });
 });
 

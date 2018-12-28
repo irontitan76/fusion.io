@@ -15,9 +15,9 @@ import Typography from '@material-ui/core/Typography';
 import withStyles from '@material-ui/core/styles/withStyles';
 
 import {
-  loadInsights,
-  unloadInsights,
-} from 'actions/insights';
+  loadCareers,
+  unloadCareers,
+} from 'actions/careers';
 
 const styles = theme => ({
   actions: {
@@ -44,19 +44,63 @@ const styles = theme => ({
   }
 })
 
-class ProfilePosts extends Component {
-  componentDidMount() {
-    const { dispatch, user } = this.props;
-    dispatch(loadInsights(user._id));
-  }
-
-  componentWillUnmount() {
+class ProfileCareers extends Component {
+  componentDidMount = () => {
     const { dispatch } = this.props;
-    dispatch(unloadInsights());
-  }
+    dispatch(loadCareers());
+  };
+
+  componentWillUnmount = () => {
+    const { dispatch } = this.props;
+    dispatch(unloadCareers());
+  };
+
+  renderHeaders = () => {
+    const { classes } = this.props;
+
+    const headers = [
+      'Role',
+      'Brief Description',
+      'Location',
+      'Organization',
+      'Team',
+      'Posted At'
+    ];
+
+    const headerCells = headers.map((header, key) => (
+      <TableCell key={key}>{ header }</TableCell>
+    ));
+
+    return <TableHead>
+      <TableRow className={classes.tableRow}>
+        {headerCells}
+      </TableRow>
+    </TableHead>;
+  };
+
+  renderBody = () => {
+    const { careers, classes } = this.props;
+
+    const careerRows = careers.roles.map((role, key) => (
+      <TableRow className={classes.tableRow} key={key}>
+        <TableCell>
+          <Link to={`/profile/careers/edit/${role._id}`}>
+            { role.role }
+          </Link>
+        </TableCell>
+        <TableCell>{ role.brief }</TableCell>
+        <TableCell>{ role.location.city + ', ' + role.location.state }</TableCell>
+        <TableCell>{ role.org }</TableCell>
+        <TableCell>{ role.team }</TableCell>
+        <TableCell>{ moment(role._publishedAt).format('MMM Do YYYY, h:mm a') || 'Not Posted' }</TableCell>
+      </TableRow>
+    ));
+
+    return <TableBody>{careerRows}</TableBody>;
+  };
 
   render() {
-    const { classes, insights } = this.props;
+    const { classes } = this.props;
 
     return <Grid
       className={classes.root}
@@ -69,7 +113,7 @@ class ProfilePosts extends Component {
             <Typography
               className={classes.title}
               variant='h6'>
-              Your Insights
+              Careers
             </Typography>
           </Grid>
 
@@ -82,7 +126,7 @@ class ProfilePosts extends Component {
               <FontAwesomeIcon
                 className={classes.icon}
                 icon={['fal', 'plus']} />
-              New Insight
+              New Career
             </Button>
           </Grid>
         </Grid>
@@ -90,38 +134,8 @@ class ProfilePosts extends Component {
 
       <Grid item xs={12}>
         <Table padding='dense'>
-          <TableHead>
-            <TableRow className={classes.tableRow}>
-              {
-                [
-                  'Title',
-                  'Content',
-                  'Created At',
-                  'Last Modified',
-                  'Published At'
-                ].map((header, key) => (
-                  <TableCell key={key}>{ header }</TableCell>
-                ))
-              }
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {
-              insights.items.map((insight, key) => (
-                <TableRow className={classes.tableRow} key={key}>
-                  <TableCell>
-                    <Link to={`/profile/insights/edit/${insight.slug}`}>
-                      { insight.title }
-                    </Link>
-                  </TableCell>
-                  <TableCell>{ insight.brief }...</TableCell>
-                  <TableCell>{ moment(insight._createdAt).format('MMM Do YYYY, h:mm a') }</TableCell>
-                  <TableCell>{ moment(insight._modifiedAt).format('MMM Do YYYY, h:mm a') }</TableCell>
-                  <TableCell>{ moment(insight._publishedAt).format('MMM Do YYYY, h:mm a') || 'Unpublished' }</TableCell>
-                </TableRow>
-              ))
-            }
-          </TableBody>
+          {this.renderHeaders()}
+          {this.renderBody()}
         </Table>
       </Grid>
     </Grid>;
@@ -129,8 +143,8 @@ class ProfilePosts extends Component {
 }
 
 const select = state => ({
-  insights: state.insights,
+  careers: state.careers,
   user: state.session.user,
 });
 
-export default withStyles(styles)(connect(select)(ProfilePosts));
+export default withStyles(styles)(connect(select)(ProfileCareers));

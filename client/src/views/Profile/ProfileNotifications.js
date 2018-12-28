@@ -45,7 +45,7 @@ class ProfileNotifications extends Component {
       </Grid>
 
       <Grid item xs={12}>
-        <Table>
+        <Table padding='dense'>
           <TableHead>
             <TableRow className={classes.tableRow}>
               {

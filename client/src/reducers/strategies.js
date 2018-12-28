@@ -62,7 +62,7 @@ const strategies = (state = initialState, action) => {
     case 'STRATEGY_LOAD':
       return {
         ...state,
-        currentItem: action.payload,
+        currentItem: action.payload.item,
       };
     case 'STRATEGY_REMOVE':
       return state;
@@ -76,7 +76,7 @@ const strategies = (state = initialState, action) => {
     case 'STRATEGIES_LOAD':
       return {
         ...state,
-        items: action.payload,
+        items: action.payload.items,
       };
     case 'STRATEGIES_UNLOAD':
       return {

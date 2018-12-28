@@ -3,7 +3,6 @@ import Link from 'react-router-dom/Link';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import filter from 'lodash.filter';
 
-import Badge from '@material-ui/core/Badge';
 import Drawer from '@material-ui/core/Drawer';
 import IconButton from '@material-ui/core/IconButton';
 import List from '@material-ui/core/List';
@@ -30,7 +29,7 @@ const styles = theme => ({
     width: '100%'
   },
   drawerPaper: {
-    backgroundColor: '#f8f8f8',
+    backgroundColor: theme.palette.primary.main,
     height: '100%',
     position: 'relative',
     transition: theme.transitions.create('width', {
@@ -53,10 +52,12 @@ const styles = theme => ({
     },
   },
   icon: {
-    paddingLeft: theme.spacing.unit * .5,
+    color: '#fff',
   },
   iconContainer: {
-    width: '20px !important',
+    display: 'block',
+    textAlign: 'center',
+    width: 20,
   },
   item: {
     paddingBottom: 12,
@@ -64,6 +65,7 @@ const styles = theme => ({
   },
   list: {},
   toggleButton: {
+    color: '#fff',
     marginLeft: theme.spacing.unit * 1.5,
     transition: theme.transitions.create('transform', {
       easing: theme.transitions.easing.sharp,
@@ -99,70 +101,89 @@ class ProfileNavigation extends Component {
     return this.setState({ open: !open, type });
   };
 
+  getMenuItems = () => {
+    const { session } = this.props;
+    const isAdmin = session.user.role === 'admin';
+
+    let menuItems = [];
+    if ( isAdmin ) {
+      menuItems = adminMenu;
+    } else {
+      menuItems = userMenu;
+    }
+
+    return [ ...menuItems, ...settingsMenu ];
+  };
+
+  getNotifications = () => {
+    const { session } = this.props;
+
+    return filter(session.user.notifications, notification => {
+      if ( !notification.isNotified ) {
+        return notification;
+      }
+    }).length;
+  };
+
+  renderMenuItems = () => {
+    const { classes } = this.props;
+
+    const menuItems = this.getMenuItems();
+
+    return menuItems.map((menuItem, index) => (
+      <ListItem
+        button
+        className={classes.item}
+        component={Link}
+        dense
+        key={menuItem.label}
+        to={menuItem.path}>
+
+        <ListItemIcon className={classes.iconContainer}>
+          {this.renderNotifications(menuItem)}
+        </ListItemIcon>
+        <ListItemText
+          primary={menuItem.label}
+          primaryTypographyProps={{ style: { color: '#fff' }}} />
+      </ListItem>
+    ));
+  };
+
+  renderNotifications = (menuItem) => {
+    const { classes } = this.props;
+
+    return <FontAwesomeIcon
+      className={classes.icon}
+      icon={menuItem.icon} />;
+  };
+
   render() {
     const { open } = this.state;
-    const { classes, session } = this.props;
+    const { classes } = this.props;
 
-    let menuItems = session.user.role === 'admin'
-      ? adminMenu
-      : userMenu;
+    const paperClass = `
+      ${classes.drawerPaper}
+      ${!open ? classes.drawerPaperClose : ''}`;
 
-    menuItems = [ ...menuItems, ...settingsMenu ];
-
-    const notifications = filter(session.user.notifications, notification => {
-      if ( !notification.isNotified ) return notification;
-    }).length;
+    const buttonClass = `
+      ${classes.toggleButton}
+      ${!!open ? classes.toggleButtonRotate : ''}`;
 
     return <Drawer
       className={classes.root}
-      classes={{
-        paper: `
-          ${classes.drawerPaper}
-          ${!open ? classes.drawerPaperClose : ''}`
-      }}
+      classes={{ paper: paperClass }}
       open={open}
       onMouseEnter={() => this.toggleOpen('mouseEnter')}
       onMouseLeave={() => this.toggleOpen('mouseLeave')}
       variant='permanent'>
 
       <List className={classes.list}>
-        {menuItems.map((item, index) => (
-          <ListItem
-            button
-            className={classes.item}
-            component={Link}
-            dense
-            key={item.label}
-            to={item.path}>
-
-            <ListItemIcon className={classes.iconContainer}>
-              { item.label === 'Notifications' && notifications ?
-                <Badge
-                  badgeContent={notifications}
-                  classes={{ badge: classes.badge }}
-                  color='primary'>
-                    <FontAwesomeIcon
-                      className={classes.icon}
-                      icon={item.icon}
-                    />
-                </Badge>
-                : <FontAwesomeIcon
-                  className={classes.icon}
-                  icon={item.icon}
-                />
-              }
-            </ListItemIcon>
-            <ListItemText primary={item.label} primaryTypographyProps={{ color: 'textSecondary' }} />
-          </ListItem>
-        ))}
+        {this.renderMenuItems()}
       </List>
 
       <List className={classes.bottomNavigation}>
         <IconButton
-          className={`
-            ${classes.toggleButton}
-            ${!!open ? classes.toggleButtonRotate : ''}
-          `}
+          className={buttonClass}
           onClick={() => this.toggleOpen('click')}>
           <ChevronRightIcon />
         </IconButton>

@@ -63,7 +63,7 @@ const standards = (state = initialState, action) => {
     case 'STANDARD_LOAD':
       return {
         ...state,
-        currentItem: action.payload,
+        currentItem: action.payload.item,
       };
     case 'STANDARD_REMOVE':
       return state;
@@ -77,7 +77,7 @@ const standards = (state = initialState, action) => {
     case 'STANDARDS_LOAD':
       return {
         ...state,
-        items: action.payload,
+        items: action.payload.items,
       };
     case 'STANDARDS_UNLOAD':
       return {

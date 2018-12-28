@@ -17,22 +17,55 @@ router.delete('/:id', async (req, res) => {
   const response = await Standard.deleteOne({ _id }, (err, result) => {
     if ( err ) {
       console.log('-X Standard delete failed ' + err);
-      res.status(500).json({ error: err, message: 'Standard delete failed!' });
+      res.status(500).json({
+        error: err,
+        message: 'Standard delete failed!',
+      });
       return err;
     }
     console.log(`--- Standard ${_id} deleted successfully`);
-    res.status(200).json({ message: 'Successfully deleted Standard ' + _id});
+    res.status(200).json({
+      message: 'Successfully deleted Standard ' + _id,
+    });
   });
 });
 
 router.get('/', async (req, res) => {
-  const response = await Standard.find({});
-  await res.status(200).send(response);
+  await Standard.find({}, (err, result) => {
+    if ( err ) {
+      console.log('-X Standards find failed ' + err);
+      res.status(500).json({
+        error: err,
+        message: 'Standards find failed!',
+      });
+      return err;
+    }
+    console.log(`--- Standards found successfully`);
+    res.status(200).json({
+      items: result,
+      message: 'Successfully found Standards',
+    });
+  });
 });
 
-router.get('/:id', async (req, res) => {
-  const response = await Standard.findOne({ _id: req.params.id });
-  await res.status(200).send(response);
+router.get('/:_id', async (req, res) => {
+  const _id = req.params._id;
+
+  await Standard.findOne({ _id }, (err, result) => {
+    if ( err ) {
+      console.log(`-X Standard ${_id} find failed ${err}`);
+      res.status(500).json({
+        error: err,
+        message: `Standard ${id} find failed!`,
+      });
+      return err;
+    }
+    console.log(`--- Standard ${_id} found successfully`);
+    res.status(200).json({
+      item: result,
+      message: `Successfully found Standard ${_id}`,
+    });
+  });
 });
 
 router.post('/', async (req, res) => {
@@ -78,11 +111,16 @@ router.post('/', async (req, res) => {
   standard.save((err, result) => {
     if (err) {
       console.log('-X Standard save failed ' + err);
-      res.status(500).json({ error: err, message: 'Standard save failed!' });
+      res.status(500).json({
+        error: err,
+        message: 'Standard save failed!',
+      });
       return err;
     }
     console.log(`--- Standard ${standard._id} saved successfully`);
-    res.status(200).json({ message: 'Successfully saved a new standard' });
+    res.status(200).json({
+      message: 'Successfully saved a new standard',
+    });
   })
 });
 
@@ -149,11 +187,16 @@ router.put('/:id', async (req, res) => {
   await Standard.updateOne({ _id }, { $set: standard }, (err, result) => {
     if (err) {
       console.log('-X Standard update failed ' + err);
-      res.status(500).json({ error: err, message: 'Standard update failed!' });
+      res.status(500).json({
+        error: err,
+        message: 'Standard update failed!',
+      });
       return err;
     }
     console.log(`--- Standard ${_id} updated successfully`);
-    res.status(200).json({ message: 'Successfully updated standard ' + _id});
+    res.status(200).json({
+      message: 'Successfully updated standard ' + _id,
+    });
   });
 });
 

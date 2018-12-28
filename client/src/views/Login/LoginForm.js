@@ -57,10 +57,10 @@ const styles = theme => ({
   },
   loginFormTitlePaper: {
     backgroundColor: '#0074D9',
-    paddingBottom: theme.spacing.unit * 8,
+    paddingBottom: theme.spacing.unit * 6,
     paddingLeft: theme.spacing.unit * 3,
     paddingRight: theme.spacing.unit * 3,
-    paddingTop: theme.spacing.unit * 8,
+    paddingTop: theme.spacing.unit * 6,
   },
   loginFormTitle: {
     color: '#fff',

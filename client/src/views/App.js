@@ -46,7 +46,7 @@ import Signup from 'views/Signup';
 
 // Policies
 import Cookies from 'views/Policy/cookies';
-import PrivacyPolicy from 'views/Policy/privacy';
+import PrivacyPolicy from 'views/Policy/Privacy2';
 import SiteMap from 'views/Policy/sitemap';
 import TermsOfUse from 'views/Policy/terms';
 

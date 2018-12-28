@@ -7,12 +7,12 @@ const products = (state = initialState, action) => {
     case 'PRODUCT_LOAD':
       return {
         ...state,
-        selected: action.payload[0],
+        selected: action.payload.item,
       };
     case 'PRODUCTS_LOAD':
       return {
         ...state,
-        items: action.payload,
+        items: action.payload.items,
       };
     default:
       return state;

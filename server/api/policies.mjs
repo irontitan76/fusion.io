@@ -1,5 +1,5 @@
 import express from 'express';
-import Career from './../mongoose/Career';
+import Policy from './../mongoose/Policy';
 import omit from 'lodash.omit';
 
 const router = express.Router();
@@ -7,18 +7,18 @@ const router = express.Router();
 router.delete('/:_id', async (req, res) => {
   const _id = req.params._id;
 
-  await Career.deleteOne({ _id }, (err, result) => {
+  await Policy.deleteOne({ _id }, (err, result) => {
     if ( err ) {
-      console.log('-X Career delete failed ' + err);
+      console.log('-X Policy delete failed ' + err);
       res.status(500).json({
         error: err,
-        message: 'Career delete failed!',
+        message: 'Policy delete failed!',
       });
       return err;
     }
-    console.log(`--- Career ${_id} deleted successfully`);
+    console.log(`--- Policy ${_id} deleted successfully`);
     res.status(200).json({
-      message: 'Successfully deleted Career ' + _id,
+      message: 'Successfully deleted Policy ' + _id,
     });
   });
 });
@@ -33,63 +33,63 @@ router.get('/', async (req, res) => {
 
   filter = { ...filter, ...omit(req.query, [ 'search' ]) };
 
-  await Career.find(filter, (err, result) => {
+  await Policy.find(filter, (err, result) => {
     if ( err ) {
-      console.log('-X Career find failed ' + err);
+      console.log('-X Policy find failed ' + err);
       res.status(500).json({
         error: err,
-        message: 'Careers found failed!',
+        message: 'Policies found failed!',
       });
       return err;
     }
-    console.log(`--- Careers found successfully`);
+    console.log(`--- Policies found successfully`);
     res.status(200).json({
       items: result,
-      message: 'Successfully found Careers',
+      message: 'Successfully found Policies',
     });
   });
 });
 
 router.get('/:_id', async (req, res) => {
   const _id = req.params._id;
-  await Career.findOne({ _id }, (err, result) => {
+  await Policy.findOne({ _id }, (err, result) => {
     if ( err ) {
-      console.log('-X Career find failed ' + err);
+      console.log('-X Policy find failed ' + err);
       res.status(500).json({
         error: err,
-        message: 'Career find failed!',
+        message: 'Policy find failed!',
       });
       return err;
     }
-    console.log(`--- Career ${_id} found successfully`);
+    console.log(`--- Policy ${_id} found successfully`);
     res.status(200).json({
       item: result,
-      message: 'Successfully found Career ' + _id,
+      message: 'Successfully found Policy ' + _id,
     });
   });
 });
 
 router.post('/', async (req, res) => {
   const now = new Date();
-  const career = new Career({
+  const policy = new Policy({
     _createdAt: now,
     _modifiedAt: now,
     ...req.body,
   });
 
-  await career.save((err, result) => {
+  await policy.save((err, result) => {
     if (err) {
-      console.log('-X Career save failed ' + err);
+      console.log('-X Policy save failed ' + err);
       res.status(500).json({
         error: err,
-        message: 'Career save failed!',
+        message: 'Policy save failed!',
       });
       return err;
     }
-    console.log(`--- Career ${career._id} saved successfully`);
+    console.log(`--- Policy ${policy._id} saved successfully`);
     res.status(200).json({
       item: result,
-      message: 'Successfully saved a new career',
+      message: 'Successfully saved a new policy',
     });
   });
 });
@@ -98,24 +98,24 @@ router.put('/:id', async (req, res) => {
   const _id = req.params.id;
   const now = new Date();
 
-  const career = {
+  const policy = {
     _modifiedAt: now,
     ...req.body,
   };
 
-  await Career.findOneAndUpdate({ _id }, { $set: career }, { new: true }, (err, result) => {
+  await Policy.findOneAndUpdate({ _id }, { $set: policy }, { new: true }, (err, result) => {
     if (err) {
-      console.log('-X Career update failed ' + err);
+      console.log('-X Policy update failed ' + err);
       res.status(500).json({
         error: err,
-        message: 'Career update failed!',
+        message: 'Policy update failed!',
       });
       return err;
     }
-    console.log(`--- Career ${_id} updated successfully`);
+    console.log(`--- Policy ${_id} updated successfully`);
     res.status(200).json({
       item: result,
-      message: 'Successfully updated Career ' + _id,
+      message: 'Successfully updated Policy ' + _id,
     });
   });
 });

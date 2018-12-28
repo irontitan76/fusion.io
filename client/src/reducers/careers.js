@@ -7,7 +7,7 @@ const careers = (state = initialState, action) => {
     case 'CAREERS_LOAD':
       return {
         ...state,
-        roles: action.payload,
+        roles: action.payload.items,
       };
     case 'CAREERS_UNLOAD':
       return initialState;

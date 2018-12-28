@@ -80,17 +80,17 @@ export const primaryMenu = [
     />,
     name: 'Industries',
   },
-  {
-    active: true,
-    icon: <FontAwesomeIcon
-      icon={[ 'fal', 'brain' ]}
-      style={{
-        ...iconStyle
-      }}
-    />,
-    name: 'A.I.',
-    path: '/ai'
-  },
+  // {
+  //   active: true,
+  //   icon: <FontAwesomeIcon
+  //     icon={[ 'fal', 'brain' ]}
+  //     style={{
+  //       ...iconStyle
+  //     }}
+  //   />,
+  //   name: 'A.I.',
+  //   path: '/ai'
+  // },
   {
     active: true,
     children: [
@@ -132,73 +132,73 @@ export const primaryMenu = [
     />,
     name: 'Consulting',
   },
-  {
-    active: true,
-    icon: <FontAwesomeIcon
-      icon={[ 'fal', 'space-shuttle' ]}
-      style={{
-        fontSize: 20,
-        width: 24
-      }}
-    />,
-    name: 'Cosmos',
-    path: '/cosmos'
-  },
-  {
-    active: true,
-    icon: <FontAwesomeIcon
-      icon={[ 'fal', 'solar-panel' ]}
-      style={{
-        ...iconStyle
-      }}
-    />,
-    name: 'Energy',
-    path: '/energy'
-  },
-  {
-    active: true,
-    icon: <FontAwesomeIcon
-      icon={[ 'fal', 'credit-card-blank' ]}
-      style={{
-        ...iconStyle
-      }}
-    />,
-    name: 'Finance',
-    path: '/finance'
-  },
-  {
-    active: true,
-    icon: <FontAwesomeIcon
-      icon={[ 'fal', 'dna' ]}
-      style={{
-        ...iconStyle
-      }}
-    />,
-    name: 'Health',
-    path: '/health'
-  },
-  {
-    active: true,
-    icon: <FontAwesomeIcon
-      icon={[ 'fal', 'balance-scale' ]}
-      style={{
-        ...iconStyle
-      }}
-    />,
-    name: 'Legal',
-    path: '/legal'
-  },
-  {
-    active: true,
-    icon: <FontAwesomeIcon
-      icon={[ 'fal', 'broadcast-tower' ]}
-      style={{
-        ...iconStyle
-      }}
-    />,
-    name: 'Media',
-    path: '/media'
-  },
+  // {
+  //   active: true,
+  //   icon: <FontAwesomeIcon
+  //     icon={[ 'fal', 'space-shuttle' ]}
+  //     style={{
+  //       fontSize: 20,
+  //       width: 24
+  //     }}
+  //   />,
+  //   name: 'Cosmos',
+  //   path: '/cosmos'
+  // },
+  // {
+  //   active: true,
+  //   icon: <FontAwesomeIcon
+  //     icon={[ 'fal', 'solar-panel' ]}
+  //     style={{
+  //       ...iconStyle
+  //     }}
+  //   />,
+  //   name: 'Energy',
+  //   path: '/energy'
+  // },
+  // {
+  //   active: true,
+  //   icon: <FontAwesomeIcon
+  //     icon={[ 'fal', 'credit-card-blank' ]}
+  //     style={{
+  //       ...iconStyle
+  //     }}
+  //   />,
+  //   name: 'Finance',
+  //   path: '/finance'
+  // },
+  // {
+  //   active: true,
+  //   icon: <FontAwesomeIcon
+  //     icon={[ 'fal', 'dna' ]}
+  //     style={{
+  //       ...iconStyle
+  //     }}
+  //   />,
+  //   name: 'Health',
+  //   path: '/health'
+  // },
+  // {
+  //   active: true,
+  //   icon: <FontAwesomeIcon
+  //     icon={[ 'fal', 'balance-scale' ]}
+  //     style={{
+  //       ...iconStyle
+  //     }}
+  //   />,
+  //   name: 'Legal',
+  //   path: '/legal'
+  // },
+  // {
+  //   active: true,
+  //   icon: <FontAwesomeIcon
+  //     icon={[ 'fal', 'broadcast-tower' ]}
+  //     style={{
+  //       ...iconStyle
+  //     }}
+  //   />,
+  //   name: 'Media',
+  //   path: '/media'
+  // },
   {
     active: true,
     icon: <FontAwesomeIcon
@@ -210,17 +210,17 @@ export const primaryMenu = [
     name: 'Technology',
     path: '/tech'
   },
-  {
-    active: true,
-    icon: <FontAwesomeIcon
-      icon={[ 'fal', 'map-marked' ]}
-      style={{
-        ...iconStyle
-      }}
-    />,
-    name: 'Transport',
-    path: '/transport'
-  }
+  // {
+  //   active: true,
+  //   icon: <FontAwesomeIcon
+  //     icon={[ 'fal', 'map-marked' ]}
+  //     style={{
+  //       ...iconStyle
+  //     }}
+  //   />,
+  //   name: 'Transport',
+  //   path: '/transport'
+  // }
 ];
 
 export const secondaryMenu = [

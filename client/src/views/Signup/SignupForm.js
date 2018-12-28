@@ -17,7 +17,7 @@ const styles = theme => ({
   signupForm: {
     paddingBottom: theme.spacing.unit * 8,
     paddingTop: theme.spacing.unit * 5,
-    [theme.breakpoints.up('lg')]: {
+    [theme.breakpoints.up('xl')]: {
       paddingTop: theme.spacing.unit * 20,
     },
     [theme.breakpoints.down('xs')]: {
@@ -159,9 +159,9 @@ class SignupForm extends Component {
       <Grid
         className={classes.signupFormContainer}
         item
-        lg={3}
         md={4}
         sm={7}
+        xl={3}
         xs={12}>
 
         <Paper

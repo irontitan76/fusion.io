@@ -15,51 +15,61 @@ export const hero = {
 export const logos = {
   items: [
     {
+      disabled: true,
       icon: 'brain',
       label: 'A.I.',
       to: '/ai',
     },
     {
+      disabled: false,
       icon: 'users',
       label: 'Consulting',
       to: '/consulting',
     },
     {
+      disabled: true,
       icon: 'space-shuttle',
       label: 'Cosmos',
       to: '/cosmos',
     },
     {
+      disabled: true,
       icon: 'solar-panel',
       label: 'Energy',
       to: '/energy',
     },
     {
+      disabled: true,
       icon: 'credit-card-blank',
       label: 'Finance',
       to: '/finance',
     },
     {
+      disabled: true,
       icon: 'dna',
       label: 'Health',
       to: '/health',
     },
     {
+      disabled: true,
       icon: 'balance-scale',
       label: 'Legal',
       to: '/legal',
     },
     {
+      disabled: true,
       icon: 'broadcast-tower',
       label: 'Media',
       to: '/media',
     },
     {
+      disabled: false,
       icon: 'code',
       label: 'Technology',
       to: '/technology',
     },
     {
+      disabled: true,
       icon: 'map-marked',
       label: 'Transport',
       to: '/transport',

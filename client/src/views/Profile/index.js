@@ -6,6 +6,7 @@ import Route from 'react-router-dom/Route';
 import Grid from '@material-ui/core/Grid';
 
 import ProfileAdmin from './ProfileAdmin';
+import ProfileCareers from './ProfileCareers';
 import ProfileNotifications from './ProfileNotifications';
 import ProfilePost from './ProfilePost';
 import ProfilePostEdit from './ProfilePostEdit';
@@ -42,9 +43,39 @@ class Home extends Component {
               notifications={session.user.notifications}
               {...props} />
           }} />
+
+        <Route exact path={`${match.path}/careers`} component={ProfileCareers} />
         <Route exact path={`${match.path}/insights/new`} component={ProfilePost} />
         <Route exact path={`${match.path}/insights/edit/:itemId`} component={ProfilePostEdit} />
         <Route exact path={`${match.path}/insights`} component={ProfilePosts} />
+        <Route exact path={`${match.path}/policies/new`}
+          render={props => {
+            const select = state => ({
+              message: state.messages,
+              item: state.policies.currentItem,
+              items: state.policies.items,
+            });
+            const Component = connect(select)(ProfileReport);
+            return <Component {...props} />;
+          }} />
+        <Route exact path={`${match.path}/policies/edit/:itemId`}
+          render={props => {
+            const select = state => ({
+              message: state.messages,
+              item: state.policies.currentItem,
+              items: state.policies.items,
+            });
+            const Component = connect(select)(ProfileReportEdit);
+            return <Component {...props} />;
+          }} />
+        <Route exact path={`${match.path}/policies`}
+          render={props => {
+            const select = state => ({
+              items: state.policies,
+            });
+            const Component = connect(select)(ProfileReports);
+            return <Component {...props} />;
+          }} />
         <Route exact path={`${match.path}/standards/new`}
           render={props => {
             const select = state => ({

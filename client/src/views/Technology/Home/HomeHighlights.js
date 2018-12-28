@@ -23,6 +23,7 @@ const styles = theme => ({
   },
   card: {
     '&:hover': {
+      cursor: 'pointer',
       opacity: '0.8'
     },
   },

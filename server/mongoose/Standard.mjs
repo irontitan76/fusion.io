@@ -6,7 +6,6 @@ const contentSchema = new mongoose.Schema({
 });
 
 const standardSchema = new mongoose.Schema({
-  content: contentSchema,
   _createdAt: {
     required: true,
     type: Date,
@@ -19,6 +18,7 @@ const standardSchema = new mongoose.Schema({
   _publishedAt: {
     type: Date,
   },
+  content: contentSchema,
   id: {
     required: true,
     type: Number,

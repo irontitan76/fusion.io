@@ -17,6 +17,10 @@ const styles = theme => ({
       backgroundColor: theme.palette.offwhite,
     }
   },
+  logoDisabled: {
+    paddingBottom: theme.spacing.unit * 2,
+    paddingTop: theme.spacing.unit * 2,
+  },
   logos: {
     margin: 'auto',
     marginBottom: theme.spacing.unit * 4,
@@ -37,18 +41,18 @@ class HomeLogos extends Component {
 
     return items.map((item, key) => (
       <Grid
-        className={classes.logo}
+        className={item.disabled ? classes.logoDisabled : classes.logo}
         item
         key={key}
         md={1}
         xs={3}>
         <Typography
           align='center'
-          component={Link}
-          to={item.to}
+          component={item.disabled ? 'div' : Link}
+          to={item.disabled ? null : item.to}
           style={{ textDecoration: 'none' }}>
           <FontAwesomeIcon
-            color='#0074D9'
+            color={item.disabled ? '#bbb' : '#0074D9'}
             icon={[ 'fal', item.icon] }
             size='2x'
             style={{ marginBottom: 20 }} />

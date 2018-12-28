@@ -14,11 +14,25 @@ export const userMenu = [
 export const adminMenu = [
   ...userMenu,
   {
+    admin: true,
+    label: 'Careers',
+    icon: ['fal', 'briefcase'],
+    path: '/profile/careers',
+  },
+  {
+    admin: true,
+    label: 'Policies',
+    icon: ['fal', 'file-contract'],
+    path: '/profile/policies',
+  },
+  {
+    admin: true,
     label: 'Standards',
     icon: ['fal', 'circle-notch'],
     path: '/profile/standards',
   },
   {
+    admin: true,
     label: 'Strategies',
     icon: ['fal', 'infinity'],
     path: '/profile/strategies',

@@ -28,6 +28,15 @@ const styles = theme => ({
     fontSize: 64,
     marginBottom: theme.spacing.unit * 3,
   },
+  overlay: {
+    position: 'fixed',
+    top: 0,
+    background: 'rgba(0, 0, 0, 0.5)',
+    color: '#f1f1f1',
+    height: '100%',
+    width: '100%',
+    padding: 20,
+  },
 });
 
 class Landing extends Component {
@@ -123,6 +132,7 @@ class Landing extends Component {
             </Typography>
           </Grid>
         </Grid>
+
       </main>
       <Footer />
     </>;

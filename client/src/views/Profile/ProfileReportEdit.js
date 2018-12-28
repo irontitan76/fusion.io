@@ -9,6 +9,15 @@ import {
 } from 'actions/messages';
 
 import {
+  changePolicy,
+  loadPolicies,
+  loadPolicy,
+  unloadPolicies,
+  unloadPolicy,
+  updatePolicy,
+} from 'actions/policies';
+
+import {
   changeNewStandard,
   loadStandard,
   loadStandards,
@@ -43,6 +52,9 @@ class ProfileReportEdit extends Component {
     } else if ( type === '/profile/strategies/edit/:itemId' ){
       dispatch(loadStrategy(match.params.itemId));
       dispatch(loadStrategies());
+    } else if ( type === '/profile/policies/edit/:itemId' ){
+      dispatch(loadPolicy(match.params.itemId));
+      dispatch(loadPolicies());
     }
   };
 
@@ -58,6 +70,9 @@ class ProfileReportEdit extends Component {
     } else if ( type === '/profile/strategies/edit/:itemId' ){
       dispatch(unloadStrategy());
       dispatch(unloadStrategies());
+    } else if ( type === '/profile/policies/edit/:itemId' ){
+      dispatch(unloadPolicy());
+      dispatch(unloadPolicies());
     }
   };
 
@@ -79,6 +94,8 @@ class ProfileReportEdit extends Component {
       dispatch(changeNewStandard(name, value));
     } else if ( type === '/profile/strategies/edit/:itemId' ){
       dispatch(changeNewStrategy(name, value));
+    } else if ( type === '/profile/policies/edit/:itemId' ){
+      dispatch(changePolicy(name, value));
     }
   };
 
@@ -127,6 +144,13 @@ class ProfileReportEdit extends Component {
           return this.displayMessage(`Updated Strategy "${item.title}".`);
         })
       );
+    } else if ( type === '/profile/policies/edit/:itemId' ){
+      this.displayMessage(
+        'Updating Policy...',
+        () => dispatch(updatePolicy(item)).then(() => {
+          return this.displayMessage(`Updated Policy "${item.title}".`);
+        })
+      );
     }
   };
 
@@ -148,6 +172,10 @@ class ProfileReportEdit extends Component {
       deleteText = 'Delete Strategy';
       name = 'Edit Strategy';
       submitText = 'Update Strategy';
+    } else if ( type === '/profile/policies/edit/:itemId' ){
+      deleteText = 'Delete Policy';
+      name = 'Edit Policy';
+      submitText = 'Update Policy';
     }
 
     return <ReportForm

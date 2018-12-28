@@ -20,7 +20,9 @@ router.post('/login', async (req, res) => {
         console.log(`--- User ${user._id} logged in`);
         res.status(200).json(user);
       } else {
-        res.status(404).json({ data: { message: 'User not found' }})
+        res.status(404).json({
+          data: { message: 'User not found' }
+        });
       }
     });
   });
@@ -38,14 +40,21 @@ router.post('/signup', (req, res) => {
     if (err) {
       console.log('-X User save failed ' + err);
       if (err.name === 'MongoError' && err.code === 11000) {
-        res.status(400).json({ error: 'A user with that email address is already found' });
+        res.status(400).json({
+          error: 'A user with that email address is already found',
+        });
         return err;
       }
-      res.status(500).json({ error: err, message: 'Sign up failed!' });
+      res.status(500).json({
+        error: err,
+        message: 'Sign up failed!',
+      });
       return err;
     }
     console.log(`--- User ${user._id} saved successfully`);
-    res.status(200).json({ message: 'Successfully signed up' });
+    res.status(200).json({
+      message: 'Successfully signed up',
+    });
   });
 });
 
