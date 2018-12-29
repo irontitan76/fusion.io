@@ -8,8 +8,8 @@ import {
 } from 'actions/messages';
 
 import {
-  addInsight,
   changeInsight,
+  createInsight,
   loadInsight,
   removeInsight,
   unloadInsight,
@@ -68,7 +68,7 @@ class ProfileInsight extends Component {
 
     this.displayMessage(
       'Creating Insight...',
-      () => dispatch(addInsight(insight, user)).then(() => {
+      () => dispatch(createInsight(insight, user)).then(() => {
         return this.displayMessage(`Created Insight "${insight.title}".`);
       })
     );

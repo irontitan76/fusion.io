@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 import MenuItem from '@material-ui/core/MenuItem';
+import withStyles from '@material-ui/core/styles/withStyles';
+
 import ReportForm from 'components/ReportForm';
 
 import {
@@ -9,8 +11,8 @@ import {
 } from 'actions/messages';
 
 import {
-  addStrategy,
   changeStrategy,
+  createStrategy,
   loadStrategy,
   loadStrategies,
   removeStrategy,
@@ -18,6 +20,16 @@ import {
   unloadStrategies,
   updateStrategy,
 } from 'actions/strategies';
+
+const styles = theme => ({
+  content: {
+    fontFamily: 'Inconsolata, Monaco, Consolas, "Courier New", Courier;',
+    fontSize: 12,
+  },
+  selectMenu: {
+    maxHeight: 400,
+  },
+});
 
 class ProfileStrategy extends Component {
   componentDidMount = () => {
@@ -73,7 +85,7 @@ class ProfileStrategy extends Component {
 
     this.displayMessage(
       'Creating Strategy...',
-      () => dispatch(addStrategy(item)).then(() => {
+      () => dispatch(createStrategy(item)).then(() => {
         return this.displayMessage(`Created Strategy "${item.title}".`);
       })
     );
@@ -148,7 +160,7 @@ class ProfileStrategy extends Component {
   };
 
   render() {
-    const { match, strategy = {} } = this.props;
+    const { classes, match, strategy = {} } = this.props;
     const isExist = match.params.itemId;
 
     const parents = this.getParents();
@@ -192,14 +204,14 @@ class ProfileStrategy extends Component {
         onChange: this.onChange,
         placeholder: 'Select the sibling section',
         select: true,
-        // SelectProps: { MenuProps: { className: classes.selectMenu } },
+        SelectProps: { MenuProps: { className: classes.selectMenu } },
         size: { md: 6, xs: 12 },
         type: 'select',
         value: sibling,
         variant: 'outlined',
       },
       {
-        // InputProps: { className: classes.content },
+        InputProps: { className: classes.content },
         fullWidth: true,
         label: 'Content',
         multiline: true,
@@ -238,4 +250,4 @@ const select = state => ({
   strategies: state.strategies.items,
 });
 
-export default connect(select)(ProfileStrategy);
+export default withStyles(styles)(connect(select)(ProfileStrategy));

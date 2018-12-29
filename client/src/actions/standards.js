@@ -1,6 +1,6 @@
 import {
-  STANDARD_ADD,
   STANDARD_CHANGE,
+  STANDARD_CREATE,
   STANDARD_REMOVE,
   STANDARD_LOAD,
   STANDARD_UNLOAD,
@@ -13,20 +13,9 @@ import {
   deleteStandard,
   getStandard,
   getStandards,
-  postStandards,
-  putStandards,
+  postStandard,
+  putStandard,
 } from 'api/standards';
-
-export const addStandard = (standard) => {
-  return async dispatch => {
-    try {
-      const payload = postStandards(standard);
-      return dispatch({ type: STANDARD_ADD, payload });
-    } catch (err) {
-      return dispatch({ type: STANDARD_ADD, error: true, err });
-    }
-  };
-};
 
 export const changeStandard = (name, value) => {
   return async dispatch => {
@@ -35,6 +24,17 @@ export const changeStandard = (name, value) => {
       return dispatch({ type: STANDARD_CHANGE, payload });
     } catch (err) {
       return dispatch({ type: STANDARD_CHANGE, error: true, err });
+    }
+  };
+};
+
+export const createStandard = (standard) => {
+  return async dispatch => {
+    try {
+      const payload = postStandard(standard);
+      return dispatch({ type: STANDARD_CREATE, payload });
+    } catch (err) {
+      return dispatch({ type: STANDARD_CREATE, error: true, err });
     }
   };
 };
@@ -98,7 +98,7 @@ export const unloadStandards = () => {
 export const updateStandard = (update) => {
   return async dispatch => {
     try {
-      const payload = await putStandards(update);
+      const payload = await putStandard(update);
       return dispatch({ type: STANDARD_UPDATE, payload });
     } catch (err) {
       return dispatch({ type: STANDARD_UPDATE, error: true, err });

@@ -35,7 +35,7 @@ export const getInsight = async (slug) => {
   }
 };
 
-export const postInsights = async (insight, user) => {
+export const postInsight = async (insight, user) => {
   try {
     const path = '/api/insights';
 
@@ -65,7 +65,7 @@ export const postInsights = async (insight, user) => {
   }
 };
 
-export const putInsights = async (insight) => {
+export const putInsight = async (insight) => {
   try {
     const path = `/api/insights/${insight._id}`;
     const response = await axios.put(path, insight);

@@ -23,7 +23,7 @@ export const getPolicy = async (_id) => {
   }
 };
 
-export const putPolicies = async (update) => {
+export const putPolicy = async (update) => {
   try {
     const path = `/api/policies/${update._id}`;
 

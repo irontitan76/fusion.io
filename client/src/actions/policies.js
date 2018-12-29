@@ -1,8 +1,8 @@
 import {
   POLICIES_LOAD,
+  POLICIES_UNLOAD,
   POLICY_CHANGE,
   POLICY_LOAD,
-  POLICIES_UNLOAD,
   POLICY_UNLOAD,
   POLICY_UPDATE,
 } from 'actions';
@@ -10,7 +10,7 @@ import {
 import {
   getPolicies,
   getPolicy,
-  putPolicies,
+  putPolicy,
 } from 'api/policies';
 
 export const changePolicy = (name, value) => {
@@ -32,7 +32,7 @@ export const loadPolicies = () => {
     } catch (err) {
       return dispatch({ type: POLICIES_LOAD, error: true, err });
     }
-  }
+  };
 };
 
 export const loadPolicy = (_id) => {
@@ -43,7 +43,7 @@ export const loadPolicy = (_id) => {
     } catch (err) {
       return dispatch({ type: POLICY_LOAD, error: true, err });
     }
-  }
+  };
 };
 
 export const unloadPolicies = () => {
@@ -53,7 +53,7 @@ export const unloadPolicies = () => {
     } catch (err) {
       return dispatch({ type: POLICIES_UNLOAD, error: true, err });
     }
-  }
+  };
 };
 
 export const unloadPolicy = () => {
@@ -63,13 +63,13 @@ export const unloadPolicy = () => {
     } catch (err) {
       return dispatch({ type: POLICY_UNLOAD, error: true, err });
     }
-  }
+  };
 };
 
 export const updatePolicy = (update) => {
   return async dispatch => {
     try {
-      const payload = await putPolicies(update);
+      const payload = await putPolicy(update);
       return dispatch({ type: POLICY_UPDATE, payload });
     } catch (err) {
       return dispatch({ type: POLICY_UPDATE, error: true, err });

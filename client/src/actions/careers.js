@@ -39,7 +39,7 @@ export const unloadCareer = () => {
     } catch (err) {
       return dispatch({ type: CAREER_UNLOAD, error: true, err });
     }
-  }
+  };
 }
 
 export const unloadCareers = params => {
@@ -49,5 +49,5 @@ export const unloadCareers = params => {
     } catch (err) {
       return dispatch({ type: CAREERS_UNLOAD, error: true, err });
     }
-  }
+  };
 };

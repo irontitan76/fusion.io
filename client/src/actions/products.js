@@ -1,6 +1,11 @@
-import { PRODUCTS_LOAD } from 'actions';
+import {
+  PRODUCTS_LOAD,
+  PRODUCTS_UNLOAD,
+} from 'actions';
 
-import { getProducts } from 'api/products';
+import {
+  getProducts
+} from 'api/products';
 
 export const loadProducts = params => {
   return async dispatch => {
@@ -10,5 +15,15 @@ export const loadProducts = params => {
     } catch (err) {
       return dispatch({ type: PRODUCTS_LOAD, error: true, err });
     }
-  }
+  };
+};
+
+export const unloadProducts = () => {
+  return async dispatch => {
+    try {
+      return dispatch({ type: PRODUCTS_UNLOAD });
+    } catch (err) {
+      return dispatch({ type: PRODUCTS_UNLOAD, error: true, err });
+    }
+  };
 };

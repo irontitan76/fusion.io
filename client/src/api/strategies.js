@@ -30,7 +30,7 @@ export const getStrategies = async () => {
   }
 };
 
-export const postStrategies = async (strategy) => {
+export const postStrategy = async (strategy) => {
   try {
     const path = '/api/strategies';
 
@@ -49,7 +49,7 @@ export const postStrategies = async (strategy) => {
   }
 };
 
-export const putStrategies = async (update) => {
+export const putStrategy = async (update) => {
   try {
     const path = `/api/strategies/${update._id}`;
 

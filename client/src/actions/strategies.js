@@ -1,32 +1,21 @@
 import {
-  STRATEGY_ADD,
+  STRATEGIES_LOAD,
+  STRATEGIES_UNLOAD,
   STRATEGY_CHANGE,
+  STRATEGY_CREATE,
   STRATEGY_REMOVE,
   STRATEGY_LOAD,
   STRATEGY_UNLOAD,
   STRATEGY_UPDATE,
-  STRATEGIES_LOAD,
-  STRATEGIES_UNLOAD,
 } from 'actions';
 
 import {
   deleteStrategy,
   getStrategy,
   getStrategies,
-  postStrategies,
-  putStrategies,
+  postStrategy,
+  putStrategy,
 } from 'api/strategies';
-
-export const addStrategy = (strategy) => {
-  return async dispatch => {
-    try {
-      const payload = postStrategies(strategy);
-      return dispatch({ type: STRATEGY_ADD, payload });
-    } catch (err) {
-      return dispatch({ type: STRATEGY_ADD, error: true, err });
-    }
-  };
-};
 
 export const changeStrategy = (name, value) => {
   return async dispatch => {
@@ -35,6 +24,28 @@ export const changeStrategy = (name, value) => {
       return dispatch({ type: STRATEGY_CHANGE, payload });
     } catch (err) {
       return dispatch({ type: STRATEGY_CHANGE, error: true, err });
+    }
+  };
+};
+
+export const createStrategy = (strategy) => {
+  return async dispatch => {
+    try {
+      const payload = postStrategy(strategy);
+      return dispatch({ type: STRATEGY_CREATE, payload });
+    } catch (err) {
+      return dispatch({ type: STRATEGY_CREATE, error: true, err });
+    }
+  };
+};
+
+export const loadStrategies = () => {
+  return async dispatch => {
+    try {
+      const payload = await getStrategies();
+      return dispatch({ type: STRATEGIES_LOAD, payload });
+    } catch (err) {
+      return dispatch({ type: STRATEGIES_LOAD, error: true, err });
     }
   };
 };
@@ -49,17 +60,6 @@ export const loadStrategy = (id) => {
       return dispatch({ type: STRATEGY_LOAD, payload });
     } catch (err) {
       return dispatch({ type: STRATEGY_LOAD, error: true, err });
-    }
-  };
-};
-
-export const loadStrategies = () => {
-  return async dispatch => {
-    try {
-      const payload = await getStrategies();
-      return dispatch({ type: STRATEGIES_LOAD, payload });
-    } catch (err) {
-      return dispatch({ type: STRATEGIES_LOAD, error: true, err });
     }
   };
 };
@@ -98,7 +98,7 @@ export const unloadStrategies = () => {
 export const updateStrategy = (update) => {
   return async dispatch => {
     try {
-      const payload = await putStrategies(update);
+      const payload = await putStrategy(update);
       return dispatch({ type: STRATEGY_UPDATE, payload });
     } catch (err) {
       return dispatch({ type: STRATEGY_UPDATE, error: true, err });

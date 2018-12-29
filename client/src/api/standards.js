@@ -30,7 +30,7 @@ export const getStandards = async () => {
   }
 };
 
-export const postStandards = async (standard) => {
+export const postStandard = async (standard) => {
   try {
     const path = '/api/standards';
 
@@ -49,7 +49,7 @@ export const postStandards = async (standard) => {
   }
 };
 
-export const putStandards = async (update) => {
+export const putStandard = async (update) => {
   try {
     const path = `/api/standards/${update._id}`;
 

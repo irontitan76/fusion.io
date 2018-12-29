@@ -11,15 +11,8 @@ import ReportFormDialog from './ReportFormDialog';
 import ReportFormSidebar from './ReportFormSidebar';
 
 const styles = theme => ({
-  content: {
-    fontFamily: 'Inconsolata, Monaco, Consolas, "Courier New", Courier;',
-    fontSize: 12,
-  },
   root: {
     height: '100%',
-  },
-  selectMenu: {
-    maxHeight: 400,
   },
   standardContainer: {
     paddingBottom: theme.spacing.unit,

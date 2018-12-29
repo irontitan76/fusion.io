@@ -16,7 +16,7 @@ export const loadMessage = content => {
     } catch (err) {
       return dispatch({ type: MESSAGE_LOAD, error: true, err });
     }
-  }
+  };
 };
 
 /**
@@ -30,5 +30,5 @@ export const unloadMessage = () => {
     } catch (err) {
       return dispatch({ type: MESSAGE_UNLOAD, error: true, err });
     }
-  }
+  };
 };

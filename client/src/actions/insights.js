@@ -1,12 +1,12 @@
 import {
-  INSIGHT_ADD,
   INSIGHT_CHANGE,
+  INSIGHT_CREATE,
   INSIGHT_LOAD,
   INSIGHT_REMOVE,
+  INSIGHT_UNLOAD,
   INSIGHT_UPDATE,
   INSIGHTS_FILTER,
   INSIGHTS_LOAD,
-  INSIGHT_UNLOAD,
   INSIGHTS_UNLOAD
 } from 'actions';
 
@@ -14,17 +14,27 @@ import {
   deleteInsight,
   getInsight,
   getInsights,
-  postInsights,
-  putInsights,
+  postInsight,
+  putInsight,
 } from 'api/insights';
 
-export const addInsight = (insight, user) => {
+export const changeInsight = (name, value) => {
   return async dispatch => {
     try {
-      const payload = await postInsights(insight, user);
-      return dispatch({ type: INSIGHT_ADD, payload });
+      return dispatch({ type: INSIGHT_CHANGE, payload: { name, value }});
     } catch (err) {
-      return dispatch({ type: INSIGHT_ADD, error: true, err });
+      return dispatch({ type: INSIGHT_CHANGE, error: true, err });
+    }
+  };
+};
+
+export const createInsight = (insight, user) => {
+  return async dispatch => {
+    try {
+      const payload = await postInsight(insight, user);
+      return dispatch({ type: INSIGHT_CREATE, payload });
+    } catch (err) {
+      return dispatch({ type: INSIGHT_CREATE, error: true, err });
     }
   };
 };
@@ -36,16 +46,6 @@ export const filterInsights = (filter) => {
       return dispatch({ type: INSIGHTS_FILTER, payload });
     } catch (err) {
       return dispatch({ type: INSIGHTS_FILTER, error: true, err });
-    }
-  };
-};
-
-export const changeInsight = (name, value) => {
-  return async dispatch => {
-    try {
-      return dispatch({ type: INSIGHT_CHANGE, payload: { name, value }});
-    } catch (err) {
-      return dispatch({ type: INSIGHT_CHANGE, error: true, err });
     }
   };
 };
@@ -109,10 +109,10 @@ export const unloadInsights = () => {
 export const updateInsight = (insight) => {
   return async dispatch => {
     try {
-      const payload = await putInsights(insight);
+      const payload = await putInsight(insight);
       return dispatch({ type: INSIGHT_UPDATE, payload });
     } catch (err) {
       return dispatch({ type: INSIGHT_UPDATE, error: true, err });
     }
   };
-}
+};

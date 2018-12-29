@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 import MenuItem from '@material-ui/core/MenuItem';
+import withStyles from '@material-ui/core/styles/withStyles';
 
 import ReportForm from 'components/ReportForm';
 
@@ -10,8 +11,8 @@ import {
 } from 'actions/messages';
 
 import {
-  addStandard,
   changeStandard,
+  createStandard,
   loadStandard,
   loadStandards,
   removeStandard,
@@ -19,6 +20,25 @@ import {
   unloadStandards,
   updateStandard,
 } from 'actions/standards';
+
+const styles = theme => ({
+  root: {
+    height: '100%',
+  },
+  standardContainer: {
+    paddingBottom: theme.spacing.unit,
+    paddingLeft: theme.spacing.unit * 2,
+    paddingRight: theme.spacing.unit * 2,
+    paddingTop: theme.spacing.unit * 3,
+  },
+  title: {
+    fontWeight: 400,
+    paddingBottom: theme.spacing.unit,
+    paddingLeft: theme.spacing.unit * 2,
+    paddingRight: theme.spacing.unit * 2,
+    paddingTop: theme.spacing.unit * 3,
+  }
+});
 
 class ProfileStandard extends Component {
   componentDidMount = () => {
@@ -74,7 +94,7 @@ class ProfileStandard extends Component {
 
     this.displayMessage(
       'Creating Standard...',
-      () => dispatch(addStandard(item)).then(() => {
+      () => dispatch(createStandard(item)).then(() => {
         return this.displayMessage(`Created Standard "${item.title}".`);
       })
     );
@@ -239,4 +259,4 @@ const select = state => ({
   standards: state.standards.items,
 });
 
-export default connect(select)(ProfileStandard);
+export default withStyles(styles)(connect(select)(ProfileStandard));
