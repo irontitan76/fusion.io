@@ -40,6 +40,7 @@ import ConsultingSolutions from 'views/Consulting/Solutions';
 
 // Fusion Technology
 import TechnologyHome from 'views/Technology/Home';
+import TechnologyProducts from 'views/Technology/Products';
 
 // Authentication
 import Login from 'views/Login';
@@ -98,6 +99,7 @@ const App = () => {
 
                         <Route exact path='/tech' render={() => <Redirect to='/technology' />} />
                         <Route exact path='/technology' component={TechnologyHome} />
+                        <Route exact path='/technology/products' component={TechnologyProducts} />
 
                         <Route exact path='/ai' component={Landing} />
                         <Route exact path='/cosmos' component={Landing} />

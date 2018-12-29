@@ -1,6 +1,6 @@
 const initialState = {
   currentRole: {},
-  roles: [],
+  careers: [],
 };
 
 const careers = (state = initialState, action) => {
@@ -18,7 +18,7 @@ const careers = (state = initialState, action) => {
     case 'CAREERS_LOAD':
       return {
         ...state,
-        roles: action.payload.items,
+        items: action.payload.items,
       };
     case 'CAREERS_UNLOAD':
       return initialState;

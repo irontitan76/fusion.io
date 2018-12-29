@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 
 import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid';
-import MenuItem from '@material-ui/core/MenuItem';
 import TextField from '@material-ui/core/TextField';
 import Typography from '@material-ui/core/Typography';
 import withStyles from '@material-ui/core/styles/withStyles';
@@ -35,114 +34,32 @@ const styles = theme => ({
     paddingRight: theme.spacing.unit * 2,
     paddingTop: theme.spacing.unit * 3,
   }
-})
+});
 
-class ProfileStandard extends Component {
-  getParents = () => {
-    const { sections = [] } = this.props;
+class ReportForm extends Component {
+  renderFields = () => {
+    const { classes, fields } = this.props;
 
-    let items = sections.map((item, key) => {
-      return <MenuItem key={key} value={item.id}>
-        {item.id}. &nbsp;{item.title}
-      </MenuItem>
-    });
-
-    if (items.length === 0) {
-      return {
-        disable: true,
-        items: [
-          <MenuItem key='none' value='none'>No parent sections </MenuItem>
-        ],
-      };
-    } else {
-      return {
-        disable: false,
-        items: [
-          <MenuItem key='none' value='none'>
-            No parent section
-          </MenuItem>,
-          ...items,
-        ]
-      };
-    }
-  };
-
-  getSiblings = () => {
-    const { section = {}, sections = [] } = this.props;
-
-    let items = sections
-      .filter((item) => {
-        const isSibling = item.parentId === section.parentId;
-        const isNotSelf = item.id !== section.id;
-        return isSibling && isNotSelf;
-      })
-      .map((item, key) => {
-        return <MenuItem key={key} value={item.id}>
-          {item.id}. &nbsp;{item.title}
-        </MenuItem>
-      });
-
-    if (items.length === 0) {
-      return {
-        disable: true,
-        items: [
-          <MenuItem key='none' value='none'>No sibling sections </MenuItem>
-        ],
-      };
-    } else {
-      return {
-        disable: false,
-        items: [
-          <MenuItem key='none' value='none'>
-            No previous section
-          </MenuItem>,
-          ...items,
-        ]
-      };
-    }
-  };
-
-  getValue = (property) => {
-    return typeof property === 'number' ? property : 'none';
-  };
-
-  renderContent = () => {
-    const { section: { content } } = this.props;
-
-    let result = '';
-    return content.map((item, index) => {
-
-      switch (item.type) {
-        case 'md':
-        default:
-          result = '';
-      }
-
-      if ( index !== content.length - 1 ) {
-        result += '\n';
-      }
-
-      return result;
+    return fields.map((field) => {
+      return <Grid
+        className={classes.standardContainer}
+        item
+        key={field.label}
+        {...field.size}>
+        <TextField {...field} />
+      </Grid>;
     });
   };
 
   render() {
     const {
+      cancelButton,
       classes,
-      deleteText,
-      name,
-      onChange,
-      onDelete,
+      onCancel,
       onSubmit,
-      section = {},
-      submitText,
+      submitButton,
+      title,
     } = this.props;
-
-    const parents = this.getParents();
-    const parent = this.getValue(section.parentId);
-
-    const siblings = this.getSiblings();
-    const sibling = this.getValue(section.siblingId);
 
     return <>
       <Grid
@@ -156,69 +73,11 @@ class ProfileStandard extends Component {
               <Typography
                 className={classes.title}
                 variant='h6'>
-                {name}
+                {title}
               </Typography>
             </Grid>
 
-            <Grid className={classes.standardContainer} item xs={12}>
-              <TextField
-                fullWidth
-                label='Title'
-                name='title'
-                onChange={onChange}
-                placeholder='Type the section title here...'
-                type='text'
-                value={section.title || ''}
-                variant='outlined' />
-            </Grid>
-
-            <Grid className={classes.standardContainer} item md={6} xs={12}>
-              <TextField
-                disabled={parents.disable}
-                fullWidth
-                label='Parent Section'
-                name='parentId'
-                onChange={onChange}
-                placeholder='Select the parent section'
-                select
-                SelectProps={{ MenuProps: { className: classes.selectMenu } }}
-                value={parent}
-                variant='outlined'>
-                {parents.items}
-              </TextField>
-            </Grid>
-
-            <Grid className={classes.standardContainer} item md={6} xs={12}>
-              <TextField
-                disabled={siblings.disable}
-                fullWidth
-                label='Previous Section'
-                name='siblingId'
-                onChange={onChange}
-                placeholder='Select the parent section'
-                select
-                SelectProps={{ MenuProps: { className: classes.selectMenu } }}
-                value={sibling}
-                variant='outlined'>
-                {siblings.items}
-              </TextField>
-            </Grid>
-
-            <Grid className={classes.standardContainer} item xs={12}>
-              <TextField
-                InputProps={{ className: classes.content }}
-                fullWidth
-                label='Content'
-                multiline
-                name='content'
-                onChange={onChange}
-                placeholder='Type content here...'
-                rows={20}
-                type='text'
-                value={(section.content && section.content.body) || ''}
-                variant='outlined'
-              />
-            </Grid>
+            {this.renderFields()}
 
             <Grid className={classes.standardContainer} item xs={12}>
               <Grid container justify='space-between'>
@@ -228,14 +87,14 @@ class ProfileStandard extends Component {
                     color='primary'
                     onClick={onSubmit}
                     variant='contained'>
-                    {submitText}
+                    {submitButton}
                   </Button>
                 </Grid>
                 {
-                  onDelete ? <Grid item>
+                  onCancel ? <Grid item>
                     <ReportFormDialog
-                      deleteText={deleteText}
-                      onDelete={onDelete} />
+                      cancelButton={cancelButton}
+                      onCancel={onCancel} />
                   </Grid> : null
                 }
               </Grid>
@@ -251,4 +110,4 @@ class ProfileStandard extends Component {
   }
 }
 
-export default withStyles(styles)(ProfileStandard);
+export default withStyles(styles)(ReportForm);

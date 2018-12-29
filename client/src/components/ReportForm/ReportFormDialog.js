@@ -22,7 +22,7 @@ class ReportFormDialog extends Component {
 
   render() {
     const { open } = this.state;
-    const { deleteText, onDelete } = this.props;
+    const { cancelButton, onCancel } = this.props;
 
     return <>
       <Button
@@ -30,13 +30,13 @@ class ReportFormDialog extends Component {
         onClick={this.handleOpen}
         style={{ borderColor: 'red', color: 'red' }}
         variant='outlined'>
-        {deleteText}
+        {cancelButton}
       </Button>
       <Dialog
         open={open}
         onClose={this.handleClose}
-        aria-labelledby={deleteText}>
-        <DialogTitle id={deleteText}>{deleteText}</DialogTitle>
+        aria-labelledby={cancelButton}>
+        <DialogTitle id={cancelButton}>{cancelButton}</DialogTitle>
         <DialogContent>
           <DialogContentText id='alert-dialog-description'>
             Are you certain you want to delete this item? This will unpublish
@@ -50,7 +50,7 @@ class ReportFormDialog extends Component {
             No
           </Button>
           <Button
-            onClick={onDelete}
+            onClick={onCancel}
             color='primary' autoFocus>
             Yes
           </Button>

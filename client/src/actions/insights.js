@@ -2,6 +2,7 @@ import {
   INSIGHT_ADD,
   INSIGHT_CHANGE,
   INSIGHT_LOAD,
+  INSIGHT_REMOVE,
   INSIGHT_UPDATE,
   INSIGHTS_FILTER,
   INSIGHTS_LOAD,
@@ -10,6 +11,7 @@ import {
 } from 'actions';
 
 import {
+  deleteInsight,
   getInsight,
   getInsights,
   postInsights,
@@ -51,7 +53,7 @@ export const changeInsight = (name, value) => {
 export const loadInsight = slug => {
   return async dispatch => {
     try {
-      let payload = null;
+      let payload = { item: null };
       if ( slug ) {
         payload = await getInsight(slug);
       }
@@ -69,6 +71,17 @@ export const loadInsights = userId => {
       return dispatch({ type: INSIGHTS_LOAD, payload });
     } catch (err) {
       return dispatch({ type: INSIGHTS_LOAD, error: true, err });
+    }
+  };
+};
+
+export const removeInsight = (_id) => {
+  return async dispatch => {
+    try {
+      const payload = await deleteInsight(_id);
+      return dispatch({ type: INSIGHT_REMOVE, payload });
+    } catch (err) {
+      return dispatch({ type: INSIGHT_REMOVE, error: true, err });
     }
   };
 };

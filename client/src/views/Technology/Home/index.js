@@ -4,7 +4,6 @@ import HomeHero from './HomeHero';
 import HomeHighlights from './HomeHighlights';
 import Footer from 'components/Footer';
 
-
 class Home extends Component {
   render() {
     return <>

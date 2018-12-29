@@ -5,8 +5,6 @@ import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import withStyles from '@material-ui/core/styles/withStyles';
 
-import { hero } from './home';
-
 const styles = theme => ({
   hero: {
     backgroundImage: 'url("/images/minimal.jpg")',
@@ -60,7 +58,6 @@ const styles = theme => ({
 class HomeHero extends Component {
   render() {
     const { classes } = this.props;
-    const { icon, title } = hero;
 
     return <Grid container justify='center'>
       <Grid className={classes.hero} item lg={11} md={10} xs={12} xl={8}>
@@ -73,14 +70,14 @@ class HomeHero extends Component {
 
           <FontAwesomeIcon
             className={classes.heroIcon}
-            icon={icon} />
+            icon={[ 'fal', 'code' ]} />
 
           <Typography
             align='center'
             className={classes.heroTitle}
             gutterBottom
             variant='h4'>
-            {title}
+            FUSION TECHNOLOGY
           </Typography>
 
         </Grid>

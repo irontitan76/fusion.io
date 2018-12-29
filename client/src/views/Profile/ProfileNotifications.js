@@ -1,75 +1,36 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import moment from 'moment';
 
-import Grid from '@material-ui/core/Grid';
-import Table from '@material-ui/core/Table';
-import TableBody from '@material-ui/core/TableBody';
-import TableCell from '@material-ui/core/TableCell';
-import TableHead from '@material-ui/core/TableHead';
-import TableRow from '@material-ui/core/TableRow';
-import Typography from '@material-ui/core/Typography';
-import withStyles from '@material-ui/core/styles/withStyles';
+import ReportTable from 'components/ReportTable';
 
-const styles = theme => ({
-  notifications: {
-    flexShrink: 1,
-  },
-  tableRow: {
-    height: 30,
-  },
-  title: {
-    fontWeight: 400,
-    paddingBottom: theme.spacing.unit * 3,
-    paddingLeft: theme.spacing.unit * 2,
-    paddingRight: theme.spacing.unit * 2,
-    paddingTop: theme.spacing.unit * 3,
-  }
-});
-
-class ProfileNotifications extends Component {
+class ProfilePosts extends Component {
   render() {
-    const { classes, notifications } = this.props;
+    const { notifications } = this.props;
 
-    const headers = [ 'Name', 'Description', 'Notified At' ];
-
-    return <Grid
-      className={classes.notifications}
-      container
-      justify='center'>
-
-      <Grid item xs={12}>
-        <Typography
-          className={classes.title}
-          variant='h6'>
-          Your Notifications
-        </Typography>
-      </Grid>
-
-      <Grid item xs={12}>
-        <Table padding='dense'>
-          <TableHead>
-            <TableRow className={classes.tableRow}>
-              {
-                headers.map((header, key) => (
-                  <TableCell key={key}>{ header }</TableCell>
-                ))
-              }
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {
-              notifications.map((notification, key) => (
-                <TableRow className={classes.tableRow} key={key}>
-                  <TableCell>{ notification.name }</TableCell>
-                  <TableCell>{ notification.description }</TableCell>
-                  <TableCell>{ notification._notifiedAt }</TableCell>
-                </TableRow>
-              ))
-            }
-          </TableBody>
-        </Table>
-      </Grid>
-    </Grid>;
+    return <ReportTable
+      addButton='New Insight'
+      headers={[
+        'Name',
+        'Description',
+        'Notified At',
+      ]}
+      items={notifications || []}
+      onAdd='/profile/notifications/new'
+      properties={[
+        { name: 'name', modifier: null },
+        { name: 'description',  modifier: null },
+        { name: '_modifiedAt', modifier: (notification) => (
+            moment(notification._notifiedAt).format('MMM Do YYYY, h:mm a')
+          )
+        },
+      ]}
+      title='Your Notifications' />;
   }
 }
 
-export default withStyles(styles)(ProfileNotifications);
+const select = state => ({
+  notifications: state.session.user.notifications,
+});
+
+export default connect(select)(ProfilePosts);

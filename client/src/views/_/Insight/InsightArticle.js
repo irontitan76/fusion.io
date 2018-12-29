@@ -74,7 +74,8 @@ const styles = theme => ({
 
 class InsightArticle extends Component {
   renderAuthor = () => {
-    const { author, classes } = this.props;
+    const { classes, insight } = this.props;
+    const { author } = insight;
 
     if (!author) return null;
 

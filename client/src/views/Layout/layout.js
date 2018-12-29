@@ -17,8 +17,7 @@ export const primaryMenu = [
         active: true,
         icon: <FontAwesomeIcon
           icon={[ 'fal', 'home' ]}
-          style={iconStyle}
-        />,
+          style={iconStyle} />,
         name: 'Home',
         path: '/'
       },
@@ -26,8 +25,7 @@ export const primaryMenu = [
         active: true,
         icon: <FontAwesomeIcon
           icon={[ 'fal', 'glasses' ]}
-          style={iconStyle}
-        />,
+          style={iconStyle} />,
         name: 'About Us',
         path: '/about'
       },
@@ -35,8 +33,7 @@ export const primaryMenu = [
         active: true,
         icon: <FontAwesomeIcon
           icon={[ 'fal', 'briefcase' ]}
-          style={iconStyle}
-        />,
+          style={iconStyle} />,
         name: 'Careers',
         path: '/careers'
       },
@@ -46,8 +43,7 @@ export const primaryMenu = [
           icon={[ 'fal', 'binoculars' ]}
           style={{
             ...iconStyle
-          }}
-        />,
+          }} />,
         name: 'Insights',
         path: '/insights'
       },
@@ -57,8 +53,7 @@ export const primaryMenu = [
           icon={[ 'fal', 'circle-notch' ]}
           style={{
             ...iconStyle
-          }}
-        />,
+          }} />,
         name: 'Standard',
         path: '/standard'
       },
@@ -68,16 +63,14 @@ export const primaryMenu = [
           icon={[ 'fal', 'infinity' ]}
           style={{
             ...iconStyle
-          }}
-        />,
+          }} />,
         name: 'Strategy',
         path: '/strategy'
       },
     ],
     icon: <FontAwesomeIcon
       icon={[ 'fal', 'globe' ]}
-      style={iconStyle}
-    />,
+      style={iconStyle} />,
     name: 'Industries',
   },
   // {
@@ -86,8 +79,7 @@ export const primaryMenu = [
   //     icon={[ 'fal', 'brain' ]}
   //     style={{
   //       ...iconStyle
-  //     }}
-  //   />,
+  //     }} />,
   //   name: 'A.I.',
   //   path: '/ai'
   // },
@@ -100,8 +92,7 @@ export const primaryMenu = [
           icon={[ 'fal', 'home' ]}
           style={{
             ...iconStyle
-          }}
-        />,
+          }} />,
       name: 'Home',
         path: '/consulting'
       },
@@ -109,8 +100,7 @@ export const primaryMenu = [
         active: true,
         icon: <FontAwesomeIcon
           icon={[ 'fal', 'toolbox' ]}
-          style={iconStyle}
-        />,
+          style={iconStyle} />,
         name: 'Services',
         path: '/consulting/services'
       },
@@ -118,8 +108,7 @@ export const primaryMenu = [
         active: true,
         icon: <FontAwesomeIcon
           icon={[ 'fal', 'boxes-alt' ]}
-          style={iconStyle}
-        />,
+          style={iconStyle} />,
         name: 'Solutions',
         path: '/consulting/solutions'
       },
@@ -128,8 +117,7 @@ export const primaryMenu = [
       icon={[ 'fal', 'users' ]}
       style={{
         ...iconStyle
-      }}
-    />,
+      }} />,
     name: 'Consulting',
   },
   // {
@@ -139,8 +127,7 @@ export const primaryMenu = [
   //     style={{
   //       fontSize: 20,
   //       width: 24
-  //     }}
-  //   />,
+  //     }} />,
   //   name: 'Cosmos',
   //   path: '/cosmos'
   // },
@@ -150,8 +137,7 @@ export const primaryMenu = [
   //     icon={[ 'fal', 'solar-panel' ]}
   //     style={{
   //       ...iconStyle
-  //     }}
-  //   />,
+  //     }} />,
   //   name: 'Energy',
   //   path: '/energy'
   // },
@@ -161,8 +147,7 @@ export const primaryMenu = [
   //     icon={[ 'fal', 'credit-card-blank' ]}
   //     style={{
   //       ...iconStyle
-  //     }}
-  //   />,
+  //     }} />,
   //   name: 'Finance',
   //   path: '/finance'
   // },
@@ -172,8 +157,7 @@ export const primaryMenu = [
   //     icon={[ 'fal', 'dna' ]}
   //     style={{
   //       ...iconStyle
-  //     }}
-  //   />,
+  //     }} />,
   //   name: 'Health',
   //   path: '/health'
   // },
@@ -183,8 +167,7 @@ export const primaryMenu = [
   //     icon={[ 'fal', 'balance-scale' ]}
   //     style={{
   //       ...iconStyle
-  //     }}
-  //   />,
+  //     }} />,
   //   name: 'Legal',
   //   path: '/legal'
   // },
@@ -194,21 +177,28 @@ export const primaryMenu = [
   //     icon={[ 'fal', 'broadcast-tower' ]}
   //     style={{
   //       ...iconStyle
-  //     }}
-  //   />,
+  //     }} />,
   //   name: 'Media',
   //   path: '/media'
   // },
   {
     active: true,
+    children: [
+      {
+        active: true,
+        icon: <FontAwesomeIcon
+          icon={[ 'fal', 'glasses' ]}
+          style={iconStyle} />,
+        name: 'Products',
+        path: '/technology/products'
+      },
+    ],
     icon: <FontAwesomeIcon
       icon={[ 'fal', 'code' ]}
       style={{
         ...iconStyle
-      }}
-    />,
+      }} />,
     name: 'Technology',
-    path: '/tech'
   },
   // {
   //   active: true,
@@ -216,8 +206,7 @@ export const primaryMenu = [
   //     icon={[ 'fal', 'map-marked' ]}
   //     style={{
   //       ...iconStyle
-  //     }}
-  //   />,
+  //     }} />,
   //   name: 'Transport',
   //   path: '/transport'
   // }
@@ -228,8 +217,7 @@ export const secondaryMenu = [
     active: true,
     icon: <FontAwesomeIcon
       icon={[ 'fal', 'sliders-h' ]}
-      style={{ fontSize: '1rem', width: 24 }}
-    />,
+      style={{ fontSize: '1rem', width: 24 }} />,
     name: 'Profile',
     path: '/profile'
   },
@@ -237,8 +225,7 @@ export const secondaryMenu = [
     active: true,
     icon: <FontAwesomeIcon
       icon={[ 'fal', 'sign-out' ]}
-      style={{ fontSize: '1rem', width: 24 }}
-    />,
+      style={{ fontSize: '1rem', width: 24 }} />,
     name: 'Sign out',
     path: '/login'
   }

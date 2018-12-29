@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
 import Link from 'react-router-dom/Link';
-import moment from 'moment';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import Button from '@material-ui/core/Button';
@@ -14,11 +12,6 @@ import TableRow from '@material-ui/core/TableRow';
 import Typography from '@material-ui/core/Typography';
 import withStyles from '@material-ui/core/styles/withStyles';
 
-import {
-  loadInsights,
-  unloadInsights,
-} from 'actions/insights';
-
 const styles = theme => ({
   actions: {
     paddingBottom: theme.spacing.unit * 2,
@@ -30,8 +23,12 @@ const styles = theme => ({
     fontSize: 16,
     marginRight: theme.spacing.unit,
   },
-  root: {
+  noResults: {
+    paddingBottom: theme.spacing.unit * 2,
+    paddingTop: theme.spacing.unit * 2,
+    textAlign: 'center',
   },
+  root: {},
   tableRow: {
     height: 30,
   },
@@ -44,19 +41,53 @@ const styles = theme => ({
   }
 })
 
-class ProfilePosts extends Component {
-  componentDidMount() {
-    const { dispatch, user } = this.props;
-    dispatch(loadInsights(user._id));
-  }
+class ReportTable extends Component {
+  renderContent = () => {
+    const { classes, items, properties } = this.props;
 
-  componentWillUnmount() {
-    const { dispatch } = this.props;
-    dispatch(unloadInsights());
+    if ( items.length === 0 ) {
+      return [
+        <TableRow className={classes.tableRow} key={0}>
+          <TableCell
+            className={classes.noResults}
+            colSpan={6}>
+            No items found
+          </TableCell>
+        </TableRow>
+      ];
+    }
+
+    return items
+      .sort((a,b) => a.order - b.order)
+      .map((item, key) => {
+        return <TableRow className={classes.tableRow} key={item._id || key}>
+          {
+            properties.map((property) => {
+              let value = item[property.name];
+
+              if ( property.modifier ) {
+                value = property.modifier(item);
+              }
+
+              return <TableCell key={property.name}>
+                {value}
+              </TableCell>;
+            })
+          }
+        </TableRow>;
+    })
+  };
+
+  renderHeaders = () => {
+    const { headers } = this.props;
+
+    return headers.map((header) => (
+      <TableCell key={header}>{header}</TableCell>
+    ));
   }
 
   render() {
-    const { classes, insights } = this.props;
+    const { addButton, classes, onAdd, title } = this.props;
 
     return <Grid
       className={classes.root}
@@ -69,7 +100,7 @@ class ProfilePosts extends Component {
             <Typography
               className={classes.title}
               variant='h6'>
-              Your Insights
+              {title}
             </Typography>
           </Grid>
 
@@ -77,12 +108,12 @@ class ProfilePosts extends Component {
             <Button
               color='primary'
               component={Link}
-              to='/profile/insights/new'
+              to={onAdd}
               variant='contained'>
               <FontAwesomeIcon
                 className={classes.icon}
                 icon={['fal', 'plus']} />
-              New Insight
+              {addButton}
             </Button>
           </Grid>
         </Grid>
@@ -92,35 +123,11 @@ class ProfilePosts extends Component {
         <Table padding='dense'>
           <TableHead>
             <TableRow className={classes.tableRow}>
-              {
-                [
-                  'Title',
-                  'Content',
-                  'Created At',
-                  'Last Modified',
-                  'Published At'
-                ].map((header, key) => (
-                  <TableCell key={key}>{ header }</TableCell>
-                ))
-              }
+              {this.renderHeaders()}
             </TableRow>
           </TableHead>
           <TableBody>
-            {
-              insights.items.map((insight, key) => (
-                <TableRow className={classes.tableRow} key={key}>
-                  <TableCell>
-                    <Link to={`/profile/insights/edit/${insight.slug}`}>
-                      { insight.title }
-                    </Link>
-                  </TableCell>
-                  <TableCell>{ insight.brief }...</TableCell>
-                  <TableCell>{ moment(insight._createdAt).format('MMM Do YYYY, h:mm a') }</TableCell>
-                  <TableCell>{ moment(insight._modifiedAt).format('MMM Do YYYY, h:mm a') }</TableCell>
-                  <TableCell>{ moment(insight._publishedAt).format('MMM Do YYYY, h:mm a') || 'Unpublished' }</TableCell>
-                </TableRow>
-              ))
-            }
+            {this.renderContent()}
           </TableBody>
         </Table>
       </Grid>
@@ -128,9 +135,4 @@ class ProfilePosts extends Component {
   }
 }
 
-const select = state => ({
-  insights: state.insights,
-  user: state.session.user,
-});
-
-export default withStyles(styles)(connect(select)(ProfilePosts));
+export default withStyles(styles)(ReportTable);

@@ -7,15 +7,15 @@ import Grid from '@material-ui/core/Grid';
 
 import ProfileAdmin from './ProfileAdmin';
 import ProfileCareers from './ProfileCareers';
+import ProfileInsight from './ProfileInsight';
+import ProfileInsights from './ProfileInsights';
 import ProfileNotifications from './ProfileNotifications';
-import ProfilePost from './ProfilePost';
-import ProfilePostEdit from './ProfilePostEdit';
-import ProfilePosts from './ProfilePosts';
 import ProfileOverview from './ProfileOverview';
-import ProfileReport from './ProfileReport';
-import ProfileReportEdit from './ProfileReportEdit';
-import ProfileReports from './ProfileReports';
 import ProfileSettings from './ProfileSettings';
+import ProfileStandard from './ProfileStandard';
+import ProfileStandards from './ProfileStandards';
+import ProfileStrategies from './ProfileStrategies';
+import ProfileStrategy from './ProfileStrategy';
 import ProfileUser from './ProfileUser';
 
 class Home extends Component {
@@ -37,101 +37,17 @@ class Home extends Component {
       <Grid item style={{ flex: 1, overflowY: 'scroll' }}>
         <Route exact path={ match.path } component={ProfileOverview} />
         <Route exact path={`${match.path}/settings`} component={ProfileSettings} />
-        <Route exact path={`${match.path}/notifications`}
-          render={props => {
-            return <ProfileNotifications
-              notifications={session.user.notifications}
-              {...props} />
-          }} />
-
+        <Route exact path={`${match.path}/notifications`} component={ProfileNotifications} />
         <Route exact path={`${match.path}/careers`} component={ProfileCareers} />
-        <Route exact path={`${match.path}/insights/new`} component={ProfilePost} />
-        <Route exact path={`${match.path}/insights/edit/:itemId`} component={ProfilePostEdit} />
-        <Route exact path={`${match.path}/insights`} component={ProfilePosts} />
-        <Route exact path={`${match.path}/policies/new`}
-          render={props => {
-            const select = state => ({
-              message: state.messages,
-              item: state.policies.currentItem,
-              items: state.policies.items,
-            });
-            const Component = connect(select)(ProfileReport);
-            return <Component {...props} />;
-          }} />
-        <Route exact path={`${match.path}/policies/edit/:itemId`}
-          render={props => {
-            const select = state => ({
-              message: state.messages,
-              item: state.policies.currentItem,
-              items: state.policies.items,
-            });
-            const Component = connect(select)(ProfileReportEdit);
-            return <Component {...props} />;
-          }} />
-        <Route exact path={`${match.path}/policies`}
-          render={props => {
-            const select = state => ({
-              items: state.policies,
-            });
-            const Component = connect(select)(ProfileReports);
-            return <Component {...props} />;
-          }} />
-        <Route exact path={`${match.path}/standards/new`}
-          render={props => {
-            const select = state => ({
-              message: state.messages,
-              item: state.standards.currentItem,
-              items: state.standards.items,
-            });
-            const Component = connect(select)(ProfileReport);
-            return <Component {...props} />;
-          }} />
-        <Route exact path={`${match.path}/standards/edit/:itemId`}
-          render={props => {
-            const select = state => ({
-              message: state.messages,
-              item: state.standards.currentItem,
-              items: state.standards.items,
-            });
-            const Component = connect(select)(ProfileReportEdit);
-            return <Component {...props} />;
-          }} />
-        <Route exact path={`${match.path}/standards`}
-          render={props => {
-            const select = state => ({
-              items: state.standards,
-            });
-            const Component = connect(select)(ProfileReports);
-            return <Component {...props} />;
-          }} />
-          <Route exact path={`${match.path}/strategies/new`}
-            render={props => {
-              const select = state => ({
-                message: state.messages,
-                item: state.strategies.currentItem,
-                items: state.strategies.items,
-              });
-              const Component = connect(select)(ProfileReport);
-              return <Component {...props} />;
-            }} />
-          <Route exact path={`${match.path}/strategies/edit/:itemId`}
-            render={props => {
-              const select = state => ({
-                message: state.messages,
-                item: state.strategies.currentItem,
-                items: state.strategies.items,
-              });
-              const Component = connect(select)(ProfileReportEdit);
-              return <Component {...props} />;
-            }} />
-          <Route exact path={`${match.path}/strategies`}
-            render={props => {
-              const select = state => ({
-                items: state.strategies,
-              });
-              const Component = connect(select)(ProfileReports);
-              return <Component {...props} />;
-            }} />
+        <Route exact path={`${match.path}/insights/new`} component={ProfileInsight} />
+        <Route exact path={`${match.path}/insights/edit/:itemId`} component={ProfileInsight} />
+        <Route exact path={`${match.path}/insights`} component={ProfileInsights} />
+        <Route exact path={`${match.path}/standards/new`} component={ProfileStandard}/>
+        <Route exact path={`${match.path}/standards/edit/:itemId`} component={ProfileStandard} />
+        <Route exact path={`${match.path}/standards`} component={ProfileStandards} />
+        <Route exact path={`${match.path}/strategies/new`} component={ProfileStrategy} />
+        <Route exact path={`${match.path}/strategies/edit/:itemId`} component={ProfileStrategy} />
+        <Route exact path={`${match.path}/strategies`} component={ProfileStrategies} />
       </Grid>
     </Grid>;
   }

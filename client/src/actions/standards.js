@@ -1,8 +1,6 @@
 import {
-  NEW_STANDARD_ADD,
-  NEW_STANDARD_CHANGE,
-  NEW_STANDARD_LOAD,
-  NEW_STANDARD_UNLOAD,
+  STANDARD_ADD,
+  STANDARD_CHANGE,
   STANDARD_REMOVE,
   STANDARD_LOAD,
   STANDARD_UNLOAD,
@@ -19,34 +17,24 @@ import {
   putStandards,
 } from 'api/standards';
 
-export const addNewStandard = (standard) => {
+export const addStandard = (standard) => {
   return async dispatch => {
     try {
       const payload = postStandards(standard);
-      return dispatch({ type: NEW_STANDARD_ADD, payload });
+      return dispatch({ type: STANDARD_ADD, payload });
     } catch (err) {
-      return dispatch({ type: NEW_STANDARD_ADD, error: true, err });
+      return dispatch({ type: STANDARD_ADD, error: true, err });
     }
   };
 };
 
-export const changeNewStandard = (name, value) => {
+export const changeStandard = (name, value) => {
   return async dispatch => {
     try {
       const payload = { name, value };
-      return dispatch({ type: NEW_STANDARD_CHANGE, payload });
+      return dispatch({ type: STANDARD_CHANGE, payload });
     } catch (err) {
-      return dispatch({ type: NEW_STANDARD_CHANGE, error: true, err });
-    }
-  };
-};
-
-export const loadNewStandard = () => {
-  return async dispatch => {
-    try {
-      return dispatch({ type: NEW_STANDARD_LOAD });
-    } catch (err) {
-      return dispatch({ type: NEW_STANDARD_LOAD, error: true, err });
+      return dispatch({ type: STANDARD_CHANGE, error: true, err });
     }
   };
 };
@@ -54,7 +42,10 @@ export const loadNewStandard = () => {
 export const loadStandard = (id) => {
   return async dispatch => {
     try {
-      const payload = await getStandard(id);
+      let payload = { item: null };
+      if ( id ) {
+        payload = await getStandard(id);
+      }
       return dispatch({ type: STANDARD_LOAD, payload });
     } catch (err) {
       return dispatch({ type: STANDARD_LOAD, error: true, err });
@@ -80,16 +71,6 @@ export const removeStandard = (_id) => {
       return dispatch({ type: STANDARD_REMOVE, payload });
     } catch (err) {
       return dispatch({ type: STANDARD_REMOVE, error: true, err });
-    }
-  };
-};
-
-export const unloadNewStandard = () => {
-  return async dispatch => {
-    try {
-      return dispatch({ type: NEW_STANDARD_UNLOAD });
-    } catch (err) {
-      return dispatch({ type: NEW_STANDARD_UNLOAD, error: true, err });
     }
   };
 };

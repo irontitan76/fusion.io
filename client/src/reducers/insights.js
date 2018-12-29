@@ -19,7 +19,7 @@ const insights = (state = initialState, action) => {
     case 'INSIGHT_LOAD':
       return {
         ...state,
-        selected: action.payload.item || {},
+        selected: action.payload && (action.payload.item || {}),
       };
     case 'INSIGHT_UNLOAD':
       return {

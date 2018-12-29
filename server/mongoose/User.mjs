@@ -12,6 +12,9 @@ const validateUsername = email => {
 const UserSchema = new mongoose.Schema({
   _createdAt: Date,
   _modifiedAt: { type: Date, default: Date.now },
+  avatar: {
+    type: String,
+  },
   firstName: String,
   lastName: String,
   password: String,
@@ -24,6 +27,10 @@ const UserSchema = new mongoose.Schema({
     validate: [validateUsername, 'Please fill a valid email address'],
     match: [/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/, 'Please fill a valid email address']
   },
+  title: {
+    trim: true,
+    type: String,
+  }
 }, { collection: 'users' });
 
 UserSchema.pre('save', function(next) {

@@ -5,7 +5,7 @@ const initialState = {
 
 const standards = (state = initialState, action) => {
   switch (action.type) {
-    case 'NEW_STANDARD_CHANGE': {
+    case 'STANDARD_CHANGE': {
       const { currentItem } = state;
       const { name, value } = action.payload;
 
@@ -42,28 +42,10 @@ const standards = (state = initialState, action) => {
         };
       }
     }
-    case 'NEW_STANDARD_LOAD':
-      return {
-        ...state,
-        currentItem: {
-          content: {
-            body: '',
-            type: 'md',
-          },
-          parentId: 0,
-          siblingId: null,
-          title: '',
-        },
-      };
-      case 'NEW_STANDARD_UNLOAD':
-        return {
-          ...state,
-          currentItem: initialState.currentItem,
-        };
     case 'STANDARD_LOAD':
       return {
         ...state,
-        currentItem: action.payload.item,
+        currentItem: action.payload && (action.payload.item || {}),
       };
     case 'STANDARD_REMOVE':
       return state;

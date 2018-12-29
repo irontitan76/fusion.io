@@ -5,7 +5,7 @@ const initialState = {
 
 const strategies = (state = initialState, action) => {
   switch (action.type) {
-    case 'NEW_STRATEGY_CHANGE': {
+    case 'STRATEGY_CHANGE': {
       const { currentItem } = state;
       const { name, value } = action.payload;
 
@@ -41,28 +41,10 @@ const strategies = (state = initialState, action) => {
         };
       }
     }
-    case 'NEW_STRATEGY_LOAD':
-      return {
-        ...state,
-        currentItem: {
-          content: {
-            body: '',
-            type: 'md',
-          },
-          parentId: 0,
-          siblingId: null,
-          title: '',
-        },
-      };
-      case 'NEW_STRATEGY_UNLOAD':
-        return {
-          ...state,
-          currentItem: initialState.currentItem,
-        };
     case 'STRATEGY_LOAD':
       return {
         ...state,
-        currentItem: action.payload.item,
+        currentItem: action.payload && (action.payload.item || {}),
       };
     case 'STRATEGY_REMOVE':
       return state;
