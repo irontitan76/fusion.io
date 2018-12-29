@@ -125,23 +125,23 @@ class CareersList extends Component {
       content = 'No roles available';
     }
 
-    if ( careers.roles.length === 0 ) {
+    if ( careers.items.length === 0 ) {
       return <TableRow>
         <TableCell colSpan={5}>{content}</TableCell>
       </TableRow>
     }
 
-    const rolesRows = careers.roles.map((role, key) => {
-      return <TableRow className={classes.careersListRow} key={key}>
-        <TableCell>{role.role}</TableCell>
-        <TableCell>{role.org}</TableCell>
-        <TableCell>{role.team}</TableCell>
-        <TableCell>{`${role.location.city} ${role.location.state}`}</TableCell>
+    const rolesRows = careers.items.map((career) => {
+      return <TableRow className={classes.careersListRow} key={career._id}>
+        <TableCell>{career.role}</TableCell>
+        <TableCell>{career.org}</TableCell>
+        <TableCell>{career.team}</TableCell>
+        <TableCell>{`${career.location.city} ${career.location.state}`}</TableCell>
         <TableCell>
           <Button
             color='primary'
             component={Link}
-            to={`/careers/${role._id}`}
+            to={`/careers/${career._id}`}
             variant='text'>
             Apply
           </Button>

@@ -187,6 +187,14 @@ export const primaryMenu = [
       {
         active: true,
         icon: <FontAwesomeIcon
+          icon={[ 'fal', 'home' ]}
+          style={iconStyle} />,
+        name: 'Home',
+        path: '/technology'
+      },
+      {
+        active: true,
+        icon: <FontAwesomeIcon
           icon={[ 'fal', 'glasses' ]}
           style={iconStyle} />,
         name: 'Products',

@@ -41,30 +41,24 @@ const strategies = (state = initialState, action) => {
         };
       }
     }
-    case 'STRATEGY_LOAD':
-      return {
-        ...state,
-        currentItem: action.payload && (action.payload.item || {}),
-      };
+    case 'STRATEGY_LOAD': {
+      const { item } = action.payload;
+      return { ...state, currentItem: item || {} };
+    }
     case 'STRATEGY_REMOVE':
       return state;
     case 'STRATEGY_UPDATE':
       return state;
     case 'STRATEGY_UNLOAD':
-      return {
-        ...state,
-        currentItem: initialState.currentItem,
-      };
-    case 'STRATEGIES_LOAD':
-      return {
-        ...state,
-        items: action.payload.items,
-      };
-    case 'STRATEGIES_UNLOAD':
-      return {
-        ...state,
-        items: initialState.items,
-      };
+      return { ...state, currentItem: initialState.currentItem };
+    case 'STRATEGIES_LOAD': {
+      const { items } = action.payload;
+      return { ...state, items };
+    }
+    case 'STRATEGIES_UNLOAD': {
+      const { items } = initialState;
+      return { ...state, items };
+    }
     default:
       return state;
   }

@@ -104,7 +104,7 @@ router.post('/', async (req, res) => {
     level: req.body.level || level,
     order: req.body.order || order,
     parentId: req.body.parentId || null,
-    siblingId: req.body.siblingId || null,
+    siblingId: req.body.siblingId === 'none' ? null : req.body.siblingId,
     title: req.body.title,
   });
 
@@ -126,61 +126,62 @@ router.post('/', async (req, res) => {
 
 router.put('/:id', async (req, res) => {
   const _id = req.params.id;
-  const parent = await Strategy.findOne({ id: req.body.parentId });
-  const self = await Strategy.findOne({ _id });
-  const sibling = await Strategy.findOne({ id: req.body.siblingId });
+  const { parentId, siblingId } = req.body;
 
-  let level;
-  if ( parent ) {
+  const parent = await Strategy.findOne({ id: parentId });
+  const self = await Strategy.findOne({ _id });
+
+  let sibling = null;
+  if (siblingId && siblingId !== 'none') {
+    sibling = await Strategy.findOne({ id: siblingId });
+  }
+
+  let level = null;
+  if (parent) {
     level = parent.level + 1;
   } else {
     level = 0;
   }
 
-  let order;
-  if ( sibling ) {
-    let next;
-    next = await Strategy.findOne({
-      level: sibling.level,
-      order: { $gt: sibling.order },
-    }).sort({ order: 1 });
-
-    if ( !next ) {
-      next = await Strategy.findOne({
-        level: parent.level,
-        order: { $gt: parent.order },
-      }).sort({ order: 1 });
-    }
-
-    const nextChildren = await Strategy.countDocuments({
-      order: {
-        $gt: sibling.order,
-        $lt: (next && next.order) || await Strategy.countDocuments({})
-      },
-    });
-
-    order = sibling.order + nextChildren + 1;
-
-  } else if ( parent ){
-    order = parent.order + 1;
+  let order = null;
+  if (sibling) {
+    order = sibling.order;
+  } else if (parent) {
+    order = parent.order;
   } else {
     order = 0;
   }
 
-  await Strategy.updateMany(
-    { order: { $gt: self.order, $lte: order }},
-    { $inc: { order: -1 }},
-  );
+  const replace = await Strategy.findOne({ order });
+
+  if (replace) {
+    if (replace.order > self.order) {
+      await Strategy.updateMany(
+        { order: { $gt: self.order, $lte: replace.order }},
+        { $inc: { order: -1 }},
+      );
+    } else if ( replace.order < self.order ) {
+      await Strategy.updateMany(
+        { order: { $gt: replace.order, $lte: self.order }},
+        { $inc: { order: 1 }},
+      );
+      order = order + 1;
+    }
+  } else {
+    await Strategy.updateMany(
+      { order: { $gte: self.order }},
+      { $inc: { order: -1 }},
+    );
+  }
 
   const now = new Date();
-
   const strategy = {
     _modifiedAt: now,
     content: req.body.content,
     level,
     order,
-    parentId: req.body.parentId,
-    siblingId: req.body.siblingId,
+    parentId: parentId,
+    siblingId: siblingId === 'none' ? null : siblingId,
     title: req.body.title,
   };
 

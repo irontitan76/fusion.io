@@ -42,30 +42,26 @@ const standards = (state = initialState, action) => {
         };
       }
     }
-    case 'STANDARD_LOAD':
-      return {
-        ...state,
-        currentItem: action.payload && (action.payload.item || {}),
-      };
+    case 'STANDARD_LOAD': {
+      const { item } = action.payload;
+      return { ...state, currentItem: item || {} };
+    }
     case 'STANDARD_REMOVE':
       return state;
     case 'STANDARD_UPDATE':
       return state;
-    case 'STANDARD_UNLOAD':
-      return {
-        ...state,
-        currentItem: initialState.currentItem,
-      };
-    case 'STANDARDS_LOAD':
-      return {
-        ...state,
-        items: action.payload.items,
-      };
-    case 'STANDARDS_UNLOAD':
-      return {
-        ...state,
-        items: initialState.items,
-      };
+    case 'STANDARD_UNLOAD': {
+      const { currentItem } = initialState;
+      return { ...state, currentItem };
+    }
+    case 'STANDARDS_LOAD': {
+      const { items } = action.payload;
+      return { ...state, items };
+    }
+    case 'STANDARDS_UNLOAD': {
+      const { items } = initialState;
+      return { ...state, items };
+    }
     default:
       return state;
   }

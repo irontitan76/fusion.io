@@ -1,44 +1,31 @@
 const initialState = {
+  currentItem: {},
+  filteredItems: [],
   items: [],
-  selected: {},
 };
 
 const insights = (state = initialState, action) => {
   switch (action.type) {
     case 'INSIGHT_CHANGE': {
-      const name = action.payload.name;
-      const value = action.payload.value;
-      return {
-        ...state,
-        selected: {
-          ...state.selected,
-          [name]: value,
-        },
-      };
+      const { name, value } = action.payload;
+      return { ...state, currentItem: { ...state.currentItem, [name]: value, } };
     }
-    case 'INSIGHT_LOAD':
-      return {
-        ...state,
-        selected: action.payload && (action.payload.item || {}),
-      };
+    case 'INSIGHT_LOAD': {
+      const { item } = action.payload;
+      return { ...state, currentItem: item || {} };
+    }
     case 'INSIGHT_UNLOAD':
-      return {
-        ...state,
-        selected: initialState.selected,
-      }
+      return { ...state, currentItem: initialState.selected, };
     case 'INSIGHT_UPDATE':
       return state;
-    case 'INSIGHTS_FILTER':
-      return {
-        ...state,
-        filteredItems: action.payload.items,
-      };
-    case 'INSIGHTS_LOAD':
-      return {
-        ...state,
-        items: action.payload.items,
-        filteredItems: action.payload.items,
-      };
+    case 'INSIGHTS_FILTER': {
+      const { items } = action.payload;
+      return { ...state, filteredItems: items };
+    }
+    case 'INSIGHTS_LOAD': {
+      const { items } = action.payload;
+      return { ...state, items, filteredItems: items };
+    }
     case 'INSIGHTS_UNLOAD':
       return initialState;
     default:

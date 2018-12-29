@@ -137,8 +137,8 @@ class ProfileInsight extends Component {
 
 const select = state => ({
   message: state.messages,
-  insight: state.insights.selected,
-  insights: state.insights.items,
+  insight: state.insights.currentItem,
+  insights: state.insights.filteredItems,
   user: state.session.user,
 });
 

@@ -35,18 +35,16 @@ const policies = (state = initialState, action) => {
        };
      }
     }
-    case 'POLICY_LOAD':
-      return {
-        ...state,
-        currentItem: action.payload.item,
-      };
+    case 'POLICY_LOAD': {
+      const { item } = action.payload;
+      return { ...state, currentItem: item };
+    }
     case 'POLICIES_UNLOAD':
       return initialState;
-    case 'POLICY_UNLOAD':
-      return {
-        ...state,
-        currentItem: initialState.currentItem,
-      };
+    case 'POLICY_UNLOAD': {
+      const { currentItem } = initialState;
+      return { ...state, currentItem };
+    }
     case 'POLICY_UPDATE':
       return state;
     default:

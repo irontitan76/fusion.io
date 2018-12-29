@@ -246,7 +246,7 @@ class ProfileStandard extends Component {
       cancelButton={isExist ? 'Delete Standard' : null}
       onCancel={isExist ? this.onDelete : null}
       onChange={this.onChange}
-      onSubmit={isExist ? this.onUpdate : this.onSubmit}
+      onSubmit={isExist ? this.onUpdate : this.onCreate}
       fields={fields}
       submitButton={text}
       title={text} />;

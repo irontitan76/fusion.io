@@ -81,12 +81,12 @@ class ProfileStrategy extends Component {
   };
 
   onCreate = () => {
-    const { dispatch, item } = this.props;
+    const { dispatch, strategy } = this.props;
 
     this.displayMessage(
       'Creating Strategy...',
-      () => dispatch(createStrategy(item)).then(() => {
-        return this.displayMessage(`Created Strategy "${item.title}".`);
+      () => dispatch(createStrategy(strategy)).then(() => {
+        return this.displayMessage(`Created Strategy "${strategy.title}".`);
       })
     );
   };
@@ -237,7 +237,7 @@ class ProfileStrategy extends Component {
       cancelButton={isExist ? 'Delete Strategy' : null}
       onCancel={isExist ? this.onDelete : null}
       onChange={this.onChange}
-      onSubmit={isExist ? this.onUpdate : this.onSubmit}
+      onSubmit={isExist ? this.onUpdate : this.onCreate}
       fields={fields}
       submitButton={text}
       title={text} />;

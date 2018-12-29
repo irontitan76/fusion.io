@@ -6,16 +6,9 @@ const initialState = {
 const session = (state = initialState, action) => {
   switch (action.type) {
     case 'SESSION_START':
-      return {
-        ...state,
-        ...action.payload,
-      };
+      return { ...state, ...action.payload };
     case 'SESSION_END':
-      return {
-        ...state,
-        auth: !action.payload,
-        user: {},
-      };
+      return { ...state, auth: !action.payload, user: {} };
     default:
       return state;
   }

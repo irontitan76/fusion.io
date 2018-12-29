@@ -57,7 +57,7 @@ class Insight extends Component {
 }
 
 const select = state => ({
-  insight: state.insights.selected,
+  insight: state.insights.currentItem,
 });
 
 export default withStyles(styles)(connect(select)(Insight));
