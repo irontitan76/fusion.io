@@ -1,7 +1,7 @@
 export const teams = {
   design: {
-    bg: 'aqua',
-    color: 'black',
+    bg: 'health',
+    color: 'white',
     description: 'Join our User Experience & Design Team to improve the overall experience of users by creating seamless interactive and dynamic experiences and desigining intuitive presentations of websites. By doing this, you are providing the maximum consumer satisfaction for all users.',
     name: 'User Experience & Design',
     roles: [
@@ -51,13 +51,13 @@ export const teams = {
     slogan: 'Everything is designed, but we design things well'
   },
   finance: {
-    bg: 'green',
+    bg: 'finance',
     color: 'white',
     name: 'Finance',
     slogan: 'Make innovations a reality'
   },
   engineering: {
-    bg: 'blue',
+    bg: 'technology',
     color: 'white',
     description: 'Be at the forefront of technology and work on projects like Isomorph.io and Fusion.design. Individuals who work in the Engineering and Technology Group offer innovative solutions that are expectionally well-thought out in terms of scale, cohesion, and coupling.',
     name: 'Engineering & Technology',
@@ -102,19 +102,19 @@ export const teams = {
     slogan: 'We are in a position to change the world, not just study it'
   },
   legal: {
-    bg: 'yellow',
+    bg: 'legal',
     color: 'black',
     name: 'Legal & Corporate Affairs',
     slogan: 'As engineers, we are in a position to change the world, not just study it'
   },
   marketing: {
-    bg: 'navy',
+    bg: 'media',
     color: 'white',
     name: 'Marketing ',
     slogan: 'As engineers, we are in a position to change the world, not just study it'
   },
   sales: {
-    bg: 'gray',
+    bg: 'cosmos',
     color: 'white',
     name: 'Accounts & Sales',
     slogan: 'Everything is designed - few things are designed well'

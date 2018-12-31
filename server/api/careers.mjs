@@ -25,7 +25,7 @@ router.delete('/:_id', async (req, res) => {
 
 router.get('/', async (req, res) => {
   let filter = {};
-
+  
   if ( req.query.search ) {
     const search = new RegExp(req.query.search, 'i');
     filter = { $text: { $search: search }};

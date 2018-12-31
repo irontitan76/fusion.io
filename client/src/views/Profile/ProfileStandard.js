@@ -22,8 +22,15 @@ import {
 } from 'actions/standards';
 
 const styles = theme => ({
+  content: {
+    fontFamily: 'Inconsolata, Monaco, Consolas, "Courier New", Courier;',
+    fontSize: 12,
+  },
   root: {
     height: '100%',
+  },
+  selectMenu: {
+    maxHeight: 400,
   },
   standardContainer: {
     paddingBottom: theme.spacing.unit,
@@ -169,7 +176,7 @@ class ProfileStandard extends Component {
   };
 
   render() {
-    const { match, standard = {} } = this.props;
+    const { classes, match, standard = {} } = this.props;
     const isExist = match.params.itemId;
 
     const parents = this.getParents();
@@ -199,6 +206,7 @@ class ProfileStandard extends Component {
         onChange: this.onChange,
         placeholder: 'Select the parent section',
         select: true,
+        SelectProps: { MenuProps: { className: classes.selectMenu } },
         size: { md: 6, xs: 12 },
         type: 'select',
         value: parent,
@@ -213,14 +221,14 @@ class ProfileStandard extends Component {
         onChange: this.onChange,
         placeholder: 'Select the sibling section',
         select: true,
-        // SelectProps: { MenuProps: { className: classes.selectMenu } },
+        SelectProps: { MenuProps: { className: classes.selectMenu } },
         size: { md: 6, xs: 12 },
         type: 'select',
         value: sibling,
         variant: 'outlined',
       },
       {
-        // InputProps: { className: classes.content },
+        InputProps: { className: classes.content },
         fullWidth: true,
         label: 'Content',
         multiline: true,

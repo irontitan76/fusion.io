@@ -92,7 +92,7 @@ insightSchema.set('autoIndex', autoIndex, {
 });
 
 insightSchema.index({
-  author: 'text',
+  'author.name': 'text',
   brief: 'text',
   slug: 'text',
   subtitle: 'text',

@@ -190,6 +190,7 @@ class ProfileStrategy extends Component {
         onChange: this.onChange,
         placeholder: 'Select the parent section',
         select: true,
+        SelectProps: { MenuProps: { className: classes.selectMenu } },
         size: { md: 6, xs: 12 },
         type: 'select',
         value: parent,

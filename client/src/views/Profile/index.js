@@ -6,6 +6,7 @@ import Route from 'react-router-dom/Route';
 import Grid from '@material-ui/core/Grid';
 
 import ProfileAdmin from './ProfileAdmin';
+import ProfileCareer from './ProfileCareer';
 import ProfileCareers from './ProfileCareers';
 import ProfileInsight from './ProfileInsight';
 import ProfileInsights from './ProfileInsights';
@@ -38,6 +39,8 @@ class Home extends Component {
         <Route exact path={ match.path } component={ProfileOverview} />
         <Route exact path={`${match.path}/settings`} component={ProfileSettings} />
         <Route exact path={`${match.path}/notifications`} component={ProfileNotifications} />
+        <Route exact path={`${match.path}/careers/new`} component={ProfileCareer} />
+        <Route exact path={`${match.path}/careers/edit/:itemId`} component={ProfileCareer} />
         <Route exact path={`${match.path}/careers`} component={ProfileCareers} />
         <Route exact path={`${match.path}/insights/new`} component={ProfileInsight} />
         <Route exact path={`${match.path}/insights/edit/:itemId`} component={ProfileInsight} />

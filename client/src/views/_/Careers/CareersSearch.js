@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
-
 import AppBar from '@material-ui/core/AppBar';
 import Grid from '@material-ui/core/Grid';
 import InputAdornment from '@material-ui/core/InputAdornment';
@@ -39,7 +38,7 @@ class CareersSearch extends Component {
     const icon = <InputAdornment position='start'>
       <FontAwesomeIcon
         className={classes.searchIcon}
-        icon={[ 'fal', 'search' ]} />
+        icon={['fal', 'search']} />
     </InputAdornment>;
 
     return <AppBar className={classes.search} position='static'>
@@ -48,6 +47,7 @@ class CareersSearch extends Component {
         <Grid container justify='center'>
           <Grid item xl={3} md={5} xs={12}>
             <TextField
+              autoFocus
               className={classes.searchField}
               fullWidth
               inputProps={{ className: classes.searchInput }}

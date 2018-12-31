@@ -4,7 +4,6 @@ import Link from 'react-router-dom/Link';
 import Button from '@material-ui/core/Button';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import Grid from '@material-ui/core/Grid';
-import Fade from '@material-ui/core/Fade';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
@@ -51,19 +50,43 @@ class CareersList extends Component {
     'org': {
       name: 'org',
       label: 'Organization',
-      items: ['All organizations', 'Fusion A.I.', 'Fusion Consulting', 'Fusion Cosmos', 'Fusion Energy', 'Fusion Finance', 'Fusion Health', 'Fusion Legal', 'Fusion Media', 'Fusion Technology', 'Fusion Transport'],
+      items: [
+        'All organizations',
+        'Fusion A.I.',
+        'Fusion Consulting',
+        'Fusion Cosmos',
+        'Fusion Energy',
+        'Fusion Finance',
+        'Fusion Health',
+        'Fusion Legal',
+        'Fusion Media',
+        'Fusion Technology',
+        'Fusion Transport'
+      ],
       value: 'All organizations',
     },
     'team': {
       name: 'team',
       label: 'Team',
-      items: ['All teams', 'Engineering & Technology', 'User Experience & Design', 'Accounts & Sales', 'Finance', 'Marketing', 'Legal & Corporate Affairs'],
+      items: [
+        'All teams',
+        'Engineering & Technology',
+        'User Experience & Design',
+        'Accounts & Sales',
+        'Finance',
+        'Marketing',
+        'Legal & Corporate Affairs'
+      ],
       value: 'All teams',
     },
     'location': {
       name: 'location',
       label: 'Location',
-      items: ['Any location', 'Austin, TX', 'Remote'],
+      items: [
+        'Any location',
+        'Austin, TX',
+        'Remote'
+      ],
       value: 'Any location',
     }
   };
@@ -81,9 +104,13 @@ class CareersList extends Component {
 
   renderFilters = () => {
     const { state } = this;
-    const { classes } = this.props;
+    const { careers, classes } = this.props;
 
     return Object.keys(state).map((searcher, key) => {
+      const options = state[searcher].items.map((item, index) => (
+        <MenuItem key={item} value={item}>{item}</MenuItem>)
+      );
+
       return <Grid item key={state[searcher].name}>
         <TextField
           className={classes.careersListFilter}
@@ -93,12 +120,8 @@ class CareersList extends Component {
           name={state[searcher].name}
           onChange={this.onChange}
           select
-          value={state[searcher].value}>
-            {
-              state[searcher].items.map((item, index) => (
-                <MenuItem key={item} value={item}>{item}</MenuItem>)
-              )
-            }
+          value={careers.filters[state[searcher].name] || state[searcher].value}>
+          {options}
         </TextField>
       </Grid>;
     });
@@ -116,10 +139,10 @@ class CareersList extends Component {
   };
 
   renderRolesRows = () => {
-    const { careers, classes, isFetching } = this.props;
+    const { careers, classes } = this.props;
 
     let content = null;
-    if ( isFetching ) {
+    if ( careers.isFetching ) {
       content = <CircularProgress />
     } else {
       content = 'No roles available';
@@ -136,7 +159,7 @@ class CareersList extends Component {
         <TableCell>{career.role}</TableCell>
         <TableCell>{career.org}</TableCell>
         <TableCell>{career.team}</TableCell>
-        <TableCell>{`${career.location.city} ${career.location.state}`}</TableCell>
+        <TableCell>{career.location}</TableCell>
         <TableCell>
           <Button
             color='primary'
@@ -164,55 +187,53 @@ class CareersList extends Component {
   render() {
     const { classes } = this.props;
 
-    return <Fade in timeout={350}>
-      <Grid
-        className={classes.careersList}
-        container
-        spacing={40}>
+    return <Grid
+      className={classes.careersList}
+      container
+      spacing={40}>
 
-        <Grid item md={3}>
+      <Grid item md={3}>
 
-          <Grid
-            className={classes.careersListFilters}
-            container
-            direction='column'
-            style={{
-              backgroundColor: 'rgb(250,251,252)',
-              border: '1px solid #ccc',
-              padding: 40,
-              paddingTop: 0,
-              marginTop: 20,
-            }}>
-            <Typography
-              className={classes.careersListTitle}
-              variant='h5'>
-              Filter
-            </Typography>
-            {this.renderFilters()}
-          </Grid>
-        </Grid>
-
-        <Grid item md={9}>
+        <Grid
+          className={classes.careersListFilters}
+          container
+          direction='column'
+          style={{
+            backgroundColor: 'rgb(250,251,252)',
+            border: '1px solid #ccc',
+            padding: 40,
+            paddingTop: 0,
+            marginTop: 20,
+          }}>
           <Typography
             className={classes.careersListTitle}
-            variant='h4'>
-            Open Requisitions
+            variant='h5'>
+            Filter
           </Typography>
-
-          <Table>
-
-            <TableHead>
-              <TableRow>{this.renderHeaders()}</TableRow>
-            </TableHead>
-
-            <TableBody>
-              {this.renderRolesRows()}
-            </TableBody>
-
-          </Table>
+          {this.renderFilters()}
         </Grid>
       </Grid>
-    </Fade>
+
+      <Grid item md={9}>
+        <Typography
+          className={classes.careersListTitle}
+          variant='h4'>
+          Open Requisitions
+        </Typography>
+
+        <Table>
+
+          <TableHead>
+            <TableRow>{this.renderHeaders()}</TableRow>
+          </TableHead>
+
+          <TableBody>
+            {this.renderRolesRows()}
+          </TableBody>
+
+        </Table>
+      </Grid>
+    </Grid>;
   }
 }
 

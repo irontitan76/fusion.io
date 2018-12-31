@@ -83,7 +83,7 @@ class InsightsHeader extends Component {
   };
 
   render() {
-    const { classes } = this.props;
+    const { classes, history } = this.props;
 
     const searchIcon = <InputAdornment position='start'>
       <FontAwesomeIcon
@@ -110,7 +110,15 @@ class InsightsHeader extends Component {
             className={classes.headerSearchField}
             component={Grid}
             fullWidth
-            inputProps={{ className: classes.headerSearchInput }}
+            inputProps={{
+              className: classes.headerSearchInput,
+              onKeyPress: (event) => {
+                if ( event.key !== 'Enter' ) {
+                  return null;
+                }
+                return history.push('/insights');
+              },
+            }}
             InputProps={{ disableUnderline: true, startAdornment: searchIcon }}
             item
             margin='none'

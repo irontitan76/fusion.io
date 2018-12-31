@@ -28,9 +28,11 @@ class Insights extends Component {
   };
 
   render() {
+    const { history } = this.props;
+    
     return <>
       <main style={{ minHeight: '100%', }}>
-        <InsightsHeader />
+        <InsightsHeader history={history} />
         <InsightsGrid insights={this.filterInsights()} />
       </main>
       <Footer />

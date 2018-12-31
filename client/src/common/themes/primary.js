@@ -28,7 +28,7 @@ export default createMuiTheme({
     health: { main: teal, contrastText: offwhite },
     legal: { main: gray, contrastText: dark },
     media: { main: red, contrastText: offwhite },
-    technology: { blue: dark, contrastText: offwhite },
+    technology: { main: blue, contrastText: offwhite },
     transport: { main: gray, contrastText: offwhite },
     blue,
     dark,

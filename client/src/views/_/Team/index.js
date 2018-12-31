@@ -81,7 +81,7 @@ class Team extends Component {
           titleTypographyProps={{
             className: classes.teamRoleCardHeaderTitle,
             variant: 'subtitle1'
-          }}/>
+          }} />
         <CardContent
           className={classes.teamRoleCardContent}>
           <Typography
@@ -122,7 +122,7 @@ class Team extends Component {
           <Grid
             className={classes.teamTitleContainer}
             item
-            style={{ backgroundColor: theme.palette[bg] }}
+            style={{ backgroundColor: theme.palette[bg].main }}
             xs={12}>
 
             <Typography

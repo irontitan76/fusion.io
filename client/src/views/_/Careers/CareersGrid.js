@@ -181,7 +181,7 @@ const styles = theme => ({
 
 class CareersGrid extends Component {
   renderTeam = (team, key) => {
-    const { classes } = this.props;
+    const { classes, onClick } = this.props;
 
     return <Grid
       className={classes.team}
@@ -223,8 +223,11 @@ class CareersGrid extends Component {
             color='primary'
             className={classes.teamButton}
             component={Link}
+            onClick={() => onClick({
+              target: { name: 'team', value: team.title }
+            })}
             size='small'
-            to={team.button2.path}>
+            to='/careers/search'>
             {team.button2.label}
           </Button>
         </CardActions>

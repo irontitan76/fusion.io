@@ -35,11 +35,11 @@ class Insight extends Component {
   }
 
   render() {
-    const { classes, insight = {} } = this.props;
+    const { classes, history, insight = {} } = this.props;
 
     return <>
       <main className={classes.main}>
-        <InsightsHeader />
+        <InsightsHeader history={history} />
         <Fade in timeout={{ enter: 500, exit: 500 }}>
           <Grid
             className={classes.insightsItem}

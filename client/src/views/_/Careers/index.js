@@ -8,68 +8,76 @@ import CareersSearch from './CareersSearch';
 import Footer from 'components/Footer';
 
 import {
+  filterCareers,
   loadCareers,
+  searchCareers,
   unloadCareers,
 } from 'actions/careers';
 
 class Careers extends Component {
-  state = {
-    isFetching: false,
-    isSearching: false,
-    search: {},
+  componentDidMount = () => {
+    const { dispatch } = this.props;
+    dispatch(loadCareers());
+  };
+
+  componentWillUnmount = () => {
+    const { dispatch } = this.props;
+    dispatch(unloadCareers());
   };
 
   onChange = event => {
+    const { dispatch, careers: { filters, search } } = this.props;
     let { name, value } = event.target;
 
-    if ( value === 'All teams' || value === 'All organizations' || value === 'Any organizations' ) {
+    if ( value.includes('All') || value.includes('Any') ) {
       value = undefined;
     }
 
-    this.setState({
-      search: {
-        ...this.state.search,
-        [name]: value,
-      }
+    dispatch(filterCareers(name, value)).then((action) => {
+      const { name, value } = action.payload;
+      const fullSearch = { search, ...filters, ...{ [name]: value } };
+      dispatch(loadCareers(fullSearch)).then(() => {
+        dispatch(searchCareers(search, false, true));
+      });
     });
   };
 
   onSearch = event => {
-    const { search } = this.state;
-    const { dispatch } = this.props;
+    const { dispatch, careers: { filters } } = this.props;
     const { value } = event.target;
 
     if ( value.length > 0 ) {
-      this.setState({ isFetching: true, isSearching: true });
-      dispatch(loadCareers({ search: value, ...search })).then(() => {
-        this.setState({ isFetching: false });
+      dispatch(searchCareers(value, true, true)).then(() => {
+        dispatch(loadCareers({ search: value, ...filters })).then(() => {
+          dispatch(searchCareers(value, false, true));
+        });
       });
     } else {
-      dispatch(unloadCareers());
-      this.setState({ isFetching: false, isSearching: false })
+      dispatch(unloadCareers()).then(() => {
+        const isSearching = Object.keys(filters).length > 0;
+
+        if ( !isSearching ) {
+          dispatch(searchCareers(value, false, false));
+        }
+      });
     }
   };
 
   render() {
-    const { isFetching, isSearching } = this.state;
     const { careers } = this.props;
-
     let content;
-    if ( !isSearching ) {
+    if ( !careers.isSearching ) {
       content = <>
         <CareersHero />
-        <CareersGrid />
+        <CareersGrid onClick={this.onChange}/>
       </>;
     } else {
-      content = <CareersList
-        careers={careers}
-        isFetching={isFetching}
-        onChange={this.onChange} />
+      content = <CareersList careers={careers} onChange={this.onChange} />;
     }
 
     return <>
       <main style={{ minHeight: '100%', }}>
-        <CareersSearch onSearch={this.onSearch} />
+        <CareersSearch onCancel={this.onCancel} onSearch={this.onSearch} />
         {content}
       </main>
       <Footer />

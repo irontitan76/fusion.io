@@ -8,6 +8,8 @@ export const CAREER_LOAD = 'CAREER_LOAD';
 export const CAREER_REMOVE = 'CAREER_REMOVE';
 export const CAREER_UNLOAD = 'CAREER_UNLOAD';
 export const CAREER_UPDATE = 'CAREER_UPDATE';
+export const CAREERS_FILTER = 'CAREERS_FILTER';
+export const CAREERS_SEARCH = 'CAREERS_SEARCH';
 export const CAREERS_LOAD = 'CAREERS_LOAD';
 export const CAREERS_UNLOAD = 'CAREERS_UNLOAD';
 

@@ -1,12 +1,10 @@
 import mongoose from 'mongoose';
 
-const locationSchema = new mongoose.Schema({
-  street: { type: String },
-  city: { type: String },
-  state: { type: String },
-  countryCode: { type: String },
-  postalCode: { type: String },
-});
+// const locationSchema = new mongoose.Schema({
+//   city: { type: String },
+//   state: { type: String },
+//   country: { type: String },
+// });
 
 const careerSchema = new mongoose.Schema({
     _createdAt: {
@@ -31,7 +29,7 @@ const careerSchema = new mongoose.Schema({
     },
     location: {
       trim: true,
-      type: locationSchema,
+      type: String,
     },
     org: {
       index: true,
