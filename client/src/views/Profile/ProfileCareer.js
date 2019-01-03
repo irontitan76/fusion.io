@@ -126,12 +126,13 @@ class ProfileCareer extends Component {
 
   getTeams = () => {
     const teams = [
-      { _id: '0', name: 'DevOps' },
-      { _id: '1', name: 'Marketing' },
-      { _id: '2', name: 'Design' },
-      { _id: '3', name: 'Finance' },
-      { _id: '4', name: 'UI' },
-      { _id: '5', name: 'Web' },
+      // { _id: '0', name: 'DevOps' },
+      // { _id: '1', name: 'Marketing' },
+      // { _id: '2', name: 'Design' },
+      // { _id: '3', name: 'Finance' },
+      // { _id: '4', name: 'UI' },
+      // { _id: '5', name: 'Web' },
+      { _id: '6', name: 'Engineering & Technology' },
     ];
 
     return teams.map((team) => {
@@ -141,26 +142,14 @@ class ProfileCareer extends Component {
     });
   };
 
-  getCities = () => {
-    const cities = [
-      { _id: '0', name: 'Austin' }
+  getLocations = () => {
+    const locations = [
+      { _id: '0', name: 'Austin, TX' }
     ];
 
-    return cities.map((city) => {
-      return <MenuItem key={city._id} value={city.name}>
-        {city.name}
-      </MenuItem>;
-    });
-  };
-
-  getStates = () => {
-    const states = [
-      { _id: '0', name: 'TX' }
-    ];
-
-    return states.map((state) => {
-      return <MenuItem key={state._id} value={state.name}>
-        {state.name}
+    return locations.map((location) => {
+      return <MenuItem key={location._id} value={location.name}>
+        {location.name}
       </MenuItem>;
     });
   };
@@ -210,31 +199,35 @@ class ProfileCareer extends Component {
         variant: 'outlined',
       },
       {
-        children: this.getCities(),
+        children: this.getLocations(),
         fullWidth: true,
-        label: 'City',
-        name: 'city',
+        label: 'Location',
+        name: 'location',
         onChange: this.onChange,
-        placeholder: 'Select the city...',
+        placeholder: 'Select the location...',
         select: true,
         SelectProps: { MenuProps: { className: classes.selectMenu } },
         size: { md: 6, xs: 12 },
         type: 'select',
-        value: (career.location && career.location.city) || career.city || '',
+        value: career.location || '',
         variant: 'outlined',
-      },
+      }, 
       {
-        children: this.getStates(),
+        InputProps: {
+          className: classes.description
+        },
         fullWidth: true,
-        label: 'State',
-        name: 'state',
+        label: 'Brief',
+        multiline: true,
+        name: 'brief',
         onChange: this.onChange,
-        placeholder: 'Select the state...',
-        select: true,
-        SelectProps: { MenuProps: { className: classes.selectMenu } },
-        size: { md: 6, xs: 12 },
-        type: 'select',
-        value: (career.location && career.location.state) || career.state || '',
+        placeholder: 'Type the brief description here...',
+        rows: 1,
+        size: {
+          xs: 12
+        },
+        type: 'text',
+        value: career.brief || '',
         variant: 'outlined',
       },
       {
@@ -250,7 +243,7 @@ class ProfileCareer extends Component {
         type: 'text',
         value: career.description || '',
         variant: 'outlined',
-      }
+      },
     ];
 
     let text = '';

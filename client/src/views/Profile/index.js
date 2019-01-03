@@ -30,7 +30,7 @@ class Home extends Component {
     } else if ( session.user.role === 'admin' ) {
       userType = <ProfileAdmin session={ session } />;
     } else {
-      userType = <ProfileUser />
+      userType = <ProfileUser />;
     }
 
     return <Grid container style={{ height: '100%' }}>

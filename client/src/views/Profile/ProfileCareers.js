@@ -44,10 +44,7 @@ class ProfilePosts extends Component {
           }
         },
         { name: 'brief',  modifier: null },
-        { name: 'location', modifier: (career) => (
-            `${career.location.city}, ${career.location.state}`
-          )
-        },
+        { name: 'location', modifier: (career) => career.location },
         { name: 'org', modifier: null },
         { name: 'team', modifier: null },
         { name: '_publishedAt', modifier: (career) => {

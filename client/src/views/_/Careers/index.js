@@ -64,7 +64,7 @@ class Careers extends Component {
   };
 
   render() {
-    const { careers } = this.props;
+    const { careers, dispatch } = this.props;
     let content;
     if ( !careers.isSearching ) {
       content = <>
@@ -77,7 +77,11 @@ class Careers extends Component {
 
     return <>
       <main style={{ minHeight: '100%', }}>
-        <CareersSearch onCancel={this.onCancel} onSearch={this.onSearch} />
+        <CareersSearch
+          dispatch={dispatch}
+          isSearching={careers.isSearching}
+          onCancel={this.onCancel}
+          onSearch={this.onSearch} />
         {content}
       </main>
       <Footer />

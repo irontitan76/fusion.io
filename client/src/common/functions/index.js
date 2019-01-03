@@ -8,12 +8,7 @@ export const breakLine = (str, align) => (
       align={align || 'center'}
       component={Grid}
       key={key}
-      style={
-        {
-          fontSize: 'inherit',
-          fontWeight: 'inherit',
-        }
-      }>
+      style={{ fontSize: 'inherit', fontWeight: 'inherit' }}>
       {i}<br />
     </Typography>
   ))

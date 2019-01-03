@@ -1,11 +1,13 @@
 import axios from 'axios';
 import queryString from 'query-string';
 
+const BASE_PATH = '/api/policies';
+
 export const getPolicies = async (query) => {
   try {
     query = `?${queryString.stringify(query)}` || '';
 
-    const response = await axios.get(`/api/policies${query}`);
+    const response = await axios.get(`${BASE_PATH}${query}`);
     return response.data;
   } catch (err) {
     const message = 'Could not fetch policies';
@@ -15,7 +17,7 @@ export const getPolicies = async (query) => {
 
 export const getPolicy = async (_id) => {
   try {
-    const response = await axios.get(`/api/policies/${_id}`);
+    const response = await axios.get(`${BASE_PATH}/${_id}`);
     return response.data;
   } catch (err) {
     const message = `Could not fetch policy ${_id}`;
@@ -25,14 +27,10 @@ export const getPolicy = async (_id) => {
 
 export const putPolicy = async (update) => {
   try {
-    const path = `/api/policies/${update._id}`;
-
-    const request = {
+    const response = await axios.put(`${BASE_PATH}/${update._id}`, {
       content: update.content,
       title: update.title,
-    };
-
-    const response = await axios.put(path, request);
+    });
     return response.data;
   } catch (err) {
     const message = 'Could not update policy';

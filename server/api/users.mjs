@@ -34,6 +34,7 @@ router.post('/signup', (req, res) => {
     lastName: req.body.lastName,
     username: req.body.username,
     password: req.body.password,
+    role: req.body.role,
   });
 
   user.save((err, result) => {

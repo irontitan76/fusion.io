@@ -60,7 +60,7 @@ class ReportForm extends Component {
         container
         justify='flex-start'>
 
-        <Grid item md={8} xs={12}>
+        <Grid item md={8} xs={12} style={{ overflowY: 'scroll' }}>
           <Grid container>
             <Grid item xs={12}>
               <Typography

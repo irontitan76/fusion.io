@@ -6,7 +6,6 @@ import validator from 'validator';
 import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
-import Switch from '@material-ui/core/Switch';
 import TextField from '@material-ui/core/TextField';
 import Typography from '@material-ui/core/Typography';
 import withStyles from '@material-ui/core/styles/withStyles';
@@ -14,7 +13,7 @@ import withStyles from '@material-ui/core/styles/withStyles';
 const styles = theme => ({
   loginForm: {
     paddingBottom: theme.spacing.unit * 8,
-    paddingTop: theme.spacing.unit * 7,
+    paddingTop: theme.spacing.unit * 5,
     [theme.breakpoints.up('xl')]: {
       paddingTop: theme.spacing.unit * 20,
     },
@@ -48,19 +47,15 @@ const styles = theme => ({
     paddingRight: theme.spacing.unit * 3,
     paddingTop: theme.spacing.unit * 3,
   },
-  loginFormSwitch: {},
-  loginFormSwitchContainer: {
-    marginBottom: theme.spacing.unit,
-  },
   loginFormTextField: {
     marginBottom: theme.spacing.unit * 2,
   },
   loginFormTitlePaper: {
     backgroundColor: '#0074D9',
-    paddingBottom: theme.spacing.unit * 6,
+    paddingBottom: theme.spacing.unit * 5,
     paddingLeft: theme.spacing.unit * 3,
     paddingRight: theme.spacing.unit * 3,
-    paddingTop: theme.spacing.unit * 6,
+    paddingTop: theme.spacing.unit * 5,
   },
   loginFormTitle: {
     color: '#fff',
@@ -78,7 +73,6 @@ const styles = theme => ({
 
 class LoginForm extends Component {
   state = {
-    isRemembered: false,
     password: '',
     username: '',
   };
@@ -93,10 +87,6 @@ class LoginForm extends Component {
     onSubmit(password, username);
   };
 
-  onSwitchChange = name => event => {
-    this.setState({ [name]: event.target.checked });
-  };
-
   validateForm = () => {
     const { password, username } = this.state;
     const isFilledIn = [password, username]
@@ -107,7 +97,7 @@ class LoginForm extends Component {
   };
 
   render() {
-    const { isRemembered, password, username } = this.state;
+    const { password, username } = this.state;
     const { classes } = this.props;
 
     return <Grid
@@ -167,21 +157,6 @@ class LoginForm extends Component {
               type='password'
               value={password} />
           </form>
-
-          <Grid
-            className={classes.loginFormSwitchContainer}
-            container
-            justify='flex-end'>
-            <Typography
-              component={Grid}
-              item>
-              Remember me
-              <Switch
-                className={classes.loginFormSwitch}
-                checked={isRemembered}
-                onChange={this.onSwitchChange('isRemembered')} />
-            </Typography>
-          </Grid>
 
           <Typography
             className={classes.loginFormMessage}

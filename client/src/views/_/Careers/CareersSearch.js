@@ -3,12 +3,18 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import AppBar from '@material-ui/core/AppBar';
 import Grid from '@material-ui/core/Grid';
+import IconButton from '@material-ui/core/IconButton';
 import InputAdornment from '@material-ui/core/InputAdornment';
 import TextField from '@material-ui/core/TextField';
 import Toolbar from '@material-ui/core/Toolbar';
 import withStyles from '@material-ui/core/styles/withStyles';
 
+import {
+  searchCareers,
+} from 'actions/careers';
+
 const styles = theme => ({
+  iconButton: {},
   search: {
     backgroundColor: theme.palette.blue,
     zIndex: 0,
@@ -33,7 +39,7 @@ const styles = theme => ({
 
 class CareersSearch extends Component {
   render() {
-    const { classes, onSearch } = this.props;
+    const { classes, dispatch, onSearch, value } = this.props;
 
     const icon = <InputAdornment position='start'>
       <FontAwesomeIcon
@@ -47,14 +53,26 @@ class CareersSearch extends Component {
         <Grid container justify='center'>
           <Grid item xl={3} md={5} xs={12}>
             <TextField
-              autoFocus
               className={classes.searchField}
               fullWidth
-              inputProps={{ className: classes.searchInput }}
-              InputProps={{ disableUnderline: true, startAdornment: icon }}
+              inputProps={{
+                className: classes.searchInput,
+              }}
+              InputProps={{
+                endAdornment: value === '' ? null : <IconButton
+                  className={classes.iconButton}
+                  onClick={() => dispatch(searchCareers(null, false, false))}>
+                  <FontAwesomeIcon
+                    icon={['fal', 'times']}
+                    style={{ fontSize: 12 }} />
+                </IconButton> ,
+                disableUnderline: true,
+                startAdornment: icon
+              }}
               margin='none'
+              placeholder='Search jobs...'
               onChange={onSearch}
-              placeholder='Search jobs...' />
+              onFocus={() => dispatch(searchCareers(null, false, true))} />
           </Grid>
         </Grid>
 

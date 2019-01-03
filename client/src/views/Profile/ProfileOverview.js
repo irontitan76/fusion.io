@@ -2,11 +2,17 @@ import React, { Component } from 'react';
 
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
+import CardHeader from '@material-ui/core/CardHeader';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import withStyles from '@material-ui/core/styles/withStyles';
 
 const styles = theme => ({
+  card: {
+  },
+  cardContent: {
+    paddingBottom: theme.spacing.unit * 2,
+  },
   root: {
     paddingBottom: theme.spacing.unit * 3,
     paddingLeft: theme.spacing.unit * 3,
@@ -25,18 +31,16 @@ class ProfileOverview extends Component {
     return <Grid
       className={classes.root}
       container
-      justify='space-around'>
+      justify='space-around'
+      spacing={16}>
 
-      <Card component={Grid} item md={3} xs={12}>
-        <CardContent>
-          <Typography
-            className={classes.title}
-            color='textSecondary'
-            gutterBottom>
-            Total Insights
-          </Typography>
+      <Card className={classes.card} component={Grid} item md={2} xs={12}>
+        <CardHeader subheader='Total Insights' />
+        <CardContent className={classes.cardContent}>
+          <Typography align='center' variant='h4'></Typography>
         </CardContent>
       </Card>
+
 
     </Grid>;
   }

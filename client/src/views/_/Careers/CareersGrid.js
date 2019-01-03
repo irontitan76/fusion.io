@@ -227,7 +227,7 @@ class CareersGrid extends Component {
               target: { name: 'team', value: team.title }
             })}
             size='small'
-            to='/careers/search'>
+            to='/careers'>
             {team.button2.label}
           </Button>
         </CardActions>

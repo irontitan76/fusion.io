@@ -1,9 +1,11 @@
 import axios from 'axios';
 import queryString from 'query-string';
 
+const BASE_PATH = '/api/insights';
+
 export const deleteInsight = async (_id) => {
   try {
-    const response = await axios.delete(`/api/insights/${_id}`);
+    const response = await axios.delete(`${BASE_PATH}/${_id}`);
     return response.data;
   } catch (err) {
     const message = `Could not delete Insight ${_id}`;
@@ -17,7 +19,7 @@ export const getInsights = async (params, userId) => {
     if ( userId ) {
       params = `?userId=${userId}&${params}`;
     }
-    const response = await axios.get(`/api/insights${params}`);
+    const response = await axios.get(`${BASE_PATH}${params}`);
     return response.data;
   } catch (err) {
     const message = 'Could not fetch articles';
@@ -27,7 +29,7 @@ export const getInsights = async (params, userId) => {
 
 export const getInsight = async (slug) => {
   try {
-    const response = await axios.get(`/api/insights/slug/${slug}`);
+    const response = await axios.get(`${BASE_PATH}/slug/${slug}`);
     return response.data;
   } catch (err) {
     const message = 'Could not fetch articles';
@@ -37,9 +39,7 @@ export const getInsight = async (slug) => {
 
 export const postInsight = async (insight, user) => {
   try {
-    const path = '/api/insights';
-
-    const request = {
+    const response = await axios.post(BASE_PATH, {
       author: {
         _id: user._id,
         avatar: user.avatar,
@@ -55,9 +55,7 @@ export const postInsight = async (insight, user) => {
       },
       subtitle: insight.subtitle,
       title: insight.title,
-    };
-
-    const response = await axios.post(path, request);
+    });
     return response.data;
   } catch (err) {
     const message = 'Could not add insight';
@@ -67,8 +65,7 @@ export const postInsight = async (insight, user) => {
 
 export const putInsight = async (insight) => {
   try {
-    const path = `/api/insights/${insight._id}`;
-    const response = await axios.put(path, insight);
+    const response = await axios.put(`${BASE_PATH}/${insight._id}`, insight);
     return response.data;
   } catch (err) {
     const message = 'Could not update insight';

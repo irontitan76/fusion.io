@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import Markdown from 'react-markdown';
 
 import Footer from 'components/Footer';
 
+import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import withStyles from '@material-ui/core/styles/withStyles';
 
@@ -15,7 +17,10 @@ const styles = theme => ({
     paddingBottom: theme.spacing.unit * 5,
     paddingLeft: theme.spacing.unit * 3,
     paddingRight: theme.spacing.unit * 3,
-    paddingTop: theme.spacing.unit * 5,
+    paddingTop: theme.spacing.unit * 2,
+    '& h3': {
+      fontWeight: 500,
+    }
   },
   heading: {
     paddingBottom: theme.spacing.unit,
@@ -41,34 +46,41 @@ class Career extends Component {
     if ( typeof career === 'undefined' ) return null;
 
     return <>
-      <main>
-        <Typography
-          align='left'
-          className={classes.heading}
-          variant='h4'>
-          {career.role}
-        </Typography>
-        <Typography
-          align='left'
-          className={classes.location}
-          variant='body2'>
-          <b>Location</b>: {career.location && `${career.location.city}, ${career.location.state}`}
-          &nbsp;&nbsp;|&nbsp;&nbsp;<b>Requisition ID</b>: {career._id}
-        </Typography>
-        <Typography
-          align='left'
-          className={classes.description}
-          variant='body2'>
-          {career.description}
-        </Typography>
-      </main>
+      <Grid container component='main' justify='space-around'>
+        <Grid item md={1} />
+        <Grid item md={6} xs={12}>
+          <Typography
+            align='left'
+            className={classes.heading}
+            variant='h4'>
+            {career.role}
+          </Typography>
+          <Typography
+            align='left'
+            className={classes.location}
+            variant='body2'>
+            <b>Location</b>: {career.location}
+            &nbsp;&nbsp;|&nbsp;&nbsp;<b>Requisition ID</b>: {career._id}
+          </Typography>
+          <Typography
+            align='left'
+            component={Markdown}
+            className={classes.description}
+            variant='body2'>
+            {career.description}
+          </Typography>
+        </Grid>
+        <Grid item md={5}>
+          
+        </Grid>
+      </Grid>
       <Footer />
     </>;
   }
 }
 
 const select = state => ({
-  career: state.careers.currentRole,
+  career: state.careers.currentItem,
 });
 
 export default withStyles(styles)(connect(select)(Career));

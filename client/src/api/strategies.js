@@ -1,8 +1,10 @@
 import axios from 'axios';
 
+const BASE_PATH = '/api/strategies';
+
 export const deleteStrategy = async (_id) => {
   try {
-    const response = await axios.delete(`/api/strategies/${_id}`);
+    const response = await axios.delete(`${BASE_PATH}/${_id}`);
     return response.data;
   } catch (err) {
     const message = `Could not delete strategy ${_id}`;
@@ -12,7 +14,7 @@ export const deleteStrategy = async (_id) => {
 
 export const getStrategy = async (id) => {
   try {
-    const response = await axios.get(`/api/strategies/${id}`);
+    const response = await axios.get(`${BASE_PATH}/${id}`);
     return response.data;
   } catch (err) {
     const message = 'Could not fetch strategies';
@@ -22,7 +24,7 @@ export const getStrategy = async (id) => {
 
 export const getStrategies = async () => {
   try {
-    const response = await axios.get(`/api/strategies`);
+    const response = await axios.get(BASE_PATH);
     return response.data;
   } catch (err) {
     const message = 'Could not fetch strategies';
@@ -32,16 +34,12 @@ export const getStrategies = async () => {
 
 export const postStrategy = async (strategy) => {
   try {
-    const path = '/api/strategies';
-
-    const request = {
+    const response = await axios.post(BASE_PATH, {
       content: strategy.content,
       parentId: strategy.parentId === 'none' ? null : strategy.parentId,
       siblingId: strategy.siblingId === 'none' ? null : strategy.siblingId,
       title: strategy.title,
-    };
-
-    const response = await axios.post(path, request);
+    });
     return response.data;
   } catch (err) {
     const message = 'Could not add strategy';
@@ -51,16 +49,12 @@ export const postStrategy = async (strategy) => {
 
 export const putStrategy = async (update) => {
   try {
-    const path = `/api/strategies/${update._id}`;
-
-    const request = {
+    const response = await axios.put(`${BASE_PATH}/${update._id}`, {
       content: update.content,
       parentId: update.parentId,
       siblingId: update.siblingId,
       title: update.title,
-    };
-
-    const response = await axios.put(path, request);
+    });
     return response.data;
   } catch (err) {
     const message = 'Could not update strategy';

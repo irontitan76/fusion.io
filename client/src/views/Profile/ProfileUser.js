@@ -1,15 +1,13 @@
 import React, { Component } from 'react';
 
-import withStyles from '@material-ui/core/styles/withStyles';
-
-const styles = theme => ({
-
-});
+import ProfileNavigation from './ProfileNavigation';
 
 class ProfileUser extends Component {
   render() {
-    return <div>User</div>;
+    const { session } = this.props;
+
+    return <ProfileNavigation session={session} />;
   }
 }
 
-export default withStyles(styles)(ProfileUser);
+export default ProfileUser;

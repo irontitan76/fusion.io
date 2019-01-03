@@ -166,7 +166,7 @@ class CareersList extends Component {
             component={Link}
             to={`/careers/${career._id}`}
             variant='text'>
-            Apply
+            More
           </Button>
         </TableCell>
       </TableRow>
