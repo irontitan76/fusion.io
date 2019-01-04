@@ -62,18 +62,39 @@ const styles = theme => ({
 });
 
 export class Footer extends Component {
-  render() {
-    const { classes, theme } = this.props;
-
-    const icons = {
+  getIcons = () => {
+    return {
       'linkedin': 'http://linkedin.com/in/rosssheppard',
       'twitter': 'http://twitter.com/rshep182',
       'github': 'http://github.com/irontitan76',
       'facebook': 'http://facebook.com/rshep',
       'instagram': 'http://instagram.com/rshep182'
-    };
+    }
+  };
 
-    const menus = [
+  getLinks = () => {
+    return [
+      {
+        label: 'Privacy',
+        path: '/company/privacy',
+      },
+      {
+        label: 'Terms of Use',
+        path: '/company/terms-of-use',
+      },
+      {
+        label: 'Cookies',
+        path: '/company/cookies',
+      },
+      {
+        label: 'Sitemap',
+        path: '/company/sitemap',
+      }
+    ];
+  };
+
+  getMenus = () => {
+    return [
       // {
       //   title: 'COMPANY',
       //   list: [
@@ -103,26 +124,119 @@ export class Footer extends Component {
       //   list: []
       // }
     ];
+  };
 
-    const links = [
-      {
-        label: 'Privacy',
-        path: '/company/privacy',
-      },
-      {
-        label: 'Terms of Use',
-        path: '/company/terms-of-use',
-      },
-      {
-        label: 'Cookies',
-        path: '/company/cookies',
-      },
-      {
-        label: 'Sitemap',
-        path: '/company/sitemap',
-      }
-    ];
+  renderCopyright = () => {
+    const { classes } = this.props;
+    const links = this.getLinks();
 
+    const renderedLinks = links.map((link, key) => {
+      const separator = key === links.length - 1 ? null : ' \u00A0| \u00A0';
+      
+      return <Fragment key={key}>
+        <Link
+          className={classes.footerLink}
+          to={link.path}>
+          { link.label }
+        </Link>
+        {separator}
+      </Fragment>
+    });
+
+    return <>
+      <Grid item xs={6}>
+        <Typography
+          className={classes.footerCopyright}
+          variant='body2'>
+          © Copyright 2018 Fusion Industries, Inc.
+        </Typography>
+      </Grid>
+
+      <Grid item xs={6}>
+        <Typography
+          align='right'
+          className={classes.footerCopyright}
+          variant='body2'>
+          {renderedLinks}
+        </Typography>
+      </Grid>
+    </>;
+  };
+
+  renderSocial = (belowMedium) => {
+    const { classes } = this.props;
+    const icons = this.getIcons();
+
+    return <Grid className={classes.footerSocial} item xs={8}>
+      <Typography
+        align={ belowMedium ? 'center' : 'right' }
+        className={classes.footerText}
+        variant='body2'>
+        FOLLOW FUSION
+      </Typography>
+      <Typography
+        align={ belowMedium ? 'center' : 'right' }>
+        {
+          Object.keys(icons).map((icon, key) => (
+            <IconButton
+              className={classes.footerSocialButton}
+              href={icons[icon]}
+              key={key}
+              target='_blank'>
+              <FontAwesomeIcon
+                className={classes.footerSocialIcon}
+                icon={['fab', icon]}
+              />
+            </IconButton>
+          ))
+        }
+      </Typography>
+
+    </Grid>
+  }
+
+  renderMenu = (menu) => {
+    const { classes } = this.props;
+
+    return menu.list.map((item, key) => {
+      return <ListItem
+        className={classes.footerListItem}
+        dense
+        key={key}>
+        <ListItemText
+          primary={item}
+          primaryTypographyProps={{
+            className: classes.footerListItemText
+          }}/>
+      </ListItem>
+    })
+  }
+  
+  renderMenus = () => {
+    const { classes } = this.props;
+    const menus = this.getMenus();
+
+    return menus.length > 0 ? menus.map((menu, key) => {
+      return <Grid
+        className={classes.footerColumn}
+        item
+        key={key}
+        xs={2}>
+
+        <Typography className={classes.footerText} variant='body2'>
+          { menu.title }
+        </Typography>
+
+        <List>
+          {this.getMenu(menu)}
+        </List>
+
+      </Grid>
+    }) : <Grid item xs={10} />
+  }
+
+  render() {
+    const { classes, theme } = this.props;
     const belowMedium = theme.breakpoints.down('md');
 
     return (
@@ -133,91 +247,9 @@ export class Footer extends Component {
         container
         justify={ belowMedium ? 'center' : 'space-between'}>
 
-        {
-          menus.length > 0 ? menus.map((menu, key) => {
-            return <Grid
-              className={classes.footerColumn}
-              item
-              key={key}
-              xs={2}>
-
-              <Typography className={classes.footerText} variant='body2'>
-                { menu.title }
-              </Typography>
-
-              <List>
-                {
-                  menu.list.map((item, key) => {
-                    return <ListItem
-                      className={classes.footerListItem}
-                      dense
-                      key={key}>
-                      <ListItemText
-                        primary={item}
-                        primaryTypographyProps={{
-                          className: classes.footerListItemText
-                        }}/>
-                    </ListItem>
-                  })
-                }
-              </List>
-
-            </Grid>
-          }) : <Grid item xs={10} />
-        }
-
-        <Grid className={classes.footerSocial} item xs={8}>
-          <Typography
-            align={ belowMedium ? 'center' : 'right' }
-            className={classes.footerText}
-            variant='body2'>
-            FOLLOW FUSION
-          </Typography>
-          <Typography
-            align={ belowMedium ? 'center' : 'right' }>
-            {
-              Object.keys(icons).map((icon, key) => (
-                <IconButton
-                  className={classes.footerSocialButton}
-                  href={icons[icon]}
-                  key={key}
-                  target='_blank'>
-                  <FontAwesomeIcon
-                    className={classes.footerSocialIcon}
-                    icon={['fab', icon]}
-                  />
-                </IconButton>
-              ))
-            }
-          </Typography>
-
-        </Grid>
-
-        <Grid item xs={6}>
-          <Typography
-            className={classes.footerCopyright}
-            variant='body2'>
-            © Copyright 2018 Fusion Industries, Inc.
-          </Typography>
-        </Grid>
-
-        <Grid item xs={6}>
-          <Typography
-            align='right'
-            className={classes.footerCopyright}
-            variant='body2'>
-            {
-              links.map((link, key) => <Fragment key={key}>
-                <Link
-                  className={classes.footerLink}
-                  to={link.path}>
-                  { link.label }
-                </Link>
-                { key === links.length - 1 ? null : ' \u00A0| \u00A0' }
-              </Fragment>)
-            }
-          </Typography>
-        </Grid>
+        {this.renderMenus()}
+        {this.renderSocial(belowMedium)}
+        {this.renderCopyright()}
 
       </Grid>
     );

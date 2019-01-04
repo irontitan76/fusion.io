@@ -18,7 +18,9 @@ export class NavMainMenu extends Component {
     const { classes, items, onClose, open } = this.props;
 
     const menu = <div className={classes.list}>
-      <NavItems items={items} onClose={onClose}/>
+      <NavItems 
+        items={items}
+        onClose={onClose}/>
     </div>;
 
     return <NavDrawer

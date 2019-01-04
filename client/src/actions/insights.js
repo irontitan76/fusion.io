@@ -21,7 +21,8 @@ import {
 export const changeInsight = (name, value) => {
   return async dispatch => {
     try {
-      return dispatch({ type: INSIGHT_CHANGE, payload: { name, value }});
+      const payload = { name, value };
+      return dispatch({ type: INSIGHT_CHANGE, payload });
     } catch (err) {
       return dispatch({ type: INSIGHT_CHANGE, error: true, err });
     }
@@ -86,7 +87,7 @@ export const removeInsight = (_id) => {
   };
 };
 
-export const unloadInsight = id => {
+export const unloadInsight = () => {
   return async dispatch => {
     try {
       return dispatch({ type: INSIGHT_UNLOAD });

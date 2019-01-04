@@ -75,7 +75,7 @@ class ReportTable extends Component {
             })
           }
         </TableRow>;
-    })
+    });
   };
 
   renderHeaders = () => {

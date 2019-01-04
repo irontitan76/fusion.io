@@ -85,7 +85,7 @@ export class NavItem extends Component {
   isOpen = (open, path) => {
     if ( open ) return open;
     if ( path && !open ) return !open;
-  }
+  };
 
   renderListItem = (child, key) => {
     const { classes } = this.props;

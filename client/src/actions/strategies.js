@@ -53,10 +53,7 @@ export const loadStrategies = () => {
 export const loadStrategy = (id) => {
   return async dispatch => {
     try {
-      let payload = { item: null };
-      if ( id ) {
-        payload = await getStrategy(id);
-      }
+      const payload = id ? { item: null } : await getStrategy(id);
       return dispatch({ type: STRATEGY_LOAD, payload });
     } catch (err) {
       return dispatch({ type: STRATEGY_LOAD, error: true, err });

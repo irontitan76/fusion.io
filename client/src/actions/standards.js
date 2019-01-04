@@ -42,10 +42,7 @@ export const createStandard = (standard) => {
 export const loadStandard = (id) => {
   return async dispatch => {
     try {
-      let payload = { item: null };
-      if ( id ) {
-        payload = await getStandard(id);
-      }
+      const payload = id ? { item: null } : await getStandard(id);
       return dispatch({ type: STANDARD_LOAD, payload });
     } catch (err) {
       return dispatch({ type: STANDARD_LOAD, error: true, err });

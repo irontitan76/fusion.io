@@ -12,7 +12,8 @@ import {
 export const loadMessage = content => {
   return async dispatch => {
     try {
-      return dispatch({ type: MESSAGE_LOAD, payload: { content } });
+      const payload = { content };
+      return dispatch({ type: MESSAGE_LOAD, payload });
     } catch (err) {
       return dispatch({ type: MESSAGE_LOAD, error: true, err });
     }

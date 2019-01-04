@@ -5,35 +5,21 @@ const initialState = {
 
 const policies = (state = initialState, action) => {
   switch (action.type) {
-    case 'POLICIES_LOAD':
-      return {
-        ...state,
-        items: action.payload.items,
-      };
+    case 'POLICIES_LOAD': {
+      const { items } = action.payload;
+      return { ...state, items };
+    }
     case 'POLICY_CHANGE': {
       const { currentItem } = state;
       const { name, value } = action.payload;
 
       if ( name === 'content' ) {
-        return {
-          ...state,
-          currentItem: {
-            ...currentItem,
-            content: {
-              body: value,
-              type: 'md',
-            },
-          },
-        };
+        const newItem = { ...currentItem, content: { body: value, type: 'md' }};
+        return { ...state, currentItem: newItem };
       } else {
-       return {
-         ...state,
-         currentItem: {
-           ...currentItem,
-           [name]: value,
-         },
-       };
-     }
+        const newItem = { ...currentItem, [name]: value };
+        return { ...state, currentItem: newItem };
+      }
     }
     case 'POLICY_LOAD': {
       const { item } = action.payload;

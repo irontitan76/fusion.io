@@ -9,13 +9,20 @@ import NavItem from './NavItem';
 const styles = {};
 
 export class NavItems extends Component {
-  _getItems = () => this.props.items.map((item, key) => (
-    <NavItem item={item} key={key} onClose={this.props.onClose} />
-  ));
+  getItems = () => {
+    const { items } = this.props;
+    
+    return items.map((item, key) => (
+      <NavItem 
+        item={item} 
+        key={key} 
+        onClose={this.props.onClose} />
+    ));
+  }
 
   render() {
     return <List component='nav'>
-      { this._getItems() }
+      {this.getItems()}
     </List>;
   }
 }

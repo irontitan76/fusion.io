@@ -64,9 +64,7 @@ const styles = theme => ({
 });
 
 export class TabBar extends Component {
-  state = {
-    value: 0
-  };
+  state = { value: 0 };
 
   onChange = (event, value) => {
     this.setState({ value });

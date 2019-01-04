@@ -22,7 +22,8 @@ import {
 export const changeCareer = (name, value) => {
   return async dispatch => {
     try {
-      return dispatch({ type: CAREER_CHANGE, payload: { name, value }});
+      const payload = { name, value };
+      return dispatch({ type: CAREER_CHANGE, payload });
     } catch (err) {
       return dispatch({ type: CAREER_CHANGE, error: true, err });
     }

@@ -23,9 +23,6 @@ const styles = theme => ({
     backgroundRepeat: 'no-repeat',
     backgroundSize: '100% 180%',
     overflow: 'hidden',
-    // marginBottom: theme.spacing.unit * 6,
-    // paddingBottom: theme.spacing.unit * 15,
-    // paddingTop: theme.spacing.unit * 15,
     [theme.breakpoints.down('xl')]: {
       backgroundSize: '100% 180%',
     },

@@ -56,7 +56,7 @@ export class NavBar extends Component {
           color='inherit'
           to='/'
           variant='h6'>
-          { title }
+          {title}
         </Typography>
         <NavUserMenu items={items} />
       </Toolbar>

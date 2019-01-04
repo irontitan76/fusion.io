@@ -10,36 +10,16 @@ const standards = (state = initialState, action) => {
       const { name, value } = action.payload;
 
       if (name === 'content') {
-        return {
-          ...state,
-          currentItem: {
-            ...currentItem,
-            content: {
-              body: value,
-              type: 'md',
-            },
-          },
-        };
+        const newItem = { ...currentItem, content: { body: value, type: 'md' }};
+        return { ...state, currentItem: newItem };
       } else if (name === 'parentId') {
-        const siblingId = value === currentItem.parentId
-          ? currentItem.siblingId
-          : null;
-        return {
-          ...state,
-          currentItem: {
-            ...currentItem,
-            parentId: value,
-            siblingId,
-          },
-        };
+        const parentId = value;
+        const siblingId = value === currentItem.parentId ? currentItem.siblingId : null;
+        const newItem = { ...currentItem, parentId, siblingId };
+        return { ...state, currentItem: newItem };
       } else {
-        return {
-          ...state,
-          currentItem: {
-            ...currentItem,
-            [name]: value,
-          },
-        };
+        const newItem = { ...currentItem, [name]: value };
+        return { ...state, currentItem: newItem };
       }
     }
     case 'STANDARD_LOAD': {
