@@ -198,6 +198,7 @@ class SignupForm extends Component {
                   fullWidth
                   helperText={fields[field].message}
                   inputProps={{
+                    'aria-label': fields[field].label,
                     className: classes.signupFormInput,
                   }}
                   key={key}

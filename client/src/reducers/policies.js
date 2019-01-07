@@ -1,41 +1,45 @@
 const initialState = {
   currentItem: {},
+  filteredItems: [],
   items: [],
 };
 
-const policies = (state = initialState, action) => {
+const insights = (state = initialState, action) => {
   switch (action.type) {
-    case 'POLICIES_LOAD': {
-      const { items } = action.payload;
-      return { ...state, items };
-    }
     case 'POLICY_CHANGE': {
       const { currentItem } = state;
       const { name, value } = action.payload;
 
-      if ( name === 'content' ) {
+      if (name === 'content') {
         const newItem = { ...currentItem, content: { body: value, type: 'md' }};
         return { ...state, currentItem: newItem };
       } else {
-        const newItem = { ...currentItem, [name]: value };
-        return { ...state, currentItem: newItem };
+        return { ...state, currentItem: { ...state.currentItem, [name]: value, } };
       }
     }
     case 'POLICY_LOAD': {
       const { item } = action.payload;
-      return { ...state, currentItem: item };
+      return { ...state, currentItem: item || {} };
+    }
+    case 'POLICY_REMOVE':
+      return state;
+    case 'POLICY_UNLOAD':
+      return { ...state, currentItem: initialState.selected, };
+    case 'POLICY_UPDATE':
+      return state;
+    case 'POLICIES_FILTER': {
+      const { items } = action.payload;
+      return { ...state, filteredItems: items };
+    }
+    case 'POLICIES_LOAD': {
+      const { items } = action.payload;
+      return { ...state, items, filteredItems: items };
     }
     case 'POLICIES_UNLOAD':
       return initialState;
-    case 'POLICY_UNLOAD': {
-      const { currentItem } = initialState;
-      return { ...state, currentItem };
-    }
-    case 'POLICY_UPDATE':
-      return state;
     default:
       return state;
   }
 };
 
-export default policies;
+export default insights;

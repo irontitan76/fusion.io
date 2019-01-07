@@ -29,10 +29,10 @@ export const changePolicy = (name, value) => {
   };
 };
 
-export const createPolicy = (insight, user) => {
+export const createPolicy = (policy) => {
   return async dispatch => {
     try {
-      const payload = await postPolicy(insight, user);
+      const payload = await postPolicy(policy);
       return dispatch({ type: POLICY_CREATE, payload });
     } catch (err) {
       return dispatch({ type: POLICY_CREATE, error: true, err });
@@ -65,10 +65,10 @@ export const loadPolicy = slug => {
   };
 };
 
-export const loadPolicies = userId => {
+export const loadPolicies = () => {
   return async dispatch => {
     try {
-      const payload = await getPolicies(null, userId);
+      const payload = await getPolicies(null);
       return dispatch({ type: POLICIES_LOAD, payload });
     } catch (err) {
       return dispatch({ type: POLICIES_LOAD, error: true, err });
@@ -107,10 +107,10 @@ export const unloadPolicies = () => {
   };
 };
 
-export const updatePolicy = (insight) => {
+export const updatePolicy = (policy) => {
   return async dispatch => {
     try {
-      const payload = await putPolicy(insight);
+      const payload = await putPolicy(policy);
       return dispatch({ type: POLICY_UPDATE, payload });
     } catch (err) {
       return dispatch({ type: POLICY_UPDATE, error: true, err });

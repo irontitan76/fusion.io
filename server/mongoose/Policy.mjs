@@ -27,6 +27,10 @@ const policySchema = new mongoose.Schema({
       required: true,
       type: Number,
     },
+    location: {
+      required: true,
+      type: String,
+    },
     order: {
       required: true,
       type: Number,

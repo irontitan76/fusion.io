@@ -37,12 +37,18 @@ export const getPolicy = async (_id) => {
 
 export const postPolicy = async (policy) => {
   try {
+    console.log(policy, BASE_PATH);
     const response = await axios.post(BASE_PATH, {
-      brief: policy.content.substring(0, 65),
+      brief: policy.content.body.substring(0, 65),
       content: policy.content,
-      subtitle: policy.subtitle,
+      level: 0,
+      location: policy.location,
+      order: 0,
+      parentId: null,
+      siblingId: null,
       title: policy.title,
     });
+
     return response.data;
   } catch (err) {
     const message = 'Could not add policy';

@@ -141,7 +141,10 @@ class LoginForm extends Component {
             <TextField
               className={classes.loginFormTextField}
               fullWidth
-              inputProps={{ className: classes.loginFormInput }}
+              inputProps={{ 
+                'aria-label': 'username',
+                className: classes.loginFormInput
+              }}
               label='Username'
               name='username'
               onChange={this.onChange}
@@ -150,7 +153,10 @@ class LoginForm extends Component {
             <TextField
               className={classes.loginFormTextField}
               fullWidth
-              inputProps={{ className: classes.loginFormInput }}
+              inputProps={{ 
+                'aria-label': 'password',
+                className: classes.loginFormInput ,
+              }}
               label='Password'
               name='password'
               onChange={this.onChange}

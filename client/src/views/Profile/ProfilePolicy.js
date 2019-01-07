@@ -53,32 +53,34 @@ class ProfilePolicy extends Component {
     const { dispatch, history, policy } = this.props;
 
     this.displayMessage(
-      'Deleting Standard...',
+      'Deleting Policy...',
       () => dispatch(removePolicy(policy._id)).then(() => {
-        this.displayMessage(`Deleted Standard "${policy.title}".`);
-        return setTimeout(() => history.push('/profile/policys'), 1000);
+        this.displayMessage(`Deleted Policy "${policy.title}".`);
+        return setTimeout(() => history.push('/profile/policies'), 1000);
       })
     );
   };
 
   onUpdate = () => {
-    const { dispatch, policy, user } = this.props;
+    const { dispatch, policy } = this.props;
 
     this.displayMessage(
       'Updating Policy...',
-      () => dispatch(updatePolicy(policy, user)).then(() => {
+      () => dispatch(updatePolicy(policy)).then(() => {
         return this.displayMessage(`Updated Policy "${policy.title}".`);
       })
     );
   };
 
   onCreate = () => {
-    const { dispatch, policy, user } = this.props;
-
+    const { dispatch, history, policy } = this.props;
+    
     this.displayMessage(
       'Creating Policy...',
-      () => dispatch(createPolicy(policy, user)).then(() => {
-        return this.displayMessage(`Created Policy "${policy.title}".`);
+      () => dispatch(createPolicy(policy)).then((action) => {
+        const { _id } = action.payload.item;
+        this.displayMessage(`Created Policy "${policy.title}".`);
+        return setTimeout(() => history.push(`/profile/policies/edit/${_id}`), 1000);
       })
     );
   };
@@ -97,6 +99,19 @@ class ProfilePolicy extends Component {
         size: { xs: 12 },
         type: 'text',
         value: policy.title || '',
+        variant: 'outlined',
+      },
+      {
+        fullWidth: true,
+        label: 'URL Suffix',
+        name: 'location',
+        onChange: this.onChange,
+        placeholder: 'Type the URL suffix here...',
+        size: {
+          xs: 12
+        },
+        type: 'text',
+        value: policy.location || '',
         variant: 'outlined',
       },
       {
@@ -126,7 +141,7 @@ class ProfilePolicy extends Component {
       cancelButton={isExist ? 'Delete Policy' : null}
       onCancel={isExist ? this.onDelete : null}
       onChange={this.onChange}
-      onSubmit={isExist ? this.onUpdate : this.onSubmit}
+      onSubmit={isExist ? this.onUpdate : this.onCreate}
       fields={fields}
       submitButton={text}
       title={text} />;
