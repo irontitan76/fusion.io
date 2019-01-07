@@ -112,7 +112,7 @@ class InsightArticle extends Component {
     if ( media && media.type === 'img' ) {
       img = <img
         alt={media.alt}
-        src={media.src}
+        src={media.src  }
         height={400}
         width='100%' />
     }
