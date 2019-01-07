@@ -110,7 +110,7 @@ export const overview = {
         label: 'Our Locations',
         path: '/contact'
       },
-      content: 'Our Sales Team has vision and tactics for delivering optimal \
+      content: 'Our Accounts Team has vision and tactics for delivering optimal \
       solutions. They work closely to provide you with the best technology \
       and people possible.',
       divider: true,

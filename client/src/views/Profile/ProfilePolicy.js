@@ -10,13 +10,13 @@ import {
 } from 'actions/messages';
 
 import {
-  changeInsight,
-  createInsight,
-  loadInsight,
-  removeInsight,
-  unloadInsight,
-  updateInsight,
-} from 'actions/insights';
+  changePolicy,
+  createPolicy,
+  loadPolicy,
+  removePolicy,
+  unloadPolicy,
+  updatePolicy,
+} from 'actions/policies';
 
 const styles = theme => ({
   content: {
@@ -25,15 +25,15 @@ const styles = theme => ({
   },
 });
 
-class ProfileInsight extends Component {
+class ProfilePolicy extends Component {
   componentDidMount = () => {
     const { dispatch, match } = this.props;
-    dispatch(loadInsight(match.params.itemId));
+    dispatch(loadPolicy(match.params.itemId));
   };
 
   componentWillUnmount = () => {
     const { dispatch } = this.props;
-    dispatch(unloadInsight());
+    dispatch(unloadPolicy());
   };
 
   displayMessage = (content, cb) => {
@@ -46,45 +46,45 @@ class ProfileInsight extends Component {
   onChange = (event) => {
     const { dispatch } = this.props;
     const { name, value } = event.target;
-    dispatch(changeInsight(name, value));
+    dispatch(changePolicy(name, value));
   };
 
   onDelete = () => {
-    const { dispatch, history, insight } = this.props;
+    const { dispatch, history, policy } = this.props;
 
     this.displayMessage(
       'Deleting Standard...',
-      () => dispatch(removeInsight(insight._id)).then(() => {
-        this.displayMessage(`Deleted Standard "${insight.title}".`);
-        return setTimeout(() => history.push('/profile/insights'), 1000);
+      () => dispatch(removePolicy(policy._id)).then(() => {
+        this.displayMessage(`Deleted Standard "${policy.title}".`);
+        return setTimeout(() => history.push('/profile/policys'), 1000);
       })
     );
   };
 
   onUpdate = () => {
-    const { dispatch, insight, user } = this.props;
+    const { dispatch, policy, user } = this.props;
 
     this.displayMessage(
-      'Updating Insight...',
-      () => dispatch(updateInsight(insight, user)).then(() => {
-        return this.displayMessage(`Updated Insight "${insight.title}".`);
+      'Updating Policy...',
+      () => dispatch(updatePolicy(policy, user)).then(() => {
+        return this.displayMessage(`Updated Policy "${policy.title}".`);
       })
     );
   };
 
   onCreate = () => {
-    const { dispatch, insight, user } = this.props;
+    const { dispatch, policy, user } = this.props;
 
     this.displayMessage(
-      'Creating Insight...',
-      () => dispatch(createInsight(insight, user)).then(() => {
-        return this.displayMessage(`Created Insight "${insight.title}".`);
+      'Creating Policy...',
+      () => dispatch(createPolicy(policy, user)).then(() => {
+        return this.displayMessage(`Created Policy "${policy.title}".`);
       })
     );
   };
 
   render() {
-    const { classes, insight = {}, match } = this.props;
+    const { classes, policy = {}, match } = this.props;
     const isExist = match.params.itemId;
 
     const fields = [
@@ -96,18 +96,7 @@ class ProfileInsight extends Component {
         placeholder: 'Type the section title here...',
         size: { xs: 12 },
         type: 'text',
-        value: insight.title || '',
-        variant: 'outlined',
-      },
-      {
-        fullWidth: true,
-        label: 'Subtitle',
-        name: 'subtitle',
-        onChange: this.onChange,
-        placeholder: 'Type subtitle here (optional)...',
-        size: { xs: 12 },
-        type: 'text',
-        value: insight.subtitle || '',
+        value: policy.title || '',
         variant: 'outlined',
       },
       {
@@ -121,20 +110,20 @@ class ProfileInsight extends Component {
         rows: 20,
         size: { xs: 12 },
         type: 'text',
-        value: insight.content || '',
+        value: (policy.content && policy.content.body) || '',
         variant: 'outlined',
-      }
+      },
     ];
 
     let text = '';
     if ( isExist ) {
-      text = 'Update Insight';
+      text = 'Update Policy';
     } else {
-      text = 'Create Insight';
+      text = 'Create Policy';
     }
 
     return <ReportForm
-      cancelButton={isExist ? 'Delete Insight' : null}
+      cancelButton={isExist ? 'Delete Policy' : null}
       onCancel={isExist ? this.onDelete : null}
       onChange={this.onChange}
       onSubmit={isExist ? this.onUpdate : this.onSubmit}
@@ -146,9 +135,9 @@ class ProfileInsight extends Component {
 
 const select = state => ({
   message: state.messages,
-  insight: state.insights.currentItem,
-  insights: state.insights.filteredItems,
+  policy: state.policies.currentItem,
+  policies: state.policies.filteredItems,
   user: state.session.user,
 });
 
-export default withStyles(styles)(connect(select)(ProfileInsight));
+export default withStyles(styles)(connect(select)(ProfilePolicy));

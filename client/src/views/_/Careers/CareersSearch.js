@@ -14,7 +14,6 @@ import {
 } from 'actions/careers';
 
 const styles = theme => ({
-  iconButton: {},
   search: {
     backgroundColor: theme.palette.blue,
     zIndex: 0,
@@ -56,11 +55,12 @@ class CareersSearch extends Component {
               className={classes.searchField}
               fullWidth
               inputProps={{
+                'aria-label': 'Search jobs',
                 className: classes.searchInput,
               }}
               InputProps={{
                 endAdornment: value === '' ? null : <IconButton
-                  className={classes.iconButton}
+                  aria-label='Search jobs'
                   onClick={() => dispatch(searchCareers(null, false, false))}>
                   <FontAwesomeIcon
                     icon={['fal', 'times']}

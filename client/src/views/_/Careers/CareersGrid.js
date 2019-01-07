@@ -191,9 +191,10 @@ class CareersGrid extends Component {
       <Card className={classes.teamCard} elevation={2}>
 
         <CardMedia
+          alt={team.media.alt}
           className={classes.teamMedia}
           component={team.media.type || 'div'}
-          src={team.media.src} />
+          src={team.media.src + '/388/200?maintain=false'} />
 
         <CardHeader
           className={classes.teamTitle}
@@ -212,6 +213,7 @@ class CareersGrid extends Component {
 
         <CardActions className={classes.teamActions}>
           <Button
+            aria-label={team.button1.label}
             color='primary'
             className={classes.teamButton}
             component={Link}
@@ -220,6 +222,7 @@ class CareersGrid extends Component {
             {team.button1.label}
           </Button>
           <Button
+            aria-label={team.button2.label}
             color='primary'
             className={classes.teamButton}
             component={Link}

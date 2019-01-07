@@ -9,6 +9,7 @@ import { hero } from './home';
 
 const styles = theme => ({
   hero: {
+    backgroundColor: theme.palette.blue,
     backgroundImage: 'url("/images/city2.jpg")',
     backgroundRepeat: 'no-repeat',
     backgroundSize: '100% 100%',
@@ -25,7 +26,7 @@ const styles = theme => ({
     }
   },
   heroContent: {
-    backgroundColor: 'rgba(0,0,0,.4)',
+    backgroundColor: 'rgba(0,0,0,.3)',
     color: theme.palette.common.white,
     height: '100%',
     padding: `${theme.spacing.unit * 5}px ${theme.spacing.unit * 2}px`

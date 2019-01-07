@@ -88,6 +88,7 @@ class AboutHero extends Component {
 
           <Grid item md={8} xs={8}>
             <Button
+              aria-label={hero.button.label}
               className={classes.heroButton}
               fullWidth
               onClick={onClick}

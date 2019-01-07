@@ -10,7 +10,7 @@ import { banner } from './home';
 
 const styles = theme => ({
   banner: {
-    backgroundColor: theme.palette.light,
+    backgroundColor: theme.palette.offwhite,
     borderBottom: `1px solid ${theme.palette.lightgray}`,
     borderTop: `1px solid ${theme.palette.lightgray}`,
     marginBottom: theme.spacing.unit * 5,
@@ -74,6 +74,7 @@ class HomeServices extends Component {
             md={3}
             xs={12}>
             <Button
+              aria-label={button1.label}
               className={classes.bannerButton}
               color='primary'
               component={Link}
@@ -90,6 +91,7 @@ class HomeServices extends Component {
             md={3}
             xs={12}>
             <Button
+              aria-label={button2.label}
               className={classes.bannerButton}
               color='secondary'
               component={Link}

@@ -57,9 +57,8 @@ class Report extends Component {
             }}>
             {section.title}
           </Link>
+          <ol style={{ paddingBottom: 20 }}>{items}</ol>
         </li>
-        <ol>{items}</ol>
-        <br />
       </Fragment>;
     });
   };

@@ -57,6 +57,13 @@ const styles = theme => ({
   tabs: {
     backgroundColor: '#fefefe',
   },
+  tabsName: {
+    color: 'white',
+    fontWeight: 300,
+    letterSpacing: 5,
+    paddingBottom: 10,
+    paddingTop: 10
+  },
   title: {
     paddingLeft: theme.spacing.unit *4,
     paddingRight: theme.spacing.unit *4,
@@ -69,6 +76,31 @@ export class TabBar extends Component {
   onChange = (event, value) => {
     this.setState({ value });
   };
+
+  renderTabIcon = (header, isVertical) => {
+    const { classes } = this.props;
+
+    if ( isVertical ) {
+      return <FontAwesomeIcon
+        className={classes.icon}
+        icon={header.icon} />;
+    } else {
+      return <Grid alignItems='center' container justify='center'>
+        <Grid item xs={5}>
+          <Grid container alignItems='center'>
+            <Grid item xs={2}>
+              <FontAwesomeIcon
+                className={classes.icon}
+                icon={header.icon} />
+            </Grid>
+            <Grid className={classes.horizontalLabel} item xs={10}>
+              {header.label}
+            </Grid>
+          </Grid>
+          </Grid>
+      </Grid>;
+    }
+  }
 
   renderTabs = (tabs) => {
     const { value } = this.state;
@@ -162,54 +194,33 @@ export class TabBar extends Component {
 
   renderTabsHeaders = headers => {
     const { classes, direction } = this.props;
+    const isVertical = direction === 'vertical';
 
-    return headers.map((header, key) => (
-      <Tab
+    return headers.map((header, key) => {
+      const icon = this.renderTabIcon(header, isVertical);
+      const label = isVertical ? header.label : undefined;
+
+      return <Tab
+        aria-label={header.label}
         classes={{ label: classes.label }}
-        icon={
-          direction === 'vertical'
-            ? <FontAwesomeIcon
-                className={classes.icon}
-                icon={header.icon} />
-            : <>
-                <Grid alignItems='center' container justify='center'>
-                  <Grid item xs={5}>
-                    <Grid container alignItems='center'>
-                      <Grid item xs={2}>
-                        <FontAwesomeIcon
-                          className={classes.icon}
-                          icon={header.icon} />
-                      </Grid>
-                      <Grid className={classes.horizontalLabel} item xs={10}>
-                        {header.label}
-                      </Grid>
-                    </Grid>
-                    </Grid>
-                </Grid>
-              </>
-        }
+        icon={icon}
         key={key}
-        label={direction === 'vertical' ? header.label : undefined }
-      />
-    ));
+        label={label} />
+    });
   };
 
   render() {
     const { value } = this.state;
     const { classes, name, values } = this.props;
 
+    // TODO: change Tabs to variant='fullWidth' with MUI update
+
     return (
       <>
         <AppBar className={classes.root} position='static'>
           <Typography
             align='center'
-            style={{
-              color: 'white',
-              fontWeight: 300,
-              letterSpacing: 5,
-              paddingBottom: 10,
-              paddingTop: 10
-            }}
+            className={classes.tabsName}
             variant='h6'>
             { name }
           </Typography>
@@ -221,10 +232,10 @@ export class TabBar extends Component {
             onChange={this.onChange}
             textColor='primary'
             value={value}>
-            { this.renderTabsHeaders(values) }
+            {this.renderTabsHeaders(values)}
           </Tabs>
         </AppBar>
-        { this.renderTabs(values) }
+        {this.renderTabs(values)}
       </>
     );
   }

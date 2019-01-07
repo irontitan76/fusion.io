@@ -179,9 +179,11 @@ export class Footer extends Component {
         {
           Object.keys(icons).map((icon, key) => (
             <IconButton
+              aria-label={icon}
               className={classes.footerSocialButton}
               href={icons[icon]}
               key={key}
+              rel='noopener'
               target='_blank'>
               <FontAwesomeIcon
                 className={classes.footerSocialIcon}

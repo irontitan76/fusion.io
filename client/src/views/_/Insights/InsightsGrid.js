@@ -69,9 +69,10 @@ class InsightsGrid extends Component {
 
     const media = insight.media ?
       <CardMedia
+        alt={insight.media.alt}
         className={classes.gridMedia}
         component={insight.media.type || 'div'}
-        src={insight.media.src} /> : null;
+        src={insight.media.src + '/388/200?maintain=false'} /> : null;
 
     return <Grid
       className={classes.grid}

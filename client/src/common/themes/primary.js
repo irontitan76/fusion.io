@@ -15,7 +15,7 @@ const orange = '#ff851b'; /* Tango */
 // const purple = '#b10dc9';
 const red = '#ff4136';
 const teal = '#39cccc';
-// const yellow = '#ffdc00';
+const yellow = '#ffdc00';
 
 /* Incident Response Site - Material UI Theme */
 export default createMuiTheme({
@@ -32,10 +32,14 @@ export default createMuiTheme({
     transport: { main: gray, contrastText: offwhite },
     blue,
     dark,
+    green,
     light,
     offwhite,
+    orange,
+    red,
     primary: { main: blue, contrastText: offwhite },
     secondary: { main: green, contrastText: offwhite },
+    yellow,
     type: 'light',
   },
   shape: {

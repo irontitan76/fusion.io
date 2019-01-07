@@ -12,6 +12,8 @@ import ProfileInsight from './ProfileInsight';
 import ProfileInsights from './ProfileInsights';
 import ProfileNotifications from './ProfileNotifications';
 import ProfileOverview from './ProfileOverview';
+import ProfilePolicies from './ProfilePolicies';
+import ProfilePolicy from './ProfilePolicy';
 import ProfileSettings from './ProfileSettings';
 import ProfileStandard from './ProfileStandard';
 import ProfileStandards from './ProfileStandards';
@@ -45,6 +47,9 @@ class Home extends Component {
         <Route exact path={`${match.path}/insights/new`} component={ProfileInsight} />
         <Route exact path={`${match.path}/insights/edit/:itemId`} component={ProfileInsight} />
         <Route exact path={`${match.path}/insights`} component={ProfileInsights} />
+        <Route exact path={`${match.path}/policies`} component={ProfilePolicies} />
+        <Route exact path={`${match.path}/policies/new`} component={ProfilePolicy} />
+        <Route exact path={`${match.path}/policies/edit/:itemId`} component={ProfilePolicy} />
         <Route exact path={`${match.path}/standards/new`} component={ProfileStandard}/>
         <Route exact path={`${match.path}/standards/edit/:itemId`} component={ProfileStandard} />
         <Route exact path={`${match.path}/standards`} component={ProfileStandards} />

@@ -3,6 +3,16 @@ import queryString from 'query-string';
 
 const BASE_PATH = '/api/policies';
 
+export const deletePolicy = async (_id) => {
+  try {
+    const response = await axios.delete(`${BASE_PATH}/${_id}`);
+    return response.data;
+  } catch (err) {
+    const message = `Could not delete Policy ${_id}`;
+    return { err, message };
+  }
+};
+
 export const getPolicies = async (query) => {
   try {
     query = `?${queryString.stringify(query)}` || '';
@@ -21,6 +31,21 @@ export const getPolicy = async (_id) => {
     return response.data;
   } catch (err) {
     const message = `Could not fetch policy ${_id}`;
+    return { err, message };
+  }
+};
+
+export const postPolicy = async (policy) => {
+  try {
+    const response = await axios.post(BASE_PATH, {
+      brief: policy.content.substring(0, 65),
+      content: policy.content,
+      subtitle: policy.subtitle,
+      title: policy.title,
+    });
+    return response.data;
+  } catch (err) {
+    const message = 'Could not add policy';
     return { err, message };
   }
 };

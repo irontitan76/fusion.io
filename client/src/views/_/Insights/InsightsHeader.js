@@ -111,6 +111,7 @@ class InsightsHeader extends Component {
             component={Grid}
             fullWidth
             inputProps={{
+              'aria-label': 'Search insights',
               className: classes.headerSearchInput,
               onKeyPress: (event) => {
                 if ( event.key !== 'Enter' ) {

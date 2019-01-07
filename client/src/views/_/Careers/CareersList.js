@@ -113,6 +113,7 @@ class CareersList extends Component {
 
       return <Grid item key={state[searcher].name}>
         <TextField
+          aria-label='Filter careers'
           className={classes.careersListFilter}
           fullWidth
           inputProps={{ name: state[searcher].name, id: state[searcher].name }}

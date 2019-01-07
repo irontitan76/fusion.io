@@ -44,7 +44,7 @@ class AboutStory extends Component {
                 className={classes.storyImageContainer}
                 container
                 justify='center'>
-                <img alt='' {...story.image} height='100%' width='100%'/>
+                <img alt={story.image.alt} src={story.image.src + '/820/500?maintain=false'} />
               </Grid>
             </Grid>
 
