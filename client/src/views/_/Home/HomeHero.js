@@ -1,13 +1,12 @@
 import React, { Component } from 'react';
 import Link from 'react-router-dom/Link';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { FormattedMessage } from 'react-intl';
 
 import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import withStyles from '@material-ui/core/styles/withStyles';
-
-import { hero } from './home';
 
 const styles = theme => ({
   hero: {
@@ -74,7 +73,6 @@ const styles = theme => ({
 class HomeHero extends Component {
   render() {
     const { classes } = this.props;
-    const { button1, button2, icon, subtitle, title } = hero;
 
     return <Grid
       className={classes.hero}
@@ -90,14 +88,14 @@ class HomeHero extends Component {
 
           <FontAwesomeIcon
             className={classes.heroIcon}
-            icon={icon} />
+            icon={[ 'fal', 'atom-alt' ]} />
 
           <Typography
             align='center'
             className={classes.heroTitle}
             gutterBottom
             variant='h4'>
-            {title}
+            <FormattedMessage id='company.shortname' />
           </Typography>
 
           <Typography
@@ -105,7 +103,7 @@ class HomeHero extends Component {
             className={classes.heroSubtitle}
             gutterBottom
             variant='h4'>
-            {subtitle}
+            <FormattedMessage id='company.slogan' />
           </Typography>
 
           <Grid
@@ -119,9 +117,9 @@ class HomeHero extends Component {
                 color='default'
                 component={Link}
                 fullWidth
-                to={button1.path}
+                to='/about'
                 variant='outlined'>
-                {button1.label}
+                <FormattedMessage id='home.hero.button[0].label' />
               </Button>
             </Grid>
 
@@ -131,9 +129,9 @@ class HomeHero extends Component {
                 color='default'
                 component={Link}
                 fullWidth
-                to={button2.path}
+                to='/strategy'
                 variant='outlined'>
-                {button2.label}
+                <FormattedMessage id='home.hero.button[1].label' />
               </Button>
             </Grid>
           </Grid>

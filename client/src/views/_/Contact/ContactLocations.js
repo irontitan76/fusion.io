@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { FormattedMessage } from 'react-intl';
 
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
@@ -25,7 +26,7 @@ export class ContactLocations extends Component {
         <Typography
           gutterBottom
           variant='h6'>
-          Our locations
+          <FormattedMessage id='contact.locations.title' />
         </Typography>
         <Typography
           align='left'>

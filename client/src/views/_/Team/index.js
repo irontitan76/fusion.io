@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
 import Link from 'react-router-dom/Link';
 import withRouter from 'react-router-dom/withRouter';
+import { FormattedMessage } from 'react-intl';
 
 import Button from '@material-ui/core/Button';
 import Card from '@material-ui/core/Card';
@@ -12,8 +12,6 @@ import Typography from '@material-ui/core/Typography';
 import withStyles from '@material-ui/core/styles/withStyles';
 
 import Footer from 'components/Footer';
-
-import { teams } from './team';
 
 const styles = theme => ({
   team: {},
@@ -70,6 +68,141 @@ const styles = theme => ({
 });
 
 class Team extends Component {
+  getTeam = (id) => {
+    const teams = {
+      design: {
+        aboutTitle: 'teams.team[0].about.descriptor',
+        bg: 'health',
+        color: 'white',
+        description: 'teams.team[0].description',
+        name: 'teams.team[0].name',
+        roles: [{
+            id: 'associate-designer',
+            description: 'Designers are proficient in creating wireframes, mockups, and demos for user interfaces and experiences. They have bright imaginations and can turn those imaginings into reality.',
+            name: 'Associate Designer',
+            salary: 65000
+          },
+          {
+            id: 'designer',
+            description: 'Designers are proficient in creating wireframes, mockups, and demos for user interfaces and experiences. They have bright imaginations and can turn those imaginings into reality.',
+            name: 'Designer',
+            salary: 70000,
+          },
+          {
+            id: 'senior-designer',
+            description: 'Senior Designers are technically proficient in coding robust, scalable solutions. They have an advanced understanding of programming languages and paradigms.',
+            name: 'Senior Designer',
+            salary: 80000,
+          },
+          {
+            id: 'lead-designer',
+            description: 'Lead Designers grasp the entirety of a solution, solve technical problems, and are able to teach and relay any necessary information to his or her teammates and managers.',
+            name: 'Lead Designer',
+            salary: 85000,
+          },
+          {
+            id: 'principal-designer',
+            description: 'Principal Designers have vision far and beyond others on his or her team. They can easily switch contexts from low-level to high-level problems and relay that information.',
+            name: 'Principal Designer',
+            salary: 92500,
+          },
+          {
+            id: 'design-architect',
+            description: 'Design Architects create system architectures that are highly scalable, loosely coupled, and highly cohesive. They can foresee and articulate the technical vision for the business.',
+            name: 'Design Architect',
+            salary: 100000
+          },
+          {
+            id: 'senior-design-architect',
+            description: 'Senior Design Architects lead and collaborate on the architecture across the breadth of the company and how their area of focus integrates with the rest of the company.',
+            name: 'Senior Design Architect',
+            salary: 110000
+          },
+        ],
+        slogan: 'teams.team[0].slogan'
+      },
+      finance: {
+        aboutTitle: 'teams.team[1].about.descriptor',
+        bg: 'finance',
+        color: 'white',
+        description: 'teams.team[1].description',
+        name: 'teams.team[1].name',
+        slogan: 'teams.team[1].slogan',
+      },
+      engineering: {
+        aboutTitle: 'teams.team[2].about.descriptor',
+        bg: 'technology',
+        color: 'white',
+        description: 'teams.team[2].description',
+        name: 'teams.team[2].name',
+        roles: [{
+            id: 'software-engineer',
+            description: 'Software Engineers exhibit knowledge in fundamental coding concepts concerning data structures and algorithms. They have innovative minds and offer efficient solutions.',
+            name: 'Software Engineer',
+            salary: 85000,
+          },
+          {
+            id: 'senior-software-engineer',
+            description: 'Senior Software Engineers are technically proficient in coding robust, scalable solutions. They have an advanced understanding of programming languages and paradigms.',
+            name: 'Senior Software Engineer',
+            salary: 100000,
+          },
+          {
+            id: 'lead-software-engineer',
+            description: 'Lead Software Engineers grasp the entirety of a solution, solve technical problems, and are able to teach and relay any necessary information to his or her teammates and managers.',
+            name: 'Lead Software Engineer',
+            salary: 110000,
+          },
+          {
+            id: 'principal-software-engineer',
+            description: 'Principal Software Engineers have vision far and beyond others on his or her team. They can easily switch contexts from low-level to high-level problems and relay that information.',
+            name: 'Principal Software Engineer',
+            salary: 120000,
+          },
+          {
+            id: 'software-architect',
+            description: 'Software Architects create system architectures that are highly scalable, loosely coupled, and highly cohesive. They can foresee and articulate the technical vision for the business.',
+            name: 'Software Architect',
+            salary: 150000,
+          },
+          {
+            id: 'senior-software-architect',
+            description: 'Senior Software Architects lead and collaborate on the architecture across the breadth of the company and how their area of focus integrates with the rest of the company.',
+            name: 'Senior Software Architect',
+            salary: 200000,
+          },
+        ],
+        slogan: 'teams.team[2].slogan',
+      },
+      legal: {
+        aboutTitle: 'teams.team[3].about.descriptor',
+        bg: 'legal',
+        color: 'black',
+          description: 'teams.team[3].description',
+        name: 'teams.team[3].name',
+        slogan: 'teams.team[3].slogan',
+      },
+      marketing: {
+        aboutTitle: 'teams.team[4].about.descriptor',
+        bg: 'media',
+        color: 'white',
+        description: 'teams.team[4].description',
+        name: 'teams.team[4].name',
+        slogan: 'teams.team[4].slogan',
+      },
+      sales: {
+        aboutTitle: 'teams.team[5].about.descriptor',
+        bg: 'cosmos',
+        color: 'white',
+        description: 'teams.team[5].description',
+        name: 'teams.team[5].name',
+        slogan: 'teams.team[5].slogan',
+      },
+    };
+
+    return teams[id];
+  };
+
   renderRole = (role, key) => {
     const { classes } = this.props;
 
@@ -94,23 +227,15 @@ class Team extends Component {
     </Grid>;
   };
 
-  renderRoles = () => {
-    const { match } = this.props;
-    const { roles } = teams[match.params.teamId];
-
+  renderRoles = (roles) => {
     if (!roles) return null;
     return roles.map((role, key) => this.renderRole(role, key));
   };
 
   render() {
     const { classes, match, theme } = this.props;
-    const {
-      bg,
-      color,
-      description,
-      name,
-      slogan
-    } = teams[match.params.teamId];
+    const team = this.getTeam(match.params.teamId);
+    const { aboutTitle, bg, color, description, name, slogan } = team;
 
     return <>
       <main>
@@ -131,7 +256,7 @@ class Team extends Component {
               gutterBottom
               style={{ color }}
               variant='h3'>
-              {name}
+              <FormattedMessage id={name} />
             </Typography>
 
             <Typography
@@ -139,7 +264,7 @@ class Team extends Component {
               className={classes.teamTitle}
               style={{ color }}
               variant='subtitle1'>
-              {slogan}
+              <FormattedMessage id={slogan} />
             </Typography>
 
           </Grid>
@@ -152,13 +277,13 @@ class Team extends Component {
             <Typography
               className={classes.teamDescriptionTitle}
               variant='h6'>
-              { `About ${name}`}
+              <FormattedMessage id={aboutTitle} />
             </Typography>
 
             <Typography
               className={classes.teamDescriptionText}
               variant='body2'>
-              {description}
+              <FormattedMessage id={description} />
             </Typography>
 
             <Button
@@ -166,7 +291,7 @@ class Team extends Component {
               component={Link}
               to={`/careers?team=${name.trim().split(' ')[0].toLowerCase()}`}
               variant='contained'>
-              See jobs
+              <FormattedMessage id='teams.team.button.label' />
             </Button>
           </Grid>
 
@@ -177,11 +302,11 @@ class Team extends Component {
             <Typography
               className={classes.teamPositionsTitle}
               variant='h6'>
-              Our Roles
+              <FormattedMessage id='teams.team.roles.descriptor' />
             </Typography>
 
             <Grid alignItems='center' container justify='flex-start' spacing={24}>
-              {this.renderRoles()}
+              {this.renderRoles(team.roles)}
             </Grid>
 
           </Grid>
@@ -192,6 +317,4 @@ class Team extends Component {
   }
 }
 
-const select = state => ({});
-
-export default withRouter(withStyles(styles, { withTheme: true })(connect(select)(Team)));
+export default withRouter(withStyles(styles, { withTheme: true })(Team));

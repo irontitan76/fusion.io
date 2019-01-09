@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { FormattedMessage } from 'react-intl';
 
 import AppBar from '@material-ui/core/AppBar';
 import Fade from '@material-ui/core/Fade';
@@ -104,7 +105,7 @@ export class TabBar extends Component {
 
   renderTabs = (tabs) => {
     const { value } = this.state;
-    const { classes } = this.props;
+    const { classes, intl } = this.props;
 
     return tabs.map((tab, key) => (
       value === key && (
@@ -123,7 +124,7 @@ export class TabBar extends Component {
             item
             variant='h6'
             xs={12}>
-            {tab.title}
+            { intl ? <FormattedMessage id={tab.title} /> : tab.title }
           </Typography>
 
           <Typography
@@ -134,7 +135,7 @@ export class TabBar extends Component {
             item
             variant='subtitle1'
             xs={12}>
-            {tab.subheading}
+            { intl ? <FormattedMessage id={tab.subtitle} /> : tab.subtitle }
           </Typography>
 
 
@@ -157,7 +158,9 @@ export class TabBar extends Component {
                     container
                     direction='column'
                     justify='center'>
-                    { breakLine(tab.description) }
+                    <Typography align='center' style={{ fontSize: 'inherit', fontWeight: 'inherit' }} variant='body1'>
+                      { intl ? <FormattedMessage id={tab.description} /> : tab.description }
+                    </Typography>
                   </Grid>
 
                 </Fade>

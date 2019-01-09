@@ -1,10 +1,9 @@
 import React, { Component } from 'react';
+import { FormattedMessage } from 'react-intl';
 
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import withStyles from '@material-ui/core/styles/withStyles';
-
-import { banner } from './about';
 
 const styles = theme => ({
   author: {
@@ -56,7 +55,7 @@ class AboutBanner extends Component {
           align='center'
           className={classes.author}
           variant='h6'>
-          {banner.author}
+          <FormattedMessage id='about.banner.author' />
         </Typography>
       </Grid>
 
@@ -69,7 +68,7 @@ class AboutBanner extends Component {
           align='left'
           className={classes.quote}
           variant='subtitle1'>
-          {banner.quote}
+          <FormattedMessage id='about.banner.quote' />
         </Typography>
       </Grid>
     </Grid>;

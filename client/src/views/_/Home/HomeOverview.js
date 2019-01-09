@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Link from 'react-router-dom/Link';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { FormattedMessage } from 'react-intl';
 
 import Button from '@material-ui/core/Button';
 import Card from '@material-ui/core/Card';
@@ -11,8 +12,6 @@ import Divider from '@material-ui/core/Divider';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import withStyles from '@material-ui/core/styles/withStyles';
-
-import { overview } from './home';
 
 const styles = theme => ({
   overview: {
@@ -64,13 +63,13 @@ class HomeOverview extends Component {
 
         <CardHeader
           avatar={avatar}
-          title={item.title}/>
+          title={<FormattedMessage id={`home.overview.card[${key}].title`} />}/>
 
         <CardContent
           className={classes.overviewCardContent}>
           <Typography
             component='p'>
-            {item.content}
+            <FormattedMessage id={`home.overview.card[${key}].content`} />
           </Typography>
         </CardContent>
 
@@ -82,7 +81,7 @@ class HomeOverview extends Component {
             component={Link}
             size='small'
             to={item.button.path}>
-            {item.button.label}
+            <FormattedMessage id={`home.overview.card[${key}].button`} />
           </Button>
         </CardActions>
 
@@ -91,15 +90,44 @@ class HomeOverview extends Component {
   }
 
   renderItems = () => {
-    const { items } = overview;
+    const items = [
+      {
+        button: {
+          label: 'home.overview.card[0].button',
+          path: '/about'
+        },
+        content: 'home.overview.card[0].content',
+        divider: true,
+        icon: ['fal', 'user-tie'],
+        title: 'home.overview.card[0].title',
+      },
+      {
+        button: {
+          label: 'home.overview.card[0].button',
+          path: '/insights'
+        },
+        content: 'home.overview.card[1].content',
+        divider: true,
+        icon: ['fal', 'binoculars'],
+        title: 'home.overview.card[1].content',
+      },
+      {
+        button: {
+          label: 'home.overview.card[0].button',
+          path: '/contact'
+        },
+        content: 'home.overview.card[2].content',
+        divider: true,
+        icon: ['fal', 'route'],
+        title: 'home.overview.card[2].content',
+      },
+    ];
 
-    if (!items) return null;
     return items.map((item, key) => this.renderItem(item, key));
   };
 
   render() {
     const { classes } = this.props;
-    const { subtitle, title } = overview;
 
     return <Grid
       className={classes.overview}
@@ -113,7 +141,7 @@ class HomeOverview extends Component {
             className={classes.overviewTitle}
             gutterBottom
             variant='h4'>
-            {title}
+            <FormattedMessage id='home.overview.title' />
           </Typography>
 
           <Typography
@@ -121,7 +149,7 @@ class HomeOverview extends Component {
             className={classes.overviewSubtitle}
             gutterBottom
             variant='subtitle1'>
-            {subtitle}
+            <FormattedMessage id='home.overview.subtitle' />
           </Typography>
         </Grid>
 

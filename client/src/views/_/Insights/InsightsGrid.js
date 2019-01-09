@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Link from 'react-router-dom/Link';
+import { FormattedMessage } from 'react-intl';
 
 import Button from '@material-ui/core/Button';
 import Card from '@material-ui/core/Card';
@@ -129,14 +130,14 @@ class InsightsGrid extends Component {
               component={Grid}
               item
               xs={12}>
-              No insight articles could be found
+              <FormattedMessage id='insights.search.none.descriptor' />
             </Typography>
             <Button
               color='primary'
               component={Link}
               to='/'
               variant='contained'>
-              Go Home
+              <FormattedMessage id='insights.search.none.button' />
             </Button>
           </Grid>
 

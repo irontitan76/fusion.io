@@ -6,11 +6,14 @@ import Grid from '@material-ui/core/Grid';
 import withStyles from '@material-ui/core/styles/withStyles';
 
 import Footer from 'components/Footer';
-import { loadInsight } from 'actions/insights';
 
 import InsightArticle from './InsightArticle';
 import InsightSidebar from './InsightSidebar';
 import InsightsHeader from '../Insights/InsightsHeader'; // From another folder :(
+
+import {
+  loadInsight
+} from 'actions/insights';
 
 const styles = theme => ({
   insights: {},

@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Link from 'react-router-dom/Link';
+import { FormattedMessage, injectIntl } from 'react-intl';
 
 import Button from '@material-ui/core/Button';
 import CircularProgress from '@material-ui/core/CircularProgress';
@@ -24,8 +25,11 @@ const styles = theme => ({
     marginBottom: theme.spacing.unit * 3,
   },
   careersListFilters: {
-    paddingBottom: theme.spacing.unit * 4,
+    backgroundColor: 'rgb(250,251,252)',
+    border: '1px solid #ccc',
+    padding: theme.spacing.unit * 5,
     paddingTop: 0,
+    marginTop: theme.spacing.unit * 1.5,
   },
   careersListNoMoreFound: {
     color: '#777',
@@ -49,7 +53,7 @@ class CareersList extends Component {
   state = {
     'org': {
       name: 'org',
-      label: 'Organization',
+      label: 'careers.filter.org.label',
       items: [
         'All organizations',
         'Fusion A.I.',
@@ -67,7 +71,7 @@ class CareersList extends Component {
     },
     'team': {
       name: 'team',
-      label: 'Team',
+      label: 'careers.filter.team.label',
       items: [
         'All teams',
         'Engineering & Technology',
@@ -81,7 +85,7 @@ class CareersList extends Component {
     },
     'location': {
       name: 'location',
-      label: 'Location',
+      label: 'careers.filter.location.label',
       items: [
         'Any location',
         'Austin, TX',
@@ -104,7 +108,7 @@ class CareersList extends Component {
 
   renderFilters = () => {
     const { state } = this;
-    const { careers, classes } = this.props;
+    const { careers, classes, intl } = this.props;
 
     return Object.keys(state).map((searcher, key) => {
       const options = state[searcher].items.map((item, index) => (
@@ -117,7 +121,7 @@ class CareersList extends Component {
           className={classes.careersListFilter}
           fullWidth
           inputProps={{ name: state[searcher].name, id: state[searcher].name }}
-          label={state[searcher].label}
+          label={intl.formatMessage({ id: state[searcher].label})}
           name={state[searcher].name}
           onChange={this.onChange}
           select
@@ -134,19 +138,19 @@ class CareersList extends Component {
     if (!headers) return null;
     return headers.map((header, key) => {
       return <TableCell key={key}>
-        {header.name}
+        <FormattedMessage id={header.name} />
       </TableCell>
     })
   };
 
   renderRolesRows = () => {
-    const { careers, classes } = this.props;
+    const { careers, classes, intl } = this.props;
 
     let content = null;
     if ( careers.isFetching ) {
       content = <CircularProgress />
     } else {
-      content = 'No roles available';
+      content = intl.formatMessage({ id: 'careers.search.none.descriptor' });
     }
 
     if ( careers.items.length === 0 ) {
@@ -167,7 +171,7 @@ class CareersList extends Component {
             component={Link}
             to={`/careers/${career._id}`}
             variant='text'>
-            More
+            <FormattedMessage id='careers.select.descriptor' />
           </Button>
         </TableCell>
       </TableRow>
@@ -179,7 +183,7 @@ class CareersList extends Component {
         <TableCell
           className={classes.careersListNoMoreFound}
           colSpan={5}>
-          End of results
+          {intl.formatMessage({ id: 'careers.search.end.descriptor' })}
         </TableCell>
       </TableRow>
     </>;
@@ -198,18 +202,11 @@ class CareersList extends Component {
         <Grid
           className={classes.careersListFilters}
           container
-          direction='column'
-          style={{
-            backgroundColor: 'rgb(250,251,252)',
-            border: '1px solid #ccc',
-            padding: 40,
-            paddingTop: 0,
-            marginTop: 20,
-          }}>
+          direction='column'>
           <Typography
             className={classes.careersListTitle}
             variant='h5'>
-            Filter
+            <FormattedMessage id='careers.filter.title' />
           </Typography>
           {this.renderFilters()}
         </Grid>
@@ -219,7 +216,7 @@ class CareersList extends Component {
         <Typography
           className={classes.careersListTitle}
           variant='h4'>
-          Open Requisitions
+          <FormattedMessage id='careers.title' />
         </Typography>
 
         <Table>
@@ -240,12 +237,12 @@ class CareersList extends Component {
 
 CareersList.defaultProps = {
   headers: [
-    { name: 'Role' },
-    { name: 'Organization' },
-    { name: 'Team' },
-    { name: 'Location' },
-    { name: '' }
+    { name: 'careers.table.header[0]' },
+    { name: 'careers.table.header[1]' },
+    { name: 'careers.table.header[2]' },
+    { name: 'careers.table.header[3]' },
+    { name: 'careers.table.header[4]' }
   ]
 };
 
-export default withStyles(styles)(CareersList);
+export default withStyles(styles)(injectIntl(CareersList));

@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Link from 'react-router-dom/Link';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { injectIntl } from 'react-intl';
 
 import AppBar from '@material-ui/core/AppBar';
 import Grid from '@material-ui/core/Grid';
@@ -11,19 +12,19 @@ import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import withStyles from '@material-ui/core/styles/withStyles';
 
-import { filterInsights } from 'actions/insights';
+import { 
+  filterInsights
+} from 'actions/insights';
 
 const styles = theme => ({
   header: {
-    borderBottom: '1px solid #ccc',
-    boxShadow: 'none',
     marginBottom: theme.spacing.unit * 5,
     [theme.breakpoints.down('sm')]: {
       marginBottom: 0,
     },
   },
   headerBar: {
-    backgroundColor: theme.palette.common.white,
+    backgroundColor: theme.palette.blue,
     [theme.breakpoints.down('sm')]: {
       paddingBottom: theme.spacing.unit * 2,
     },
@@ -39,23 +40,30 @@ const styles = theme => ({
     },
   },
   headerTitleSpan: {
-    fontWeight: 500,
+    color: theme.palette.common.white,
+    fontWeight: 300,
   },
   headerPeriod: {
-    color: '#0074D9',
+    color: theme.palette.dark,
     fontSize: 40,
     lineHeight: .4,
   },
   headerSearchField: {
+    backgroundColor: 'rgba(255,255,255,0.3)',
     border: '1px solid #ddd',
     padding: `${theme.spacing.unit * .75}px 0px`,
   },
   headerSearchIcon: {
-    color: theme.palette.gray,
+    color: theme.palette.common.white,
     paddingLeft: 12,
   },
   headerSearchInput: {
+    color: theme.palette.common.white,
     padding: theme.spacing.unit * .75,
+    '&::placeholder': {
+      color: theme.palette.common.white,
+      fontWeight: 300,
+    }
   },
 });
 
@@ -83,7 +91,7 @@ class InsightsHeader extends Component {
   };
 
   render() {
-    const { classes, history } = this.props;
+    const { classes, history, intl } = this.props;
 
     const searchIcon = <InputAdornment position='start'>
       <FontAwesomeIcon
@@ -91,7 +99,7 @@ class InsightsHeader extends Component {
         icon={[ 'fal', 'search' ]} />
     </InputAdornment>;
 
-    return <AppBar className={classes.header} position='sticky'>
+    return <AppBar className={classes.header} position='sticky' elevation={0}>
       <Toolbar className={classes.headerBar}>
         <Grid alignItems='center' container justify='space-between'>
           <Grid item md={9} xs={12}>
@@ -111,7 +119,7 @@ class InsightsHeader extends Component {
             component={Grid}
             fullWidth
             inputProps={{
-              'aria-label': 'Search insights',
+              'aria-label': intl.formatMessage({ id: 'insights.search.placeholder' }),
               className: classes.headerSearchInput,
               onKeyPress: (event) => {
                 if ( event.key !== 'Enter' ) {
@@ -125,7 +133,7 @@ class InsightsHeader extends Component {
             margin='none'
             md={3}
             onChange={this.onChange}
-            placeholder='Search insights...'
+            placeholder={intl.formatMessage({ id: 'insights.search.placeholder' })}
             xs={12} />
         </Grid>
       </Toolbar>
@@ -137,4 +145,4 @@ const select = state => ({
   insights: state.insights,
 });
 
-export default withStyles(styles)(connect(select)(InsightsHeader));
+export default withStyles(styles)(connect(select)(injectIntl(InsightsHeader)));

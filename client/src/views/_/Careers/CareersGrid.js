@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Link from 'react-router-dom/Link';
+import { FormattedMessage, injectIntl } from 'react-intl';
 
 import Button from '@material-ui/core/Button';
 import Card from '@material-ui/core/Card';
@@ -19,19 +20,18 @@ const size = {
   xs: 12
 };
 
-export const grid = {
+const grid = {
   teams: [
     {
       button1: {
-        label: 'Learn more',
+        label: 'careers.team[0].button[0]',
         path: '/teams/engineering'
       },
       button2: {
-        label: 'See Jobs',
+        label: 'careers.team[0].button[1]',
         path: '/careers?team=engineering'
       },
-      content: 'Develop solutions and provide professional services for \
-        businesses.',
+      content: 'careers.team[0].content',
       divider: true,
       media: {
         alt: 'engineering',
@@ -39,19 +39,18 @@ export const grid = {
         type: 'img'
       },
       size,
-      title: 'Engineering & Technology',
+      title: 'careers.team[0].title',
     },
     {
       button1: {
-        label: 'Learn more',
+        label: 'careers.team[1].button[0]',
         path: '/teams/design'
       },
       button2: {
-        label: 'See Jobs',
+        label: 'careers.team[1].button[1]',
         path: '/careers?team=design'
       },
-      content: 'Create intuitive experiences and design the future of user \
-        interaction.',
+      content: 'careers.team[1].content',
       divider: true,
       media: {
         alt: 'user experience & design',
@@ -59,18 +58,18 @@ export const grid = {
         type: 'img'
       },
       size,
-      title: 'User Experience & Design',
+      title: 'careers.team[1].title',
     },
     {
       button1: {
-        label: 'Learn more',
+        label: 'careers.team[2].button[0]',
         path: '/teams/sales'
       },
       button2: {
-        label: 'See Jobs',
+        label: 'careers.team[2].button[1]',
         path: '/careers?team=sales'
       },
-      content: 'Find, grow, and lead the people who make Fusion great.',
+      content: 'careers.team[2].content',
       divider: true,
       media: {
         alt: 'sales',
@@ -78,19 +77,18 @@ export const grid = {
         type: 'img'
       },
       size,
-      title: 'Accounts & Sales',
+      title: 'careers.team[2].title',
     },
     {
       button1: {
-        label: 'Learn more',
+        label: 'careers.team[3].button[0]',
         path: '/teams/finance'
       },
       button2: {
-        label: 'See Jobs',
+        label: 'careers.team[3].button[1]',
         path: '/careers?team=finance'
       },
-      content: 'Drive high impact revenues and provide guidance for investment \
-        decisions.',
+      content: 'careers.team[3].content',
       divider: true,
       media: {
         alt: 'finance',
@@ -98,19 +96,18 @@ export const grid = {
         type: 'img'
       },
       size,
-      title: 'Finance',
+      title: 'careers.team[3].title',
     },
     {
       button1: {
-        label: 'Learn more',
+        label: 'careers.team[4].button[0]',
         path: '/teams/marketing'
       },
       button2: {
-        label: 'See Jobs',
+        label: 'careers.team[4].button[1]',
         path: '/careers?team=marketing'
       },
-      content: 'Protect, enhance and build our company reputation through \
-        media.',
+      content: 'careers.team[4].content',
       divider: true,
       media: {
         alt: 'marketing',
@@ -118,19 +115,18 @@ export const grid = {
         type: 'img'
       },
       size,
-      title: 'Marketing',
+      title: 'careers.team[4].title',
     },
     {
       button1: {
-        label: 'Learn more',
+        label: 'careers.team[5].button[0]',
         path: '/teams/legal'
       },
       button2: {
-        label: 'See Jobs',
+        label: 'careers.team[5].button[1]',
         path: '/careers?team=legal'
       },
-      content: 'Optimize industry policy and govern how stakeholders interact \
-        with each other.',
+      content: 'careers.team[5].content',
       divider: true,
       media: {
         alt: 'legal',
@@ -138,7 +134,7 @@ export const grid = {
         type: 'img'
       },
       size,
-      title: 'Legal & Corporate Affairs',
+      title: 'careers.team[5].title',
     },
   ],
 };
@@ -181,7 +177,7 @@ const styles = theme => ({
 
 class CareersGrid extends Component {
   renderTeam = (team, key) => {
-    const { classes, onClick } = this.props;
+    const { classes, intl, onClick } = this.props;
 
     return <Grid
       className={classes.team}
@@ -198,14 +194,14 @@ class CareersGrid extends Component {
 
         <CardHeader
           className={classes.teamTitle}
-          title={team.title}
+          title={intl.formatMessage({ id: team.title})}
           titleTypographyProps={{ variant: 'subtitle1' }} />
 
         <CardContent>
           <Typography
             className={classes.teamContent}
             component='p'>
-            {team.content}
+            <FormattedMessage id={team.content} />
           </Typography>
         </CardContent>
 
@@ -219,7 +215,7 @@ class CareersGrid extends Component {
             component={Link}
             size='small'
             to={team.button1.path}>
-            {team.button1.label}
+            <FormattedMessage id={team.button1.label} />
           </Button>
           <Button
             aria-label={team.button2.label}
@@ -227,11 +223,11 @@ class CareersGrid extends Component {
             className={classes.teamButton}
             component={Link}
             onClick={() => onClick({
-              target: { name: 'team', value: team.title }
+              target: { name: 'team', value: intl.formatMessage({ id: team.title }) }
             })}
             size='small'
             to='/careers'>
-            {team.button2.label}
+            <FormattedMessage id={team.button2.label} />
           </Button>
         </CardActions>
 
@@ -259,4 +255,4 @@ class CareersGrid extends Component {
   }
 }
 
-export default withStyles(styles)(CareersGrid);
+export default withStyles(styles)(injectIntl(CareersGrid));

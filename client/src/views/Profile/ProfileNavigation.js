@@ -79,6 +79,7 @@ const styles = theme => ({
       duration: theme.transitions.duration.leavingScreen,
     }),
   },
+  toolbar: theme.mixins.toolbar,
 });
 
 class ProfileNavigation extends Component {

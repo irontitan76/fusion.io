@@ -1,11 +1,10 @@
 import React, { Component } from 'react';
+import { FormattedMessage, injectIntl } from 'react-intl';
 
 import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import withStyles from '@material-ui/core/styles/withStyles';
-
-import { hero } from './about';
 
 const styles = theme => ({
   hero: {
@@ -50,7 +49,7 @@ const styles = theme => ({
 
 class AboutHero extends Component {
   render() {
-    const { classes, onClick } = this.props;
+    const { classes, intl, onClick } = this.props;
 
     return <Grid
       alignItems='center'
@@ -74,7 +73,7 @@ class AboutHero extends Component {
             item
             variant='h1'
             xs={12}>
-            {hero.title}
+            <FormattedMessage id='about.hero.title' />
           </Typography>
 
           <Typography
@@ -83,17 +82,17 @@ class AboutHero extends Component {
             component={Grid}
             item
             xs={12}>
-            {hero.subtitle}
+            <FormattedMessage id='about.hero.subtitle' />
           </Typography>
 
           <Grid item md={8} xs={8}>
             <Button
-              aria-label={hero.button.label}
+              aria-label={intl.formatMessage({ id: 'about.hero.button.label' })}
               className={classes.heroButton}
               fullWidth
               onClick={onClick}
               variant='outlined'>
-              {hero.button.label}
+              <FormattedMessage id='about.hero.button.label' />
             </Button>
           </Grid>
 
@@ -103,4 +102,4 @@ class AboutHero extends Component {
   }
 }
 
-export default withStyles(styles)(AboutHero);
+export default withStyles(styles)(injectIntl(AboutHero));

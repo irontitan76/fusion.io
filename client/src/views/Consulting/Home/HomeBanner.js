@@ -1,12 +1,11 @@
 import React, { Component } from 'react';
 import Link from 'react-router-dom/Link';
+import { FormattedMessage } from 'react-intl';
 
 import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import withStyles from '@material-ui/core/styles/withStyles';
-
-import { banner } from './home';
 
 const styles = theme => ({
   banner: {
@@ -40,7 +39,6 @@ const styles = theme => ({
 class HomeServices extends Component {
   render() {
     const { classes } = this.props;
-    const { button1, button2, description } = banner;
 
     return <Grid
       alignItems='center'
@@ -59,7 +57,7 @@ class HomeServices extends Component {
           align='center'
           className={classes.bannerDescriptionText}
           variant='subtitle1'>
-          {description}
+          <FormattedMessage id='consult.home.banner.description' />
         </Typography>
 
       </Grid>
@@ -74,14 +72,14 @@ class HomeServices extends Component {
             md={3}
             xs={12}>
             <Button
-              aria-label={button1.label}
+              aria-label={<FormattedMessage id='consult.home.banner.button[0].label' />}
               className={classes.bannerButton}
               color='primary'
               component={Link}
               fullWidth
-              to={button1.path}
+              to='/contact'
               variant='contained'>
-              {button1.label}
+              <FormattedMessage id='consult.home.banner.button[0].label' />
             </Button>
           </Grid>
 
@@ -91,14 +89,14 @@ class HomeServices extends Component {
             md={3}
             xs={12}>
             <Button
-              aria-label={button2.label}
+              aria-label={<FormattedMessage id='consult.home.banner.button[1].label' />}
               className={classes.bannerButton}
               color='secondary'
               component={Link}
               fullWidth
-              to={button2.path}
+              to='/insights?group=consulting'
               variant='contained'>
-              {button2.label}
+              <FormattedMessage id='consult.home.banner.button[1].label' />
             </Button>
           </Grid>
 

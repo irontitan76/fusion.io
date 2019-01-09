@@ -1,10 +1,9 @@
 import React, { Component } from 'react';
+import { FormattedMessage } from 'react-intl';
 
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import withStyles from '@material-ui/core/styles/withStyles';
-
-import { reasons } from './home';
 
 const styles = theme => ({
   reasons: {},
@@ -31,7 +30,6 @@ const styles = theme => ({
 class HomeReasons extends Component {
   render() {
     const { classes } = this.props;
-    const { strategy, subtitle, title } = reasons;
 
     return <Grid
       alignItems='center'
@@ -47,13 +45,13 @@ class HomeReasons extends Component {
           align='center'
           className={classes.reasonsTitle}
           variant='h4'>
-          {title}
+          <FormattedMessage id='consult.home.reasons.title' />
         </Typography>
         <Typography
           align='center'
           className={classes.reasonsSubheading}
           variant='subtitle1'>
-          {subtitle}
+          <FormattedMessage id='consult.home.reasons.subtitle' />
         </Typography>
       </Grid>
 
@@ -66,7 +64,7 @@ class HomeReasons extends Component {
           align='left'
           className={classes.reasonsBody}
           variant='body2'>
-          {strategy}
+          <FormattedMessage id='consult.home.reasons.strategy' />
         </Typography>
         <Typography
           className={classes.reasonsBody}

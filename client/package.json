@@ -66,6 +66,7 @@
     "react-dev-utils": "^6.0.4",
     "react-dom": "^16.5.2",
     "react-fusioncharts": "^3.0.0",
+    "react-intl": "^2.7.2",
     "react-markdown": "^4.0.4",
     "react-redux": "^5.0.7",
     "react-router-dom": "^4.3.1",

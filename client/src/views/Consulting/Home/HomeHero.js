@@ -1,11 +1,10 @@
 import React, { Component } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { injectIntl } from 'react-intl';
 
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import withStyles from '@material-ui/core/styles/withStyles';
-
-import { hero } from './home';
 
 const styles = theme => ({
   hero: {
@@ -53,8 +52,7 @@ const styles = theme => ({
 
 class HomeHero extends Component {
   render() {
-    const { classes } = this.props;
-    const { icon, title } = hero;
+    const { classes, intl } = this.props;
 
     return <Grid
       className={classes.hero}
@@ -70,14 +68,14 @@ class HomeHero extends Component {
 
           <FontAwesomeIcon
             className={classes.heroIcon}
-            icon={icon} />
+            icon={[ 'fal', 'users' ]} />
 
           <Typography
             align='center'
             className={classes.heroTitle}
             gutterBottom
             variant='h4'>
-            {title}
+            { intl.formatMessage({id: 'consult.org.name' }).toUpperCase() }
           </Typography>
 
         </Grid>
@@ -86,4 +84,4 @@ class HomeHero extends Component {
   };
 }
 
-export default withStyles(styles)(HomeHero);
+export default withStyles(styles)(injectIntl(HomeHero));

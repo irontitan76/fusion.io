@@ -7,7 +7,10 @@ import InsightsGrid from './InsightsGrid';
 import InsightsHeader from './InsightsHeader';
 import Footer from 'components/Footer';
 
-import { loadInsights, unloadInsights } from 'actions/insights';
+import { 
+  loadInsights,
+  unloadInsights
+} from 'actions/insights';
 
 class Insights extends Component {
   componentDidMount() {

@@ -1,13 +1,12 @@
 import React, { Component } from 'react';
 import Link from 'react-router-dom/Link';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { FormattedMessage } from 'react-intl';
 
 import Grid from '@material-ui/core/Grid';
 import Hidden from '@material-ui/core/Hidden';
 import Typography from '@material-ui/core/Typography';
 import withStyles from '@material-ui/core/styles/withStyles';
-
-import { logos } from './home';
 
 const styles = theme => ({
   logo: {
@@ -37,7 +36,68 @@ const styles = theme => ({
 class HomeLogos extends Component {
   renderLogos = () => {
     const { classes } = this.props;
-    const { items } = logos;
+    
+    const items = [{
+        disabled: true,
+        icon: 'brain',
+        label: 'home.logo[0].name',
+        to: '/ai',
+      },
+      {
+        disabled: false,
+        icon: 'users',
+        label: 'home.logo[1].name',
+        to: '/consulting',
+      },
+      {
+        disabled: true,
+        icon: 'space-shuttle',
+        label: 'home.logo[2].name',
+        to: '/cosmos',
+      },
+      {
+        disabled: true,
+        icon: 'solar-panel',
+        label: 'home.logo[3].name',
+        to: '/energy',
+      },
+      {
+        disabled: true,
+        icon: 'credit-card-blank',
+        label: 'home.logo[4].name',
+        to: '/finance',
+      },
+      {
+        disabled: true,
+        icon: 'dna',
+        label: 'home.logo[5].name',
+        to: '/health',
+      },
+      {
+        disabled: true,
+        icon: 'balance-scale',
+        label: 'home.logo[6].name',
+        to: '/legal',
+      },
+      {
+        disabled: true,
+        icon: 'broadcast-tower',
+        label: 'home.logo[7].name',
+        to: '/media',
+      },
+      {
+        disabled: false,
+        icon: 'code',
+        label: 'home.logo[8].name',
+        to: '/technology',
+      },
+      {
+        disabled: true,
+        icon: 'map-marked',
+        label: 'home.logo[9].name',
+        to: '/transport',
+      },
+    ];
 
     return items.map((item, key) => (
       <Grid
@@ -56,7 +116,9 @@ class HomeLogos extends Component {
             icon={[ 'fal', item.icon] }
             size='2x'
             style={{ marginBottom: 20 }} />
-          <Typography>{item.label}</Typography>
+          <Typography>
+            <FormattedMessage id={item.label} />
+          </Typography>
         </Typography>
       </Grid>
     ));

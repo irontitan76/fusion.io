@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { injectIntl } from 'react-intl';
 
 import AppBar from '@material-ui/core/AppBar';
 import Grid from '@material-ui/core/Grid';
@@ -15,12 +16,14 @@ import {
 
 const styles = theme => ({
   search: {
-    backgroundColor: theme.palette.blue,
     zIndex: 0,
   },
   searchBar: {
     border: 'none',
     outline: 'none',
+  },
+  searchCancelIcon: {
+    fontSize: 12,
   },
   searchField: {
     backgroundColor: theme.palette.common.white,
@@ -37,14 +40,33 @@ const styles = theme => ({
 });
 
 class CareersSearch extends Component {
-  render() {
-    const { classes, dispatch, onSearch, value } = this.props;
+  renderEndAdornment = () => {
+    const { classes, dispatch, value } = this.props;
 
-    const icon = <InputAdornment position='start'>
+    if (value === '') return null;
+      
+    return <IconButton
+      aria-label='Cancel search'
+      onClick={() => dispatch(searchCareers(null, false, false))}>
+      <FontAwesomeIcon
+        className={classes.searchCancelIcon}
+        icon={['fal', 'times']} />
+    </IconButton>;
+  };
+
+  renderStartAdornment = () => {
+    const { classes } = this.props;
+
+    return <InputAdornment position='start'>
       <FontAwesomeIcon
         className={classes.searchIcon}
         icon={['fal', 'search']} />
     </InputAdornment>;
+  };
+
+  render() {
+    const { classes, dispatch, intl, onSearch } = this.props;
+    const label = intl.formatMessage({ id: 'careers.search.placeholder' });
 
     return <AppBar className={classes.search} position='static'>
       <Toolbar className={classes.searchBar}>
@@ -52,25 +74,16 @@ class CareersSearch extends Component {
         <Grid container justify='center'>
           <Grid item xl={3} md={5} xs={12}>
             <TextField
-              className={classes.searchField}
+              classes={{ root: classes.searchField }}
               fullWidth
-              inputProps={{
-                'aria-label': 'Search jobs',
-                className: classes.searchInput,
-              }}
+              inputProps={{  'aria-label': label,  className: classes.searchInput }}
               InputProps={{
-                endAdornment: value === '' ? null : <IconButton
-                  aria-label='Search jobs'
-                  onClick={() => dispatch(searchCareers(null, false, false))}>
-                  <FontAwesomeIcon
-                    icon={['fal', 'times']}
-                    style={{ fontSize: 12 }} />
-                </IconButton> ,
+                endAdornment: this.renderEndAdornment(),
                 disableUnderline: true,
-                startAdornment: icon
+                startAdornment: this.renderStartAdornment(),
               }}
               margin='none'
-              placeholder='Search jobs...'
+              placeholder={label}
               onChange={onSearch}
               onFocus={() => dispatch(searchCareers(null, false, true))} />
           </Grid>
@@ -81,4 +94,4 @@ class CareersSearch extends Component {
   }
 }
 
-export default withStyles(styles)(CareersSearch);
+export default withStyles(styles)(injectIntl(CareersSearch));

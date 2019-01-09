@@ -1,11 +1,10 @@
 import React, { Component } from 'react';
 import Link from 'react-router-dom/Link';
+import { FormattedMessage, injectIntl } from 'react-intl';
 
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import withStyles from '@material-ui/core/styles/withStyles';
-
-import { products } from './home';
 
 const styles = theme => ({
   light: {
@@ -82,7 +81,10 @@ class HomeProducts extends Component {
   };
 
   renderItem = (item, key) => {
-    const { classes } = this.props;
+    const { classes, intl } = this.props;
+
+    const title = intl.formatMessage({ id: item.title });
+    const subtitle = intl.formatMessage({ id: item.subtitle });
 
     return <Grid item key={key} {...item.size}>
       <Link className={classes.productItemLink} to={item.path}>
@@ -93,8 +95,8 @@ class HomeProducts extends Component {
           justify='flex-end'
           style={{ backgroundImage: `url('${item.image.src}')` }}>
           <Grid item>
-            {this.renderTitle(item.title, item.variant)}
-            {this.renderSubheading(item.subheading, item.variant)}
+            {this.renderTitle(title, item.variant)}
+            {this.renderSubheading(subtitle, item.variant)}
           </Grid>
         </Grid>
       </Link>
@@ -102,7 +104,32 @@ class HomeProducts extends Component {
   };
 
   renderItems = () => {
-    const { items } = products;
+    const items = [{
+        image: { alt: 'design', src: './images/design2.jpg' },
+        path: '/technology/products/1',
+        size: { md: 4, sm: 6, xs: 12 },
+        subtitle: 'home.products[0].subtitle',
+        title: 'home.products[0].title',
+        variant: 'light',
+      },
+      {
+        image: { alt: 'design', src: './images/isomorph.jpg' },
+        path: '/technology/products/2',
+        size: { md: 4, sm: 6, xs: 12 },
+        subtitle: 'home.products[1].subtitle',
+        title: 'home.products[1].title',
+        variant: 'light',
+      },
+      {
+        image: { alt: 'team', src: './images/consult.jpg' },
+        path: '/consulting/services',
+        size: { md: 8, sm: 12, xs: 12 },
+        subtitle: 'home.products[2].subtitle',
+        title: 'home.products[2].title',
+        variant: 'light',
+      }
+    ];
+
     return items.map((item, key) => this.renderItem(item, key));
   };
 
@@ -114,7 +141,6 @@ class HomeProducts extends Component {
 
   render() {
     const { classes } = this.props;
-    const { subtitle, title } = products;
 
     return <>
       <Grid className={classes.products} item xs={12}>
@@ -122,7 +148,7 @@ class HomeProducts extends Component {
           align='center'
           className={classes.productsTitle}
           variant='h4'>
-          {title}
+          <FormattedMessage id='home.products.title' />
         </Typography>
 
         <Typography
@@ -130,7 +156,7 @@ class HomeProducts extends Component {
           className={classes.productsSubtitle}
           gutterBottom
           variant='subtitle1'>
-          {subtitle}
+          <FormattedMessage id='home.products.subtitle' />
         </Typography>
       </Grid>
 
@@ -150,4 +176,4 @@ class HomeProducts extends Component {
 HomeProducts.defaultProps ={};
 HomeProducts.propTypes = {};
 
-export default withStyles(styles)(HomeProducts);
+export default withStyles(styles)(injectIntl(HomeProducts));

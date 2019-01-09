@@ -1,12 +1,11 @@
 import React, { Component } from 'react';
+import { FormattedMessage, injectIntl } from 'react-intl';
+import Markdown from 'react-markdown';
 
 import Grid from '@material-ui/core/Grid';
 import RootRef from '@material-ui/core/RootRef';
 import Typography from '@material-ui/core/Typography';
 import withStyles from '@material-ui/core/styles/withStyles';
-
-import { breakLine } from 'common/functions';
-import { story } from './about';
 
 const styles = theme => ({
   story: {
@@ -29,7 +28,12 @@ const styles = theme => ({
 
 class AboutStory extends Component {
   render() {
-    const { classes, storyRef } = this.props;
+    const { classes, intl, storyRef } = this.props;
+
+    const image = {
+      alt: 'satellite',
+      src: '/images/sat1.jpg',
+    };
 
     return <RootRef rootRef={storyRef}>
       <Grid
@@ -44,7 +48,7 @@ class AboutStory extends Component {
                 className={classes.storyImageContainer}
                 container
                 justify='center'>
-                <img alt={story.image.alt} src={story.image.src + '/820/500?maintain=false'} />
+                <img alt={image.alt} src={image.src + '/820/500?maintain=false'} />
               </Grid>
             </Grid>
 
@@ -55,7 +59,7 @@ class AboutStory extends Component {
               item
               variant='h4'
               xs={12}>
-              {story.title}
+              <FormattedMessage id='about.story.title' />
             </Typography>
 
             <Typography
@@ -68,7 +72,7 @@ class AboutStory extends Component {
               xl={7}
               md={5}
               xs={11}>
-              {story.subtitle}
+              <FormattedMessage id='about.story.subtitle' />
             </Typography>
 
             <Typography
@@ -81,7 +85,8 @@ class AboutStory extends Component {
               xl={6}
               md={8}
               xs={11}>
-              {breakLine(story.content, 'left')}
+              {/* Use Markdown component */}
+              <Markdown source={intl.formatMessage({ id: 'about.story.content' })} />
             </Typography>
 
           </Grid>
@@ -92,4 +97,4 @@ class AboutStory extends Component {
   }
 }
 
-export default withStyles(styles)(AboutStory);
+export default withStyles(styles)(injectIntl(AboutStory));

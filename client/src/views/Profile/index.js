@@ -4,6 +4,7 @@ import Redirect from 'react-router-dom/Redirect';
 import Route from 'react-router-dom/Route';
 
 import Grid from '@material-ui/core/Grid';
+import withStyles from '@material-ui/core/styles/withStyles';
 
 import ProfileAdmin from './ProfileAdmin';
 import ProfileCareer from './ProfileCareer';

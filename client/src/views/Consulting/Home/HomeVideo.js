@@ -1,10 +1,9 @@
 import React, { Component } from 'react';
+import { FormattedMessage } from 'react-intl';
 
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import withStyles from '@material-ui/core/styles/withStyles';
-
-import { video } from './home';
 
 const styles = theme => ({
   homeVideo: {
@@ -24,7 +23,6 @@ const styles = theme => ({
 class HomeVideo extends Component {
   render() {
     const { classes } = this.props;
-    const { title } = video;
 
     return <Grid container justify='center'>
       <Grid className={classes.homeVideoTitleContainer} item xs={12}>
@@ -32,7 +30,7 @@ class HomeVideo extends Component {
           align='center'
           className={classes.homeVideoTitle}
           variant='h4'>
-          {title}
+          <FormattedMessage id='consult.home.video.title' />
         </Typography>
       </Grid>
       <Grid className={classes.homeVideo} item>

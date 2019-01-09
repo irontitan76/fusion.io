@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { FormattedMessage } from 'react-intl';
 
 import Grid from '@material-ui/core/Grid';
 import Hidden from '@material-ui/core/Hidden';
@@ -15,6 +16,8 @@ const styles = theme => ({
     },
   },
   sidebarHeading: {
+    color: theme.palette.blue,
+    fontWeight: 300,
     paddingBottom: theme.spacing.unit * 3,
     paddingLeft: theme.spacing.unit * 2,
     paddingRight: theme.spacing.unit * 2,
@@ -32,7 +35,7 @@ class Sample extends Component {
           <Typography
             className={classes.sidebarHeading}
             variant='subtitle1'>
-            Trending
+            <FormattedMessage id='insights.trending.title' />
           </Typography>
         </Paper>
       </Grid>

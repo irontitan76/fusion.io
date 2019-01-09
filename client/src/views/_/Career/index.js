@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Markdown from 'react-markdown';
+import { FormattedMessage } from 'react-intl';
 
 import Footer from 'components/Footer';
 
@@ -59,8 +60,8 @@ class Career extends Component {
             align='left'
             className={classes.location}
             variant='body2'>
-            <b>Location</b>: {career.location}
-            &nbsp;&nbsp;|&nbsp;&nbsp;<b>Requisition ID</b>: {career._id}
+            <b><FormattedMessage id='career.location.descriptor' /></b>: {career.location}
+            &nbsp;&nbsp;|&nbsp;&nbsp;<b><FormattedMessage id='career.requisition.descriptor' /></b>: {career._id}
           </Typography>
           <Typography
             align='left'
