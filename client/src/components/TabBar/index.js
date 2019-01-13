@@ -11,8 +11,6 @@ import Tabs from '@material-ui/core/Tabs';
 import Typography from '@material-ui/core/Typography';
 import withStyles from '@material-ui/core/styles/withStyles';
 
-import { breakLine } from 'common/functions';
-
 const styles = theme => ({
   description: {
     paddingLeft: theme.spacing.unit *4,

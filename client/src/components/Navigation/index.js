@@ -15,13 +15,13 @@ export class Nav extends Component {
 
     return <nav>
       <NavBar
-        onClick={ this._onClick }
-        items={ secondary }
-        title={ title } />
+        onClick={this._onClick}
+        items={secondary}
+        title={title} />
       <NavMainMenu
-        onClose={ this._onClick }
-        open={ isNavOpen }
-        items={ primary } />
+        onClose={this._onClick}
+        open={isNavOpen}
+        items={primary} />
     </nav>;
   }
 }
