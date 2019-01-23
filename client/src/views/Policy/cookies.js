@@ -4,21 +4,25 @@ import Footer from 'components/Footer';
 import ReportContent from 'components/Report/Content';
 import ReportHeader from 'components/Report/Header';
 
+// eslint-disable-next-line
 class Cookies extends Component {
   render() {
-    return <>
-      <main>
-        <ReportHeader
-          divider
-          variant='h1'>
+    return (
+      <>
+        <main>
+          <ReportHeader
+            divider
+            variant='h1'
+          >
           Cookie Policy
-        </ReportHeader>
-        <ReportContent>
+          </ReportHeader>
+          <ReportContent>
           Test
-        </ReportContent>
-      </main>
-      <Footer />
-    </>;
+          </ReportContent>
+        </main>
+        <Footer />
+      </>
+    );
   }
 }
 

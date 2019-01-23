@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
 import Fade from '@material-ui/core/Fade';
@@ -7,13 +8,13 @@ import withStyles from '@material-ui/core/styles/withStyles';
 
 import Footer from 'components/Footer';
 
+import {
+  loadInsight,
+} from 'actions/insights';
 import InsightArticle from './InsightArticle';
 import InsightSidebar from './InsightSidebar';
 import InsightsHeader from '../Insights/InsightsHeader'; // From another folder :(
 
-import {
-  loadInsight
-} from 'actions/insights';
 
 const styles = theme => ({
   insights: {},
@@ -38,26 +39,37 @@ class Insight extends Component {
   }
 
   render() {
-    const { classes, history, insight = {} } = this.props;
+    const { classes, dispatch, history, insight = {} } = this.props;
 
-    return <>
-      <main className={classes.main}>
-        <InsightsHeader history={history} />
-        <Fade in timeout={{ enter: 500, exit: 500 }}>
-          <Grid
-            className={classes.insightsItem}
-            container
-            justify='center'
-            spacing={40}>
-            <InsightArticle insight={insight} />
-            <InsightSidebar />
-          </Grid>
-        </Fade>
-      </main>
-      <Footer />
-    </>;
+    return (
+      <>
+        <main className={classes.main}>
+          <InsightsHeader dispatch={dispatch} history={history} />
+          <Fade in timeout={{ enter: 500, exit: 500 }}>
+            <Grid
+              className={classes.insightsItem}
+              container
+              justify='center'
+              spacing={40}
+            >
+              <InsightArticle insight={insight} />
+              <InsightSidebar />
+            </Grid>
+          </Fade>
+        </main>
+        <Footer />
+      </>
+    );
   }
 }
+
+Insight.propTypes = {
+  classes: PropTypes.shape({}).isRequired,
+  dispatch: PropTypes.func.isRequired,
+  history: PropTypes.shape({}).isRequired,
+  insight: PropTypes.shape({}).isRequired,
+  match: PropTypes.shape({}).isRequired,
+};
 
 const select = state => ({
   insight: state.insights.currentItem,

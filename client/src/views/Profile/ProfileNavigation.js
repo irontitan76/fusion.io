@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import Link from 'react-router-dom/Link';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import filter from 'lodash.filter';
@@ -26,25 +27,25 @@ const styles = theme => ({
   bottomNavigation: {
     bottom: 0,
     position: 'absolute',
-    width: '100%'
+    width: '100%',
   },
   drawerPaper: {
     backgroundColor: theme.palette.primary.main,
     height: '100%',
     position: 'relative',
-    transition: theme.transitions.create('width', {
-      easing: theme.transitions.easing.sharp,
-      duration: theme.transitions.duration.enteringScreen,
-    }),
     top: 0,
+    transition: theme.transitions.create('width', {
+      duration: theme.transitions.duration.enteringScreen,
+      easing: theme.transitions.easing.sharp,
+    }),
     whiteSpace: 'nowrap',
     width: 240,
   },
   drawerPaperClose: {
     overflowX: 'hidden',
     transition: theme.transitions.create('width', {
-      easing: theme.transitions.easing.sharp,
       duration: theme.transitions.duration.leavingScreen,
+      easing: theme.transitions.easing.sharp,
     }),
     width: theme.spacing.unit * 7,
     [theme.breakpoints.up('sm')]: {
@@ -68,15 +69,15 @@ const styles = theme => ({
     color: '#fff',
     marginLeft: theme.spacing.unit * 1.5,
     transition: theme.transitions.create('transform', {
-      easing: theme.transitions.easing.sharp,
       duration: theme.transitions.duration.leavingScreen,
+      easing: theme.transitions.easing.sharp,
     }),
   },
   toggleButtonRotate: {
     transform: 'rotate(-180deg)',
     transition: theme.transitions.create('transform', {
-      easing: theme.transitions.easing.sharp,
       duration: theme.transitions.duration.leavingScreen,
+      easing: theme.transitions.easing.sharp,
     }),
   },
   toolbar: theme.mixins.toolbar,
@@ -88,18 +89,18 @@ class ProfileNavigation extends Component {
     type: null,
   };
 
-  toggleOpen = type => {
-    const { open } = this.state;
+  toggleOpen = eventType => {
+    const { open, type } = this.state;
 
-    if ( type === 'mouseLeave' && this.state.type === 'click' ) {
+    if (eventType === 'mouseLeave' && type === 'click') {
       return null;
     }
 
-    if ( type === 'mouseEnter' && this.state.type === 'click' && open ) {
+    if (eventType === 'mouseEnter' && type === 'click' && open) {
       return open ? this.setState({ open: true }) : null;
     }
 
-    return this.setState({ open: !open, type });
+    return this.setState({ open: !open, type: eventType });
   };
 
   getMenuItems = () => {
@@ -107,20 +108,20 @@ class ProfileNavigation extends Component {
     const isAdmin = session.user.role === 'admin';
 
     let menuItems = [];
-    if ( isAdmin ) {
+    if (isAdmin) {
       menuItems = adminMenu;
     } else {
       menuItems = userMenu;
     }
 
-    return [ ...menuItems, ...settingsMenu ];
+    return [...menuItems, ...settingsMenu];
   };
 
   getNotifications = () => {
     const { session } = this.props;
 
     return filter(session.user.notifications, notification => {
-      if ( !notification.isNotified ) {
+      if (!notification.isNotified) {
         return notification;
       }
     }).length;
@@ -131,21 +132,23 @@ class ProfileNavigation extends Component {
 
     const menuItems = this.getMenuItems();
 
-    return menuItems.map((menuItem, index) => (
+    return menuItems.map(menuItem => (
       <ListItem
         button
         className={classes.item}
         component={Link}
         dense
         key={menuItem.label}
-        to={menuItem.path}>
+        to={menuItem.path}
+      >
 
         <ListItemIcon className={classes.iconContainer}>
           {this.renderNotifications(menuItem)}
         </ListItemIcon>
         <ListItemText
           primary={menuItem.label}
-          primaryTypographyProps={{ style: { color: '#fff' }}} />
+          primaryTypographyProps={{ style: { color: '#fff' } }}
+        />
       </ListItem>
     ));
   };
@@ -153,9 +156,7 @@ class ProfileNavigation extends Component {
   renderNotifications = (menuItem) => {
     const { classes } = this.props;
 
-    return <FontAwesomeIcon
-      className={classes.icon}
-      icon={menuItem.icon} />;
+    return <FontAwesomeIcon className={classes.icon} icon={menuItem.icon} />;
   };
 
   render() {
@@ -168,30 +169,39 @@ class ProfileNavigation extends Component {
 
     const buttonClass = `
       ${classes.toggleButton}
-      ${!!open ? classes.toggleButtonRotate : ''}`;
+      ${open ? classes.toggleButtonRotate : ''}`;
 
-    return <Drawer
-      className={classes.root}
-      classes={{ paper: paperClass }}
-      open={open}
-      onMouseEnter={() => this.toggleOpen('mouseEnter')}
-      onMouseLeave={() => this.toggleOpen('mouseLeave')}
-      variant='permanent'>
+    return (
+      <Drawer
+        className={classes.root}
+        classes={{ paper: paperClass }}
+        open={open}
+        onMouseEnter={() => this.toggleOpen('mouseEnter')}
+        onMouseLeave={() => this.toggleOpen('mouseLeave')}
+        variant='permanent'
+      >
 
-      <List className={classes.list}>
-        {this.renderMenuItems()}
-      </List>
+        <List className={classes.list}>
+          {this.renderMenuItems()}
+        </List>
 
-      <List className={classes.bottomNavigation}>
-        <IconButton
-          className={buttonClass}
-          onClick={() => this.toggleOpen('click')}>
-          <ChevronRightIcon />
-        </IconButton>
-      </List>
+        <List className={classes.bottomNavigation}>
+          <IconButton
+            className={buttonClass}
+            onClick={() => this.toggleOpen('click')}
+          >
+            <ChevronRightIcon />
+          </IconButton>
+        </List>
 
-    </Drawer>;
+      </Drawer>
+    );
   }
 }
+
+ProfileNavigation.propTypes = {
+  classes: PropTypes.shape({}).isRequired,
+  session: PropTypes.shape({}).isRequired,
+};
 
 export default withStyles(styles)(ProfileNavigation);

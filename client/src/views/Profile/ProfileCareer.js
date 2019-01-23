@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
 import MenuItem from '@material-ui/core/MenuItem';
@@ -7,7 +8,7 @@ import withStyles from '@material-ui/core/styles/withStyles';
 import ReportForm from 'components/ReportForm';
 
 import {
-  loadMessage
+  loadMessage,
 } from 'actions/messages';
 
 import {
@@ -20,18 +21,18 @@ import {
 } from 'actions/careers';
 
 const styles = theme => ({
+  careerContainer: {
+    paddingBottom: theme.spacing.unit,
+    paddingLeft: theme.spacing.unit * 2,
+    paddingRight: theme.spacing.unit * 2,
+    paddingTop: theme.spacing.unit * 3,
+  },
   description: {
     fontFamily: 'Inconsolata, Monaco, Consolas, "Courier New", Courier;',
     fontSize: 12,
   },
   root: {
     height: '100%',
-  },
-  careerContainer: {
-    paddingBottom: theme.spacing.unit,
-    paddingLeft: theme.spacing.unit * 2,
-    paddingRight: theme.spacing.unit * 2,
-    paddingTop: theme.spacing.unit * 3,
   },
   selectMenu: {
     maxHeight: 400,
@@ -42,7 +43,7 @@ const styles = theme => ({
     paddingLeft: theme.spacing.unit * 2,
     paddingRight: theme.spacing.unit * 2,
     paddingTop: theme.spacing.unit * 3,
-  }
+  },
 });
 
 class ProfileCareer extends Component {
@@ -59,7 +60,7 @@ class ProfileCareer extends Component {
   displayMessage = (content, cb) => {
     const { dispatch } = this.props;
     dispatch(loadMessage(content)).then(() => {
-      cb && cb()
+      cb && cb();
     });
   };
 
@@ -118,39 +119,47 @@ class ProfileCareer extends Component {
     ];
 
     return orgs.map((org) => {
-      return <MenuItem key={org._id} value={org.name}>
-        {org.name}
-      </MenuItem>;
+      return (
+        <MenuItem key={org._id} value={org.name}>
+          {org.name}
+        </MenuItem>
+      );
     });
   };
 
   getTeams = () => {
     const teams = [
-      // { _id: '0', name: 'DevOps' },
-      // { _id: '1', name: 'Marketing' },
-      // { _id: '2', name: 'Design' },
-      // { _id: '3', name: 'Finance' },
-      // { _id: '4', name: 'UI' },
-      // { _id: '5', name: 'Web' },
+      /*
+       * { _id: '0', name: 'DevOps' },
+       * { _id: '1', name: 'Marketing' },
+       * { _id: '2', name: 'Design' },
+       * { _id: '3', name: 'Finance' },
+       * { _id: '4', name: 'UI' },
+       * { _id: '5', name: 'Web' },
+       */
       { _id: '6', name: 'Engineering & Technology' },
     ];
 
     return teams.map((team) => {
-      return <MenuItem key={team._id} value={team.name}>
-        {team.name}
-      </MenuItem>;
+      return (
+        <MenuItem key={team._id} value={team.name}>
+          {team.name}
+        </MenuItem>
+      );
     });
   };
 
   getLocations = () => {
     const locations = [
-      { _id: '0', name: 'Austin, TX' }
+      { _id: '0', name: 'Austin, TX' },
     ];
 
     return locations.map((location) => {
-      return <MenuItem key={location._id} value={location.name}>
-        {location.name}
-      </MenuItem>;
+      return (
+        <MenuItem key={location._id} value={location.name}>
+          {location.name}
+        </MenuItem>
+      );
     });
   };
 
@@ -211,28 +220,24 @@ class ProfileCareer extends Component {
         type: 'select',
         value: career.location || '',
         variant: 'outlined',
-      }, 
+      },
       {
-        InputProps: {
-          className: classes.description
-        },
         fullWidth: true,
+        InputProps: { className: classes.description },
         label: 'Brief',
         multiline: true,
         name: 'brief',
         onChange: this.onChange,
         placeholder: 'Type the brief description here...',
         rows: 1,
-        size: {
-          xs: 12
-        },
+        size: { xs: 12 },
         type: 'text',
         value: career.brief || '',
         variant: 'outlined',
       },
       {
-        InputProps: { className: classes.description },
         fullWidth: true,
+        InputProps: { className: classes.description },
         label: 'Description',
         multiline: true,
         name: 'description',
@@ -247,27 +252,38 @@ class ProfileCareer extends Component {
     ];
 
     let text = '';
-    if ( isExist ) {
+    if (isExist) {
       text = 'Update Career';
     } else {
       text = 'Create Career';
     }
 
-    return <ReportForm
-      cancelButton={isExist ? 'Delete Career' : null}
-      onCancel={isExist ? this.onDelete : null}
-      onChange={this.onChange}
-      onSubmit={isExist ? this.onUpdate : this.onCreate}
-      fields={fields}
-      submitButton={text}
-      title={text} />;
+    return (
+      <ReportForm
+        cancelButton={isExist ? 'Delete Career' : null}
+        onCancel={isExist ? this.onDelete : null}
+        onChange={this.onChange}
+        onSubmit={isExist ? this.onUpdate : this.onCreate}
+        fields={fields}
+        submitButton={text}
+        title={text}
+      />
+    );
   }
 }
 
+ProfileCareer.propTypes = {
+  career: PropTypes.shape({}).isRequired,
+  classes: PropTypes.shape({}).isRequired,
+  dispatch: PropTypes.func.isRequired,
+  history: PropTypes.shape({}).isRequired,
+  match: PropTypes.shape({}).isRequired,
+};
+
 const select = state => ({
-  message: state.messages,
   career: state.careers.currentItem,
   careers: state.careers.items,
+  message: state.messages,
 });
 
 export default withStyles(styles)(connect(select)(ProfileCareer));

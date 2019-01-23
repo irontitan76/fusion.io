@@ -1,17 +1,17 @@
-import React, { Component } from 'react';
+import React from 'react';
 
 import withStyles from '@material-ui/core/styles/withStyles';
 
-const styles = theme => ({
+const styles = () => ({
 
 });
 
-class ProfileOverview extends Component {
-  render() {
-    return <>
+const ProfileOverview = () => {
+  return (
+    <>
       ProfileOverview
-    </>;
-  }
-}
+    </>
+  );
+};
 
 export default withStyles(styles)(ProfileOverview);

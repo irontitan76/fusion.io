@@ -15,24 +15,23 @@ import { endSession } from 'actions/session';
 
 const styles = theme => ({
   listSize: {
-    fontSize: '0.8125rem'
+    fontSize: '0.8125rem',
   },
   menuButton: {
     '&:hover': {
       height: 'auto',
-      width: 'auto',   }
+      width: 'auto',
+    },
   },
   menuLink: {
     '&:hover': {
       color: theme.palette.blue,
-    }
-  }
+    },
+  },
 });
 
-export class NavUserMenu extends Component {
-  state = {
-    anchorEl: null,
-  };
+class NavUserMenu extends Component {
+  state = { anchorEl: null };
 
   handleMenu = (event) => {
     this.setState({ anchorEl: event.currentTarget });
@@ -40,7 +39,7 @@ export class NavUserMenu extends Component {
 
   handleClick = (name) => {
     const { dispatch } = this.props;
-    if ( name === 'Sign out' ) {
+    if (name === 'Sign out') {
       dispatch(endSession());
     }
     this.setState({ anchorEl: null });
@@ -56,61 +55,73 @@ export class NavUserMenu extends Component {
     const open = Boolean(anchorEl);
 
     if (!auth) {
-      return <Button
-        className={classes.menuLink}
-        color='primary'
-        component={Link}
-        onClick={this.handleChange}
-        to='/login'>
-        Login
-      </Button>;
+      return (
+        <Button
+          className={classes.menuLink}
+          color='primary'
+          component={Link}
+          onClick={this.handleChange}
+          to='/login'
+        >
+          Login
+        </Button>
+      );
     }
 
-    const menuItems = items.map((item, key) => (
+    const menuItems = items.map((item) => (
       <MenuItem
         component={Link}
-        key={key}
+        key={item.name}
         onClick={() => this.handleClick(item.name)}
         to={item.path}
-        style={{ fontSize: '.8125rem' }}>
+        style={{ fontSize: '.8125rem' }}
+      >
         <ListItemIcon>{ item.icon }</ListItemIcon>
         <ListItemText
           inset
           primary={item.name}
-          primaryTypographyProps={{ className: classes.listSize }} />
+          primaryTypographyProps={{ className: classes.listSize }}
+        />
       </MenuItem>
     ));
 
-    return <>
-      <IconButton
-        aria-owns={open ? 'menu-appbar' : null}
-        aria-haspopup='true'
-        className={classes.menuButton}
-        onClick={this.handleMenu}
-        color='default'>
-        <img
-          alt='avatar'
-          height='30px'
+    return (
+      <>
+        <IconButton
+          aria-owns={open ? 'menu-appbar' : null}
+          aria-haspopup='true'
+          className={classes.menuButton}
           onClick={this.handleMenu}
-          src='./images/city.jpg'
-          style={{ borderRadius: '50%' }}
-          width='30px' />
-      </IconButton>
-      <Menu
-        id='menu-appbar'
-        anchorEl={anchorEl}
-        anchorOrigin={{ horizontal: 'left', vertical: 'top' }}
-        open={open}
-        onClose={this.handleClose}
-        transformOrigin={{ horizontal: 'right', vertical: 'top' }}>
-        {menuItems}
-      </Menu>
-    </>;
+          color='default'
+        >
+          <img
+            alt='avatar'
+            height='30px'
+            src='./images/city.jpg'
+            style={{ borderRadius: '50%' }}
+            width='30px'
+          />
+        </IconButton>
+        <Menu
+          id='menu-appbar'
+          anchorEl={anchorEl}
+          anchorOrigin={{ horizontal: 'left', vertical: 'top' }}
+          open={open}
+          onClose={this.handleClose}
+          transformOrigin={{ horizontal: 'right', vertical: 'top' }}
+        >
+          {menuItems}
+        </Menu>
+      </>
+    );
   }
 }
 
 NavUserMenu.propTypes = {
-  classes: PropTypes.object.isRequired,
+  auth: PropTypes.bool.isRequired,
+  classes: PropTypes.shape({}).isRequired,
+  dispatch: PropTypes.func.isRequired,
+  items: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
 };
 
 const select = state => ({

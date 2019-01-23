@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import Link from 'react-router-dom/Link';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
@@ -38,44 +39,45 @@ const styles = theme => ({
     paddingLeft: theme.spacing.unit * 2,
     paddingRight: theme.spacing.unit * 2,
     paddingTop: theme.spacing.unit * 3,
-  }
-})
+  },
+});
 
 class ReportTable extends Component {
   renderContent = () => {
     const { classes, items, properties } = this.props;
 
-    if ( items.length === 0 ) {
+    if (items.length === 0) {
       return [
         <TableRow className={classes.tableRow} key={0}>
           <TableCell
             className={classes.noResults}
-            colSpan={6}>
+            colSpan={6}
+          >
             No items found
           </TableCell>
-        </TableRow>
+        </TableRow>,
       ];
     }
 
     return items
-      .sort((a,b) => a.order - b.order)
+      .sort((a, b) => a.order - b.order)
       .map((item, key) => {
-        return <TableRow className={classes.tableRow} key={item._id || key}>
-          {
-            properties.map((property) => {
-              let value = item[property.name];
+        return (
+          <TableRow className={classes.tableRow} key={item._id || key}>
+            {
+              properties.map((property) => {
+                let value = item[property.name];
 
-              if ( property.modifier ) {
-                value = property.modifier(item);
-              }
+                if (property.modifier) {
+                  value = property.modifier(item);
+                }
 
-              return <TableCell key={property.name}>
-                {value}
-              </TableCell>;
-            })
-          }
-        </TableRow>;
-    });
+                return <TableCell key={property.name}>{value}</TableCell>;
+              })
+            }
+          </TableRow>
+        );
+      });
   };
 
   renderHeaders = () => {
@@ -89,50 +91,57 @@ class ReportTable extends Component {
   render() {
     const { addButton, classes, onAdd, title } = this.props;
 
-    return <Grid
-      className={classes.root}
-      container>
+    return (
+      <Grid className={classes.root} container>
 
-      <Grid item xs={12}>
-        <Grid alignItems='center' container justify='space-between'>
+        <Grid item xs={12}>
+          <Grid alignItems='center' container justify='space-between'>
 
-          <Grid item style={{ flex: 1 }}>
-            <Typography
-              className={classes.title}
-              variant='h6'>
-              {title}
-            </Typography>
-          </Grid>
+            <Grid item style={{ flex: 1 }}>
+              <Typography className={classes.title} variant='h6'>
+                {title}
+              </Typography>
+            </Grid>
 
-          <Grid className={classes.actions} item>
-            <Button
-              color='primary'
-              component={Link}
-              to={onAdd}
-              variant='contained'>
-              <FontAwesomeIcon
-                className={classes.icon}
-                icon={['fal', 'plus']} />
-              {addButton}
-            </Button>
+            <Grid className={classes.actions} item>
+              <Button
+                color='primary'
+                component={Link}
+                to={onAdd}
+                variant='contained'
+              >
+                <FontAwesomeIcon className={classes.icon} icon={['fal', 'plus']} />
+                {addButton}
+              </Button>
+            </Grid>
           </Grid>
         </Grid>
-      </Grid>
 
-      <Grid item xs={12}>
-        <Table padding='dense'>
-          <TableHead>
-            <TableRow className={classes.tableRow}>
-              {this.renderHeaders()}
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {this.renderContent()}
-          </TableBody>
-        </Table>
+        <Grid item xs={12}>
+          <Table padding='dense'>
+            <TableHead>
+              <TableRow className={classes.tableRow}>
+                {this.renderHeaders()}
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              {this.renderContent()}
+            </TableBody>
+          </Table>
+        </Grid>
       </Grid>
-    </Grid>;
+    );
   }
 }
+
+ReportTable.propTypes = {
+  addButton: PropTypes.string.isRequired,
+  classes: PropTypes.shape({}).isRequired,
+  headers: PropTypes.arrayOf(PropTypes.string).isRequired,
+  items: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
+  onAdd: PropTypes.string.isRequired,
+  properties: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
+  title: PropTypes.string.isRequired,
+};
 
 export default withStyles(styles)(ReportTable);

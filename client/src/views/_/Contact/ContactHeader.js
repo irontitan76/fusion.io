@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
@@ -18,29 +19,42 @@ const styles = theme => ({
   },
 });
 
-export class Contact extends Component {
-  render() {
+class Contact extends Component {
+  renderHeader = () => {
     const { classes, subtitle, title } = this.props;
 
-    return <Grid
-      className={classes.contactHeader}
-      item
-      xs={12}>
-      <Typography
-        align='center'
-        className={classes.contactHeaderTypography}
-        gutterBottom
-        variant='h3'>
-        {title}
-      </Typography>
-      <Typography
-        align='center'
-        className={classes.contactHeaderTypography}>
-        {subtitle}
-      </Typography>
-    </Grid>
+    return (
+      <>
+        <Typography
+          align='center'
+          className={classes.contactHeaderTypography}
+          gutterBottom
+          variant='h3'
+        >
+          {title}
+        </Typography>
+        <Typography align='center' className={classes.contactHeaderTypography}>
+          {subtitle}
+        </Typography>
+      </>
+    );
+  }
+
+  render() {
+    const { classes } = this.props;
+
+    return (
+      <Grid className={classes.contactHeader} item xs={12}>
+        {this.renderHeader()}
+      </Grid>
+    );
   }
 }
 
-export default withStyles(styles)(Contact);
+Contact.propTypes = {
+  classes: PropTypes.shape({}).isRequired,
+  subtitle: PropTypes.string.isRequired,
+  title: PropTypes.string.isRequired,
+};
 
+export default withStyles(styles)(Contact);

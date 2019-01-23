@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
 import withStyles from '@material-ui/core/styles/withStyles';
@@ -6,7 +7,7 @@ import withStyles from '@material-ui/core/styles/withStyles';
 import ReportForm from 'components/ReportForm';
 
 import {
-  loadMessage
+  loadMessage,
 } from 'actions/messages';
 
 import {
@@ -18,7 +19,7 @@ import {
   updatePolicy,
 } from 'actions/policies';
 
-const styles = theme => ({
+const styles = () => ({
   content: {
     fontFamily: 'Inconsolata, Monaco, Consolas, "Courier New", Courier;',
     fontSize: 12,
@@ -38,9 +39,7 @@ class ProfilePolicy extends Component {
 
   displayMessage = (content, cb) => {
     const { dispatch } = this.props;
-    dispatch(loadMessage(content)).then(() => {
-      cb && cb()
-    });
+    dispatch(loadMessage(content)).then(() => cb && cb());
   };
 
   onChange = (event) => {
@@ -74,7 +73,7 @@ class ProfilePolicy extends Component {
 
   onCreate = () => {
     const { dispatch, history, policy } = this.props;
-    
+
     this.displayMessage(
       'Creating Policy...',
       () => dispatch(createPolicy(policy)).then((action) => {
@@ -107,16 +106,14 @@ class ProfilePolicy extends Component {
         name: 'location',
         onChange: this.onChange,
         placeholder: 'Type the URL suffix here...',
-        size: {
-          xs: 12
-        },
+        size: { xs: 12 },
         type: 'text',
         value: policy.location || '',
         variant: 'outlined',
       },
       {
-        InputProps: { className: classes.content },
         fullWidth: true,
+        InputProps: { className: classes.content },
         label: 'Content',
         multiline: true,
         name: 'content',
@@ -131,27 +128,37 @@ class ProfilePolicy extends Component {
     ];
 
     let text = '';
-    if ( isExist ) {
+    if (isExist) {
       text = 'Update Policy';
     } else {
       text = 'Create Policy';
     }
 
-    return <ReportForm
-      cancelButton={isExist ? 'Delete Policy' : null}
-      onCancel={isExist ? this.onDelete : null}
-      onChange={this.onChange}
-      onSubmit={isExist ? this.onUpdate : this.onCreate}
-      fields={fields}
-      submitButton={text}
-      title={text} />;
+    return (
+      <ReportForm
+        cancelButton={isExist ? 'Delete Policy' : null}
+        onCancel={isExist ? this.onDelete : null}
+        onChange={this.onChange}
+        onSubmit={isExist ? this.onUpdate : this.onCreate}
+        fields={fields}
+        submitButton={text}
+        title={text}
+      />
+    );
   }
 }
+
+ProfilePolicy.propTypes = {
+  classes: PropTypes.shape({}).isRequired,
+  dispatch: PropTypes.func.isRequired,
+  history: PropTypes.shape({}).isRequired,
+  match: PropTypes.shape({}).isRequired,
+  policy: PropTypes.shape({}).isRequired,
+};
 
 const select = state => ({
   message: state.messages,
   policy: state.policies.currentItem,
-  policies: state.policies.filteredItems,
   user: state.session.user,
 });
 

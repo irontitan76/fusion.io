@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
 import MenuItem from '@material-ui/core/MenuItem';
@@ -7,7 +8,7 @@ import withStyles from '@material-ui/core/styles/withStyles';
 import ReportForm from 'components/ReportForm';
 
 import {
-  loadMessage
+  loadMessage,
 } from 'actions/messages';
 
 import {
@@ -21,7 +22,7 @@ import {
   updateStrategy,
 } from 'actions/strategies';
 
-const styles = theme => ({
+const styles = () => ({
   content: {
     fontFamily: 'Inconsolata, Monaco, Consolas, "Courier New", Courier;',
     fontSize: 12,
@@ -44,11 +45,10 @@ class ProfileStrategy extends Component {
     dispatch(unloadStrategies());
   };
 
-  displayMessage = (content, cb) => {
+  displayMessage = async (content, cb) => {
     const { dispatch } = this.props;
-    dispatch(loadMessage(content)).then(() => {
-      cb && cb()
-    });
+    await dispatch(loadMessage(content));
+    cb && await cb();
   };
 
   onChange = (event) => {
@@ -57,102 +57,105 @@ class ProfileStrategy extends Component {
     dispatch(changeStrategy(name, value));
   };
 
-  onDelete = () => {
+  onDelete = async () => {
     const { dispatch, history, strategy } = this.props;
 
-    this.displayMessage(
-      'Deleting Strategy...',
-      () => dispatch(removeStrategy(strategy._id)).then(() => {
-        this.displayMessage(`Deleted Strategy "${strategy.title}".`);
-        return setTimeout(() => history.push('/profile/strategies'), 1000);
-      })
-    );
+    await this.displayMessage('Deleting Strategy...');
+    await dispatch(removeStrategy(strategy._id));
+    await this.displayMessage(`Deleted Strategy "${strategy.title}".`);
+
+    return await setTimeout(() => history.push('/profile/strategies'), 1000);
   };
 
-  onUpdate = () => {
+  onUpdate = async () => {
     const { dispatch, strategy } = this.props;
 
-    this.displayMessage(
-      'Updating Strategy...',
-      () => dispatch(updateStrategy(strategy)).then(() => {
-        return this.displayMessage(`Updated Strategy "${strategy.title}".`);
-      })
-    );
+    await this.displayMessage('Updating Strategy...');
+    await dispatch(updateStrategy(strategy));
+
+    return await this.displayMessage(`Updated Strategy "${strategy.title}".`);
   };
 
-  onCreate = () => {
+  onCreate = async () => {
     const { dispatch, strategy } = this.props;
 
-    this.displayMessage(
-      'Creating Strategy...',
-      () => dispatch(createStrategy(strategy)).then(() => {
-        return this.displayMessage(`Created Strategy "${strategy.title}".`);
-      })
-    );
+    await this.displayMessage('Creating Strategy...');
+    await dispatch(createStrategy(strategy));
+    return await this.displayMessage(`Created Strategy "${strategy.title}".`);
   };
 
   getParents = () => {
     const { strategies = [] } = this.props;
 
-    let items = strategies.map((item, key) => {
-      return <MenuItem key={key} value={item.id}>
-        {item.id}. &nbsp;{item.title}
-      </MenuItem>
+    const items = strategies.map((item) => {
+      return (
+        <MenuItem key={item.id} value={item.id}>
+          {item.id}
+          .
+          &nbsp;
+          {item.title}
+        </MenuItem>
+      );
     });
 
     if (items.length === 0) {
       return {
         disable: true,
         items: [
-          <MenuItem key='none' value='none'>No parent sections </MenuItem>
+          <MenuItem key='none' value='none'>No parent sections </MenuItem>,
         ],
       };
-    } else {
-      return {
-        disable: false,
-        items: [
-          <MenuItem key='none' value='none'>
-            No parent section
-          </MenuItem>,
-          ...items,
-        ]
-      };
     }
+
+    return {
+      disable: false,
+      items: [
+        <MenuItem key='none' value='none'>
+          No parent section
+        </MenuItem>,
+        ...items,
+      ],
+    };
   };
 
   getSiblings = () => {
     const { strategy = {}, strategies = [] } = this.props;
 
-    let items = strategies
+    const items = strategies
       .filter((item) => {
         const isSibling = item.parentId === strategy.parentId;
         const isNotSelf = item.id !== strategy.id;
         return isSibling && isNotSelf;
       })
-      .map((item, key) => {
-        return <MenuItem key={key} value={item.id}>
-          {item.id}. &nbsp;{item.title}
-        </MenuItem>
+      .map((item) => {
+        return (
+          <MenuItem key={item.id} value={item.id}>
+            {item.id}
+            .
+            &nbsp;
+            {item.title}
+          </MenuItem>
+        );
       });
 
     if (items.length === 0) {
       return {
         disable: true,
         items: [
-          <MenuItem key='none' value='none'>No sibling sections </MenuItem>
+          <MenuItem key='none' value='none'>No sibling sections </MenuItem>,
         ],
       };
-    } else {
-      return {
-        disable: false,
-        items: [
-          <MenuItem key='none' value='none'>
-            No previous section
-          </MenuItem>,
-          ...items,
-        ]
-      };
     }
+
+    return {
+      disable: false,
+      items: [
+        <MenuItem key='none' value='none'>
+          No previous section
+        </MenuItem>,
+        ...items,
+      ],
+    };
   };
 
   getValue = (property) => {
@@ -212,8 +215,8 @@ class ProfileStrategy extends Component {
         variant: 'outlined',
       },
       {
-        InputProps: { className: classes.content },
         fullWidth: true,
+        InputProps: { className: classes.content },
         label: 'Content',
         multiline: true,
         name: 'content',
@@ -224,31 +227,44 @@ class ProfileStrategy extends Component {
         type: 'text',
         value: (strategy.content && strategy.content.body) || '',
         variant: 'outlined',
-      }
+      },
     ];
 
     let text = '';
-    if ( isExist ) {
+    if (isExist) {
       text = 'Update Strategy';
     } else {
       text = 'Create Strategy';
     }
 
-    return <ReportForm
-      cancelButton={isExist ? 'Delete Strategy' : null}
-      onCancel={isExist ? this.onDelete : null}
-      onChange={this.onChange}
-      onSubmit={isExist ? this.onUpdate : this.onCreate}
-      fields={fields}
-      submitButton={text}
-      title={text} />;
+    return (
+      <ReportForm
+        cancelButton={isExist ? 'Delete Strategy' : null}
+        onCancel={isExist ? this.onDelete : null}
+        onChange={this.onChange}
+        onSubmit={isExist ? this.onUpdate : this.onCreate}
+        fields={fields}
+        submitButton={text}
+        title={text}
+      />
+    );
   }
 }
 
+ProfileStrategy.propTypes = {
+  classes: PropTypes.shape({}).isRequired,
+  dispatch: PropTypes.func.isRequired,
+  history: PropTypes.shape({}).isRequired,
+  match: PropTypes.shape({}).isRequired,
+  message: PropTypes.shape({}).isRequired,
+  strategies: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
+  strategy: PropTypes.shape({}).isRequired,
+};
+
 const select = state => ({
   message: state.messages,
-  strategy: state.strategies.currentItem,
   strategies: state.strategies.items,
+  strategy: state.strategies.currentItem,
 });
 
 export default withStyles(styles)(connect(select)(ProfileStrategy));

@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import Markdown from 'react-markdown';
 import { FormattedMessage } from 'react-intl';
@@ -15,13 +16,13 @@ import {
 
 const styles = theme => ({
   description: {
+    '& h3': {
+      fontWeight: 500,
+    },
     paddingBottom: theme.spacing.unit * 5,
     paddingLeft: theme.spacing.unit * 3,
     paddingRight: theme.spacing.unit * 3,
     paddingTop: theme.spacing.unit * 2,
-    '& h3': {
-      fontWeight: 500,
-    }
   },
   heading: {
     paddingBottom: theme.spacing.unit,
@@ -32,7 +33,7 @@ const styles = theme => ({
   location: {
     paddingLeft: theme.spacing.unit * 3,
     paddingRight: theme.spacing.unit * 3,
-  }
+  },
 });
 
 class Career extends Component {
@@ -44,41 +45,52 @@ class Career extends Component {
   render() {
     const { career, classes } = this.props;
 
-    if ( typeof career === 'undefined' ) return null;
+    if (typeof career === 'undefined') return null;
 
-    return <>
-      <Grid container component='main' justify='space-around'>
-        <Grid item md={1} />
-        <Grid item md={6} xs={12}>
-          <Typography
-            align='left'
-            className={classes.heading}
-            variant='h4'>
-            {career.role}
-          </Typography>
-          <Typography
-            align='left'
-            className={classes.location}
-            variant='body2'>
-            <b><FormattedMessage id='career.location.descriptor' /></b>: {career.location}
-            &nbsp;&nbsp;|&nbsp;&nbsp;<b><FormattedMessage id='career.requisition.descriptor' /></b>: {career._id}
-          </Typography>
-          <Typography
-            align='left'
-            component={Markdown}
-            className={classes.description}
-            variant='body2'>
-            {career.description}
-          </Typography>
+    return (
+      <>
+        <Grid container component='main' justify='space-around'>
+          <Grid item md={1} />
+          <Grid item md={6} xs={12}>
+            <Typography align='left' className={classes.heading} variant='h4'>
+              {career.role}
+            </Typography>
+            <Typography align='left' className={classes.location} variant='body2'>
+              <b>
+                <FormattedMessage id='career.location.descriptor' />
+              </b>
+              :
+              {career.location}
+              &nbsp;&nbsp;|&nbsp;&nbsp;
+              <b>
+                <FormattedMessage id='career.requisition.descriptor' />
+              </b>
+              :
+              {career._id}
+            </Typography>
+            <Typography
+              align='left'
+              component={Markdown}
+              className={classes.description}
+              variant='body2'
+            >
+              {career.description}
+            </Typography>
+          </Grid>
+          <Grid item md={5} />
         </Grid>
-        <Grid item md={5}>
-          
-        </Grid>
-      </Grid>
-      <Footer />
-    </>;
+        <Footer />
+      </>
+    );
   }
 }
+
+Career.propTypes = {
+  career: PropTypes.shape({}).isRequired,
+  classes: PropTypes.shape({}).isRequired,
+  dispatch: PropTypes.func.isRequired,
+  match: PropTypes.shape({}).isRequired,
+};
 
 const select = state => ({
   career: state.careers.currentItem,

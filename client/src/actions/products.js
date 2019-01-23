@@ -4,26 +4,26 @@ import {
 } from 'actions';
 
 import {
-  getProducts
+  getProducts,
 } from 'api/products';
 
 export const loadProducts = params => {
   return async dispatch => {
     try {
       const payload = await getProducts(params);
-      return dispatch({ type: PRODUCTS_LOAD, payload });
+      return dispatch({ payload, type: PRODUCTS_LOAD });
     } catch (err) {
-      return dispatch({ type: PRODUCTS_LOAD, error: true, err });
+      return dispatch({ err, error: true, type: PRODUCTS_LOAD });
     }
   };
 };
 
 export const unloadProducts = () => {
-  return async dispatch => {
+  return dispatch => {
     try {
       return dispatch({ type: PRODUCTS_UNLOAD });
     } catch (err) {
-      return dispatch({ type: PRODUCTS_UNLOAD, error: true, err });
+      return dispatch({ err, error: true, type: PRODUCTS_UNLOAD });
     }
   };
 };

@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 
-import AboutBanner from './AboutBanner'
+import Footer from 'components/Footer';
+
+import AboutBanner from './AboutBanner';
 import AboutHero from './AboutHero';
-// import AboutOrgs from './AboutOrgs';
 import AboutStory from './AboutStory';
 import AboutValues from './AboutValues';
-import Footer from 'components/Footer';
 
 class About extends Component {
   constructor() {
@@ -14,19 +14,21 @@ class About extends Component {
   }
 
   scrollToStory = () => {
-    window.scroll({ top: this.myRef.current.offsetTop, behavior: 'smooth' });
+    window.scroll({ behavior: 'smooth', top: this.myRef.current.offsetTop });
   };
 
   render() {
-    return <>
-      <main>
-        <AboutHero onClick={this.scrollToStory} />
-        <AboutValues />
-        <AboutBanner />
-        <AboutStory storyRef={this.myRef}/>
-      </main>
-      <Footer />
-    </>;
+    return (
+      <>
+        <main>
+          <AboutHero onClick={this.scrollToStory} />
+          <AboutValues />
+          <AboutBanner />
+          <AboutStory storyRef={this.myRef} />
+        </main>
+        <Footer />
+      </>
+    );
   }
 }
 

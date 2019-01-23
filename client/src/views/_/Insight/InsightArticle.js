@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import Markdown from 'react-markdown';
 import moment from 'moment';
 
@@ -18,15 +19,25 @@ const styles = theme => ({
       marginTop: 0,
     },
   },
+  articleAvatarItem: {
+    [theme.breakpoints.down('xl')]: {
+      marginRight: 0,
+    },
+    [theme.breakpoints.down('md')]: {
+      marginRight: theme.spacing.unit * 2,
+    },
+    [theme.breakpoints.down('xs')]: {
+      marginRight: theme.spacing.unit * 4,
+    },
+  },
   articleByline: {
-    padding: theme.spacing.unit * 3
+    padding: theme.spacing.unit * 3,
   },
   articleBylineName: {},
   articleBylineRole: {
-    color: theme.palette.gray
+    color: theme.palette.gray,
   },
   articleContent: {
-    padding: theme.spacing.unit * 3,
     '& h1,h2,h3': {
       fontWeight: 300,
       paddingBottom: theme.spacing.unit * .5,
@@ -36,7 +47,8 @@ const styles = theme => ({
       fontWeight: 300,
       paddingBottom: theme.spacing.unit * .25,
       paddingTop: theme.spacing.unit * .25,
-    }
+    },
+    padding: theme.spacing.unit * 3,
   },
   articleDate: {
     fontWeight: 300,
@@ -59,17 +71,6 @@ const styles = theme => ({
     paddingRight: theme.spacing.unit * 4,
     paddingTop: theme.spacing.unit * 3,
   },
-  articleAvatarItem: {
-    [theme.breakpoints.down('xl')]: {
-      marginRight: 0,
-    },
-    [theme.breakpoints.down('md')]: {
-      marginRight: theme.spacing.unit * 2,
-    },
-    [theme.breakpoints.down('xs')]: {
-      marginRight: theme.spacing.unit * 4,
-    },
-  }
 });
 
 class InsightArticle extends Component {
@@ -79,29 +80,28 @@ class InsightArticle extends Component {
 
     if (!author) return null;
 
-    return <Paper
-      className={classes.articleByline}
-      component={Grid}
-      container
-      elevation={1}>
-      <Grid
-        className={classes.articleAvatarItem}
-        item
-        xs={1}>
-        <Avatar alt={author.name} src={author.avatar} />
-      </Grid>
-      <Grid item xs={9}>
-        <Typography
-          className={classes.articleBylineName}>
-          {author.name}
-        </Typography>
-        <Typography
-          className={classes.articleBylineRole}>
-          {author.title}
-        </Typography>
-      </Grid>
+    return (
+      <Paper
+        className={classes.articleByline}
+        component={Grid}
+        container
+        elevation={1}
+      >
+        <Grid className={classes.articleAvatarItem} item xs={1}>
+          <Avatar alt={author.name} src={author.avatar} />
+        </Grid>
 
-    </Paper>;
+        <Grid item xs={9}>
+          <Typography className={classes.articleBylineName}>
+            {author.name}
+          </Typography>
+          <Typography className={classes.articleBylineRole}>
+            {author.title}
+          </Typography>
+        </Grid>
+
+      </Paper>
+    );
   };
 
   render() {
@@ -109,51 +109,55 @@ class InsightArticle extends Component {
     const { _createdAt, content, media, subtitle, title } = insight;
 
     let img = null;
-    if ( media && media.type === 'img' ) {
-      img = <img
-        alt={media.alt}
-        src={media.src  }
-        height={400}
-        width='100%' />
+    if (media && media.type === 'img') {
+      img = (
+        <img
+          alt={media.alt}
+          src={media.src}
+          height={400}
+          width='100%'
+        />
+      );
     }
 
     const createdAt = moment(_createdAt).format('YYYY-MM-DD');
     const html = <Markdown source={content} />;
 
-    return insight && <Grid className={classes.article} item md={8} xl={5} xs={12}>
-      <Paper
-        className={classes.articlePaper}
-        elevation={isWidthUp('md', width) ? 1 : 0}>
-        {img}
-        <Typography
-          className={classes.articleDate}
-          variant='body2'>
-          {createdAt}
-        </Typography>
+    return insight && (
+      <Grid className={classes.article} item md={8} xl={5} xs={12}>
+        <Paper className={classes.articlePaper} elevation={isWidthUp('md', width) ? 1 : 0}>
 
-        <Typography
-          className={classes.articleTitle}
-          variant='h4'>
-          {title}
-        </Typography>
+          {img}
 
-        <Typography
-          className={classes.articleSubtitle}
-          variant='subtitle1'>
-          {subtitle}
-        </Typography>
+          <Typography className={classes.articleDate} variant='body2'>
+            {createdAt}
+          </Typography>
 
-        <Divider light />
+          <Typography className={classes.articleTitle} variant='h4'>
+            {title}
+          </Typography>
 
-        <Typography
-          className={classes.articleContent}
-          component='div'>
-          {html}
-        </Typography>
-      </Paper>
-      {this.renderAuthor()}
-    </Grid>;
+          <Typography className={classes.articleSubtitle} variant='subtitle1'>
+            {subtitle}
+          </Typography>
+
+          <Divider light />
+
+          <Typography className={classes.articleContent} component='div'>
+            {html}
+          </Typography>
+
+        </Paper>
+        {this.renderAuthor()}
+      </Grid>
+    );
   }
 }
+
+InsightArticle.propTypes = {
+  classes: PropTypes.shape({}).isRequired,
+  insight: PropTypes.shape({}).isRequired,
+  width: PropTypes.string.isRequired,
+};
 
 export default withStyles(styles)(withWidth()(InsightArticle));

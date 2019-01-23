@@ -35,7 +35,7 @@ export const getCareers = async (query) => {
   }
 };
 
-export const postCareer = async (career, user) => {
+export const postCareer = async (career) => {
   try {
     const response = await axios.post(BASE_PATH, {
       brief: career.description.substring(0, 100),

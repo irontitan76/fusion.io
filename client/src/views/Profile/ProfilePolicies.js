@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import Link from 'react-router-dom/Link';
 import moment from 'moment';
@@ -24,45 +25,56 @@ class ProfilePosts extends Component {
   render() {
     const { policies } = this.props;
 
-    return <ReportTable
-      addButton='New Policy'
-      headers={[
-        'Title',
-        'Content',
-        'Created At',
-        'Last Modified',
-        'Published At'
-      ]}
-      items={policies || []}
-      onAdd='/profile/policies/new'
-      properties={[
-        { name: 'title', modifier: (policy) => {
-            return <Link to={`/profile/policies/edit/${policy._id}`}>
-              {policy.title}
-            </Link>;
-          }
-        },
-        { name: 'brief',  modifier: null },
-        { name: '_createdAt', modifier: (policy) => (
-            moment(policy._createdAt).format('MMM Do YYYY, h:mm a')
-          )
-        },
-        { name: '_modifiedAt', modifier: (policy) => (
-            moment(policy._modifiedAt).format('MMM Do YYYY, h:mm a')
-          )
-        },
-        { name: '_publishedAt', modifier: (policy) => {
-            if (!policy._publishedAt) {
-              return 'Unpublished';
-            }
-
-            return moment(policy._publishedAt).format('MMM Do YYYY, h:mm a');
-          }
-        },
-      ]}
-      title='Your Policies' />;
+    return (
+      <ReportTable
+        addButton='New Policy'
+        headers={[
+          'Title',
+          'Content',
+          'Created At',
+          'Last Modified',
+          'Published At',
+        ]}
+        items={policies || []}
+        onAdd='/profile/policies/new'
+        properties={[
+          {
+            modifier: (policy) => {
+              return (
+                <Link to={`/profile/policies/edit/${policy._id}`}>
+                  {policy.title}
+                </Link>
+              );
+            },
+            name: 'title',
+          },
+          { modifier: null, name: 'brief' },
+          {
+            modifier: (policy) => moment(policy._createdAt).format('MMM Do YYYY, h:mm a'),
+            name: '_createdAt',
+          },
+          {
+            modifier: (policy) => moment(policy._modifiedAt).format('MMM Do YYYY, h:mm a'),
+            name: '_modifiedAt',
+          },
+          {
+            modifier: (policy) => {
+              if (!policy._publishedAt) return 'Unpublished';
+              return moment(policy._publishedAt).format('MMM Do YYYY, h:mm a');
+            },
+            name: '_publishedAt',
+          },
+        ]}
+        title='Your Policies'
+      />
+    );
   }
 }
+
+ProfilePosts.propTypes = {
+  dispatch: PropTypes.func.isRequired,
+  policies: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
+};
 
 const select = state => ({
   policies: state.policies.items,

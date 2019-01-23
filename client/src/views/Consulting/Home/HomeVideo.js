@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { FormattedMessage } from 'react-intl';
 
 import Grid from '@material-ui/core/Grid';
@@ -20,26 +21,34 @@ const styles = theme => ({
   },
 });
 
+// eslint-disable-next-line
 class HomeVideo extends Component {
   render() {
     const { classes } = this.props;
 
-    return <Grid container justify='center'>
-      <Grid className={classes.homeVideoTitleContainer} item xs={12}>
-        <Typography
-          align='center'
-          className={classes.homeVideoTitle}
-          variant='h4'>
-          <FormattedMessage id='consult.home.video.title' />
-        </Typography>
+    return (
+      <Grid container justify='center'>
+        <Grid className={classes.homeVideoTitleContainer} item xs={12}>
+          <Typography
+            align='center'
+            className={classes.homeVideoTitle}
+            variant='h4'
+          >
+            <FormattedMessage id='consult.home.video.title' />
+          </Typography>
+        </Grid>
+        <Grid className={classes.homeVideo} item>
+          <video height='100%' controls>
+            <source src='./fusion-full.mov' type='video/mp4' />
+          </video>
+        </Grid>
       </Grid>
-      <Grid className={classes.homeVideo} item>
-        <video height='100%'controls>
-          <source src='./fusion-full.mov' type='video/mp4' />
-        </video>
-      </Grid>
-    </Grid>;
+    );
   }
 }
+
+HomeVideo.propTypes = {
+  classes: PropTypes.shape({}).isRequired,
+};
 
 export default withStyles(styles)(HomeVideo);

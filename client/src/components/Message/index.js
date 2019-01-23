@@ -21,27 +21,33 @@ class Message extends Component {
   render = () => {
     const { message, ...props } = this.props;
 
-    return <Snackbar
-      message={message.content}
-      onClose={this.removeMessage}
-      open={message.open}
-      {...omit(props, ['dispatch'])} />;
+    return (
+      <Snackbar
+        message={message.content}
+        onClose={this.removeMessage}
+        open={message.open}
+        {...omit(props, ['dispatch'])}
+      />
+    );
   };
 }
 
 Message.defaultProps = {
   anchorOrigin: {
-    vertical: 'bottom',
     horizontal: 'left',
+    vertical: 'bottom',
   },
   autoHideDuration: 6000,
 };
 
 Message.propTypes = {
-  anchorOrigin: PropTypes.object.isRequired,
-  autoHideDuration: PropTypes.number.isRequired,
+  anchorOrigin: PropTypes.shape({
+    horizontal: PropTypes.oneOf(['center', 'left', 'right']),
+    vertical: PropTypes.oneOf(['bottom', 'top']),
+  }),
+  autoHideDuration: PropTypes.number,
   dispatch: PropTypes.func.isRequired,
-  message: PropTypes.object.isRequired,
+  message: PropTypes.shape({}).isRequired,
 };
 
 const select = state => ({

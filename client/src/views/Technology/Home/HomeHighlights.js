@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import Link from 'react-router-dom/Link';
 
 import Card from '@material-ui/core/Card';
@@ -14,17 +15,17 @@ const styles = theme => ({
     paddingLeft: 0,
   },
   button: {
+    '&:hover': {
+      textDecoration: 'underline',
+    },
     color: theme.palette.blue,
     fontWeight: 500,
     textDecoration: 'none',
-    '&:hover': {
-      textDecoration: 'underline',
-    }
   },
   card: {
     '&:hover': {
       cursor: 'pointer',
-      opacity: '0.8'
+      opacity: '0.8',
     },
   },
   content: {
@@ -32,42 +33,44 @@ const styles = theme => ({
   },
   media: {
     height: 175,
-  }
+  },
 });
 
 const cards = [
   {
+    desc: 'Lizards are a widespread group of squamate reptiles',
     media: { image: './images/drone.jpg', title: 'camp' },
     title: 'Bloggers',
-    desc: 'Lizards are a widespread group of squamate reptiles',
   },
   {
+    desc: 'Lizards are a widespread group of squamate reptiles',
     media: { image: './images/marketing-resized.jpg', title: 'camp' },
     title: 'Developers',
-    desc: 'Lizards are a widespread group of squamate reptiles',
   },
   {
+    desc: 'Lizards are a widespread group of squamate reptiles',
     media: { image: './images/desk-laptop.jpg', title: 'camp' },
     title: 'Designers',
-    desc: 'Lizards are a widespread group of squamate reptiles',
   },
   {
+    desc: 'Lizards are a widespread group of squamate reptiles',
     media: { image: './images/gamer.jpg', title: 'camp' },
     title: 'Business people',
-    desc: 'Lizards are a widespread group of squamate reptiles',
   },
 ];
 
-class Sample extends Component {
+class HomeHighlights extends Component {
   renderCards = () => {
     const { classes } = this.props;
 
     return cards.map(card => {
-      return <Grid item key={card.title} md={3}>
-        <Card className={classes.card} elevation={0}>
+      return (
+        <Grid item key={card.title} md={3}>
+          <Card className={classes.card} elevation={0}>
             <CardMedia
               className={classes.media}
-              {...card.media} />
+              {...card.media}
+            />
             <CardContent className={classes.content}>
               <Typography variant='h6'>
                 {card.title}
@@ -76,28 +79,38 @@ class Sample extends Component {
                 {card.desc}
               </Typography>
             </CardContent>
-          <CardActions className={classes.actions}>
-            <Typography
-              className={classes.button}
-              component={Link}
-              to='/technology'
-              variant='body1'>
-              SEARCH NOW >
-            </Typography>
-          </CardActions>
-        </Card>
-      </Grid>;
-    })
+            <CardActions className={classes.actions}>
+              <Typography
+                className={classes.button}
+                component={Link}
+                to='/technology'
+                variant='body1'
+              >
+              SEARCH NOW
+                {'>'}
+              </Typography>
+            </CardActions>
+          </Card>
+        </Grid>
+      );
+    });
   }
+
   render() {
-    return <Grid container justify='center'>
-      <Grid item md={11} xs={12} xl={8}>
-        <Grid container justify='space-between' spacing={40}>
-          {this.renderCards()}
+    return (
+      <Grid container justify='center'>
+        <Grid item md={11} xs={12} xl={8}>
+          <Grid container justify='space-between' spacing={40}>
+            {this.renderCards()}
+          </Grid>
         </Grid>
       </Grid>
-    </Grid>;
+    );
   }
 }
 
-export default withStyles(styles)(Sample);
+HomeHighlights.propTypes = {
+  classes: PropTypes.shape({}).isRequired,
+};
+
+export default withStyles(styles)(HomeHighlights);

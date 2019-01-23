@@ -1,24 +1,27 @@
 import React, { Component } from 'react';
 
+import Footer from 'components/Footer';
 import HomeBanner from './HomeBanner';
 import HomeHero from './HomeHero';
 import HomeReasons from './HomeReasons';
 import HomeServices from './HomeServices';
 import HomeVideo from './HomeVideo';
-import Footer from 'components/Footer';
 
+// eslint-disable-next-line
 class Home extends Component {
   render() {
-    return <>
-      <main>
-        <HomeHero />
-        <HomeServices />
-        <HomeBanner />
-        <HomeVideo />
-        <HomeReasons />
-      </main>
-      <Footer />
-    </>;
+    return (
+      <>
+        <main>
+          <HomeHero />
+          <HomeServices />
+          <HomeBanner />
+          <HomeVideo />
+          <HomeReasons />
+        </main>
+        <Footer />
+      </>
+    );
   }
 }
 

@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
@@ -29,7 +30,7 @@ const styles = theme => ({
 
 const settings = [
   {
-    icon: <FontAwesomeIcon icon={[ 'fal', 'user-circle' ]} size='lg' />,
+    icon: <FontAwesomeIcon icon={['fal', 'user-circle']} size='lg' />,
     label: 'Account',
     name: 'account',
     options: [
@@ -37,7 +38,7 @@ const settings = [
     ],
   },
   {
-    icon: <FontAwesomeIcon icon={[ 'fal', 'globe' ]} size='lg' />,
+    icon: <FontAwesomeIcon icon={['fal', 'globe']} size='lg' />,
     label: 'Language',
     name: 'lanaguage',
     options: [
@@ -45,53 +46,62 @@ const settings = [
     ],
   },
   {
-    icon: <FontAwesomeIcon icon={[ 'fal', 'comment-plus' ]} size='lg' />,
+    icon: <FontAwesomeIcon icon={['fal', 'comment-plus']} size='lg' />,
     label: 'Subscriptions',
     name: 'subscriptions',
-    options: [
-
-    ],
-  }
-]
+    options: [],
+  },
+];
 
 class ProfileSettings extends Component {
   renderPanels = () => {
     const { classes } = this.props;
 
     return settings.map((setting) => {
-      return <ExpansionPanel key={setting.name}>
-        <ExpansionPanelSummary
-          expandIcon={<ExpandMoreIcon />}>
-          {setting.icon ? setting.icon : null}
-          <Typography
-            className={classes.heading}>
-            {setting.label}
-          </Typography>
-        </ExpansionPanelSummary>
-        <ExpansionPanelDetails>
-          <Typography>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse malesuada lacus ex, sit amet blandit leo lobortis eget.
-          </Typography>
-        </ExpansionPanelDetails>
-      </ExpansionPanel>;
-    })
+      return (
+        <ExpansionPanel key={setting.name}>
+          <ExpansionPanelSummary
+            expandIcon={<ExpandMoreIcon />}
+          >
+            {setting.icon ? setting.icon : null}
+            <Typography
+              className={classes.heading}
+            >
+              {setting.label}
+            </Typography>
+          </ExpansionPanelSummary>
+          <ExpansionPanelDetails>
+            <Typography>
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+            </Typography>
+          </ExpansionPanelDetails>
+        </ExpansionPanel>
+      );
+    });
   };
 
   render() {
     const { classes } = this.props;
 
-    return <Grid className={classes.root} container justify='center'>
-      <Grid item md={8} xs={12}>
-        <TextField
-          className={classes.search}
-          fullWidth
-          label='Search Settings...'
-          placeholder='Search Settings...'
-          variant='outlined' />
-        {this.renderPanels()}
+    return (
+      <Grid className={classes.root} container justify='center'>
+        <Grid item md={8} xs={12}>
+          <TextField
+            className={classes.search}
+            fullWidth
+            label='Search Settings...'
+            placeholder='Search Settings...'
+            variant='outlined'
+          />
+          {this.renderPanels()}
+        </Grid>
       </Grid>
-    </Grid>;
+    );
   }
 }
+
+ProfileSettings.propTypes = {
+  classes: PropTypes.shape({}).isRequired,
+};
 
 export default withStyles(styles)(ProfileSettings);

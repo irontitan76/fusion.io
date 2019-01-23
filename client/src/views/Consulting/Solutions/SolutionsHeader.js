@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 
 import Divider from '@material-ui/core/Divider';
 import Grid from '@material-ui/core/Grid';
@@ -18,6 +19,7 @@ const styles = theme => ({
   },
 });
 
+// eslint-disable-next-line
 class SolutionsHeader extends Component {
   render() {
     const { classes } = this.props;
@@ -26,16 +28,19 @@ class SolutionsHeader extends Component {
       <Grid
         className={classes.servicesHeader}
         container
-        justify='center'>
+        justify='center'
+      >
 
         <Grid
           className={classes.servicesTitle}
           item
-          xs={12}>
+          xs={12}
+        >
           <Typography
             align='center'
             className={classes.servicesTypography}
-            variant='h4'>
+            variant='h4'
+          >
             Our Solutions
           </Typography>
         </Grid>
@@ -46,8 +51,12 @@ class SolutionsHeader extends Component {
         </Grid>
 
       </Grid>
-    )
+    );
   }
 }
+
+SolutionsHeader.propTypes = {
+  classes: PropTypes.shape({}).isRequired,
+};
 
 export default withStyles(styles)(SolutionsHeader);

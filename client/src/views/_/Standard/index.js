@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
 import Report from 'components/Report';
 
 import {
   loadStandards,
-  unloadStandards
+  unloadStandards,
 } from 'actions/standards';
 
 class Standard extends Component {
@@ -25,8 +26,13 @@ class Standard extends Component {
   }
 }
 
+Standard.propTypes = {
+  dispatch: PropTypes.func.isRequired,
+  standards: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
+};
+
 const select = state => ({
-  standards: state.standards.items
+  standards: state.standards.items,
 });
 
 export default connect(select)(Standard);

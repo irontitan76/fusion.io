@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 
 import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid';
@@ -9,7 +10,6 @@ import withStyles from '@material-ui/core/styles/withStyles';
 const fields = [
   {
     label: 'Business Need',
-    required: true,
     options: [
       {
         label: 'Consulting',
@@ -24,8 +24,9 @@ const fields = [
         value: 2,
       },
     ],
+    required: true,
     select: true,
-    type: 'select'
+    type: 'select',
   },
   {
     label: 'First Name',
@@ -63,81 +64,80 @@ const fields = [
     required: false,
     rows: 10,
     type: 'text',
-  }
+  },
 ];
 
 const styles = theme => ({
   contactContent: {
     backgroundColor: theme.palette.offwhite,
     height: '100%',
-    paddingTop: theme.spacing.unit * 3,
     paddingBottom: theme.spacing.unit * 3,
+    paddingTop: theme.spacing.unit * 3,
   },
   contactForm: {},
   contactTextField: {
     marginBottom: theme.spacing.unit * 3,
-  }
+  },
 });
 
-export class ContactForm extends Component {
+class ContactForm extends Component {
   renderFields = () => {
     const { classes } = this.props;
 
-    return fields.map((field, key) => {
+    return fields.map((field) => {
       let options = null;
-      if (field.select && field.options ) {
+      if (field.select && field.options) {
         options = field.options.map((option) => {
-          return <MenuItem key={option.label} value={option.value}>
-            {option.label}
-          </MenuItem>;
+          return (
+            <MenuItem key={option.label} value={option.value}>
+              {option.label}
+            </MenuItem>
+          );
         });
       }
 
-      return <TextField
-        className={classes.contactTextField}
-        fullWidth
-        key={key}
-        label={field.label}
-        required={field.required}
-        type={field.type}
-        value={field.type === 'select' ? 0 : undefined}
-        {...field}>
-        {options}
-      </TextField>
+      return (
+        <TextField
+          className={classes.contactTextField}
+          fullWidth
+          key={field.label}
+          label={field.label}
+          required={field.required}
+          type={field.type}
+          value={field.type === 'select' ? 0 : undefined}
+          {...field}
+        >
+          {options}
+        </TextField>
+      );
     });
   };
 
   render() {
     const { classes, title } = this.props;
 
-    return <Grid
-      className={classes.contactContent}
-      item
-      xs={12}>
-      <Grid
-        className={classes.contactForm}
-        container
-        justify='center'>
-        <Grid
-          item
-          md={6}
-          xs={12}>
-          <form>
-            {this.renderFields()}
-            <Grid container justify='flex-end'>
-              <Button
-                color='primary'
-                type='submit'
-                variant='contained'>
-                {title}
-              </Button>
-            </Grid>
-          </form>
+    return (
+      <Grid className={classes.contactContent} item xs={12}>
+        <Grid className={classes.contactForm} container justify='center'>
+          <Grid item md={6} xs={12}>
+            <form>
+              {this.renderFields()}
+              <Grid container justify='flex-end'>
+                <Button color='primary' type='submit' variant='contained'>
+                  {title}
+                </Button>
+              </Grid>
+            </form>
+          </Grid>
         </Grid>
       </Grid>
-    </Grid>
+    );
   }
 }
 
-export default withStyles(styles)(ContactForm);
+ContactForm.propTypes = {
+  classes: PropTypes.shape({}).isRequired,
+  title: PropTypes.string.isRequired,
+};
 
+export default withStyles(styles)(ContactForm);

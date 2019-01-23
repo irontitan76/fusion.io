@@ -33,9 +33,9 @@ export const signup = async (user) => {
     const response = await axios.post(`${BASE_PATH}/signup`, {
       firstName: user.firstName.value,
       lastName: user.lastName.value,
-      username: user.username.value,
       password: user.password.value,
       role: 'user',
+      username: user.username.value,
     });
 
     return response;

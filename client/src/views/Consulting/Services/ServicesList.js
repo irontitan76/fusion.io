@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 
 import Divider from '@material-ui/core/Divider';
 import Grid from '@material-ui/core/Grid';
@@ -12,27 +13,37 @@ const styles = theme => ({
   servicesListGrid: {},
 });
 
+// eslint-disable-next-line
 class ServicesList extends Component {
   render() {
     const { classes } = this.props;
 
-    return <Grid
-      className={classes.servicesList}>
-      <Divider />
-
+    return (
       <Grid
-        className={classes.servicesListGrid}
-        item
-        xs={12}>
+        className={classes.servicesList}
+      >
+        <Divider />
 
-        <Typography
-          variant='body2'>
+        <Grid
+          className={classes.servicesListGrid}
+          item
+          xs={12}
+        >
+
+          <Typography
+            variant='body2'
+          >
           Services List
-        </Typography>
+          </Typography>
 
+        </Grid>
       </Grid>
-    </Grid>;
+    );
   }
 }
+
+ServicesList.propTypes = {
+  classes: PropTypes.shape({}).isRequired,
+};
 
 export default withStyles(styles)(ServicesList);

@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import Grid from '@material-ui/core/Grid';
@@ -24,7 +25,7 @@ const styles = theme => ({
     [theme.breakpoints.down('sm')]: {
       backgroundSize: '180% 120%',
       marginTop: 0,
-    }
+    },
   },
   heroContent: {
     backgroundColor: 'rgba(0,0,0,.25)',
@@ -40,8 +41,8 @@ const styles = theme => ({
     fontSize: '10rem',
     marginBottom: theme.spacing.unit * 3,
     [theme.breakpoints.down('xs')]: {
-      fontSize: '6rem'
-    }
+      fontSize: '6rem',
+    },
   },
   heroTitle: {
     color: theme.palette.common.white,
@@ -50,40 +51,50 @@ const styles = theme => ({
     letterSpacing: 20,
     textIndent: 28,
     [theme.breakpoints.down('xs')]: {
-      fontSize: 20
-    }
+      fontSize: 20,
+    },
   },
 });
 
+// eslint-disable-next-line
 class HomeHero extends Component {
   render() {
     const { classes } = this.props;
 
-    return <Grid container justify='center'>
-      <Grid className={classes.hero} item lg={11} md={10} xs={12} xl={8}>
-        <Grid
-          alignItems='center'
-          className={classes.heroContent}
-          container
-          direction='column'
-          justify='center'>
+    return (
+      <Grid container justify='center'>
+        <Grid className={classes.hero} item lg={11} md={10} xs={12} xl={8}>
+          <Grid
+            alignItems='center'
+            className={classes.heroContent}
+            container
+            direction='column'
+            justify='center'
+          >
 
-          <FontAwesomeIcon
-            className={classes.heroIcon}
-            icon={[ 'fal', 'code' ]} />
+            <FontAwesomeIcon
+              className={classes.heroIcon}
+              icon={['fal', 'code']}
+            />
 
-          <Typography
-            align='center'
-            className={classes.heroTitle}
-            gutterBottom
-            variant='h4'>
+            <Typography
+              align='center'
+              className={classes.heroTitle}
+              gutterBottom
+              variant='h4'
+            >
             FUSION TECHNOLOGY
-          </Typography>
+            </Typography>
 
+          </Grid>
         </Grid>
       </Grid>
-    </Grid>;
-  };
+    );
+  }
 }
+
+HomeHero.propTypes = {
+  classes: PropTypes.shape({}).isRequired,
+};
 
 export default withStyles(styles)(HomeHero);

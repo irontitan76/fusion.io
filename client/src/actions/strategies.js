@@ -18,23 +18,23 @@ import {
 } from 'api/strategies';
 
 export const changeStrategy = (name, value) => {
-  return async dispatch => {
+  return dispatch => {
     try {
       const payload = { name, value };
-      return dispatch({ type: STRATEGY_CHANGE, payload });
+      return dispatch({ payload, type: STRATEGY_CHANGE });
     } catch (err) {
-      return dispatch({ type: STRATEGY_CHANGE, error: true, err });
+      return dispatch({ err, error: true, type: STRATEGY_CHANGE });
     }
   };
 };
 
 export const createStrategy = (strategy) => {
-  return async dispatch => {
+  return dispatch => {
     try {
       const payload = postStrategy(strategy);
-      return dispatch({ type: STRATEGY_CREATE, payload });
+      return dispatch({ payload, type: STRATEGY_CREATE });
     } catch (err) {
-      return dispatch({ type: STRATEGY_CREATE, error: true, err });
+      return dispatch({ err, error: true, type: STRATEGY_CREATE });
     }
   };
 };
@@ -43,9 +43,9 @@ export const loadStrategies = () => {
   return async dispatch => {
     try {
       const payload = await getStrategies();
-      return dispatch({ type: STRATEGIES_LOAD, payload });
+      return dispatch({ payload, type: STRATEGIES_LOAD });
     } catch (err) {
-      return dispatch({ type: STRATEGIES_LOAD, error: true, err });
+      return dispatch({ err, error: true, type: STRATEGIES_LOAD });
     }
   };
 };
@@ -53,10 +53,10 @@ export const loadStrategies = () => {
 export const loadStrategy = (id) => {
   return async dispatch => {
     try {
-      const payload = id ? { item: null } : await getStrategy(id);
-      return dispatch({ type: STRATEGY_LOAD, payload });
+      const payload = id ? await getStrategy(id) : { item: null };
+      return dispatch({ payload, type: STRATEGY_LOAD });
     } catch (err) {
-      return dispatch({ type: STRATEGY_LOAD, error: true, err });
+      return dispatch({ err, error: true, type: STRATEGY_LOAD });
     }
   };
 };
@@ -65,29 +65,29 @@ export const removeStrategy = (_id) => {
   return async dispatch => {
     try {
       const payload = await deleteStrategy(_id);
-      return dispatch({ type: STRATEGY_REMOVE, payload });
+      return dispatch({ payload, type: STRATEGY_REMOVE });
     } catch (err) {
-      return dispatch({ type: STRATEGY_REMOVE, error: true, err });
+      return dispatch({ err, error: true, type: STRATEGY_REMOVE });
     }
   };
 };
 
 export const unloadStrategy = () => {
-  return async dispatch => {
+  return dispatch => {
     try {
       return dispatch({ type: STRATEGY_UNLOAD });
     } catch (err) {
-      return dispatch({ type: STRATEGY_UNLOAD, error: true, err });
+      return dispatch({ err, error: true, type: STRATEGY_UNLOAD });
     }
   };
 };
 
 export const unloadStrategies = () => {
-  return async dispatch => {
+  return dispatch => {
     try {
       return dispatch({ type: STRATEGIES_UNLOAD });
     } catch (err) {
-      return dispatch({ type: STRATEGIES_UNLOAD, error: true, err });
+      return dispatch({ err, error: true, type: STRATEGIES_UNLOAD });
     }
   };
 };
@@ -96,9 +96,9 @@ export const updateStrategy = (update) => {
   return async dispatch => {
     try {
       const payload = await putStrategy(update);
-      return dispatch({ type: STRATEGY_UPDATE, payload });
+      return dispatch({ payload, type: STRATEGY_UPDATE });
     } catch (err) {
-      return dispatch({ type: STRATEGY_UPDATE, error: true, err });
+      return dispatch({ err, error: true, type: STRATEGY_UPDATE });
     }
   };
 };

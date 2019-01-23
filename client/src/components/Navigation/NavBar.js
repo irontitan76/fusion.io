@@ -17,66 +17,75 @@ const styles = theme => ({
     zIndex: theme.zIndex.drawer + 1,
   },
   menuButton: {
+    '&:hover': {
+      color: theme.palette.blue,
+    },
     color: '#111',
     marginLeft: -12,
     marginRight: 20,
-    '&:hover': {
-      color: theme.palette.blue,
-    }
   },
   title: {
+    '&:hover': {
+      color: theme.palette.blue,
+    },
     color: '#111',
     flexGrow: 1,
     fontWeight: 300,
     letterSpacing: 8,
     textDecoration: 'none',
-    '&:hover': {
-      color: theme.palette.blue,
-    }
   },
   toolbar: theme.mixins.toolbar,
 });
 
-export class NavBar extends Component {
-  render() {
-    const { classes, items, onClick, title } = this.props;
+class NavBar extends Component {
+  renderLogo = () => {
+    const { classes, onClick, title } = this.props;
 
-    return <>
-      <AppBar className={classes.appBar} elevation={8} position='fixed'>
-        <Toolbar className={classes.toolbar}>
-          <IconButton
-            aria-label='Menu'
-            className={classes.menuButton}
-            color='inherit'
-            onClick={onClick}>
-            <MenuIcon />
-          </IconButton>
-          <Typography
-            className={classes.title}
-            component={Link}
-            color='inherit'
-            to='/'
-            variant='h6'>
-            {title}
-          </Typography>
-          <NavUserMenu items={items} />
-        </Toolbar>
-      </AppBar>
-      <div className={classes.toolbar} />
-    </>;
+    return (
+      <>
+        <IconButton
+          aria-label='Menu'
+          className={classes.menuButton}
+          color='inherit'
+          onClick={onClick}
+        >
+          <MenuIcon />
+        </IconButton>
+        <Typography
+          className={classes.title}
+          component={Link}
+          color='inherit'
+          to='/'
+          variant='h6'
+        >
+          {title}
+        </Typography>
+      </>
+    );
+  };
+
+  render() {
+    const { classes, items } = this.props;
+
+    return (
+      <>
+        <AppBar className={classes.appBar} elevation={8} position='fixed'>
+          <Toolbar className={classes.toolbar}>
+            {this.renderLogo()}
+            <NavUserMenu items={items} />
+          </Toolbar>
+        </AppBar>
+        <div className={classes.toolbar} />
+      </>
+    );
   }
 }
 
-NavBar.defaultProps = {
-  classes: {},
-  onClick: null,
-  title: ''
-};
-
 NavBar.propTypes = {
-  classes: PropTypes.object.isRequired,
+  classes: PropTypes.shape({}).isRequired,
+  items: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
   onClick: PropTypes.func.isRequired,
-  title: PropTypes.node.isRequired
+  title: PropTypes.node.isRequired,
 };
 
 export default withStyles(styles)(NavBar);

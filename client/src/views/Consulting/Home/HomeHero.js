@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { injectIntl } from 'react-intl';
 
@@ -22,21 +23,21 @@ const styles = theme => ({
     },
     [theme.breakpoints.down('xs')]: {
       backgroundSize: '180% 120%',
-    }
+    },
   },
   heroContent: {
     backgroundColor: 'rgba(0,0,0,.3)',
     color: theme.palette.common.white,
     height: '100%',
-    padding: `${theme.spacing.unit * 5}px ${theme.spacing.unit * 2}px`
+    padding: `${theme.spacing.unit * 5}px ${theme.spacing.unit * 2}px`,
   },
   heroIcon: {
     color: theme.palette.common.white,
     fontSize: '10rem',
     marginBottom: theme.spacing.unit * 3,
     [theme.breakpoints.down('xs')]: {
-      fontSize: '6rem'
-    }
+      fontSize: '6rem',
+    },
   },
   heroTitle: {
     color: theme.palette.common.white,
@@ -45,43 +46,48 @@ const styles = theme => ({
     letterSpacing: 20,
     textIndent: 28,
     [theme.breakpoints.down('xs')]: {
-      fontSize: 20
-    }
+      fontSize: 20,
+    },
   },
 });
 
+// eslint-disable-next-line
 class HomeHero extends Component {
   render() {
     const { classes, intl } = this.props;
 
-    return <Grid
-      className={classes.hero}
-      container
-      justify='center'>
-      <Grid item xs={12}>
-        <Grid
-          alignItems='center'
-          className={classes.heroContent}
-          container
-          direction='column'
-          justify='center'>
+    return (
+      <Grid className={classes.hero} container justify='center'>
+        <Grid item xs={12}>
+          <Grid
+            alignItems='center'
+            className={classes.heroContent}
+            container
+            direction='column'
+            justify='center'
+          >
 
-          <FontAwesomeIcon
-            className={classes.heroIcon}
-            icon={[ 'fal', 'users' ]} />
+            <FontAwesomeIcon className={classes.heroIcon} icon={['fal', 'users']} />
 
-          <Typography
-            align='center'
-            className={classes.heroTitle}
-            gutterBottom
-            variant='h4'>
-            { intl.formatMessage({id: 'consult.org.name' }).toUpperCase() }
-          </Typography>
+            <Typography
+              align='center'
+              className={classes.heroTitle}
+              gutterBottom
+              variant='h4'
+            >
+              { intl.formatMessage({ id: 'consult.org.name' }).toUpperCase() }
+            </Typography>
 
+          </Grid>
         </Grid>
       </Grid>
-    </Grid>;
-  };
+    );
+  }
 }
+
+HomeHero.propTypes = {
+  classes: PropTypes.shape({}).isRequired,
+  intl: PropTypes.shape({}).isRequired,
+};
 
 export default withStyles(styles)(injectIntl(HomeHero));

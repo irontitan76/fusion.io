@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
 import withStyles from '@material-ui/core/styles/withStyles';
@@ -6,7 +7,7 @@ import withStyles from '@material-ui/core/styles/withStyles';
 import ReportForm from 'components/ReportForm';
 
 import {
-  loadMessage
+  loadMessage,
 } from 'actions/messages';
 
 import {
@@ -18,7 +19,7 @@ import {
   updateInsight,
 } from 'actions/insights';
 
-const styles = theme => ({
+const styles = () => ({
   content: {
     fontFamily: 'Inconsolata, Monaco, Consolas, "Courier New", Courier;',
     fontSize: 12,
@@ -38,9 +39,7 @@ class ProfileInsight extends Component {
 
   displayMessage = (content, cb) => {
     const { dispatch } = this.props;
-    dispatch(loadMessage(content)).then(() => {
-      cb && cb()
-    });
+    dispatch(loadMessage(content)).then(() => cb && cb());
   };
 
   onChange = (event) => {
@@ -111,8 +110,8 @@ class ProfileInsight extends Component {
         variant: 'outlined',
       },
       {
-        InputProps: { className: classes.content },
         fullWidth: true,
+        InputProps: { className: classes.content },
         label: 'Content',
         multiline: true,
         name: 'content',
@@ -123,31 +122,43 @@ class ProfileInsight extends Component {
         type: 'text',
         value: insight.content || '',
         variant: 'outlined',
-      }
+      },
     ];
 
     let text = '';
-    if ( isExist ) {
+    if (isExist) {
       text = 'Update Insight';
     } else {
       text = 'Create Insight';
     }
 
-    return <ReportForm
-      cancelButton={isExist ? 'Delete Insight' : null}
-      onCancel={isExist ? this.onDelete : null}
-      onChange={this.onChange}
-      onSubmit={isExist ? this.onUpdate : this.onCreate}
-      fields={fields}
-      submitButton={text}
-      title={text} />;
+    return (
+      <ReportForm
+        cancelButton={isExist ? 'Delete Insight' : null}
+        onCancel={isExist ? this.onDelete : null}
+        onChange={this.onChange}
+        onSubmit={isExist ? this.onUpdate : this.onCreate}
+        fields={fields}
+        submitButton={text}
+        title={text}
+      />
+    );
   }
 }
 
+ProfileInsight.propTypes = {
+  classes: PropTypes.shape({}).isRequired,
+  dispatch: PropTypes.func.isRequired,
+  history: PropTypes.shape({}).isRequired,
+  insight: PropTypes.shape({}).isRequired,
+  match: PropTypes.shape({}).isRequired,
+  user: PropTypes.shape({}).isRequired,
+};
+
 const select = state => ({
-  message: state.messages,
   insight: state.insights.currentItem,
   insights: state.insights.filteredItems,
+  message: state.messages,
   user: state.session.user,
 });
 

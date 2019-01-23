@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import Link from 'react-router-dom/Link';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import validator from 'validator';
@@ -25,21 +26,21 @@ const styles = theme => ({
     marginBottom: theme.spacing.unit * 2,
   },
   loginFormContainer: {},
+  loginFormInput: {
+    '&:-webkit-autofill': {
+      '-webkit-box-shadow': 'inset 0 0 0px 9999px white',
+    },
+    color: '#111',
+  },
   loginFormLogo: {
     color: 'inherit',
     marginBottom: theme.spacing.unit * 3,
   },
-  loginFormInput: {
-    color: '#111',
-    '&:-webkit-autofill': {
-      '-webkit-box-shadow': 'inset 0 0 0px 9999px white'
-    }
-  },
   loginFormMessage: {
     boxSizing: 'border-box',
     color: theme.palette.red,
-    marginBottom: theme.spacing.unit,
     height: 12,
+    marginBottom: theme.spacing.unit,
   },
   loginFormPaper: {
     paddingBottom: theme.spacing.unit * 3,
@@ -50,6 +51,13 @@ const styles = theme => ({
   loginFormTextField: {
     marginBottom: theme.spacing.unit * 2,
   },
+  loginFormTitle: {
+    '&:hover': {
+      color: theme.palette.navy,
+    },
+    color: '#fff',
+    textDecoration: 'none',
+  },
   loginFormTitlePaper: {
     backgroundColor: '#0074D9',
     paddingBottom: theme.spacing.unit * 5,
@@ -57,17 +65,10 @@ const styles = theme => ({
     paddingRight: theme.spacing.unit * 3,
     paddingTop: theme.spacing.unit * 5,
   },
-  loginFormTitle: {
-    color: '#fff',
-    textDecoration: 'none',
-    '&:hover': {
-      color: theme.palette.navy,
-    }
-  },
   loginFormTitleText: {
     color: 'inherit',
-    letterSpacing: 18,
     fontWeight: 300,
+    letterSpacing: 18,
   },
 });
 
@@ -97,104 +98,123 @@ class LoginForm extends Component {
   };
 
   render() {
-    const { password, username } = this.state;
+    const { message, password, username } = this.state;
     const { classes } = this.props;
 
-    return <Grid
-      className={classes.loginForm}
-      container
-      justify='center'>
-
+    return (
       <Grid
-        className={classes.loginFormContainer}
-        item
-        md={4}
-        sm={7}
-        xl={3}
-        xs={12}>
+        className={classes.loginForm}
+        container
+        justify='center'
+      >
 
-        <Paper
-          className={classes.loginFormTitlePaper}
-          elevation={1}>
-          <Typography
-            align='center'
-            className={classes.loginFormTitle}
-            component={Link}
-            to='/'>
-            <FontAwesomeIcon
-              className={classes.loginFormLogo}
-              color='#fff'
-              icon={['fal', 'atom-alt']}
-              size='6x' />
+        <Grid
+          className={classes.loginFormContainer}
+          item
+          md={4}
+          sm={7}
+          xl={3}
+          xs={12}
+        >
+
+          <Paper
+            className={classes.loginFormTitlePaper}
+            elevation={1}
+          >
             <Typography
-              className={classes.loginFormTitleText}
-              variant='h6'>
+              align='center'
+              className={classes.loginFormTitle}
+              component={Link}
+              to='/'
+            >
+              <FontAwesomeIcon
+                className={classes.loginFormLogo}
+                color='#fff'
+                icon={['fal', 'atom-alt']}
+                size='6x'
+              />
+              <Typography
+                className={classes.loginFormTitleText}
+                variant='h6'
+              >
               FUSION
+              </Typography>
             </Typography>
-          </Typography>
-        </Paper>
+          </Paper>
 
-        <Paper
-          className={classes.loginFormPaper}
-          elevation={1}>
-          <form>
-            <TextField
-              className={classes.loginFormTextField}
+          <Paper
+            className={classes.loginFormPaper}
+            elevation={1}
+          >
+            <form>
+              <TextField
+                className={classes.loginFormTextField}
+                fullWidth
+                inputProps={{
+                  'aria-label': 'username',
+                  className: classes.loginFormInput,
+                }}
+                label='Username'
+                name='username'
+                onChange={this.onChange}
+                type='text'
+                value={username}
+              />
+              <TextField
+                className={classes.loginFormTextField}
+                fullWidth
+                inputProps={{
+                  'aria-label': 'password',
+                  className: classes.loginFormInput,
+                }}
+                label='Password'
+                name='password'
+                onChange={this.onChange}
+                type='password'
+                value={password}
+              />
+            </form>
+
+            <Typography
+              className={classes.loginFormMessage}
+              gutterBottom
+            >
+              {message}
+            </Typography>
+
+            <Button
+              className={classes.loginFormButton}
+              color='primary'
+              disabled={this.validateForm()}
               fullWidth
-              inputProps={{ 
-                'aria-label': 'username',
-                className: classes.loginFormInput
-              }}
-              label='Username'
-              name='username'
-              onChange={this.onChange}
-              type='text'
-              value={username} />
-            <TextField
-              className={classes.loginFormTextField}
-              fullWidth
-              inputProps={{ 
-                'aria-label': 'password',
-                className: classes.loginFormInput ,
-              }}
-              label='Password'
-              name='password'
-              onChange={this.onChange}
-              type='password'
-              value={password} />
-          </form>
-
-          <Typography
-            className={classes.loginFormMessage}
-            gutterBottom>
-            { this.state.message }
-          </Typography>
-
-          <Button
-            className={classes.loginFormButton}
-            color='primary'
-            disabled={this.validateForm()}
-            fullWidth
-            onClick={this.onSubmit}
-            variant='contained'>
+              onClick={this.onSubmit}
+              variant='contained'
+            >
             Login
-          </Button>
+            </Button>
 
-          <Button
-            color='default'
-            component={Link}
-            fullWidth
-            to='/signup'
-            variant='contained'>
+            <Button
+              color='default'
+              component={Link}
+              fullWidth
+              to='/signup'
+              variant='contained'
+            >
             Sign up
-          </Button>
+            </Button>
 
-        </Paper>
+          </Paper>
+
+        </Grid>
 
       </Grid>
-
-    </Grid>;
+    );
   }
 }
+
+LoginForm.propTypes = {
+  classes: PropTypes.shape({}).isRequired,
+  onSubmit: PropTypes.func.isRequired,
+};
 
 export default withStyles(styles)(LoginForm);

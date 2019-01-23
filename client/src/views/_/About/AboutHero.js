@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import { FormattedMessage, injectIntl } from 'react-intl';
+import PropTypes from 'prop-types';
+import { FormattedMessage, injectIntl, intlShape } from 'react-intl';
 
 import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid';
@@ -16,90 +17,117 @@ const styles = theme => ({
       height: 550,
     },
     [theme.breakpoints.down('sm')]: {
-      backgroundSize: '130% 100%'
+      backgroundSize: '130% 100%',
     },
     [theme.breakpoints.down('xs')]: {
-      backgroundSize: '180% 100%'
-    }
+      backgroundSize: '180% 100%',
+    },
   },
   heroButton: {
+    '&:hover': {
+      backgroundColor: 'rgba(255,255,255,0.5)',
+    },
     backgroundColor: 'rgba(255,255,255,0.3)',
     border: '1px solid white',
     color: theme.palette.common.white,
-    '&:hover': {
-      backgroundColor: 'rgba(255,255,255,0.5)',
-    }
   },
   heroContent: {
     backgroundColor: 'rgba(0,0,0,.1)',
-    padding: theme.spacing.unit * 5
+    padding: theme.spacing.unit * 5,
   },
   heroSubtitle: {
     color: '#f2f2f2',
     marginBottom: theme.spacing.unit * 3,
     paddingBottom: theme.spacing.unit * 2,
-    paddingTop: theme.spacing.unit * 2
+    paddingTop: theme.spacing.unit * 2,
   },
   heroTitle: {
     color: theme.palette.light,
     fontSize: 42,
-    fontWeight: 300
-  }
+    fontWeight: 300,
+  },
 });
 
 class AboutHero extends Component {
-  render() {
+  renderButton = () => {
     const { classes, intl, onClick } = this.props;
 
-    return <Grid
-      alignItems='center'
-      className={classes.hero}
-      container
-      justify='center'>
+    return (
+      <Grid item md={8} xs={8}>
+        <Button
+          aria-label={intl.formatMessage({ id: 'about.hero.button.label' })}
+          className={classes.heroButton}
+          fullWidth
+          onClick={onClick}
+          variant='outlined'
+        >
+          <FormattedMessage id='about.hero.button.label' />
+        </Button>
+      </Grid>
+    );
+  };
 
-      <Grid item xl={8} md={7} />
+  renderSubtitle = () => {
+    const { classes } = this.props;
 
-      <Grid item xl={3} md={4}>
-        <Grid
-          alignItems='center'
-          className={classes.heroContent}
-          container
-          justify='center'>
+    return (
+      <Typography
+        align='center'
+        className={classes.heroSubtitle}
+        component={Grid}
+        item
+        xs={12}
+      >
+        <FormattedMessage id='about.hero.subtitle' />
+      </Typography>
+    );
+  };
 
-          <Typography
-            align='center'
-            className={classes.heroTitle}
-            component={Grid}
-            item
-            variant='h1'
-            xs={12}>
-            <FormattedMessage id='about.hero.title' />
-          </Typography>
+  renderTitle = () => {
+    const { classes } = this.props;
 
-          <Typography
-            align='center'
-            className={classes.heroSubtitle}
-            component={Grid}
-            item
-            xs={12}>
-            <FormattedMessage id='about.hero.subtitle' />
-          </Typography>
+    return (
+      <Typography
+        align='center'
+        className={classes.heroTitle}
+        component={Grid}
+        item
+        variant='h1'
+        xs={12}
+      >
+        <FormattedMessage id='about.hero.title' />
+      </Typography>
+    );
+  };
 
-          <Grid item md={8} xs={8}>
-            <Button
-              aria-label={intl.formatMessage({ id: 'about.hero.button.label' })}
-              className={classes.heroButton}
-              fullWidth
-              onClick={onClick}
-              variant='outlined'>
-              <FormattedMessage id='about.hero.button.label' />
-            </Button>
+  render() {
+    const { classes } = this.props;
+
+    return (
+      <Grid alignItems='center' className={classes.hero} container justify='center'>
+        <Grid item xl={8} md={7} />
+
+        <Grid item xl={3} md={4}>
+          <Grid
+            alignItems='center'
+            className={classes.heroContent}
+            container
+            justify='center'
+          >
+            {this.renderTitle()}
+            {this.renderSubtitle()}
+            {this.renderButton()}
           </Grid>
-
         </Grid>
       </Grid>
-    </Grid>;
+    );
   }
 }
+
+AboutHero.propTypes = {
+  classes: PropTypes.shape({}).isRequired,
+  intl: intlShape.isRequired,
+  onClick: PropTypes.func.isRequired,
+};
 
 export default withStyles(styles)(injectIntl(AboutHero));

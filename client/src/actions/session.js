@@ -6,9 +6,9 @@ export const startSession = (password, username) => {
   return async dispatch => {
     try {
       const payload = await login(password, username);
-      return dispatch({ type: SESSION_START, payload });
+      return dispatch({ payload, type: SESSION_START });
     } catch (err) {
-      return dispatch({ type: SESSION_START, error: true, err });
+      return dispatch({ err, error: true, type: SESSION_START });
     }
   };
 };
@@ -17,9 +17,9 @@ export const endSession = () => {
   return async dispatch => {
     try {
       const payload = await logout();
-      return dispatch({ type: SESSION_END, payload });
+      return dispatch({ payload, type: SESSION_END });
     } catch (err) {
-      return dispatch({ type: SESSION_END, error: true, err });
+      return dispatch({ err, error: true, type: SESSION_END });
     }
   };
 };

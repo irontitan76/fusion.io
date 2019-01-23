@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
@@ -17,6 +18,7 @@ const styles = theme => ({
   },
 });
 
+/* eslint-disable-next-line */
 class ServicesHeader extends Component {
   render() {
     const { classes } = this.props;
@@ -25,22 +27,29 @@ class ServicesHeader extends Component {
       <Grid
         className={classes.servicesHeader}
         container
-        justify='center'>
+        justify='center'
+      >
 
         <Grid
           className={classes.servicesTitle}
           item
-          xs={12}>
+          xs={12}
+        >
           <Typography
             align='center'
             className={classes.servicesTypography}
-            variant='h4'>
+            variant='h4'
+          >
             Our Services
           </Typography>
         </Grid>
       </Grid>
-    )
+    );
   }
 }
+
+ServicesHeader.propTypes = {
+  classes: PropTypes.shape({}).isRequired,
+};
 
 export default withStyles(styles)(ServicesHeader);

@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import Grid from '@material-ui/core/Grid';
@@ -29,114 +30,124 @@ const styles = theme => ({
     marginBottom: theme.spacing.unit * 3,
   },
   overlay: {
-    position: 'fixed',
-    top: 0,
     background: 'rgba(0, 0, 0, 0.5)',
     color: '#f1f1f1',
     height: '100%',
-    width: '100%',
     padding: 20,
+    position: 'fixed',
+    top: 0,
+    width: '100%',
   },
 });
 
 class Landing extends Component {
-  render() {
-    const { classes, location, theme } = this.props;
+  get locationMap() {
+    const { theme } = this.props;
 
-    const locationMap = {
+    return {
       '/ai': {
         info: 'Fusion A.I. is the 3rd phase in the Fusion Strategy.',
-        logo: [ 'fal', 'mind-share' ],
+        logo: ['fal', 'mind-share'],
         name: 'Fusion AI',
         theme: theme.palette.ai,
       },
       '/cosmos': {
         info: 'Fusion Cosmos is the 10th phase in the Fusion Strategy.',
+        logo: ['fal', 'space-shuttle'],
         name: 'Fusion Cosmos',
-        logo: [ 'fal', 'space-shuttle' ],
         theme: theme.palette.cosmos,
       },
       '/energy': {
         info: 'Fusion Energy is the 8th phase in the Fusion Strategy',
+        logo: ['fal', 'solar-panel'],
         name: 'Fusion Energy',
-        logo: [ 'fal', 'solar-panel' ],
         theme: theme.palette.energy,
       },
       '/finance': {
         info: 'Fusion Finance is the 5th phase in the Fusion Strategy.',
+        logo: ['fal', 'credit-card-blank'],
         name: 'Fusion Finance',
-        logo: [ 'fal', 'credit-card-blank' ],
         theme: theme.palette.finance,
       },
       '/health': {
         info: 'Fusion Health is the 7th phase in the Fusion Strategy.',
+        logo: ['fal', 'dna'],
         name: 'Fusion Health',
-        logo: [ 'fal', 'dna' ],
         theme: theme.palette.health,
       },
       '/legal': {
         info: 'Fusion Legal is the 6th phase in the Fusion Strategy.',
+        logo: ['fal', 'balance-scale'],
         name: 'Fusion Legal',
-        logo: [ 'fal', 'balance-scale' ],
         theme: theme.palette.legal,
       },
       '/media': {
         info: 'Fusion Media is the 4th phase in the Fusion Strategy.',
+        logo: ['fal', 'broadcast-tower'],
         name: 'Fusion Media',
-        logo: [ 'fal', 'broadcast-tower' ],
         theme: theme.palette.media,
       },
       '/transport': {
         info: 'Fusion Transport is the 9th phase in the Fusion Strategy.',
+        logo: ['fal', 'map-marked'],
         name: 'Fusion Transport',
-        logo: [ 'fal', 'map-marked' ],
         theme: theme.palette.transport,
       },
     };
+  }
 
-    const org = locationMap[location.pathname];
+  render() {
+    const { classes, location } = this.props;
+    const org = this.locationMap[location.pathname];
 
-    return <>
-      <main>
-        <Grid container justify='center'>
-          <Grid
-            className={classes.headingContainer}
-            item
-            style={{ backgroundColor: org.theme.main }}
-            xs={12}>
+    return (
+      <>
+        <main>
+          <Grid container justify='center'>
+            <Grid
+              className={classes.headingContainer}
+              item
+              style={{ backgroundColor: org.theme.main }}
+              xs={12}
+            >
 
-            <Typography
-              align='center'
-              className={classes.heading}
-              component='div'
-              variant='h3'>
-              {
-                org.logo && <FontAwesomeIcon
-                className={classes.logo}
-                icon={org.logo} />
-              }
-              {org.name.toUpperCase()}
-            </Typography>
+              <Typography
+                align='center'
+                className={classes.heading}
+                component='div'
+                variant='h3'
+              >
+                {org.logo && <FontAwesomeIcon className={classes.logo} icon={org.logo} />}
+                {org.name.toUpperCase()}
+              </Typography>
+            </Grid>
           </Grid>
-        </Grid>
-        <Grid container justify='center'>
-          <Grid
-            className={classes.infoContainer}
-            item
-            xs={12}>
-            <Typography
-              align='center'
-              className={classes.info}
-              variant='subtitle1'>
-              {org.info}
-            </Typography>
+          <Grid container justify='center'>
+            <Grid
+              className={classes.infoContainer}
+              item
+              xs={12}
+            >
+              <Typography
+                align='center'
+                className={classes.info}
+                variant='subtitle1'
+              >
+                {org.info}
+              </Typography>
+            </Grid>
           </Grid>
-        </Grid>
-
-      </main>
-      <Footer />
-    </>;
+        </main>
+        <Footer />
+      </>
+    );
   }
 }
+
+Landing.propTypes = {
+  classes: PropTypes.shape({}).isRequired,
+  location: PropTypes.shape({}).isRequired,
+  theme: PropTypes.shape({}).isRequired,
+};
 
 export default withStyles(styles, { withTheme: true })(Landing);

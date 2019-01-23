@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
 import Footer from 'components/Footer';
+import { loadProducts } from 'actions/products';
 import SolutionsHeader from './SolutionsHeader';
 
-import { loadProducts } from 'actions/products';
 
 class Solutions extends Component {
   componentDidMount() {
@@ -13,19 +14,23 @@ class Solutions extends Component {
   }
 
   render() {
-
-    return <>
-      <main>
-        <SolutionsHeader />
-      </main>
-      <Footer />
-    </>
+    return (
+      <>
+        <main>
+          <SolutionsHeader />
+        </main>
+        <Footer />
+      </>
+    );
   }
 }
 
-const select = state => ({
+Solutions.propTypes = {
+  dispatch: PropTypes.func.isRequired,
+};
+
+const select = () => ({
 
 });
-
 
 export default connect(select)(Solutions);

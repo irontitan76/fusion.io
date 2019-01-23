@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import Link from 'react-router-dom/Link';
 import { FormattedMessage } from 'react-intl';
 
@@ -14,17 +15,17 @@ import withStyles from '@material-ui/core/styles/withStyles';
 const styles = theme => ({
   grid: {},
   gridCard: {
-    marginBottom: theme.spacing.unit * 3,
-    cursor: 'pointer',
-    transition: 'box-shadow .2s ease-out',
     '&:hover': {
       boxShadow: '1px 8px 20px grey',
-      transition: 'box-shadow .2s ease-in'
-    }
+      transition: 'box-shadow .2s ease-in',
+    },
+    cursor: 'pointer',
+    marginBottom: theme.spacing.unit * 3,
+    transition: 'box-shadow .2s ease-out',
   },
   gridContent: {
     fontWeight: 300,
-    height: 75
+    height: 75,
   },
   gridFillerText: {
     color: '#ccc',
@@ -52,9 +53,9 @@ const styles = theme => ({
     [theme.breakpoints.down('sm')]: {
       paddingLeft: 0,
       paddingRight: 0,
-    }
+    },
   },
-  gridTitle: {}
+  gridTitle: {},
 });
 
 class InsightsGrid extends Component {
@@ -65,42 +66,41 @@ class InsightsGrid extends Component {
       md: 3,
       sm: 6,
       xl: 2,
-      xs: 12
+      xs: 12,
     };
 
-    const media = insight.media ?
+    const media = insight.media ? (
       <CardMedia
         alt={insight.media.alt}
         className={classes.gridMedia}
         component={insight.media.type || 'div'}
-        src={insight.media.src + '/388/200?maintain=false'} /> : null;
+        src={insight.media.src + '/388/200?maintain=false'}
+      />
+    ) : null;
 
-    return <Grid
-      className={classes.grid}
-      item
-      key={key}
-      {...size}>
-      <Link className={classes.gridLink} to={`./insights/${insight.slug}`}>
-        <Card
-          className={classes.gridCard}
-          elevation={2}>
-          {media}
-          <CardHeader
-            className={classes.gridTitle}
-            title={insight.title}
-            titleTypographyProps={{ variant: 'subtitle1' }} />
+    return (
+      <Grid className={classes.grid} item key={key} {...size}>
+        <Link className={classes.gridLink} to={`./insights/${insight.slug}`}>
+          <Card className={classes.gridCard} elevation={2}>
 
-          <CardContent>
-            <Typography
-              className={classes.gridContent}
-              component='p'>
-              {insight.brief}
-            </Typography>
-          </CardContent>
+            {media}
 
-        </Card>
-      </Link>
-    </Grid>
+            <CardHeader
+              className={classes.gridTitle}
+              title={insight.title}
+              titleTypographyProps={{ variant: 'subtitle1' }}
+            />
+
+            <CardContent>
+              <Typography className={classes.gridContent} component='p'>
+                {insight.brief}
+              </Typography>
+            </CardContent>
+
+          </Card>
+        </Link>
+      </Grid>
+    );
   };
 
   renderInsights = () => {
@@ -117,42 +117,51 @@ class InsightsGrid extends Component {
       || (insights.length === 0)
       || insights.err;
 
-    if ( isInsights ) {
-      return <Grid
-        container
-        justify='center'
-        style={{ height: 'calc(100vh - 339px)' }}>
-        <Grid item xs={12}>
-          <Grid container justify='center'>
-            <Typography
-              align='center'
-              className={classes.gridFillerText}
-              component={Grid}
-              item
-              xs={12}>
-              <FormattedMessage id='insights.search.none.descriptor' />
-            </Typography>
-            <Button
-              color='primary'
-              component={Link}
-              to='/'
-              variant='contained'>
-              <FormattedMessage id='insights.search.none.button' />
-            </Button>
-          </Grid>
+    if (isInsights) {
+      return (
+        <Grid container justify='center' style={{ height: 'calc(100vh - 339px)' }}>
+          <Grid item xs={12}>
+            <Grid container justify='center'>
+              <Typography
+                align='center'
+                className={classes.gridFillerText}
+                component={Grid}
+                item
+                xs={12}
+              >
+                <FormattedMessage id='insights.search.none.descriptor' />
+              </Typography>
+              <Button
+                color='primary'
+                component={Link}
+                to='/'
+                variant='contained'
+              >
+                <FormattedMessage id='insights.search.none.button' />
+              </Button>
+            </Grid>
 
+          </Grid>
         </Grid>
-      </Grid>;
+      );
     }
 
-    return <Grid
-      className={classes.grids}
-      container
-      justify='center'
-      spacing={24}>
-      {this.renderInsights()}
-    </Grid>;
-  };
+    return (
+      <Grid
+        className={classes.grids}
+        container
+        justify='center'
+        spacing={24}
+      >
+        {this.renderInsights()}
+      </Grid>
+    );
+  }
 }
+
+InsightsGrid.propTypes = {
+  classes: PropTypes.shape({}).isRequired,
+  insights: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
+};
 
 export default withStyles(styles)(InsightsGrid);

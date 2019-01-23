@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 
 import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid';
@@ -26,7 +27,7 @@ const styles = theme => ({
     paddingLeft: theme.spacing.unit * 2,
     paddingRight: theme.spacing.unit * 2,
     paddingTop: theme.spacing.unit * 3,
-  }
+  },
 });
 
 class ReportForm extends Component {
@@ -34,13 +35,16 @@ class ReportForm extends Component {
     const { classes, fields } = this.props;
 
     return fields.map((field) => {
-      return <Grid
-        className={classes.standardContainer}
-        item
-        key={field.label}
-        {...field.size}>
-        <TextField {...field} />
-      </Grid>;
+      return (
+        <Grid
+          className={classes.standardContainer}
+          item
+          key={field.label}
+          {...field.size}
+        >
+          <TextField {...field} />
+        </Grid>
+      );
     });
   };
 
@@ -54,53 +58,68 @@ class ReportForm extends Component {
       title,
     } = this.props;
 
-    return <>
-      <Grid
-        className={classes.root}
-        container
-        justify='flex-start'>
+    return (
+      <>
+        <Grid
+          className={classes.root}
+          container
+          justify='flex-start'
+        >
 
-        <Grid item md={8} xs={12} style={{ overflowY: 'scroll' }}>
-          <Grid container>
-            <Grid item xs={12}>
-              <Typography
-                className={classes.title}
-                variant='h6'>
-                {title}
-              </Typography>
-            </Grid>
+          <Grid item md={8} xs={12} style={{ overflowY: 'scroll' }}>
+            <Grid container>
+              <Grid item xs={12}>
+                <Typography className={classes.title} variant='h6'>
+                  {title}
+                </Typography>
+              </Grid>
 
-            {this.renderFields()}
+              {this.renderFields()}
 
-            <Grid className={classes.standardContainer} item xs={12}>
-              <Grid container justify='space-between'>
-                <Grid item>
-                  <Button
-                    fullWidth
-                    color='primary'
-                    onClick={onSubmit}
-                    variant='contained'>
-                    {submitButton}
-                  </Button>
+              <Grid className={classes.standardContainer} item xs={12}>
+                <Grid container justify='space-between'>
+                  <Grid item>
+                    <Button color='primary' fullWidth onClick={onSubmit} variant='contained'>
+                      {submitButton}
+                    </Button>
+                  </Grid>
+                  {
+                    onCancel ? (
+                      <Grid item>
+                        <ReportFormDialog
+                          cancelButton={cancelButton}
+                          onCancel={onCancel}
+                        />
+                      </Grid>
+                    ) : null
+                  }
                 </Grid>
-                {
-                  onCancel ? <Grid item>
-                    <ReportFormDialog
-                      cancelButton={cancelButton}
-                      onCancel={onCancel} />
-                  </Grid> : null
-                }
               </Grid>
             </Grid>
           </Grid>
+
+          <ReportFormSidebar />
         </Grid>
 
-        <ReportFormSidebar />
-      </Grid>
-
-      <Message />
-    </>;
+        <Message />
+      </>
+    );
   }
 }
+
+ReportForm.defaultProps = {
+  cancelButton: '',
+  onCancel: () => null,
+};
+
+ReportForm.propTypes = {
+  cancelButton: PropTypes.string,
+  classes: PropTypes.shape({}).isRequired,
+  fields: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
+  onCancel: PropTypes.func,
+  onSubmit: PropTypes.func.isRequired,
+  submitButton: PropTypes.string.isRequired,
+  title: PropTypes.string.isRequired,
+};
 
 export default withStyles(styles)(ReportForm);

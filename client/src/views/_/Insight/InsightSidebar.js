@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { FormattedMessage } from 'react-intl';
 
 import Grid from '@material-ui/core/Grid';
@@ -22,25 +23,30 @@ const styles = theme => ({
     paddingLeft: theme.spacing.unit * 2,
     paddingRight: theme.spacing.unit * 2,
     paddingTop: theme.spacing.unit * 3,
-  }
+  },
 });
 
-class Sample extends Component {
+// eslint-disable-next-line
+class InsightSidebar extends Component {
   render() {
     const { classes } = this.props;
 
-    return <Hidden smDown>
-      <Grid className={classes.sidebar} item md={4} xl={3}>
-        <Paper>
-          <Typography
-            className={classes.sidebarHeading}
-            variant='subtitle1'>
-            <FormattedMessage id='insights.trending.title' />
-          </Typography>
-        </Paper>
-      </Grid>
-    </Hidden>;
+    return (
+      <Hidden smDown>
+        <Grid className={classes.sidebar} item md={4} xl={3}>
+          <Paper>
+            <Typography className={classes.sidebarHeading} variant='subtitle1'>
+              <FormattedMessage id='insights.trending.title' />
+            </Typography>
+          </Paper>
+        </Grid>
+      </Hidden>
+    );
   }
 }
 
-export default withStyles(styles)(Sample);
+InsightSidebar.propTypes = {
+  classes: PropTypes.shape({}).isRequired,
+};
+
+export default withStyles(styles)(InsightSidebar);

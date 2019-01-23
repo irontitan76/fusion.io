@@ -1,18 +1,17 @@
 import React, { Component } from 'react';
-import { injectIntl } from 'react-intl';
+import { injectIntl, intlShape } from 'react-intl';
 
 import Grid from '@material-ui/core/Grid';
 import withStyles from '@material-ui/core/styles/withStyles';
 
 import TabBar from 'components/TabBar';
 
-const styles = theme => ({});
+const styles = () => ({});
 
 class AboutValues extends Component {
-  render() {
-    const { intl } = this.props;
-
-    const values = [{
+  get values() {
+    return [
+      {
         description: 'By pushing the boundaries of technology through \
           questioning, self-motivation, and problem solving, you are an \
           innovator at heart. Each innovator at heart is relentless in his or \
@@ -23,9 +22,9 @@ class AboutValues extends Component {
         media: {
           alt: 'innovators at heart',
           src: '/images/innovator3.jpg',
-          type: 'image'
+          type: 'image',
         },
-        subheading: 'Approach innovation with a structured thought process',
+        subtitle: 'Approach innovation with a structured thought process',
         title: 'Innovators at Heart',
       },
       {
@@ -38,9 +37,9 @@ class AboutValues extends Component {
         media: {
           alt: 'bias for action',
           src: '/images/action.jpg',
-          type: 'image'
+          type: 'image',
         },
-        subheading: 'Anticipate and respond to opportunities to improve',
+        subtitle: 'Anticipate and respond to opportunities to improve',
         title: 'Bias for Action',
       },
       {
@@ -53,9 +52,9 @@ class AboutValues extends Component {
         media: {
           alt: 'challenge respectfully',
           src: '/images/challenge2.jpg',
-          type: 'image'
+          type: 'image',
         },
-        subheading: 'Generate ideas that challenge the status quo',
+        subtitle: 'Generate ideas that challenge the status quo',
         title: 'Challenge Respectfully',
       },
       {
@@ -67,9 +66,9 @@ class AboutValues extends Component {
         media: {
           alt: 'be compassionate',
           src: '/images/compassion.jpg',
-          type: 'image'
+          type: 'image',
         },
-        subheading: 'Every moment is an opportunity to improve lives',
+        subtitle: 'Every moment is an opportunity to improve lives',
         title: 'Be Compassionate',
       },
       {
@@ -81,21 +80,27 @@ class AboutValues extends Component {
         media: {
           alt: 'collaborate efficiently',
           src: '/images/collaborate.jpg',
-          type: 'image'
+          type: 'image',
         },
-        subheading: 'Form meaningful relationships and produce results together',
+        subtitle: 'Form meaningful relationships and produce results together',
         title: 'Collaborate Efficiently',
       },
     ];
+  }
 
-    return <Grid
-      alignItems='center'
-      container
-      justify='center'>
+  render() {
+    const { intl } = this.props;
 
-      <TabBar name={intl.formatMessage({ id: 'about.values.title'})} values={values} />
-    </Grid>;
+    return (
+      <Grid alignItems='center' container justify='center'>
+        <TabBar name={intl.formatMessage({ id: 'about.values.title' })} values={this.values} />
+      </Grid>
+    );
   }
 }
+
+AboutValues.propTypes = {
+  intl: intlShape.isRequired,
+};
 
 export default withStyles(styles)(injectIntl(AboutValues));

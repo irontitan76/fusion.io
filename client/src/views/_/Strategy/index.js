@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
 import Report from 'components/Report';
 
 import {
   loadStrategies,
-  unloadStrategies
+  unloadStrategies,
 } from 'actions/strategies';
 
 class Strategy extends Component {
@@ -25,8 +26,13 @@ class Strategy extends Component {
   }
 }
 
+Strategy.propTypes = {
+  dispatch: PropTypes.func.isRequired,
+  strategies: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
+};
+
 const select = state => ({
-  strategies: state.strategies.items
+  strategies: state.strategies.items,
 });
 
 export default connect(select)(Strategy);

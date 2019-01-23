@@ -8,14 +8,14 @@ import {
  * @argument message - The message to be displayed in the Snackbar component
  * @returns @async a dispatch function which is setting the specified message
  *  state and its respective fields and default values
-*/
+ */
 export const loadMessage = content => {
-  return async dispatch => {
+  return dispatch => {
     try {
       const payload = { content };
-      return dispatch({ type: MESSAGE_LOAD, payload });
+      return dispatch({ payload, type: MESSAGE_LOAD });
     } catch (err) {
-      return dispatch({ type: MESSAGE_LOAD, error: true, err });
+      return dispatch({ err, error: true, type: MESSAGE_LOAD });
     }
   };
 };
@@ -23,13 +23,13 @@ export const loadMessage = content => {
 /**
  * @function unloadMessage (individual)
  * @returns @async a dispatch function which is resetting the message state
-*/
+ */
 export const unloadMessage = () => {
-  return async dispatch => {
+  return dispatch => {
     try {
       return dispatch({ type: MESSAGE_UNLOAD });
     } catch (err) {
-      return dispatch({ type: MESSAGE_UNLOAD, error: true, err });
+      return dispatch({ err, error: true, type: MESSAGE_UNLOAD });
     }
   };
 };

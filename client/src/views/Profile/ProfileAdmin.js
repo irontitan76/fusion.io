@@ -1,13 +1,15 @@
-import React, { Component } from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
 
 import ProfileNavigation from './ProfileNavigation';
 
-class ProfileAdmin extends Component {
-  render() {
-    const { session } = this.props;
+const ProfileAdmin = (props) => {
+  const { session } = props;
+  return <ProfileNavigation session={session} />;
+};
 
-    return <ProfileNavigation session={session} />;
-  }
-}
+ProfileAdmin.propTypes = {
+  session: PropTypes.shape({}).isRequired,
+};
 
 export default ProfileAdmin;

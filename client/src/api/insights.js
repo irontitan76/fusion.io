@@ -16,7 +16,7 @@ export const deleteInsight = async (_id) => {
 export const getInsights = async (params, userId) => {
   try {
     params = `?${queryString.stringify(params)}` || '';
-    if ( userId ) {
+    if (userId) {
       params = `?userId=${userId}&${params}`;
     }
     const response = await axios.get(`${BASE_PATH}${params}`);

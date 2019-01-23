@@ -18,23 +18,23 @@ import {
 } from 'api/standards';
 
 export const changeStandard = (name, value) => {
-  return async dispatch => {
+  return dispatch => {
     try {
       const payload = { name, value };
-      return dispatch({ type: STANDARD_CHANGE, payload });
+      return dispatch({ payload, type: STANDARD_CHANGE });
     } catch (err) {
-      return dispatch({ type: STANDARD_CHANGE, error: true, err });
+      return dispatch({ err, error: true, type: STANDARD_CHANGE });
     }
   };
 };
 
 export const createStandard = (standard) => {
-  return async dispatch => {
+  return dispatch => {
     try {
       const payload = postStandard(standard);
-      return dispatch({ type: STANDARD_CREATE, payload });
+      return dispatch({ payload, type: STANDARD_CREATE });
     } catch (err) {
-      return dispatch({ type: STANDARD_CREATE, error: true, err });
+      return dispatch({ err, error: true, type: STANDARD_CREATE });
     }
   };
 };
@@ -42,10 +42,10 @@ export const createStandard = (standard) => {
 export const loadStandard = (id) => {
   return async dispatch => {
     try {
-      const payload = id ? { item: null } : await getStandard(id);
-      return dispatch({ type: STANDARD_LOAD, payload });
+      const payload = id ? await getStandard(id) : { item: null };
+      return dispatch({ payload, type: STANDARD_LOAD });
     } catch (err) {
-      return dispatch({ type: STANDARD_LOAD, error: true, err });
+      return dispatch({ err, error: true, type: STANDARD_LOAD });
     }
   };
 };
@@ -54,9 +54,9 @@ export const loadStandards = () => {
   return async dispatch => {
     try {
       const payload = await getStandards();
-      return dispatch({ type: STANDARDS_LOAD, payload });
+      return dispatch({ payload, type: STANDARDS_LOAD });
     } catch (err) {
-      return dispatch({ type: STANDARDS_LOAD, error: true, err });
+      return dispatch({ err, error: true, type: STANDARDS_LOAD });
     }
   };
 };
@@ -65,29 +65,29 @@ export const removeStandard = (_id) => {
   return async dispatch => {
     try {
       const payload = await deleteStandard(_id);
-      return dispatch({ type: STANDARD_REMOVE, payload });
+      return dispatch({ payload, type: STANDARD_REMOVE });
     } catch (err) {
-      return dispatch({ type: STANDARD_REMOVE, error: true, err });
+      return dispatch({ err, error: true, type: STANDARD_REMOVE });
     }
   };
 };
 
 export const unloadStandard = () => {
-  return async dispatch => {
+  return dispatch => {
     try {
       return dispatch({ type: STANDARD_UNLOAD });
     } catch (err) {
-      return dispatch({ type: STANDARD_UNLOAD, error: true, err });
+      return dispatch({ err, error: true, type: STANDARD_UNLOAD });
     }
   };
 };
 
 export const unloadStandards = () => {
-  return async dispatch => {
+  return dispatch => {
     try {
       return dispatch({ type: STANDARDS_UNLOAD });
     } catch (err) {
-      return dispatch({ type: STANDARDS_UNLOAD, error: true, err });
+      return dispatch({ err, error: true, type: STANDARDS_UNLOAD });
     }
   };
 };
@@ -96,9 +96,9 @@ export const updateStandard = (update) => {
   return async dispatch => {
     try {
       const payload = await putStandard(update);
-      return dispatch({ type: STANDARD_UPDATE, payload });
+      return dispatch({ payload, type: STANDARD_UPDATE });
     } catch (err) {
-      return dispatch({ type: STANDARD_UPDATE, error: true, err });
+      return dispatch({ err, error: true, type: STANDARD_UPDATE });
     }
   };
 };

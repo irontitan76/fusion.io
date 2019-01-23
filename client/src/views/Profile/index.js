@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import Redirect from 'react-router-dom/Redirect';
 import Route from 'react-router-dom/Route';
@@ -22,23 +23,12 @@ import ProfileStrategy from './ProfileStrategy';
 import ProfileUser from './ProfileUser';
 
 class Home extends Component {
-  render() {
-    const { match, session } = this.props;
+  renderRoutes = () => {
+    const { match } = this.props;
 
-    let userType = null;
-
-    if ( !session.auth ) {
-      return <Redirect to='/login' />;
-    } else if ( session.user.role === 'admin' ) {
-      userType = <ProfileAdmin session={ session } />;
-    } else {
-      userType = <ProfileUser />;
-    }
-
-    return <Grid container style={{ height: '100%' }}>
-      { userType }
-      <Grid item style={{ flex: 1, overflowY: 'scroll' }}>
-        <Route exact path={ match.path } component={ProfileOverview} />
+    return (
+      <>
+        <Route exact path={match.path} component={ProfileOverview} />
         <Route exact path={`${match.path}/settings`} component={ProfileSettings} />
         <Route exact path={`${match.path}/notifications`} component={ProfileNotifications} />
         <Route exact path={`${match.path}/careers/new`} component={ProfileCareer} />
@@ -50,16 +40,46 @@ class Home extends Component {
         <Route exact path={`${match.path}/policies`} component={ProfilePolicies} />
         <Route exact path={`${match.path}/policies/new`} component={ProfilePolicy} />
         <Route exact path={`${match.path}/policies/edit/:itemId`} component={ProfilePolicy} />
-        <Route exact path={`${match.path}/standards/new`} component={ProfileStandard}/>
+        <Route exact path={`${match.path}/standards/new`} component={ProfileStandard} />
         <Route exact path={`${match.path}/standards/edit/:itemId`} component={ProfileStandard} />
         <Route exact path={`${match.path}/standards`} component={ProfileStandards} />
         <Route exact path={`${match.path}/strategies/new`} component={ProfileStrategy} />
         <Route exact path={`${match.path}/strategies/edit/:itemId`} component={ProfileStrategy} />
         <Route exact path={`${match.path}/strategies`} component={ProfileStrategies} />
+      </>
+    );
+  };
+
+  render() {
+    const { session } = this.props;
+
+    let userType = null;
+
+    if (!session.auth) {
+      return <Redirect to='/login' />;
+    }
+
+    if (session.user.role === 'admin') {
+      userType = <ProfileAdmin session={session} />;
+    } else {
+      userType = <ProfileUser />;
+    }
+
+    return (
+      <Grid container style={{ height: '100%' }}>
+        {userType}
+        <Grid item style={{ flex: 1, overflowY: 'scroll' }}>
+          {this.renderRoutes()}
+        </Grid>
       </Grid>
-    </Grid>;
+    );
   }
 }
+
+Home.propTypes = {
+  match: PropTypes.shape({}).isRequired,
+  session: PropTypes.shape({}).isRequired,
+};
 
 const select = state => ({
   session: state.session,

@@ -6,4 +6,5 @@ import registerServiceWorker from './registerServiceWorker';
 ReactDOM.render(<App />, document.getElementById('root'));
 registerServiceWorker();
 
-document.body.classList.remove('loading');
+const loadingElement = document.getElementById('loading');
+loadingElement.parentNode.removeChild(loadingElement);

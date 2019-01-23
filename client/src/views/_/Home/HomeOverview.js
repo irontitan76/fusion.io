@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import Link from 'react-router-dom/Link';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { FormattedMessage } from 'react-intl';
@@ -23,10 +24,13 @@ const styles = theme => ({
     [theme.breakpoints.down('sm')]: {
       paddingLeft: 0,
       paddingRight: 0,
-    }
+    },
   },
   overviewCard: {
     backgroundColor: '#fbfbfb',
+  },
+  overviewCardContent: {
+    height: 75,
   },
   overviewSubtitle: {
     fontWeight: 300,
@@ -35,58 +39,59 @@ const styles = theme => ({
     color: '#111',
     fontWeight: 700,
   },
-  overviewCardContent: {
-    height: 75,
-  }
 });
 
 class HomeOverview extends Component {
   renderItem = (item, key) => {
     const { classes } = this.props;
 
-    const avatar = <FontAwesomeIcon
-      color='#777'
-      icon={item.icon}
-      style={{ fontSize: 26 }} />;
+    const avatar = (
+      <FontAwesomeIcon
+        color='#777'
+        icon={item.icon}
+        style={{ fontSize: 26 }}
+      />
+    );
     const divider = item.divider ? <Divider light /> : null;
 
-    return <Grid
-      className={classes.overviewItem}
-      item
-      key={key}
-      md={4}
-      xs={12}>
+    return (
+      <Grid
+        className={classes.overviewItem}
+        item
+        key={key}
+        md={4}
+        xs={12}
+      >
 
-      <Card
-        className={classes.overviewCard}
-        elevation={0}>
+        <Card className={classes.overviewCard} elevation={0}>
 
-        <CardHeader
-          avatar={avatar}
-          title={<FormattedMessage id={`home.overview.card[${key}].title`} />}/>
+          <CardHeader
+            avatar={avatar}
+            title={<FormattedMessage id={`home.overview.card[${key}].title`} />}
+          />
 
-        <CardContent
-          className={classes.overviewCardContent}>
-          <Typography
-            component='p'>
-            <FormattedMessage id={`home.overview.card[${key}].content`} />
-          </Typography>
-        </CardContent>
+          <CardContent className={classes.overviewCardContent}>
+            <Typography component='p'>
+              <FormattedMessage id={`home.overview.card[${key}].content`} />
+            </Typography>
+          </CardContent>
 
-        {divider}
+          {divider}
 
-        <CardActions>
-          <Button
-            color='primary'
-            component={Link}
-            size='small'
-            to={item.button.path}>
-            <FormattedMessage id={`home.overview.card[${key}].button`} />
-          </Button>
-        </CardActions>
+          <CardActions>
+            <Button
+              color='primary'
+              component={Link}
+              size='small'
+              to={item.button.path}
+            >
+              <FormattedMessage id={`home.overview.card[${key}].button`} />
+            </Button>
+          </CardActions>
 
-      </Card>
-    </Grid>;
+        </Card>
+      </Grid>
+    );
   }
 
   renderItems = () => {
@@ -94,7 +99,7 @@ class HomeOverview extends Component {
       {
         button: {
           label: 'home.overview.card[0].button',
-          path: '/about'
+          path: '/about',
         },
         content: 'home.overview.card[0].content',
         divider: true,
@@ -104,7 +109,7 @@ class HomeOverview extends Component {
       {
         button: {
           label: 'home.overview.card[0].button',
-          path: '/insights'
+          path: '/insights',
         },
         content: 'home.overview.card[1].content',
         divider: true,
@@ -114,7 +119,7 @@ class HomeOverview extends Component {
       {
         button: {
           label: 'home.overview.card[0].button',
-          path: '/contact'
+          path: '/contact',
         },
         content: 'home.overview.card[2].content',
         divider: true,
@@ -129,18 +134,21 @@ class HomeOverview extends Component {
   render() {
     const { classes } = this.props;
 
-    return <Grid
-      className={classes.overview}
-      container
-      justify='space-around'
-      spacing={24}>
+    return (
+      <Grid
+        className={classes.overview}
+        container
+        justify='space-around'
+        spacing={24}
+      >
 
         <Grid className={classes.overviewTitleContainer} item xs={12}>
           <Typography
             align='center'
             className={classes.overviewTitle}
             gutterBottom
-            variant='h4'>
+            variant='h4'
+          >
             <FormattedMessage id='home.overview.title' />
           </Typography>
 
@@ -148,17 +156,21 @@ class HomeOverview extends Component {
             align='center'
             className={classes.overviewSubtitle}
             gutterBottom
-            variant='subtitle1'>
+            variant='subtitle1'
+          >
             <FormattedMessage id='home.overview.subtitle' />
           </Typography>
         </Grid>
 
         {this.renderItems()}
-    </Grid>;
-  };
+      </Grid>
+    );
+  }
 }
 
-HomeOverview.defaultProps ={};
-HomeOverview.propTypes = {};
+HomeOverview.defaultProps = {};
+HomeOverview.propTypes = {
+  classes: PropTypes.shape({}).isRequired,
+};
 
 export default withStyles(styles)(HomeOverview);

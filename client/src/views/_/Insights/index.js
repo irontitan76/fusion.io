@@ -1,16 +1,17 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import queryString from 'query-string';
 import filter from 'lodash.filter';
 
+import Footer from 'components/Footer';
+import {
+  loadInsights,
+  unloadInsights,
+} from 'actions/insights';
 import InsightsGrid from './InsightsGrid';
 import InsightsHeader from './InsightsHeader';
-import Footer from 'components/Footer';
 
-import { 
-  loadInsights,
-  unloadInsights
-} from 'actions/insights';
 
 class Insights extends Component {
   componentDidMount() {
@@ -31,21 +32,29 @@ class Insights extends Component {
   };
 
   render() {
-    const { history } = this.props;
-    
-    return <>
-      <main style={{ minHeight: '100%', }}>
-        <InsightsHeader history={history} />
-        <InsightsGrid insights={this.filterInsights()} />
-      </main>
-      <Footer />
-    </>;
+    const { dispatch, history } = this.props;
+
+    return (
+      <>
+        <main style={{ minHeight: '100%' }}>
+          <InsightsHeader dispatch={dispatch} history={history} />
+          <InsightsGrid insights={this.filterInsights()} />
+        </main>
+        <Footer />
+      </>
+    );
   }
 }
 
-const select = state => ({
-  insights: state.insights.filteredItems
-});
+Insights.propTypes = {
+  dispatch: PropTypes.func.isRequired,
+  history: PropTypes.shape({}).isRequired,
+  insights: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
+  location: PropTypes.shape({}).isRequired,
+};
 
+const select = state => ({
+  insights: state.insights.filteredItems,
+});
 
 export default connect(select)(Insights);

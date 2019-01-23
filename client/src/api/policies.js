@@ -37,7 +37,6 @@ export const getPolicy = async (_id) => {
 
 export const postPolicy = async (policy) => {
   try {
-    console.log(policy, BASE_PATH);
     const response = await axios.post(BASE_PATH, {
       brief: policy.content.body.substring(0, 65),
       content: policy.content,

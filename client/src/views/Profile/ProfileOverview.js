@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
@@ -20,30 +21,41 @@ const styles = theme => ({
     paddingTop: theme.spacing.unit * 3,
   },
   title: {
-    fontSize: 14
+    fontSize: 14,
   },
 });
 
 class ProfileOverview extends Component {
-  render() {
+  renderCard = () => {
     const { classes } = this.props;
-
-    return <Grid
-      className={classes.root}
-      container
-      justify='space-around'
-      spacing={16}>
-
+    return (
       <Card className={classes.card} component={Grid} item md={2} xs={12}>
         <CardHeader subheader='Total Insights' />
         <CardContent className={classes.cardContent}>
-          <Typography align='center' variant='h4'></Typography>
+          <Typography align='center' variant='h4' />
         </CardContent>
       </Card>
+    );
+  };
 
+  render() {
+    const { classes } = this.props;
 
-    </Grid>;
+    return (
+      <Grid
+        className={classes.root}
+        container
+        justify='space-around'
+        spacing={16}
+      >
+        {this.renderCard()}
+      </Grid>
+    );
   }
 }
+
+ProfileOverview.propTypes = {
+  classes: PropTypes.shape({}).isRequired,
+};
 
 export default withStyles(styles)(ProfileOverview);

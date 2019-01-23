@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import Grid from '@material-ui/core/Grid';
@@ -7,17 +8,17 @@ import withStyles from '@material-ui/core/styles/withStyles';
 
 const styles = theme => ({
   button: {
-    marginBottom: theme.spacing.unit * 2
+    marginBottom: theme.spacing.unit * 2,
   },
   content: {
-    padding: `${theme.spacing.unit * 5}px ${theme.spacing.unit * 2}px`
+    padding: `${theme.spacing.unit * 5}px ${theme.spacing.unit * 2}px`,
   },
   icon: {
     fontSize: '7rem',
     marginBottom: theme.spacing.unit * 3,
     [theme.breakpoints.down('xs')]: {
-      fontSize: '4rem'
-    }
+      fontSize: '4rem',
+    },
   },
   root: {
     backgroundRepeat: 'no-repeat',
@@ -28,15 +29,15 @@ const styles = theme => ({
     },
     [theme.breakpoints.down('xs')]: {
       backgroundSize: '180% 120%',
-    }
+    },
   },
   subtitle: {
     fontSize: 26,
     fontWeight: 400,
     marginBottom: theme.spacing.unit * 3,
     [theme.breakpoints.down('xs')]: {
-      fontSize: 16
-    }
+      fontSize: 16,
+    },
   },
   title: {
     fontSize: 32,
@@ -44,9 +45,9 @@ const styles = theme => ({
     letterSpacing: 20,
     textIndent: 28,
     [theme.breakpoints.down('xs')]: {
-      fontSize: 20
-    }
-  }
+      fontSize: 20,
+    },
+  },
 });
 
 export class Hero extends Component {
@@ -55,12 +56,12 @@ export class Hero extends Component {
 
     return icon && (
       <FontAwesomeIcon
-        icon={ icon }
+        icon={icon}
         {...iconProps}
         className={`
           ${classes.icon}
           ${iconProps && iconProps.className
-            ? iconProps.className : ''}
+          ? iconProps.className : ''}
         `}
       />
     );
@@ -78,9 +79,10 @@ export class Hero extends Component {
         className={`
           ${classes.subtitle}
           ${subtitleTypographyProps && subtitleTypographyProps.className
-            ? subtitleTypographyProps.className : ''}
-        `}>
-        { subtitle }
+          ? subtitleTypographyProps.className : ''}
+        `}
+      >
+        {subtitle}
       </Typography>
     );
   };
@@ -97,11 +99,12 @@ export class Hero extends Component {
         className={`
           ${classes.title}
           ${titleTypographyProps && titleTypographyProps.className
-            ? titleTypographyProps.className : ''}
-        `}>
+          ? titleTypographyProps.className : ''}
+        `}
+      >
         { title }
       </Typography>
-    )
+    );
   };
 
   render() {
@@ -118,7 +121,8 @@ export class Hero extends Component {
         className={classes.root}
         container
         justify='center'
-        style={{ backgroundImage: `url("${image}")`, height: height || 'auto' }}>
+        style={{ backgroundImage: `url("${image}")`, height: height || 'auto' }}
+      >
 
         <Grid item xs={12}>
           <Grid
@@ -128,15 +132,14 @@ export class Hero extends Component {
             justify='center'
             {...contentProps}
             className={`
-              ${classes.content} ${contentProps && contentProps.className
-                ? contentProps.className : ''}
-            `}>
-
+              ${classes.content} 
+              ${contentProps && contentProps.className ? contentProps.className : ''}
+            `}
+          >
             { this.renderIcon() }
             { this.renderTitle() }
             { this.renderSubtitle() }
             { children }
-
           </Grid>
         </Grid>
 
@@ -145,7 +148,24 @@ export class Hero extends Component {
   }
 }
 
-Hero.defaultProps = {};
-Hero.propTypes = {};
+Hero.defaultProps = {
+  contentProps: {},
+  height: 500,
+  subtitle: '',
+};
+
+Hero.propTypes = {
+  children: PropTypes.node.isRequired,
+  classes: PropTypes.shape({}).isRequired,
+  contentProps: PropTypes.shape({}),
+  height: PropTypes.number,
+  icon: PropTypes.node.isRequired,
+  iconProps: PropTypes.shape({}).isRequired,
+  image: PropTypes.node.isRequired,
+  subtitle: PropTypes.string,
+  subtitleTypographyProps: PropTypes.shape({}).isRequired,
+  title: PropTypes.string.isRequired,
+  titleTypographyProps: PropTypes.shape({}).isRequired,
+};
 
 export default withStyles(styles)(Hero);

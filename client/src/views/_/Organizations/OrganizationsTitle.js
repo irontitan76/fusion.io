@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import Typography from '@material-ui/core/Typography';
@@ -19,19 +20,31 @@ const styles = theme => ({
   },
 });
 
+// eslint-disable-next-line
 class OrganizationsTitle extends Component {
   render = () => {
     const { bgColor, classes, icon, theme, title } = this.props;
 
-    return <Typography
-      align='left'
-      className={classes.org}
-      style={{ backgroundColor: theme.palette[bgColor || 'offwhite'] }}
-      variant='h6'>
-      <FontAwesomeIcon className={classes.orgIcon} icon={['fal', icon]} />
-      {title}
-    </Typography>;
+    return (
+      <Typography
+        align='left'
+        className={classes.org}
+        style={{ backgroundColor: theme.palette[bgColor || 'offwhite'] }}
+        variant='h6'
+      >
+        <FontAwesomeIcon className={classes.orgIcon} icon={['fal', icon]} />
+        {title}
+      </Typography>
+    );
   }
 }
+
+OrganizationsTitle.propTypes = {
+  bgColor: PropTypes.string.isRequired,
+  classes: PropTypes.shape({}).isRequired,
+  icon: PropTypes.string.isRequired,
+  theme: PropTypes.shape({}).isRequired,
+  title: PropTypes.string.isRequired,
+};
 
 export default withStyles(styles, { withTheme: true })(OrganizationsTitle);

@@ -1,17 +1,16 @@
 import React, { Component } from 'react';
 
 import Footer from 'components/Footer';
-import ReportContent from 'components/Report/Content';
-import ReportHeader from 'components/Report/Header';
 
+// eslint-disable-next-line
 class Privacy extends Component {
   render() {
-    return <>
-      <main>
-        
-      </main>
-      <Footer />
-    </>;
+    return (
+      <>
+        <main />
+        <Footer />
+      </>
+    );
   }
 }
 

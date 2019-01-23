@@ -11,77 +11,75 @@
 
     <style>
       html, body {
+        height: 100%;
         margin: 0;
         padding: 0;
-        height: 100%;
+      }
+
+      .loading .spinner {
+        display: block;
+      }
+
+      .spinner {
+        display: none;
       }
 
       .loading {
-        background: 'blue';
-        font-family: 'Roboto';
-        font-size: 1rem;
-        font-weight: 900;
-        height: 100vh;
-        text-align: center;
-        width: 100vw;
-        z-Index: 1;
-      }
-      body.loading {
-        background-image: radial-gradient(circle at 50% 15%, #fff, #fff 30%, #ccc);
-        height: 100vh;
-        margin: 0px; 
-        width: 100vw; 
-      }
-      body.loading #root {
-        position: relative;
-        width: 100%;
+        align-items: center;
+        display: flex;
         height: 100%;
-        font-size: 0px;
+        justify-content: center;
       }
-      body.loading #logo {
-        position: absolute;
-        display: block;
-        width: 140px;
-        height: 140px;
-        top: calc(50vh - 70px); left: calc(50vw - 70px);
+
+      @keyframes colors {
+      	0% { stroke: #0074D9; }
+      	33.33% { stroke: #0074D9; }
+        66.66% { stroke: #111111; }
+      	100% { stroke: #111111; }
       }
-      div.t {
-        display: inline-block;
-        box-sizing: border-box;
-        margin: 0px;
-        width: 10vw;
-        height: 10vh;
-        background-color: #e2e2e2;
+
+      @keyframes dash {
+       0% {
+         stroke-dashoffset: 187;
+       }
+       50% {
+         stroke-dashoffset: 46.75;
+         transform:rotate(135deg);
+       }
+       100% {
+         stroke-dashoffset: 187;
+         transform:rotate(450deg);
+       }
       }
-      div.t.on {
-        -webkit-animation: pulse 3s infinite linear alternate;
-        -moz-animation: pulse 3s infinite linear alternate;
-        animation: pulse 3s infinite linear alternate;
+
+      @keyframes rotator {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(270deg); }
       }
-      div.t.on:hover {
-        -webkit-animation: none;
-        background-color: #ccc;
+
+      .spinner {
+        animation: rotator 1.4s linear infinite;
       }
-      @-webkit-keyframes pulse {
-        100% { background-color: #fff; }
+
+      .path {
+        stroke-dasharray: 187;
+        stroke-dashoffset: 0;
+        transform-origin: center;
+        animation: dash 1.4s ease-in-out infinite, colors 5.6s ease-in-out infinite;
       }
-      @-moz-keyframes pulse {
-        100% { background-color: #fff; }
-      }
-      @keyframes pulse {
-        100% { background-color: #fff; }
-      }
+
     </style>
   </head>
-  <body class='loading'>
+  <body>
     <noscript>
       You need to enable JavaScript to run this app.
     </noscript>
-    <div id="root" style="height: calc(100% - 64px)">
-      <svg id='logo' version="1.1" viewBox="0 0 140 140">
-        <path d="m119.5 20.501l-18.507 18.508c4.909 4.909 8.87 10.764 10.68 16.364 11.023 34.095-18.344 65.231-52.137 57.447-14.541-3.35-29.011-17.822-32.357-32.364-6.743-29.305 15.782-55.271 44.118-54.459l22.016-22.017c-7.213-2.547-14.967-3.95-23.045-3.98-38.25-0.142-69.715 30.738-70.257 68.984-0.555 39.14 31.02 71.04 70.038 71.015 38.757-0.024 69.955-31.243 69.955-69.999 0-19.331-7.836-36.831-20.504-49.499z" fill="#015085"/>
-        <path d="m27.174 80.458c3.3458 14.542 17.815 29.015 32.355 32.364 33.79 7.784 63.157-23.352 52.134-57.447-1.8109-5.6-5.7717-11.456-10.679-16.364l-30.988 30.99 30.088 1e-3c0 16.761-13.703 30.321-30.517 30.088-16.136-0.224-29.335-13.343-29.654-29.478-0.16899-8.55 3.2288-16.307 8.8055-21.886l-0.076996-0.077 22.647-22.65c-28.332-0.812-50.856 25.154-44.114 54.459z" fill="#333"/>
+    <div class="loading" id="loading">
+      <svg class="spinner" width="65px" height="65px" viewBox="0 0 66 66" xmlns="http://www.w3.org/2000/svg">
+        <circle class="path" fill="none" stroke-width="6" stroke-linecap="round" cx="33" cy="33" r="30"></circle>
       </svg>
+    </div>
+    <div id="root" style="height: calc(100% - 64px)">
       <script>
         var c = document.getElementById('root');
         for (var i = 0; i < 100; i += 1) {

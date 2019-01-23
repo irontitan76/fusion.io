@@ -1,14 +1,14 @@
-import React, { Component } from 'react';
+import React from 'react';
 
+import Footer from 'components/Footer';
 import HomeHero from './HomeHero';
 import HomeLogos from './HomeLogos';
 import HomeOverview from './HomeOverview';
 import HomeProducts from './HomeProducts';
-import Footer from 'components/Footer';
 
-class Home extends Component {
-  render() {
-    return <>
+const Home = () => {
+  return (
+    <>
       <main>
         <HomeHero />
         <HomeLogos />
@@ -16,8 +16,8 @@ class Home extends Component {
         <HomeProducts />
       </main>
       <Footer />
-    </>;
-  }
-}
+    </>
+  );
+};
 
 export default Home;

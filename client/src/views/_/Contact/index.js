@@ -1,33 +1,46 @@
 import React, { Component } from 'react';
-import { injectIntl } from 'react-intl';
+import { injectIntl, intlShape } from 'react-intl';
 
 import Grid from '@material-ui/core/Grid';
+
+import Footer from 'components/Footer';
 
 import ContactForm from './ContactForm';
 import ContactHeader from './ContactHeader';
 import ContactLocations from './ContactLocations';
-import Footer from 'components/Footer';
 
-export class Contact extends Component {
-  render() {
+class Contact extends Component {
+  renderContent = () => {
     const { intl } = this.props;
 
-    return <>
-      <main>
-        <Grid
-          container
-          justify='center'>
-          <ContactHeader
-            subtitle={intl.formatMessage({ id: 'contact.form.subtitle' })}
-            title={intl.formatMessage({ id: 'contact.form.title' })} />
-          <ContactForm title={intl.formatMessage({ id: 'contact.form.title' })} />
-          <ContactLocations />
-        </Grid>
-      </main>
-      <Footer />
-    </>;
+    return (
+      <>
+        <ContactHeader
+          subtitle={intl.formatMessage({ id: 'contact.form.subtitle' })}
+          title={intl.formatMessage({ id: 'contact.form.title' })}
+        />
+        <ContactForm title={intl.formatMessage({ id: 'contact.form.title' })} />
+        <ContactLocations />
+      </>
+    );
+  }
+
+  render() {
+    return (
+      <>
+        <main>
+          <Grid container justify='center'>
+            {this.renderContent()}
+          </Grid>
+        </main>
+        <Footer />
+      </>
+    );
   }
 }
 
-export default injectIntl(Contact);
+Contact.propTypes = {
+  intl: intlShape.isRequired,
+};
 
+export default injectIntl(Contact);

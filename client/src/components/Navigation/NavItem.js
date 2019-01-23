@@ -13,6 +13,20 @@ import ListItemText from '@material-ui/core/ListItemText';
 import withStyles from '@material-ui/core/styles/withStyles';
 
 const styles = theme => ({
+  collapseButton: {
+    marginLeft: theme.spacing.unit * 1.5,
+    transition: theme.transitions.create('transform', {
+      duration: theme.transitions.duration.leavingScreen,
+      easing: theme.transitions.easing.sharp,
+    }),
+  },
+  collapseButtonRotate: {
+    transform: 'rotate(180deg)',
+    transition: theme.transitions.create('transform', {
+      duration: theme.transitions.duration.leavingScreen,
+      easing: theme.transitions.easing.sharp,
+    }),
+  },
   item: {
     color: '#333',
     paddingBottom: 12,
@@ -29,47 +43,33 @@ const styles = theme => ({
     marginRight: theme.spacing.unit * 2,
   },
   selected: {
-    backgroundColor: `${theme.palette.blue} !important`,
-    color: `${theme.palette.common.white} !important`,
     '&:hover': {
       backgroundColor: `${theme.palette.blue} !important`,
       opacity: .9,
-    }
-  },
-  collapseButton: {
-    marginLeft: theme.spacing.unit * 1.5,
-    transition: theme.transitions.create('transform', {
-      easing: theme.transitions.easing.sharp,
-      duration: theme.transitions.duration.leavingScreen,
-    }),
-  },
-  collapseButtonRotate: {
-    transform: 'rotate(180deg)',
-    transition: theme.transitions.create('transform', {
-      easing: theme.transitions.easing.sharp,
-      duration: theme.transitions.duration.leavingScreen,
-    }),
+    },
+    backgroundColor: `${theme.palette.blue} !important`,
+    color: `${theme.palette.common.white} !important`,
   },
 });
 
 const menu = {
-  'Industries': [ 'about', 'careers', 'insights', 'standard', 'strategy' ],
-  'Consulting': [ 'consulting', 'consult' ],
-  'Technology': [ 'technology', 'tech' ],
+  Consulting: ['consulting', 'consult'],
+  Industries: ['about', 'careers', 'insights', 'standard', 'strategy'],
+  Technology: ['technology', 'tech'],
 };
 
-export class NavItem extends Component {
+class NavItem extends Component {
   constructor(props) {
     super(props);
-
+    const { item: { name } } = props;
     const path = window.location.pathname.split('/')[1];
 
     this.state = {
-      open: path === '' ? props.item.name === 'Industries' : !!find(
-        menu[props.item.name],
+      open: path === '' ? name === 'Industries' : !!find(
+        menu[name],
         i => i.indexOf(path) > -1
       ),
-    }
+    };
   }
 
   handleClick = () => {
@@ -78,47 +78,48 @@ export class NavItem extends Component {
 
   handleClose = () => {
     const { onClose } = this.props;
-    this.setState(state => ({ open: false }));
+    this.setState({ open: false });
     onClose();
   };
 
   isOpen = (open, path) => {
-    if ( open ) return open;
-    if ( path && !open ) return !open;
+    if (open) return open;
+    if (path && !open) return !open;
   };
 
   renderListItem = (child, key) => {
     const { classes } = this.props;
 
-    if ( !!child.active ) {
+    if (child.active) {
       const selected = child.path === window.location.pathname;
       const className = `${classes.nested} ${selected ? classes.selected : ''}`;
 
       let icon = null;
-      if ( child.icon ) {
-        icon = <ListItemIcon
-          style={{ color: 'inherit' }}>
-          { child.icon }
-        </ListItemIcon>;
+      if (child.icon) {
+        icon = <ListItemIcon style={{ color: 'inherit' }}>{ child.icon }</ListItemIcon>;
       }
 
-      return <ListItem
-        button
-        classes={{ selected: classes.selected, }}
-        className={className}
-        component={Link}
-        key={key}
-        onClick={child.onClick || this.handleClose}
-        selected={selected}
-        to={child.path}>
-        {icon}
-        <ListItemText
-          inset
-          primary={child.name}
-          primaryTypographyProps={{
-            style: { color: 'inherit', fontSize: '.8125rem' }
-          }} />
-      </ListItem>;
+      return (
+        <ListItem
+          button
+          classes={{ selected: classes.selected }}
+          className={className}
+          component={Link}
+          key={key}
+          onClick={child.onClick || this.handleClose}
+          selected={selected}
+          to={child.path}
+        >
+          {icon}
+          <ListItemText
+            inset
+            primary={child.name}
+            primaryTypographyProps={{
+              style: { color: 'inherit', fontSize: '.8125rem' },
+            }}
+          />
+        </ListItem>
+      );
     }
 
     return null;
@@ -135,17 +136,21 @@ export class NavItem extends Component {
     const { open } = this.state;
     const { classes } = this.props;
 
-    return <Collapse
-      in={open}
-      timeout='auto'
-      unmountOnExit>
-      <List
-        className={classes.list}
-        component='div'
-        disablePadding>
-        {this.renderListItems()}
-      </List>
-    </Collapse>;
+    return (
+      <Collapse
+        in={open}
+        timeout='auto'
+        unmountOnExit
+      >
+        <List
+          className={classes.list}
+          component='div'
+          disablePadding
+        >
+          {this.renderListItems()}
+        </List>
+      </Collapse>
+    );
   };
 
   render() {
@@ -153,58 +158,60 @@ export class NavItem extends Component {
     const { classes, item, onClose } = this.props;
 
     let collapseIcon = null;
-    if ( item.children ) {
+    if (item.children) {
       const className = `${classes.collapseButton}
-        ${!!open ? classes.collapseButtonRotate : ''}`;
+        ${open ? classes.collapseButtonRotate : ''}`;
 
-      collapseIcon = <FontAwesomeIcon
-        className={className}
-        icon={[ 'fal', 'chevron-up' ]}
-        style={{ color: '#ccc' }} />
+      collapseIcon = (
+        <FontAwesomeIcon
+          className={className}
+          icon={['fal', 'chevron-up']}
+          style={{ color: '#ccc' }}
+        />
+      );
     }
 
-    if ( item.type === 'divider' ) {
+    if (item.type === 'divider') {
       return <Divider />;
-    } else if ( !item.active ) {
+    }
+
+    if (!item.active) {
       return null;
-    } else {
-      return <>
+    }
+
+    return (
+      <>
         <ListItem
           button
           classes={{ selected: classes.selected }}
           className={
             `${classes.item}
-             ${item.path === window.location.pathname
-               ? classes.selected
-               : ''}`
+             ${item.path === window.location.pathname ? classes.selected : ''}`
           }
           component={item.path ? Link : null}
           dense
           name={item.name}
           onClick={item.onClick || item.children ? this.handleClick : onClose}
           selected={item.path === window.location.pathname}
-          to={item.path}>
+          to={item.path}
+        >
 
-          <ListItemIcon>{ item.icon }</ListItemIcon>
+          <ListItemIcon>{item.icon}</ListItemIcon>
 
-          <ListItemText primary={ item.name } />
-          { collapseIcon }
+          <ListItemText primary={item.name} />
+          {collapseIcon}
         </ListItem>
-        { item.children ? this.renderCollapseMenu() : null }
-      </>;
-    }
+        {item.children ? this.renderCollapseMenu() : null}
+      </>
+    );
   }
 }
 
-NavItem.defaultProps = {
-  classes: {},
-  item: {}
-};
 
 NavItem.propTypes = {
-  classes: PropTypes.object.isRequired,
-  item: PropTypes.object.isRequired,
-  onClose: PropTypes.func.isRequired
+  classes: PropTypes.shape({}).isRequired,
+  item: PropTypes.shape({}).isRequired,
+  onClose: PropTypes.func.isRequired,
 };
 
 export default withStyles(styles)(NavItem);

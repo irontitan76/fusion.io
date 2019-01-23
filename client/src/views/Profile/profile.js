@@ -1,17 +1,17 @@
 export const userMenu = [
   {
-    label: 'Dashboard',
     icon: ['fal', 'tachometer'],
-    path: '/profile'
+    label: 'Dashboard',
+    path: '/profile',
   },
   {
-    label: 'Notifications',
     icon: ['fal', 'exclamation'],
-    path: '/profile/notifications'
+    label: 'Notifications',
+    path: '/profile/notifications',
   },
   {
-    label: 'Insights',
     icon: ['fal', 'file-alt'],
+    label: 'Insights',
     path: '/profile/insights',
   },
 ];
@@ -19,31 +19,31 @@ export const userMenu = [
 export const adminMenu = [
   ...userMenu,
   {
-    label: 'Careers',
     icon: ['fal', 'briefcase'],
+    label: 'Careers',
     path: '/profile/careers',
   },
   {
-    label: 'Policies',
     icon: ['fal', 'file-contract'],
+    label: 'Policies',
     path: '/profile/policies',
   },
   {
-    label: 'Standards',
     icon: ['fal', 'circle-notch'],
+    label: 'Standards',
     path: '/profile/standards',
   },
   {
-    label: 'Strategies',
     icon: ['fal', 'infinity'],
+    label: 'Strategies',
     path: '/profile/strategies',
-  }
+  },
 ];
 
 export const settingsMenu = [
   {
-    label: 'Settings',
     icon: ['fal', 'cog'],
+    label: 'Settings',
     path: '/profile/settings',
   },
 ];

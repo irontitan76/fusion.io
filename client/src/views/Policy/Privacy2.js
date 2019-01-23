@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
 import Report from 'components/Report';
 
 import {
   loadPolicies,
-  unloadPolicies
+  unloadPolicies,
 } from 'actions/policies';
 
 class Privacy extends Component {
@@ -25,8 +26,13 @@ class Privacy extends Component {
   }
 }
 
+Privacy.propTypes = {
+  dispatch: PropTypes.func.isRequired,
+  policies: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
+};
+
 const select = state => ({
-  policies: state.policies.items
+  policies: state.policies.items,
 });
 
 export default connect(select)(Privacy);

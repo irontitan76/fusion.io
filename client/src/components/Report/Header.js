@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 
 import Divider from '@material-ui/core/Divider';
 import Grid from '@material-ui/core/Grid';
@@ -13,25 +14,23 @@ const styles = theme => ({
     marginTop: 15,
     width: 45,
   },
+  reportHeader: {
+    fontWeight: 500,
+  },
   root: {
+    '&:first-child': {
+      paddingTop: theme.spacing.unit * 6,
+    },
     paddingBottom: theme.spacing.unit,
     paddingLeft: theme.spacing.unit * 2,
     paddingRight: theme.spacing.unit * 2,
     paddingTop: theme.spacing.unit * 2,
-    '&:first-child': {
-      paddingTop: theme.spacing.unit * 6,
-    }
   },
-  reportHeader: {
-    fontWeight: 500,
-  }
 });
 
 class ReportHeader extends Component {
-  render() {
-    const { classes, children, divider, id, variant } = this.props;
-
-    const headingSizeMap = {
+  get headingSizeMap() {
+    return {
       'h1': 36,
       'h2': 28,
       'h3': 22,
@@ -39,9 +38,13 @@ class ReportHeader extends Component {
       'h5': 16,
       'h6': 14,
     };
+  }
+
+  render() {
+    const { classes, children, divider, id, variant } = this.props;
 
     let line = null;
-    if ( divider ) {
+    if (divider) {
       line = <Divider className={classes.divider} />;
     }
 
@@ -51,8 +54,9 @@ class ReportHeader extends Component {
           <Typography
             align='left'
             className={classes.reportHeader}
-            style={{ fontSize: headingSizeMap[variant], }}
-            variant={variant}>
+            style={{ fontSize: this.headingSizeMap[variant] }}
+            variant={variant}
+          >
             {children}
           </Typography>
           {line}
@@ -65,6 +69,14 @@ class ReportHeader extends Component {
 ReportHeader.defaultProps = {
   divider: true,
   variant: 'h4',
+};
+
+ReportHeader.propTypes = {
+  children: PropTypes.node.isRequired,
+  classes: PropTypes.shape({}).isRequired,
+  divider: PropTypes.bool,
+  id: PropTypes.string.isRequired,
+  variant: PropTypes.oneOf(['h1', 'h2', 'h3', 'h4', 'h5', 'h6']),
 };
 
 export default withStyles(styles)(ReportHeader);

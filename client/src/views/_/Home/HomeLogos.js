@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import Link from 'react-router-dom/Link';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { FormattedMessage } from 'react-intl';
@@ -10,11 +11,11 @@ import withStyles from '@material-ui/core/styles/withStyles';
 
 const styles = theme => ({
   logo: {
-    paddingBottom: theme.spacing.unit * 2,
-    paddingTop: theme.spacing.unit * 2,
     '&:hover': {
       backgroundColor: theme.palette.offwhite,
-    }
+    },
+    paddingBottom: theme.spacing.unit * 2,
+    paddingTop: theme.spacing.unit * 2,
   },
   logoDisabled: {
     paddingBottom: theme.spacing.unit * 2,
@@ -29,93 +30,96 @@ const styles = theme => ({
     [theme.breakpoints.down('sm')]: {
       paddingLeft: 0,
       paddingRight: 0,
-    }
+    },
   },
 });
 
 class HomeLogos extends Component {
   renderLogos = () => {
     const { classes } = this.props;
-    
+
     const items = [{
-        disabled: true,
-        icon: 'brain',
-        label: 'home.logo[0].name',
-        to: '/ai',
-      },
-      {
-        disabled: false,
-        icon: 'users',
-        label: 'home.logo[1].name',
-        to: '/consulting',
-      },
-      {
-        disabled: true,
-        icon: 'space-shuttle',
-        label: 'home.logo[2].name',
-        to: '/cosmos',
-      },
-      {
-        disabled: true,
-        icon: 'solar-panel',
-        label: 'home.logo[3].name',
-        to: '/energy',
-      },
-      {
-        disabled: true,
-        icon: 'credit-card-blank',
-        label: 'home.logo[4].name',
-        to: '/finance',
-      },
-      {
-        disabled: true,
-        icon: 'dna',
-        label: 'home.logo[5].name',
-        to: '/health',
-      },
-      {
-        disabled: true,
-        icon: 'balance-scale',
-        label: 'home.logo[6].name',
-        to: '/legal',
-      },
-      {
-        disabled: true,
-        icon: 'broadcast-tower',
-        label: 'home.logo[7].name',
-        to: '/media',
-      },
-      {
-        disabled: false,
-        icon: 'code',
-        label: 'home.logo[8].name',
-        to: '/technology',
-      },
-      {
-        disabled: true,
-        icon: 'map-marked',
-        label: 'home.logo[9].name',
-        to: '/transport',
-      },
+      disabled: true,
+      icon: 'brain',
+      label: 'home.logo[0].name',
+      to: '/ai',
+    },
+    {
+      disabled: false,
+      icon: 'users',
+      label: 'home.logo[1].name',
+      to: '/consulting',
+    },
+    {
+      disabled: true,
+      icon: 'space-shuttle',
+      label: 'home.logo[2].name',
+      to: '/cosmos',
+    },
+    {
+      disabled: true,
+      icon: 'solar-panel',
+      label: 'home.logo[3].name',
+      to: '/energy',
+    },
+    {
+      disabled: true,
+      icon: 'credit-card-blank',
+      label: 'home.logo[4].name',
+      to: '/finance',
+    },
+    {
+      disabled: true,
+      icon: 'dna',
+      label: 'home.logo[5].name',
+      to: '/health',
+    },
+    {
+      disabled: true,
+      icon: 'balance-scale',
+      label: 'home.logo[6].name',
+      to: '/legal',
+    },
+    {
+      disabled: true,
+      icon: 'broadcast-tower',
+      label: 'home.logo[7].name',
+      to: '/media',
+    },
+    {
+      disabled: false,
+      icon: 'code',
+      label: 'home.logo[8].name',
+      to: '/technology',
+    },
+    {
+      disabled: true,
+      icon: 'map-marked',
+      label: 'home.logo[9].name',
+      to: '/transport',
+    },
     ];
 
-    return items.map((item, key) => (
+    return items.map((item) => (
       <Grid
         className={item.disabled ? classes.logoDisabled : classes.logo}
         item
-        key={key}
+        key={item.label}
         md={1}
-        xs={3}>
+        xs={3}
+      >
         <Typography
           align='center'
           component={item.disabled ? 'div' : Link}
           to={item.disabled ? null : item.to}
-          style={{ textDecoration: 'none' }}>
+          style={{ textDecoration: 'none' }}
+        >
           <FontAwesomeIcon
             color={item.disabled ? '#bbb' : '#0074D9'}
-            icon={[ 'fal', item.icon] }
+            icon={['fal', item.icon]}
             size='2x'
-            style={{ marginBottom: 20 }} />
+            style={{ marginBottom: 20 }}
+          />
           <Typography>
             <FormattedMessage id={item.label} />
           </Typography>
@@ -123,26 +127,32 @@ class HomeLogos extends Component {
       </Grid>
     ));
   }
+
   render() {
     const { classes } = this.props;
 
-    return <Hidden smDown>
-      <Grid
-        className={classes.logos}
-        container
-        justify='space-around'
-        spacing={24}>
-        <Grid item xs={12}>
-          <Grid container justify='space-evenly'>
-            {this.renderLogos()}
+    return (
+      <Hidden smDown>
+        <Grid
+          className={classes.logos}
+          container
+          justify='space-around'
+          spacing={24}
+        >
+          <Grid item xs={12}>
+            <Grid container justify='space-evenly'>
+              {this.renderLogos()}
+            </Grid>
           </Grid>
         </Grid>
-      </Grid>
-    </Hidden>;
-  };
+      </Hidden>
+    );
+  }
 }
 
-HomeLogos.defaultProps ={};
-HomeLogos.propTypes = {};
+HomeLogos.defaultProps = {};
+HomeLogos.propTypes = {
+  classes: PropTypes.shape({}).isRequired,
+};
 
 export default withStyles(styles)(HomeLogos);

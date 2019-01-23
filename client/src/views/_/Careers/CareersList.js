@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import Link from 'react-router-dom/Link';
 import { FormattedMessage, injectIntl } from 'react-intl';
 
@@ -27,9 +28,9 @@ const styles = theme => ({
   careersListFilters: {
     backgroundColor: 'rgb(250,251,252)',
     border: '1px solid #ccc',
+    marginTop: theme.spacing.unit * 1.5,
     padding: theme.spacing.unit * 5,
     paddingTop: 0,
-    marginTop: theme.spacing.unit * 1.5,
   },
   careersListNoMoreFound: {
     color: '#777',
@@ -46,14 +47,22 @@ const styles = theme => ({
   careersListTitle: {
     marginBottom: theme.spacing.unit * 4,
     marginTop: theme.spacing.unit * 4,
-  }
+  },
 });
 
 class CareersList extends Component {
   state = {
+    'location': {
+      items: [
+        'Any location',
+        'Austin, TX',
+        'Remote',
+      ],
+      label: 'careers.filter.location.label',
+      name: 'location',
+      value: 'Any location',
+    },
     'org': {
-      name: 'org',
-      label: 'careers.filter.org.label',
       items: [
         'All organizations',
         'Fusion A.I.',
@@ -65,13 +74,13 @@ class CareersList extends Component {
         'Fusion Legal',
         'Fusion Media',
         'Fusion Technology',
-        'Fusion Transport'
+        'Fusion Transport',
       ],
+      label: 'careers.filter.org.label',
+      name: 'org',
       value: 'All organizations',
     },
     'team': {
-      name: 'team',
-      label: 'careers.filter.team.label',
       items: [
         'All teams',
         'Engineering & Technology',
@@ -79,56 +88,48 @@ class CareersList extends Component {
         'Accounts & Sales',
         'Finance',
         'Marketing',
-        'Legal & Corporate Affairs'
+        'Legal & Corporate Affairs',
       ],
+      label: 'careers.filter.team.label',
+      name: 'team',
       value: 'All teams',
     },
-    'location': {
-      name: 'location',
-      label: 'careers.filter.location.label',
-      items: [
-        'Any location',
-        'Austin, TX',
-        'Remote'
-      ],
-      value: 'Any location',
-    }
   };
 
   onChange = event => {
     const { onChange } = this.props;
     const { name, value } = event.target;
 
-    this.setState({
-      [name]: {
-        ...this.state[name],
-        value,
-      }}, onChange(event));
+    this.setState(state => ({
+      [name]: { ...state[name], value } }), onChange(event));
   };
 
   renderFilters = () => {
     const { state } = this;
     const { careers, classes, intl } = this.props;
 
-    return Object.keys(state).map((searcher, key) => {
-      const options = state[searcher].items.map((item, index) => (
+    return Object.keys(state).map((searcher) => {
+      const options = state[searcher].items.map((item) => (
         <MenuItem key={item} value={item}>{item}</MenuItem>)
       );
 
-      return <Grid item key={state[searcher].name}>
-        <TextField
-          aria-label='Filter careers'
-          className={classes.careersListFilter}
-          fullWidth
-          inputProps={{ name: state[searcher].name, id: state[searcher].name }}
-          label={intl.formatMessage({ id: state[searcher].label})}
-          name={state[searcher].name}
-          onChange={this.onChange}
-          select
-          value={careers.filters[state[searcher].name] || state[searcher].value}>
-          {options}
-        </TextField>
-      </Grid>;
+      return (
+        <Grid item key={state[searcher].name}>
+          <TextField
+            aria-label='Filter careers'
+            className={classes.careersListFilter}
+            fullWidth
+            inputProps={{ id: state[searcher].name, name: state[searcher].name }}
+            label={intl.formatMessage({ id: state[searcher].label })}
+            name={state[searcher].name}
+            onChange={this.onChange}
+            select
+            value={careers.filters[state[searcher].name] || state[searcher].value}
+          >
+            {options}
+          </TextField>
+        </Grid>
+      );
     });
   };
 
@@ -136,102 +137,103 @@ class CareersList extends Component {
     const { headers } = this.props;
 
     if (!headers) return null;
-    return headers.map((header, key) => {
-      return <TableCell key={key}>
-        <FormattedMessage id={header.name} />
-      </TableCell>
-    })
+    return headers.map((header) => {
+      return (
+        <TableCell key={header.name}>
+          <FormattedMessage id={header.name} />
+        </TableCell>
+      );
+    });
   };
 
   renderRolesRows = () => {
     const { careers, classes, intl } = this.props;
 
     let content = null;
-    if ( careers.isFetching ) {
-      content = <CircularProgress />
+    if (careers.isFetching) {
+      content = <CircularProgress />;
     } else {
       content = intl.formatMessage({ id: 'careers.search.none.descriptor' });
     }
 
-    if ( careers.items.length === 0 ) {
-      return <TableRow>
-        <TableCell colSpan={5}>{content}</TableCell>
-      </TableRow>
+    if (careers.items.length === 0) {
+      return (
+        <TableRow>
+          <TableCell colSpan={5}>{content}</TableCell>
+        </TableRow>
+      );
     }
 
     const rolesRows = careers.items.map((career) => {
-      return <TableRow className={classes.careersListRow} key={career._id}>
-        <TableCell>{career.role}</TableCell>
-        <TableCell>{career.org}</TableCell>
-        <TableCell>{career.team}</TableCell>
-        <TableCell>{career.location}</TableCell>
-        <TableCell>
-          <Button
-            color='primary'
-            component={Link}
-            to={`/careers/${career._id}`}
-            variant='text'>
-            <FormattedMessage id='careers.select.descriptor' />
-          </Button>
-        </TableCell>
-      </TableRow>
+      return (
+        <TableRow className={classes.careersListRow} key={career._id}>
+          <TableCell>{career.role}</TableCell>
+          <TableCell>{career.org}</TableCell>
+          <TableCell>{career.team}</TableCell>
+          <TableCell>{career.location}</TableCell>
+          <TableCell>
+            <Button
+              color='primary'
+              component={Link}
+              to={`/careers/${career._id}`}
+              variant='text'
+            >
+              <FormattedMessage id='careers.select.descriptor' />
+            </Button>
+          </TableCell>
+        </TableRow>
+      );
     });
 
-    return <>
-      {rolesRows}
-      <TableRow>
-        <TableCell
-          className={classes.careersListNoMoreFound}
-          colSpan={5}>
-          {intl.formatMessage({ id: 'careers.search.end.descriptor' })}
-        </TableCell>
-      </TableRow>
-    </>;
+    return (
+      <>
+        {rolesRows}
+        <TableRow>
+          <TableCell
+            className={classes.careersListNoMoreFound}
+            colSpan={5}
+          >
+            {intl.formatMessage({ id: 'careers.search.end.descriptor' })}
+          </TableCell>
+        </TableRow>
+      </>
+    );
   };
 
   render() {
     const { classes } = this.props;
 
-    return <Grid
-      className={classes.careersList}
-      container
-      spacing={40}>
+    return (
+      <Grid className={classes.careersList} container spacing={40}>
 
-      <Grid item md={3}>
+        <Grid item md={3}>
+          <Grid className={classes.careersListFilters} container direction='column'>
+            <Typography className={classes.careersListTitle} variant='h5'>
+              <FormattedMessage id='careers.filter.title' />
+            </Typography>
+            {this.renderFilters()}
+          </Grid>
+        </Grid>
 
-        <Grid
-          className={classes.careersListFilters}
-          container
-          direction='column'>
-          <Typography
-            className={classes.careersListTitle}
-            variant='h5'>
-            <FormattedMessage id='careers.filter.title' />
+        <Grid item md={9}>
+          <Typography className={classes.careersListTitle} variant='h4'>
+            <FormattedMessage id='careers.title' />
           </Typography>
-          {this.renderFilters()}
+
+          <Table>
+
+            <TableHead>
+              <TableRow>{this.renderHeaders()}</TableRow>
+            </TableHead>
+
+            <TableBody>
+              {this.renderRolesRows()}
+            </TableBody>
+
+          </Table>
         </Grid>
       </Grid>
-
-      <Grid item md={9}>
-        <Typography
-          className={classes.careersListTitle}
-          variant='h4'>
-          <FormattedMessage id='careers.title' />
-        </Typography>
-
-        <Table>
-
-          <TableHead>
-            <TableRow>{this.renderHeaders()}</TableRow>
-          </TableHead>
-
-          <TableBody>
-            {this.renderRolesRows()}
-          </TableBody>
-
-        </Table>
-      </Grid>
-    </Grid>;
+    );
   }
 }
 
@@ -241,8 +243,16 @@ CareersList.defaultProps = {
     { name: 'careers.table.header[1]' },
     { name: 'careers.table.header[2]' },
     { name: 'careers.table.header[3]' },
-    { name: 'careers.table.header[4]' }
-  ]
+    { name: 'careers.table.header[4]' },
+  ],
+};
+
+CareersList.propTypes = {
+  careers: PropTypes.shape({}).isRequired,
+  classes: PropTypes.shape({}).isRequired,
+  headers: PropTypes.arrayOf(PropTypes.shape({})),
+  intl: PropTypes.shape({}).isRequired,
+  onChange: PropTypes.func.isRequired,
 };
 
 export default withStyles(styles)(injectIntl(CareersList));
