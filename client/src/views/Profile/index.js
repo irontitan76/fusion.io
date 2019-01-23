@@ -5,6 +5,7 @@ import Redirect from 'react-router-dom/Redirect';
 import Route from 'react-router-dom/Route';
 
 import Grid from '@material-ui/core/Grid';
+import withStyles from '@material-ui/core/styles/withStyles';
 
 import ProfileAdmin from './ProfileAdmin';
 import ProfileCareer from './ProfileCareer';
@@ -21,6 +22,17 @@ import ProfileStandards from './ProfileStandards';
 import ProfileStrategies from './ProfileStrategies';
 import ProfileStrategy from './ProfileStrategy';
 import ProfileUser from './ProfileUser';
+
+const styles = theme => {
+  const { palette } = theme;
+
+  return {
+    root: {
+      backgroundColor: palette.background.default,
+      height: '100%',
+    },
+  };
+};
 
 class Home extends Component {
   renderRoutes = () => {
@@ -51,7 +63,7 @@ class Home extends Component {
   };
 
   render() {
-    const { session } = this.props;
+    const { classes, session } = this.props;
 
     let userType = null;
 
@@ -66,7 +78,7 @@ class Home extends Component {
     }
 
     return (
-      <Grid container style={{ height: '100%' }}>
+      <Grid className={classes.root} container>
         {userType}
         <Grid item style={{ flex: 1, overflowY: 'scroll' }}>
           {this.renderRoutes()}
@@ -77,6 +89,7 @@ class Home extends Component {
 }
 
 Home.propTypes = {
+  classes: PropTypes.shape({}).isRequired,
   match: PropTypes.shape({}).isRequired,
   session: PropTypes.shape({}).isRequired,
 };
@@ -85,4 +98,4 @@ const select = state => ({
   session: state.session,
 });
 
-export default connect(select)(Home);
+export default withStyles(styles)(connect(select)(Home));

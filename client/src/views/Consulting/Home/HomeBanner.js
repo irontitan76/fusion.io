@@ -11,10 +11,9 @@ import withStyles from '@material-ui/core/styles/withStyles';
 
 const styles = theme => ({
   banner: {
-    backgroundColor: theme.palette.offwhite,
+    backgroundColor: theme.palette.background.paper,
     borderBottom: `1px solid ${theme.palette.lightgray}`,
     borderTop: `1px solid ${theme.palette.lightgray}`,
-    marginBottom: theme.spacing.unit * 5,
     minHeight: 175,
     paddingTop: theme.spacing.unit * 3,
   },

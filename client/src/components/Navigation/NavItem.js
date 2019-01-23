@@ -28,18 +28,18 @@ const styles = theme => ({
     }),
   },
   item: {
-    color: '#333',
+    color: theme.palette.background.dark,
     paddingBottom: 12,
     paddingTop: 12,
   },
   list: {
-    backgroundColor: '#f8f8f8',
+    backgroundColor: theme.palette.background.default,
   },
   nested: {
+    color: theme.palette.text.primary,
     paddingLeft: theme.spacing.unit * 4,
   },
   paper: {
-    backgroundColor: '#fff',
     marginRight: theme.spacing.unit * 2,
   },
   selected: {

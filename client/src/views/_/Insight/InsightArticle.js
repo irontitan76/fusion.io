@@ -64,7 +64,7 @@ const styles = theme => ({
     paddingRight: theme.spacing.unit * 4,
   },
   articleTitle: {
-    color: theme.palette.common.black,
+    color: theme.palette.text.primary,
     fontWeight: 500,
     paddingBottom: theme.spacing.unit,
     paddingLeft: theme.spacing.unit * 4,

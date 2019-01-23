@@ -20,7 +20,7 @@ import {
 } from 'api/careers';
 
 export const changeCareer = (name, value) => {
-  return dispatch => {
+  return async dispatch => {
     try {
       const payload = { name, value };
       return dispatch({ payload, type: CAREER_CHANGE });
@@ -42,7 +42,7 @@ export const createCareer = (career) => {
 };
 
 export const filterCareers = (name, value) => {
-  return dispatch => {
+  return async dispatch => {
     try {
       const payload = { name, value };
       return dispatch({ payload, type: CAREERS_FILTER });
@@ -87,7 +87,7 @@ export const removeCareer = (_id) => {
 
 
 export const searchCareers = (search, isFetching, isSearching) => {
-  return dispatch => {
+  return async dispatch => {
     try {
       const payload = { isFetching, isSearching, search };
       return dispatch({ payload, type: CAREERS_SEARCH });
@@ -98,7 +98,7 @@ export const searchCareers = (search, isFetching, isSearching) => {
 };
 
 export const unloadCareer = () => {
-  return dispatch => {
+  return async dispatch => {
     try {
       return dispatch({ type: CAREER_UNLOAD });
     } catch (err) {
@@ -108,7 +108,7 @@ export const unloadCareer = () => {
 };
 
 export const unloadCareers = () => {
-  return dispatch => {
+  return async dispatch => {
     try {
       return dispatch({ type: CAREERS_UNLOAD });
     } catch (err) {

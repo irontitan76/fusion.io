@@ -8,16 +8,19 @@ import withStyles from '@material-ui/core/styles/withStyles';
 
 const styles = theme => ({
   homeVideo: {
-    backgroundColor: theme.palette.light,
+    backgroundColor: theme.palette.background.default,
+    paddingTop: theme.spacing.unit * 5,
+  },
+  homeVideoContainer: {
     height: 550,
     marginBottom: theme.spacing.unit * 5,
   },
   homeVideoTitle: {
-    color: theme.palette.dark,
+    color: theme.palette.text.primary,
     fontWeight: 500,
   },
   homeVideoTitleContainer: {
-    marginBottom: theme.spacing.unit * 3,
+    paddingBottom: theme.spacing.unit * 3,
   },
 });
 
@@ -27,7 +30,7 @@ class HomeVideo extends Component {
     const { classes } = this.props;
 
     return (
-      <Grid container justify='center'>
+      <Grid className={classes.homeVideo} container justify='center'>
         <Grid className={classes.homeVideoTitleContainer} item xs={12}>
           <Typography
             align='center'
@@ -37,7 +40,7 @@ class HomeVideo extends Component {
             <FormattedMessage id='consult.home.video.title' />
           </Typography>
         </Grid>
-        <Grid className={classes.homeVideo} item>
+        <Grid className={classes.homeVideoContainer} item>
           <video height='100%' controls>
             <source src='./fusion-full.mov' type='video/mp4' />
           </video>

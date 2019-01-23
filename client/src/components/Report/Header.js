@@ -8,7 +8,7 @@ import withStyles from '@material-ui/core/styles/withStyles';
 
 const styles = theme => ({
   divider: {
-    backgroundColor: '#0074D9',
+    backgroundColor: theme.palette.blue,
     height: 5,
     marginBottom: 15,
     marginTop: 15,
@@ -21,6 +21,7 @@ const styles = theme => ({
     '&:first-child': {
       paddingTop: theme.spacing.unit * 6,
     },
+    backgroundColor: theme.palette.background.default,
     paddingBottom: theme.spacing.unit,
     paddingLeft: theme.spacing.unit * 2,
     paddingRight: theme.spacing.unit * 2,

@@ -145,7 +145,7 @@ const styles = theme => ({
   teamActions: {},
   teamButton: {},
   teamCard: {
-    backgroundColor: '#fcfcfc',
+    backgroundColor: theme.palette.background.paper,
     marginBottom: theme.spacing.unit * 3,
   },
   teamContent: {
@@ -159,8 +159,9 @@ const styles = theme => ({
     },
   },
   teams: {
+    backgroundColor: theme.palette.background.default,
     margin: 'auto',
-    marginBottom: theme.spacing.unit * 5,
+    paddingBottom: theme.spacing.unit * 5,
     paddingLeft: theme.spacing.unit * 12,
     paddingRight: theme.spacing.unit * 12,
     width: '100%',

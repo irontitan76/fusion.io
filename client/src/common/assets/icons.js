@@ -49,6 +49,7 @@ import {
   faPlus,
   faRoute,
   faSearch,
+  faSignIn,
   faSignOut,
   faSlidersH,
   faSolarPanel,
@@ -107,6 +108,7 @@ library.add(faMindShare);
 library.add(faPlus);
 library.add(faRoute);
 library.add(faSearch);
+library.add(faSignIn);
 library.add(faSignOut);
 library.add(faSlidersH);
 library.add(faSolarPanel);

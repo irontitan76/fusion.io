@@ -16,6 +16,7 @@ import { signup } from 'api/session';
 
 const styles = theme => ({
   signupForm: {
+    backgroundColor: theme.palette.background.default,
     paddingBottom: theme.spacing.unit * 8,
     paddingTop: theme.spacing.unit * 5,
     [theme.breakpoints.up('xl')]: {
@@ -31,7 +32,8 @@ const styles = theme => ({
   signupFormContainer: {},
   signupFormInput: {
     '&:-webkit-autofill': {
-      '-webkit-box-shadow': 'inset 0 0 0px 9999px white',
+      '-webkit-box-shadow': `inset 0 0 0px 9999px ${theme.palette.background.paper}`,
+      '-webkit-text-fill-color': theme.palette.text.primary,
     },
     color: '#111',
   },
@@ -66,7 +68,7 @@ const styles = theme => ({
     textDecoration: 'none',
   },
   signupFormTitlePaper: {
-    backgroundColor: '#0074D9',
+    backgroundColor: theme.palette.blue,
     paddingBottom: theme.spacing.unit * 5,
     paddingLeft: theme.spacing.unit * 3,
     paddingRight: theme.spacing.unit * 3,

@@ -19,7 +19,7 @@ export const loadProducts = params => {
 };
 
 export const unloadProducts = () => {
-  return dispatch => {
+  return async dispatch => {
     try {
       return dispatch({ type: PRODUCTS_UNLOAD });
     } catch (err) {

@@ -27,7 +27,7 @@ const styles = theme => ({
     fontSize: 12,
   },
   searchField: {
-    backgroundColor: theme.palette.common.white,
+    backgroundColor: theme.palette.background.paper,
     border: `1px solid ${theme.palette.lightgray}`,
     padding: `${theme.spacing.unit * .75}px 0px`,
   },

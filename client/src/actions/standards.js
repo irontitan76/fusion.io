@@ -73,7 +73,7 @@ export const removeStandard = (_id) => {
 };
 
 export const unloadStandard = () => {
-  return dispatch => {
+  return async dispatch => {
     try {
       return dispatch({ type: STANDARD_UNLOAD });
     } catch (err) {
@@ -83,7 +83,7 @@ export const unloadStandard = () => {
 };
 
 export const unloadStandards = () => {
-  return dispatch => {
+  return async dispatch => {
     try {
       return dispatch({ type: STANDARDS_UNLOAD });
     } catch (err) {

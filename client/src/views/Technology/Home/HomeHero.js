@@ -11,7 +11,7 @@ const styles = theme => ({
     backgroundImage: 'url("/images/minimal.jpg")',
     backgroundRepeat: 'no-repeat',
     backgroundSize: '100% 100%',
-    border: '1px solid #ddd',
+    border: `1px solid ${theme.palette.background.paper}`,
     height: 600,
     marginBottom: theme.spacing.unit * 5,
     marginTop: theme.spacing.unit * 5,

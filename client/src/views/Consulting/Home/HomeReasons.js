@@ -7,7 +7,9 @@ import Typography from '@material-ui/core/Typography';
 import withStyles from '@material-ui/core/styles/withStyles';
 
 const styles = theme => ({
-  reasons: {},
+  reasons: {
+    backgroundColor: theme.palette.background.default,
+  },
   reasonsBody: {
     fontSize: 16,
     fontWeight: 300,
@@ -21,7 +23,7 @@ const styles = theme => ({
     marginBottom: theme.spacing.unit * 3,
   },
   reasonsTitle: {
-    color: theme.palette.dark,
+    color: theme.palette.text.primary,
     fontWeight: 500,
     marginBottom: theme.spacing.unit,
   },

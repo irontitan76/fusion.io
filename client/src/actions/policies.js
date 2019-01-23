@@ -19,7 +19,7 @@ import {
 } from 'api/policies';
 
 export const changePolicy = (name, value) => {
-  return dispatch => {
+  return async dispatch => {
     try {
       const payload = { name, value };
       return dispatch({ payload, type: POLICY_CHANGE });
@@ -88,7 +88,7 @@ export const removePolicy = (_id) => {
 };
 
 export const unloadPolicy = () => {
-  return dispatch => {
+  return async dispatch => {
     try {
       return dispatch({ type: POLICY_UNLOAD });
     } catch (err) {
@@ -98,7 +98,7 @@ export const unloadPolicy = () => {
 };
 
 export const unloadPolicies = () => {
-  return dispatch => {
+  return async dispatch => {
     try {
       return dispatch({ type: POLICIES_UNLOAD });
     } catch (err) {

@@ -7,10 +7,13 @@ import withStyles from '@material-ui/core/styles/withStyles';
 
 const styles = theme => ({
   root: {
-    backgroundColor: 'rgb(250,251,252)',
-    borderLeft: '1px solid rgba(0,0,0,.12)',
+    backgroundColor: theme.palette.background.paper,
+    borderLeft: `1px solid ${theme.palette.gray}`,
   },
   text: {
+    '& a:link, a:visited': {
+      color: theme.palette.blue,
+    },
     fontWeight: 300,
     paddingLeft: theme.spacing.unit * 2,
     paddingRight: theme.spacing.unit * 2,

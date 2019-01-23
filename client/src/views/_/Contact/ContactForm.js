@@ -69,12 +69,14 @@ const fields = [
 
 const styles = theme => ({
   contactContent: {
-    backgroundColor: theme.palette.offwhite,
+    backgroundColor: theme.palette.background.default,
     height: '100%',
     paddingBottom: theme.spacing.unit * 3,
     paddingTop: theme.spacing.unit * 3,
   },
-  contactForm: {},
+  contactForm: {
+    backroundColor: theme.palette.background.paper,
+  },
   contactTextField: {
     marginBottom: theme.spacing.unit * 3,
   },

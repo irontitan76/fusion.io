@@ -9,10 +9,10 @@ import withStyles from '@material-ui/core/styles/withStyles';
 
 const styles = theme => ({
   light: {
-    color: `${theme.palette.common.white} !important`,
+    color: `${theme.palette.light} !important`,
   },
   product: {
-    marginBottom: theme.spacing.unit * 5,
+    paddingBottom: theme.spacing.unit * 5,
   },
   productContainer: {
     margin: 'auto',
@@ -28,12 +28,12 @@ const styles = theme => ({
     textDecoration: 'none',
   },
   productItemSubtitle: {
-    color: theme.palette.dark,
+    color: theme.palette.text.primary,
     fontWeight: 300,
     paddingBottom: theme.spacing.unit * 2,
   },
   productItemTitle: {
-    color: theme.palette.dark,
+    color: theme.palette.text.primary,
     fontWeight: 300,
   },
   products: {
@@ -43,7 +43,7 @@ const styles = theme => ({
     fontWeight: 300,
   },
   productsTitle: {
-    color: theme.palette.dark,
+    color: theme.palette.text.primary,
     fontWeight: 700,
   },
 });

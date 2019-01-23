@@ -35,20 +35,18 @@ const styles = theme => ({
     lineHeight: .4,
   },
   headerSearchField: {
-    backgroundColor: 'rgba(255,255,255,0.3)',
-    border: '1px solid #ddd',
+    backgroundColor: theme.palette.background.default,
     padding: `${theme.spacing.unit * .75}px 0px`,
   },
   headerSearchIcon: {
-    color: theme.palette.common.white,
+    color: theme.palette.text.primary,
     paddingLeft: 12,
   },
   headerSearchInput: {
     '&::placeholder': {
-      color: theme.palette.common.white,
       fontWeight: 300,
     },
-    color: theme.palette.common.white,
+    color: theme.palette.text.primary,
     padding: theme.spacing.unit * .75,
   },
   headerTitle: {

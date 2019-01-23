@@ -27,6 +27,7 @@ const styles = theme => ({
       cursor: 'pointer',
       opacity: '0.8',
     },
+    backgroundColor: theme.palette.background.default,
   },
   content: {
     paddingLeft: 0,

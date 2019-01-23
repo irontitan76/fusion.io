@@ -32,15 +32,7 @@ class Report extends Component {
 
       return (
         <li key={item.title}>
-          <Link
-            scroll={scroll}
-            to={`#${containerName}`}
-            style={{
-              color: 'black',
-              cursor: 'pointer',
-              textDecoration: 'underline',
-            }}
-          >
+          <Link scroll={scroll} to={`#${containerName}`}>
             {item.title}
           </Link>
         </li>
@@ -64,15 +56,7 @@ class Report extends Component {
       return (
         <Fragment key={section.title}>
           <li>
-            <Link
-              scroll={scroll}
-              to={`#${getReference(section.title)}`}
-              style={{
-                color: 'black',
-                cursor: 'pointer',
-                textDecoration: 'underline',
-              }}
-            >
+            <Link scroll={scroll} to={`#${getReference(section.title)}`}>
               {section.title}
             </Link>
             <ol style={{ paddingBottom: 20 }}>{items}</ol>

@@ -10,7 +10,9 @@ import withStyles from '@material-ui/core/styles/withStyles';
 
 const styles = theme => ({
   story: {
-    marginBottom: theme.spacing.unit * 5,
+    backgroundColor: theme.palette.background.default,
+    paddingBottom: theme.spacing.unit * 5,
+    paddingTop: theme.spacing.unit * 7,
   },
   storyContent: {
     fontWeight: 300,

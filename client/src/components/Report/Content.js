@@ -8,6 +8,17 @@ import withStyles from '@material-ui/core/styles/withStyles';
 
 const styles = theme => ({
   contentBody: {
+    '& a': {
+      '&:link': {
+        color: theme.palette.text.primary,
+      },
+      '&:visited': {
+        color: theme.palette.text.primary,
+      },
+      color: theme.palette.text.primary,
+      cursor: 'pointer',
+      textDecoration: 'underline',
+    },
     '& blockquote': {
       '& em': {
         fontWeight: 300,
@@ -23,6 +34,7 @@ const styles = theme => ({
     },
   },
   root: {
+    backgroundColor: theme.palette.background.default,
     paddingBottom: theme.spacing.unit,
     paddingLeft: theme.spacing.unit * 2,
     paddingRight: theme.spacing.unit * 2,

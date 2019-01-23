@@ -11,63 +11,70 @@ import Tabs from '@material-ui/core/Tabs';
 import Typography from '@material-ui/core/Typography';
 import withStyles from '@material-ui/core/styles/withStyles';
 
-const styles = theme => ({
-  description: {
-    paddingLeft: theme.spacing.unit * 4,
-    paddingRight: theme.spacing.unit * 4,
-    [theme.breakpoints.down('sm')]: {
-      marginBottom: theme.spacing.unit * 3,
+const styles = theme => {
+  const { breakpoints, palette, spacing } = theme;
+  // const isDark = palette.type === 'dark';
+  return {
+    description: {
+      paddingLeft: spacing.unit * 4,
+      paddingRight: spacing.unit * 4,
+      [breakpoints.down('sm')]: {
+        marginBottom: spacing.unit * 3,
+      },
     },
-  },
-  descriptionText: {
-    fontSize: 18,
-    fontWeight: 300,
-  },
-  horizontalLabel: {
-    [theme.breakpoints.down('md')]: {
-      display: 'none',
+    descriptionText: {
+      color: palette.text.primary,
+      fontSize: 18,
+      fontWeight: 300,
     },
-  },
-  icon: {
-    padding: theme.spacing.unit,
-  },
-  image: {
-    width: '100%',
-  },
-  label: {
-    [theme.breakpoints.down('sm')]: {
-      display: 'none',
+    horizontalLabel: {
+      [breakpoints.down('md')]: {
+        display: 'none',
+      },
     },
-  },
-  root: {},
-  subheading: {
-    marginBottom: theme.spacing.unit * 4,
-    paddingLeft: theme.spacing.unit * 4,
-    paddingRight: theme.spacing.unit * 4,
-  },
-  tab: {
-    minHeight: 585,
-    paddingBottom: theme.spacing.unit * 6,
-    paddingTop: theme.spacing.unit * 6,
-    [theme.breakpoints.down('sm')]: {
-      height: 'auto',
+    icon: {
+      padding: spacing.unit,
     },
-  },
-  tabs: {
-    backgroundColor: '#fefefe',
-  },
-  tabsName: {
-    color: 'white',
-    fontWeight: 300,
-    letterSpacing: 5,
-    paddingBottom: 10,
-    paddingTop: 10,
-  },
-  title: {
-    paddingLeft: theme.spacing.unit * 4,
-    paddingRight: theme.spacing.unit * 4,
-  },
-});
+    image: {
+      width: '100%',
+    },
+    label: {
+      [breakpoints.down('sm')]: {
+        display: 'none',
+      },
+    },
+    root: {},
+    subheading: {
+      color: palette.text.primary,
+      marginBottom: spacing.unit * 4,
+      paddingLeft: spacing.unit * 4,
+      paddingRight: spacing.unit * 4,
+    },
+    tab: {
+      backgroundColor: palette.background.default,
+      minHeight: 585,
+      paddingBottom: spacing.unit * 6,
+      paddingTop: spacing.unit * 6,
+      [breakpoints.down('sm')]: {
+        height: 'auto',
+      },
+    },
+    tabs: {
+      backgroundColor: palette.background.paper,
+    },
+    tabsName: {
+      color: palette.common.white,
+      fontWeight: 300,
+      letterSpacing: 5,
+      paddingBottom: 10,
+      paddingTop: 10,
+    },
+    title: {
+      paddingLeft: spacing.unit * 4,
+      paddingRight: spacing.unit * 4,
+    },
+  };
+};
 
 class TabBar extends Component {
   state = { value: 0 };
@@ -91,7 +98,7 @@ class TabBar extends Component {
               <FontAwesomeIcon className={classes.icon} icon={header.icon} />
             </Grid>
             <Grid className={classes.horizontalLabel} item xs={10}>
-              {header.title}
+              <FormattedMessage id={header.title} />
             </Grid>
           </Grid>
         </Grid>
@@ -211,7 +218,7 @@ class TabBar extends Component {
 
     return headers.map((header) => {
       const icon = this.renderTabIcon(header, isVertical);
-      const label = isVertical ? header.title : undefined;
+      const label = isVertical ? <FormattedMessage id={header.title} /> : undefined;
 
       return (
         <Tab

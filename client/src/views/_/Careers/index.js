@@ -14,7 +14,6 @@ import CareersHero from './CareersHero';
 import CareersList from './CareersList';
 import CareersSearch from './CareersSearch';
 
-
 class Careers extends Component {
   componentDidMount = () => {
     const { dispatch } = this.props;

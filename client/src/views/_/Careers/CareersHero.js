@@ -14,7 +14,9 @@ const styles = theme => ({
     color: theme.palette.green,
     fontWeight: 500,
   },
-  hero: {},
+  hero: {
+    backgroundColor: theme.palette.background.default,
+  },
   heroHeading: {
     fontWeight: 300,
     padding: `${theme.spacing.unit * 12}px ${theme.spacing.unit * 3}px`,

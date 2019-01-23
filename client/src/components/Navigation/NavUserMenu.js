@@ -2,8 +2,9 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Link from 'react-router-dom/Link';
 import PropTypes from 'prop-types';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
-import Button from '@material-ui/core/Button';
+// import Button from '@material-ui/core/Button';
 import IconButton from '@material-ui/core/IconButton';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
@@ -25,7 +26,7 @@ const styles = theme => ({
   },
   menuLink: {
     '&:hover': {
-      color: theme.palette.blue,
+      color: theme.palette.text.primary,
     },
   },
 });
@@ -56,15 +57,15 @@ class NavUserMenu extends Component {
 
     if (!auth) {
       return (
-        <Button
+        <IconButton
           className={classes.menuLink}
           color='primary'
           component={Link}
           onClick={this.handleChange}
           to='/login'
         >
-          Login
-        </Button>
+          <FontAwesomeIcon icon={['fal', 'sign-in']} />
+        </IconButton>
       );
     }
 

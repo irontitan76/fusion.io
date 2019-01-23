@@ -18,7 +18,7 @@ import {
 } from 'api/strategies';
 
 export const changeStrategy = (name, value) => {
-  return dispatch => {
+  return async dispatch => {
     try {
       const payload = { name, value };
       return dispatch({ payload, type: STRATEGY_CHANGE });
@@ -29,7 +29,7 @@ export const changeStrategy = (name, value) => {
 };
 
 export const createStrategy = (strategy) => {
-  return dispatch => {
+  return async dispatch => {
     try {
       const payload = postStrategy(strategy);
       return dispatch({ payload, type: STRATEGY_CREATE });
@@ -73,7 +73,7 @@ export const removeStrategy = (_id) => {
 };
 
 export const unloadStrategy = () => {
-  return dispatch => {
+  return async dispatch => {
     try {
       return dispatch({ type: STRATEGY_UNLOAD });
     } catch (err) {
@@ -83,7 +83,7 @@ export const unloadStrategy = () => {
 };
 
 export const unloadStrategies = () => {
-  return dispatch => {
+  return async dispatch => {
     try {
       return dispatch({ type: STRATEGIES_UNLOAD });
     } catch (err) {

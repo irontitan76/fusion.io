@@ -27,7 +27,7 @@ const styles = theme => ({
     },
   },
   overviewCard: {
-    backgroundColor: '#fbfbfb',
+    backgroundColor: 'transparent',
   },
   overviewCardContent: {
     height: 75,
@@ -36,7 +36,7 @@ const styles = theme => ({
     fontWeight: 300,
   },
   overviewTitle: {
-    color: '#111',
+    color: theme.palette.text.primary,
     fontWeight: 700,
   },
 });

@@ -18,7 +18,6 @@ const styles = theme => ({
   },
   sidebarHeading: {
     color: theme.palette.blue,
-    fontWeight: 300,
     paddingBottom: theme.spacing.unit * 3,
     paddingLeft: theme.spacing.unit * 2,
     paddingRight: theme.spacing.unit * 2,

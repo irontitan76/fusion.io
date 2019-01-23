@@ -13,6 +13,8 @@ import withStyles from '@material-ui/core/styles/withStyles';
 
 const styles = theme => ({
   loginForm: {
+    backgroundColor: theme.palette.background.default,
+    height: '100vh',
     paddingBottom: theme.spacing.unit * 8,
     paddingTop: theme.spacing.unit * 5,
     [theme.breakpoints.up('xl')]: {
@@ -28,9 +30,9 @@ const styles = theme => ({
   loginFormContainer: {},
   loginFormInput: {
     '&:-webkit-autofill': {
-      '-webkit-box-shadow': 'inset 0 0 0px 9999px white',
+      '-webkit-box-shadow': `inset 0 0 0px 9999px ${theme.palette.background.paper}`,
+      '-webkit-text-fill-color': theme.palette.text.primary,
     },
-    color: '#111',
   },
   loginFormLogo: {
     color: 'inherit',
@@ -102,11 +104,7 @@ class LoginForm extends Component {
     const { classes } = this.props;
 
     return (
-      <Grid
-        className={classes.loginForm}
-        container
-        justify='center'
-      >
+      <Grid className={classes.loginForm} container justify='center'>
 
         <Grid
           className={classes.loginFormContainer}
@@ -117,10 +115,7 @@ class LoginForm extends Component {
           xs={12}
         >
 
-          <Paper
-            className={classes.loginFormTitlePaper}
-            elevation={1}
-          >
+          <Paper className={classes.loginFormTitlePaper} elevation={1}>
             <Typography
               align='center'
               className={classes.loginFormTitle}
@@ -137,7 +132,7 @@ class LoginForm extends Component {
                 className={classes.loginFormTitleText}
                 variant='h6'
               >
-              FUSION
+                FUSION
               </Typography>
             </Typography>
           </Paper>
@@ -190,7 +185,7 @@ class LoginForm extends Component {
               onClick={this.onSubmit}
               variant='contained'
             >
-            Login
+              Login
             </Button>
 
             <Button
@@ -200,7 +195,7 @@ class LoginForm extends Component {
               to='/signup'
               variant='contained'
             >
-            Sign up
+              Sign up
             </Button>
 
           </Paper>

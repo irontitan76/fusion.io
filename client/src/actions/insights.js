@@ -19,7 +19,7 @@ import {
 } from 'api/insights';
 
 export const changeInsight = (name, value) => {
-  return dispatch => {
+  return async dispatch => {
     try {
       const payload = { name, value };
       return dispatch({ payload, type: INSIGHT_CHANGE });
@@ -98,7 +98,7 @@ export const unloadInsight = () => {
 };
 
 export const unloadInsights = () => {
-  return dispatch => {
+  return async dispatch => {
     try {
       return dispatch({ type: INSIGHTS_UNLOAD });
     } catch (err) {

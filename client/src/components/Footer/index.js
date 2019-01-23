@@ -11,56 +11,58 @@ import ListItemText from '@material-ui/core/ListItemText';
 import Typography from '@material-ui/core/Typography';
 import withStyles from '@material-ui/core/styles/withStyles';
 
-const styles = theme => ({
-  footer: {
-    backgroundColor: '#333',
-    borderTop: '1px solid #dedede',
-    paddingBottom: theme.spacing.unit * 3,
-    paddingLeft: theme.spacing.unit * 4,
-    paddingRight: theme.spacing.unit * 4,
-  },
-  footerColumn: {
-    height: 100,
-    paddingTop: theme.spacing.unit * 4,
-  },
-  footerCopyright: {
-    color: theme.palette.common.white,
-    fontWeight: 300,
-  },
-  footerLink: {
-    '&:hover': {
-      color: theme.palette.blue,
+const styles = theme => {
+  return {
+    footer: {
+      backgroundColor: theme.palette.background.default,
+      borderTop: '1px solid #dedede',
+      paddingBottom: theme.spacing.unit * 3,
+      paddingLeft: theme.spacing.unit * 4,
+      paddingRight: theme.spacing.unit * 4,
     },
-    color: theme.palette.common.white,
-    textDecoration: 'none',
-  },
-  footerListItem: {
-    padding: `${theme.spacing.unit}px 0`,
-  },
-  footerListItemText: {
-    color: '#fff',
-    fontSize: 13,
-    fontWeight: 300,
-  },
-  footerSocial: {
-    height: 125,
-    paddingTop: theme.spacing.unit * 4,
-  },
-  footerSocialButton: {
-    color: 'white',
-    fontSize: 18,
-    height: 36,
-    width: 36,
-  },
-  footerSocialIcon: {
-    '&:hover': {
-      color: theme.palette.blue,
+    footerColumn: {
+      height: 100,
+      paddingTop: theme.spacing.unit * 4,
     },
-  },
-  footerText: {
-    color: theme.palette.common.white,
-  },
-});
+    footerCopyright: {
+      color: theme.palette.text.primary,
+      fontWeight: 300,
+    },
+    footerLink: {
+      '&:hover': {
+        color: theme.palette.blue,
+      },
+      color: theme.palette.text.primary,
+      textDecoration: 'none',
+    },
+    footerListItem: {
+      padding: `${theme.spacing.unit}px 0`,
+    },
+    footerListItemText: {
+      color: theme.palette.text.primary,
+      fontSize: 13,
+      fontWeight: 300,
+    },
+    footerSocial: {
+      height: 125,
+      paddingTop: theme.spacing.unit * 4,
+    },
+    footerSocialButton: {
+      color: theme.palette.text.primary,
+      fontSize: 18,
+      height: 36,
+      width: 36,
+    },
+    footerSocialIcon: {
+      '&:hover': {
+        color: theme.palette.blue,
+      },
+    },
+    footerText: {
+      color: theme.palette.text.primary,
+    },
+  };
+};
 
 export class Footer extends Component {
   getIcons = () => {

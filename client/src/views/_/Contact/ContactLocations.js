@@ -8,7 +8,7 @@ import withStyles from '@material-ui/core/styles/withStyles';
 
 const styles = theme => ({
   contactLocations: {
-    backgroundColor: theme.palette.offwhite,
+    backgroundColor: theme.palette.background.default,
     height: '100%',
     paddingBottom: theme.spacing.unit * 3,
     paddingTop: theme.spacing.unit * 3,

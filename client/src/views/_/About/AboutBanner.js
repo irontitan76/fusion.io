@@ -8,16 +8,15 @@ import withStyles from '@material-ui/core/styles/withStyles';
 
 const styles = theme => ({
   author: {
-    color: 'inherit',
+    color: theme.palette.text.primary,
     [theme.breakpoints.down('sm')]: {
       paddingBottom: theme.spacing.unit,
     },
   },
   banner: {
-    backgroundColor: theme.palette.light,
+    backgroundColor: theme.palette.background.paper,
     borderBottom: '1px solid #aaa',
     borderTop: '1px solid #aaa',
-    marginBottom: theme.spacing.unit * 7,
   },
   bannerContent: {
     color: theme.palette.navy,
@@ -27,7 +26,7 @@ const styles = theme => ({
     },
   },
   quote: {
-    color: 'inherit',
+    color: theme.palette.text.primary,
     fontSize: 18,
     fontWeight: 300,
     letterSpacing: .5,

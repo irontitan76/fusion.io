@@ -7,46 +7,50 @@ import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import withStyles from '@material-ui/core/styles/withStyles';
 
-const styles = theme => ({
-  hero: {
-    backgroundImage: 'url("./images/main.jpg")',
-    backgroundRepeat: 'no-repeat',
-    backgroundSize: '100% 100%',
-    height: 800,
-    [theme.breakpoints.down('lg')]: {
-      height: 550,
+const styles = theme => {
+  const { breakpoints, palette, spacing } = theme;
+  const isDark = palette.type === 'dark';
+  return {
+    hero: {
+      backgroundImage: 'url("./images/main.jpg")',
+      backgroundRepeat: 'no-repeat',
+      backgroundSize: '100% 100%',
+      height: 800,
+      [breakpoints.down('lg')]: {
+        height: 550,
+      },
+      [breakpoints.down('sm')]: {
+        backgroundSize: '130% 100%',
+      },
+      [breakpoints.down('xs')]: {
+        backgroundSize: '180% 100%',
+      },
     },
-    [theme.breakpoints.down('sm')]: {
-      backgroundSize: '130% 100%',
+    heroButton: {
+      '&:hover': {
+        backgroundColor: 'rgba(255,255,255,0.5)',
+      },
+      backgroundColor: 'rgba(255,255,255,0.3)',
+      border: '1px solid white',
+      color: palette.common.white,
     },
-    [theme.breakpoints.down('xs')]: {
-      backgroundSize: '180% 100%',
+    heroContent: {
+      backgroundColor: `${palette.background.default}${isDark ? 80 : 25}`,
+      padding: spacing.unit * 5,
     },
-  },
-  heroButton: {
-    '&:hover': {
-      backgroundColor: 'rgba(255,255,255,0.5)',
+    heroSubtitle: {
+      color: palette.common.white,
+      marginBottom: spacing.unit * 3,
+      paddingBottom: spacing.unit * 2,
+      paddingTop: spacing.unit * 2,
     },
-    backgroundColor: 'rgba(255,255,255,0.3)',
-    border: '1px solid white',
-    color: theme.palette.common.white,
-  },
-  heroContent: {
-    backgroundColor: 'rgba(0,0,0,.1)',
-    padding: theme.spacing.unit * 5,
-  },
-  heroSubtitle: {
-    color: '#f2f2f2',
-    marginBottom: theme.spacing.unit * 3,
-    paddingBottom: theme.spacing.unit * 2,
-    paddingTop: theme.spacing.unit * 2,
-  },
-  heroTitle: {
-    color: theme.palette.light,
-    fontSize: 42,
-    fontWeight: 300,
-  },
-});
+    heroTitle: {
+      color: palette.common.white,
+      fontSize: 42,
+      fontWeight: 300,
+    },
+  };
+};
 
 class AboutHero extends Component {
   renderButton = () => {

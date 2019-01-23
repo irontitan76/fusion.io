@@ -10,7 +10,7 @@ import {
  *  state and its respective fields and default values
  */
 export const loadMessage = content => {
-  return dispatch => {
+  return async dispatch => {
     try {
       const payload = { content };
       return dispatch({ payload, type: MESSAGE_LOAD });
@@ -25,7 +25,7 @@ export const loadMessage = content => {
  * @returns @async a dispatch function which is resetting the message state
  */
 export const unloadMessage = () => {
-  return dispatch => {
+  return async dispatch => {
     try {
       return dispatch({ type: MESSAGE_UNLOAD });
     } catch (err) {

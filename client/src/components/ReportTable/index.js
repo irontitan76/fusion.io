@@ -20,6 +20,11 @@ const styles = theme => ({
     paddingRight: theme.spacing.unit * 5,
     paddingTop: theme.spacing.unit * 2,
   },
+  cell: {
+    '& a:visited, a:link': {
+      color: theme.palette.blue,
+    },
+  },
   icon: {
     fontSize: 16,
     marginRight: theme.spacing.unit,
@@ -72,7 +77,7 @@ class ReportTable extends Component {
                   value = property.modifier(item);
                 }
 
-                return <TableCell key={property.name}>{value}</TableCell>;
+                return <TableCell className={classes.cell} key={property.name}>{value}</TableCell>;
               })
             }
           </TableRow>

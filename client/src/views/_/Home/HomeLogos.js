@@ -12,7 +12,7 @@ import withStyles from '@material-ui/core/styles/withStyles';
 const styles = theme => ({
   logo: {
     '&:hover': {
-      backgroundColor: theme.palette.offwhite,
+      backgroundColor: theme.palette.action.hover,
     },
     paddingBottom: theme.spacing.unit * 2,
     paddingTop: theme.spacing.unit * 2,

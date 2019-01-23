@@ -2,7 +2,7 @@ import { NAV_TOGGLE } from 'actions';
 
 // eslint-disable-next-line
 export const toggleNav = () => {
-  return dispatch => {
+  return async dispatch => {
     try {
       return dispatch({ type: NAV_TOGGLE });
     } catch (err) {

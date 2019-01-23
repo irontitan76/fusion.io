@@ -4,14 +4,25 @@ import { connect } from 'react-redux';
 import queryString from 'query-string';
 import filter from 'lodash.filter';
 
+import withStyles from '@material-ui/core/styles/withStyles';
+
 import Footer from 'components/Footer';
 import {
   loadInsights,
   unloadInsights,
 } from 'actions/insights';
+
 import InsightsGrid from './InsightsGrid';
 import InsightsHeader from './InsightsHeader';
 
+const styles = theme => {
+  return {
+    root: {
+      backgroundColor: theme.palette.background.default,
+      minHeight: '100%',
+    },
+  };
+};
 
 class Insights extends Component {
   componentDidMount() {
@@ -32,11 +43,11 @@ class Insights extends Component {
   };
 
   render() {
-    const { dispatch, history } = this.props;
+    const { classes, dispatch, history } = this.props;
 
     return (
       <>
-        <main style={{ minHeight: '100%' }}>
+        <main className={classes.root}>
           <InsightsHeader dispatch={dispatch} history={history} />
           <InsightsGrid insights={this.filterInsights()} />
         </main>
@@ -47,6 +58,7 @@ class Insights extends Component {
 }
 
 Insights.propTypes = {
+  classes: PropTypes.shape({}).isRequired,
   dispatch: PropTypes.func.isRequired,
   history: PropTypes.shape({}).isRequired,
   insights: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
@@ -57,4 +69,4 @@ const select = state => ({
   insights: state.insights.filteredItems,
 });
 
-export default connect(select)(Insights);
+export default withStyles(styles)(connect(select)(Insights));

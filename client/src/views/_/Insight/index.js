@@ -27,6 +27,7 @@ const styles = theme => ({
     },
   },
   main: {
+    backgroundColor: theme.palette.background.default,
     minHeight: '100%',
     overflowX: 'hidden',
   },

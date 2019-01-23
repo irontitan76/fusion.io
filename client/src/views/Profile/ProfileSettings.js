@@ -17,20 +17,23 @@ const styles = theme => ({
     fontWeight: theme.typography.fontWeightRegular,
     paddingLeft: theme.spacing.unit * 2,
   },
+  icon: {
+    color: theme.palette.text.primary,
+  },
   root: {
-    backgroundColor: 'rgb(250,251,252)',
+    backgroundColor: theme.palette.background.default,
     height: '100%',
     paddingTop: theme.spacing.unit * 4,
   },
   search: {
-    backgroundColor: '#fff',
+    backgroundColor: theme.palette.background.paper,
     marginBottom: theme.spacing.unit * 3,
   },
 });
 
 const settings = [
   {
-    icon: <FontAwesomeIcon icon={['fal', 'user-circle']} size='lg' />,
+    icon: ['fal', 'user-circle'],
     label: 'Account',
     name: 'account',
     options: [
@@ -38,7 +41,7 @@ const settings = [
     ],
   },
   {
-    icon: <FontAwesomeIcon icon={['fal', 'globe']} size='lg' />,
+    icon: ['fal', 'globe'],
     label: 'Language',
     name: 'lanaguage',
     options: [
@@ -46,7 +49,7 @@ const settings = [
     ],
   },
   {
-    icon: <FontAwesomeIcon icon={['fal', 'comment-plus']} size='lg' />,
+    icon: ['fal', 'comment-plus'],
     label: 'Subscriptions',
     name: 'subscriptions',
     options: [],
@@ -60,13 +63,13 @@ class ProfileSettings extends Component {
     return settings.map((setting) => {
       return (
         <ExpansionPanel key={setting.name}>
-          <ExpansionPanelSummary
-            expandIcon={<ExpandMoreIcon />}
-          >
-            {setting.icon ? setting.icon : null}
-            <Typography
-              className={classes.heading}
-            >
+          <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
+            {
+              setting.icon
+                ? <FontAwesomeIcon className={classes.icon} icon={setting.icon} size='lg' />
+                : null
+            }
+            <Typography className={classes.heading}>
               {setting.label}
             </Typography>
           </ExpansionPanelSummary>

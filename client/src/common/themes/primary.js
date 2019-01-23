@@ -4,6 +4,7 @@ import { createMuiTheme } from '@material-ui/core/styles';
 // const aqua = '#7fdbff';
 const blue = '#0074D9'; /* Medium Electric Blue */
 const dark = '#111111'; /* Medium Electric Blue */
+const darkish = '#333';
 const gray = '#999999';
 const green = '#3d9970';
 const light = '#f2f2f2';
@@ -26,6 +27,7 @@ export default createMuiTheme({
     consulting: { contrastText: offwhite, main: blue },
     cosmos: { contrastText: offwhite, main: dark },
     dark,
+    darkish,
     energy: { contrastText: offwhite, main: orange },
     finance: { contrastText: offwhite, main: green },
     green,

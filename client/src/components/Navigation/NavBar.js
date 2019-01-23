@@ -13,14 +13,14 @@ import NavUserMenu from './NavUserMenu';
 
 const styles = theme => ({
   appBar: {
-    backgroundColor: '#fefefe',
+    backgroundColor: theme.palette.background.default,
     zIndex: theme.zIndex.drawer + 1,
   },
   menuButton: {
     '&:hover': {
       color: theme.palette.blue,
     },
-    color: '#111',
+    color: theme.palette.text.primary,
     marginLeft: -12,
     marginRight: 20,
   },
@@ -28,7 +28,7 @@ const styles = theme => ({
     '&:hover': {
       color: theme.palette.blue,
     },
-    color: '#111',
+    color: theme.palette.text.primary,
     flexGrow: 1,
     fontWeight: 300,
     letterSpacing: 8,

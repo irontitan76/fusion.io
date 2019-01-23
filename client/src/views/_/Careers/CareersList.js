@@ -19,6 +19,9 @@ import TextField from '@material-ui/core/TextField';
 
 const styles = theme => ({
   careersList: {
+    backgroundColor: theme.palette.background.default,
+    marginTop: 0,
+    minHeight: '100vh',
     paddingLeft: theme.spacing.unit * 4,
     paddingRight: theme.spacing.unit * 4,
   },
@@ -26,7 +29,7 @@ const styles = theme => ({
     marginBottom: theme.spacing.unit * 3,
   },
   careersListFilters: {
-    backgroundColor: 'rgb(250,251,252)',
+    backgroundColor: theme.palette.background.paper,
     border: '1px solid #ccc',
     marginTop: theme.spacing.unit * 1.5,
     padding: theme.spacing.unit * 5,
@@ -42,7 +45,7 @@ const styles = theme => ({
     },
   },
   careersListTable: {
-    height: 500,
+    // height: 500,
   },
   careersListTitle: {
     marginBottom: theme.spacing.unit * 4,

@@ -155,61 +155,37 @@
     "rules": {
       "array-bracket-spacing": "error",
       "brace-style": "error",
-      "camelcase": [
-        "error",
-        {
-          "allow": [
-            "^.*(campaign|code|domain|email|feature|identity|locale|product|session|subscription|time|url).*$"
-          ]
-        }
-      ],
+      "camelcase": ["error", {
+        "allow": [
+          "^.*(campaign|code|domain|email|feature|identity|locale|product|session|subscription|time|url).*$"
+        ]
+      }],
       "capitalized-comments": "error",
-      "comma-dangle": [
-        "error",
-        {
-          "arrays": "always-multiline",
-          "objects": "always-multiline",
-          "imports": "always-multiline",
-          "exports": "always-multiline"
-        }
-      ],
+      "comma-dangle": ["error", {
+        "arrays": "always-multiline",
+        "objects": "always-multiline",
+        "imports": "always-multiline",
+        "exports": "always-multiline"
+      }],
       "comma-spacing": "error",
       "comma-style": "error",
       "func-call-spacing": "error",
       "import/no-unresolved": "off",
-      "indent": [
-        "warn",
-        2
-      ],
+      "indent": ["warn", 2],
       "jsx-a11y/label-has-for": "off",
-      "jsx-a11y/label-has-associated-control": [
-        2,
-        {
-          "controlComponents": [
-            "Button",
-            "Input"
-          ]
-        }
+      "jsx-a11y/label-has-associated-control": [2, {
+        "controlComponents": [
+          "Button",
+          "Input"
+        ]}
       ],
       "jsx-a11y/media-has-caption": "off",
-      "jsx-quotes": [
-        "warn",
-        "prefer-single"
-      ],
+      "jsx-quotes": ["warn", "prefer-single"],
       "keyword-spacing": "error",
       "lines-between-class-members": "error",
-      "max-depth": [
-        "error",
-        3
-      ],
-      "max-len": [
-        "error",
-        100
-      ],
-      "multiline-comment-style": [
-        "error",
-        "starred-block"
-      ],
+      "max-depth": ["error", 3],
+      "max-len": ["error", 100],
+      "multiline-comment-style": ["error", "starred-block"],
       "no-array-constructor": "error",
       "no-await-in-loop": "error",
       "no-extra-parens": "error",
@@ -230,38 +206,24 @@
       "no-var": "error",
       "no-whitespace-before-property": "error",
       "object-curly-spacing": "error",
-      "padded-blocks": [
-        "error",
-        "never"
-      ],
+      "padded-blocks": ["error", "never"],
       "prefer-const": "error",
       "prefer-destructuring": "error",
       "prefer-object-spread": "error",
       "prefer-spread": "error",
       "react/jsx-filename-extension": "off",
-      "react/jsx-no-duplicate-props": [
-        "error",
-        {
-          "ignoreCase": false
-        }
-      ],
-      "require-await": "error",
+      "react/jsx-no-duplicate-props": ["error", {
+        "ignoreCase": false
+      }],
       "semi": "error",
-      "semi-style": [
-        "error",
-        "last"
-      ],
+      "semi-style": ["error", "last"],
       "spaced-comment": "error",
       "space-before-blocks": "error",
       "space-infix-ops": "error",
       "space-in-parens": "error",
-      "sort-keys": [
-        "error",
-        "asc",
-        {
-          "caseSensitive": false
-        }
-      ],
+      "sort-keys": ["error", "asc", {
+        "caseSensitive": false
+      }],
       "sort-vars": "error"
     },
     "globals": {

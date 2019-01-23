@@ -9,67 +9,74 @@ import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import withStyles from '@material-ui/core/styles/withStyles';
 
-const styles = theme => ({
-  hero: {
-    backgroundImage: 'url("/images/city.jpg")',
-    backgroundRepeat: 'no-repeat',
-    backgroundSize: '100% 100%',
-    height: 750,
-    marginBottom: theme.spacing.unit * 3,
-    overflow: 'hidden',
-    [theme.breakpoints.down('xl')]: {
-      backgroundSize: '100% 120%',
+const styles = theme => {
+  const { breakpoints, palette, spacing } = theme;
+
+  const isDark = theme.palette.type === 'dark';
+
+  return {
+    hero: {
+      backgroundImage: 'url("/images/city.jpg")',
+      backgroundRepeat: 'no-repeat',
+      backgroundSize: '100% 100%',
+      height: 750,
+      marginBottom: spacing.unit * 3,
+      overflow: 'hidden',
+      [breakpoints.down('xl')]: {
+        backgroundSize: '100% 120%',
+      },
+      [breakpoints.down('lg')]: {
+        height: 550,
+      },
+      [breakpoints.down('xs')]: {
+        backgroundSize: '180% 120%',
+      },
     },
-    [theme.breakpoints.down('lg')]: {
-      height: 550,
+    heroButton: {
+      '&:hover': {
+        backgroundColor: `${isDark ? palette.dark : palette.light}dd`,
+        color: palette.blue,
+      },
+      backgroundColor: `${isDark ? palette.dark : palette.light}80`,
+      borderColor: `${isDark ? palette.dark : palette.light}aa`,
+      color: '#fff',
+      marginBottom: spacing.unit * 2,
     },
-    [theme.breakpoints.down('xs')]: {
-      backgroundSize: '180% 120%',
+    heroContent: {
+      backgroundColor: 'rgba(0,0,0,.35)',
+      color: palette.common.white,
+      height: '100%',
+      padding: `${spacing.unit * 5}px ${spacing.unit * 2}px`,
     },
-  },
-  heroButton: {
-    '&:hover': {
-      backgroundColor: 'rgba(255,255,255,.9)',
-      color: theme.palette.blue,
+    heroIcon: {
+      color: palette.light,
+      fontSize: '10rem',
+      marginBottom: spacing.unit * 3,
+      [breakpoints.down('xs')]: {
+        fontSize: '6rem',
+      },
     },
-    backgroundColor: 'rgba(255,255,255,.45)',
-    color: '#fff',
-    marginBottom: theme.spacing.unit * 2,
-  },
-  heroContent: {
-    backgroundColor: 'rgba(0,0,0,.35)',
-    color: theme.palette.common.white,
-    height: '100%',
-    padding: `${theme.spacing.unit * 5}px ${theme.spacing.unit * 2}px`,
-  },
-  heroIcon: {
-    color: theme.palette.common.white,
-    fontSize: '10rem',
-    marginBottom: theme.spacing.unit * 3,
-    [theme.breakpoints.down('xs')]: {
-      fontSize: '6rem',
+    heroSubtitle: {
+      color: palette.light,
+      fontSize: 24,
+      fontWeight: 500,
+      marginBottom: spacing.unit * 4,
+      [breakpoints.down('xs')]: {
+        fontSize: 16,
+      },
     },
-  },
-  heroSubtitle: {
-    color: theme.palette.common.white,
-    fontSize: 24,
-    fontWeight: 500,
-    marginBottom: theme.spacing.unit * 4,
-    [theme.breakpoints.down('xs')]: {
-      fontSize: 16,
+    heroTitle: {
+      color: palette.light,
+      fontSize: 32,
+      fontWeight: 300,
+      letterSpacing: 20,
+      textIndent: 28,
+      [breakpoints.down('xs')]: {
+        fontSize: 20,
+      },
     },
-  },
-  heroTitle: {
-    color: theme.palette.common.white,
-    fontSize: 32,
-    fontWeight: 300,
-    letterSpacing: 20,
-    textIndent: 28,
-    [theme.breakpoints.down('xs')]: {
-      fontSize: 20,
-    },
-  },
-});
+  };
+};
 
 // eslint-disable-next-line
 class HomeHero extends Component {
