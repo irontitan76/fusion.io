@@ -74,8 +74,8 @@ class NavUserMenu extends Component {
         component={Link}
         key={item.name}
         onClick={() => this.handleClick(item.name)}
-        to={item.path}
         style={{ fontSize: '.8125rem' }}
+        to={item.path}
       >
         <ListItemIcon>{ item.icon }</ListItemIcon>
         <ListItemText
@@ -89,11 +89,11 @@ class NavUserMenu extends Component {
     return (
       <>
         <IconButton
-          aria-owns={open ? 'menu-appbar' : null}
           aria-haspopup='true'
+          aria-owns={open ? 'menu-appbar' : null}
           className={classes.menuButton}
-          onClick={this.handleMenu}
           color='default'
+          onClick={this.handleMenu}
         >
           <img
             alt='avatar'
@@ -104,11 +104,11 @@ class NavUserMenu extends Component {
           />
         </IconButton>
         <Menu
-          id='menu-appbar'
           anchorEl={anchorEl}
           anchorOrigin={{ horizontal: 'left', vertical: 'top' }}
-          open={open}
+          id='menu-appbar'
           onClose={this.handleClose}
+          open={open}
           transformOrigin={{ horizontal: 'right', vertical: 'top' }}
         >
           {menuItems}

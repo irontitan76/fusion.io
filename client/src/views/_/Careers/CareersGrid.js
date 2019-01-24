@@ -217,8 +217,8 @@ class CareersGrid extends Component {
           <CardActions className={classes.teamActions}>
             <Button
               aria-label={team.button1.label}
-              color='primary'
               className={classes.teamButton}
+              color='primary'
               component={Link}
               size='small'
               to={team.button1.path}
@@ -227,8 +227,8 @@ class CareersGrid extends Component {
             </Button>
             <Button
               aria-label={team.button2.label}
-              color='primary'
               className={classes.teamButton}
+              color='primary'
               component={Link}
               onClick={() => onClick({
                 target: { name: 'team', value: intl.formatMessage({ id: team.title }) },

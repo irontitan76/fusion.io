@@ -173,11 +173,11 @@ class ProfileNavigation extends Component {
 
     return (
       <Drawer
-        className={classes.root}
         classes={{ paper: paperClass }}
-        open={open}
+        className={classes.root}
         onMouseEnter={() => this.toggleOpen('mouseEnter')}
         onMouseLeave={() => this.toggleOpen('mouseLeave')}
+        open={open}
         variant='permanent'
       >
 

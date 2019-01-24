@@ -51,7 +51,7 @@ class ReportHeader extends Component {
 
     return  (
       <Grid className={classes.root} container id={id} justify='center'>
-        <Grid item xl={5} md={6} xs={12}>
+        <Grid item md={6} xl={5} xs={12}>
           <Typography
             align='left'
             className={classes.reportHeader}

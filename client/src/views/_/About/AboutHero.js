@@ -109,9 +109,9 @@ class AboutHero extends Component {
 
     return (
       <Grid alignItems='center' className={classes.hero} container justify='center'>
-        <Grid item xl={8} md={7} />
+        <Grid item md={7} xl={8} />
 
-        <Grid item xl={3} md={4}>
+        <Grid item md={4} xl={3}>
           <Grid
             alignItems='center'
             className={classes.heroContent}

@@ -81,7 +81,7 @@ class CareersSearch extends Component {
         <Toolbar className={classes.searchBar}>
 
           <Grid container justify='center'>
-            <Grid item xl={3} md={5} xs={12}>
+            <Grid item md={5} xl={3} xs={12}>
               <TextField
                 classes={{ root: classes.searchField }}
                 fullWidth
@@ -92,9 +92,9 @@ class CareersSearch extends Component {
                   startAdornment: this.renderStartAdornment(),
                 }}
                 margin='none'
-                placeholder={label}
                 onChange={onSearch}
                 onFocus={() => dispatch(searchCareers(null, false, true))}
+                placeholder={label}
               />
             </Grid>
           </Grid>

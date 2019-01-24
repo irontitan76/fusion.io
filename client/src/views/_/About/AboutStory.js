@@ -74,9 +74,9 @@ class AboutStory extends Component {
                 component={Grid}
                 gutterBottom
                 item
+                md={5}
                 variant='subtitle1'
                 xl={7}
-                md={5}
                 xs={11}
               >
                 <FormattedMessage id='about.story.subtitle' />
@@ -88,9 +88,9 @@ class AboutStory extends Component {
                 component={Grid}
                 gutterBottom
                 item
+                md={8}
                 variant='body2'
                 xl={6}
-                md={8}
                 xs={11}
               >
                 {/* Use Markdown component */}

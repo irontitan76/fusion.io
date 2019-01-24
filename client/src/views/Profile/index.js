@@ -40,24 +40,24 @@ class Home extends Component {
 
     return (
       <>
-        <Route exact path={match.path} component={ProfileOverview} />
-        <Route exact path={`${match.path}/settings`} component={ProfileSettings} />
-        <Route exact path={`${match.path}/notifications`} component={ProfileNotifications} />
-        <Route exact path={`${match.path}/careers/new`} component={ProfileCareer} />
-        <Route exact path={`${match.path}/careers/edit/:itemId`} component={ProfileCareer} />
-        <Route exact path={`${match.path}/careers`} component={ProfileCareers} />
-        <Route exact path={`${match.path}/insights/new`} component={ProfileInsight} />
-        <Route exact path={`${match.path}/insights/edit/:itemId`} component={ProfileInsight} />
-        <Route exact path={`${match.path}/insights`} component={ProfileInsights} />
-        <Route exact path={`${match.path}/policies`} component={ProfilePolicies} />
-        <Route exact path={`${match.path}/policies/new`} component={ProfilePolicy} />
-        <Route exact path={`${match.path}/policies/edit/:itemId`} component={ProfilePolicy} />
-        <Route exact path={`${match.path}/standards/new`} component={ProfileStandard} />
-        <Route exact path={`${match.path}/standards/edit/:itemId`} component={ProfileStandard} />
-        <Route exact path={`${match.path}/standards`} component={ProfileStandards} />
-        <Route exact path={`${match.path}/strategies/new`} component={ProfileStrategy} />
-        <Route exact path={`${match.path}/strategies/edit/:itemId`} component={ProfileStrategy} />
-        <Route exact path={`${match.path}/strategies`} component={ProfileStrategies} />
+        <Route component={ProfileOverview} exact path={match.path} />
+        <Route component={ProfileSettings} exact path={`${match.path}/settings`} />
+        <Route component={ProfileNotifications} exact path={`${match.path}/notifications`} />
+        <Route component={ProfileCareer} exact path={`${match.path}/careers/new`}  />
+        <Route component={ProfileCareer} exact path={`${match.path}/careers/edit/:itemId`}  />
+        <Route component={ProfileCareers} exact path={`${match.path}/careers`} />
+        <Route component={ProfileInsight} exact path={`${match.path}/insights/new`} />
+        <Route component={ProfileInsight} exact path={`${match.path}/insights/edit/:itemId`} />
+        <Route component={ProfileInsights} exact path={`${match.path}/insights`} />
+        <Route component={ProfilePolicies} exact path={`${match.path}/policies`} />
+        <Route component={ProfilePolicy} exact path={`${match.path}/policies/new`} />
+        <Route component={ProfilePolicy} exact path={`${match.path}/policies/edit/:itemId`} />
+        <Route component={ProfileStandard} exact path={`${match.path}/standards/new`} />
+        <Route component={ProfileStandard} exact path={`${match.path}/standards/edit/:itemId`} />
+        <Route component={ProfileStandards} exact path={`${match.path}/standards`} />
+        <Route component={ProfileStrategy} exact path={`${match.path}/strategies/new`} />
+        <Route component={ProfileStrategy} exact path={`${match.path}/strategies/edit/:itemId`} />
+        <Route component={ProfileStrategies} exact path={`${match.path}/strategies`} />
       </>
     );
   };

@@ -34,9 +34,9 @@ class ReportFormDialog extends Component {
           {cancelButton}
         </Button>
         <Dialog
-          open={open}
-          onClose={this.handleClose}
           aria-labelledby={cancelButton}
+          onClose={this.handleClose}
+          open={open}
         >
           <DialogTitle id={cancelButton}>{cancelButton}</DialogTitle>
           <DialogContent>

@@ -53,8 +53,8 @@ class NavBar extends Component {
         </IconButton>
         <Typography
           className={classes.title}
-          component={Link}
           color='inherit'
+          component={Link}
           to='/'
           variant='h6'
         >

@@ -25,8 +25,8 @@ const NavDrawer = (props) => {
     <Drawer
       anchor={anchor}
       className={classes.root}
-      open={open}
       onClose={onClose}
+      open={open}
       transitionDuration={400}
       {...rest}
     >

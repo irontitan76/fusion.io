@@ -137,10 +137,10 @@ class ProfilePolicy extends Component {
     return (
       <ReportForm
         cancelButton={isExist ? 'Delete Policy' : null}
+        fields={fields}
         onCancel={isExist ? this.onDelete : null}
         onChange={this.onChange}
         onSubmit={isExist ? this.onUpdate : this.onCreate}
-        fields={fields}
         submitButton={text}
         title={text}
       />

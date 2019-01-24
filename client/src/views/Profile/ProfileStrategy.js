@@ -240,10 +240,10 @@ class ProfileStrategy extends Component {
     return (
       <ReportForm
         cancelButton={isExist ? 'Delete Strategy' : null}
+        fields={fields}
         onCancel={isExist ? this.onDelete : null}
         onChange={this.onChange}
         onSubmit={isExist ? this.onUpdate : this.onCreate}
-        fields={fields}
         submitButton={text}
         title={text}
       />

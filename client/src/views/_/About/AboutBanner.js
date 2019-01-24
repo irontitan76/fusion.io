@@ -67,8 +67,8 @@ class AboutBanner extends Component {
     return (
       <Grid
         alignItems='center'
-        container
         className={classes.banner}
+        container
         justify='space-around'
       >
         {this.renderAuthor()}

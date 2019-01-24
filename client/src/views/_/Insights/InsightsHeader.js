@@ -98,7 +98,7 @@ class InsightsHeader extends Component {
     );
 
     return (
-      <AppBar className={classes.header} position='sticky' elevation={0}>
+      <AppBar className={classes.header} elevation={0} position='sticky'>
         <Toolbar className={classes.headerBar}>
           <Grid alignItems='center' container justify='space-between'>
             <Grid item md={9} xs={12}>

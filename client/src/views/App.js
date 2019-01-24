@@ -85,15 +85,15 @@ const App = () => {
                   return (
                     <Layout>
                       <Fade
-                        key={location.pathname.split('/')[0]}
                         in
+                        key={location.pathname.split('/')[0]}
                         style={{ height: '100%' }}
                         timeout={400}
                       >
                         <div>
                           <Switch location={location}>
-                            <Route exact path='/' component={CompanyHome} />
-                            <Route exact path='/about' component={About} />
+                            <Route component={CompanyHome} exact path='/' />
+                            <Route component={About} exact path='/about' />
                             <Route
                               exact
                               path='/about/orgs'
@@ -101,42 +101,42 @@ const App = () => {
                                 <Redirect to='/about/organizations' />
                               )}
                             />
-                            <Route exact path='/about/organizations' component={Organizations} />
-                            <Route exact path='/standard' component={Standard} />
-                            <Route exact path='/strategy' component={Strategy} />
-                            <Route exact path='/careers' component={Careers} />
-                            <Route exact path='/careers/:careerId' component={Career} />
-                            <Route exact path='/contact' component={Contact} />
-                            <Route exact path='/insights' component={Insights} />
-                            <Route exact path='/insights/:insightId' component={Insight} />
-                            <Route exact path='/teams/:teamId' component={Team} />
+                            <Route component={Organizations} exact path='/about/organizations' />
+                            <Route component={Standard} exact path='/standard' />
+                            <Route component={Strategy} exact path='/strategy' />
+                            <Route component={Careers} exact path='/careers' />
+                            <Route component={Career} exact path='/careers/:careerId' />
+                            <Route component={Contact} exact path='/contact' />
+                            <Route component={Insights} exact path='/insights' />
+                            <Route component={Insight} exact path='/insights/:insightId' />
+                            <Route component={Team} exact path='/teams/:teamId' />
 
-                            <Route exact path='/company/cookies' component={Cookies} />
-                            <Route exact path='/company/privacy' component={PrivacyPolicy} />
-                            <Route exact path='/company/sitemap' component={SiteMap} />
-                            <Route exact path='/company/terms-of-use' component={TermsOfUse} />
+                            <Route component={Cookies} exact path='/company/cookies' />
+                            <Route component={PrivacyPolicy} exact path='/company/privacy' />
+                            <Route component={SiteMap} exact path='/company/sitemap' />
+                            <Route component={TermsOfUse} exact path='/company/terms-of-use' />
 
-                            <Route path='/profile' component={Profile} />
+                            <Route component={Profile} path='/profile' />
 
-                            <Route exact path='/consulting' component={ConsultingHome} />
-                            <Route exact path='/consulting/services' component={ConsultingServices} />
-                            <Route exact path='/consulting/solutions' component={ConsultingSolutions} />
+                            <Route component={ConsultingHome} exact path='/consulting' />
+                            <Route component={ConsultingServices} exact path='/consulting/services' />
+                            <Route component={ConsultingSolutions} exact path='/consulting/solutions' />
 
                             <Route exact path='/tech' render={() => <Redirect to='/technology' />} />
-                            <Route exact path='/technology' component={TechnologyHome} />
-                            <Route exact path='/technology/products' component={TechnologyProducts} />
+                            <Route component={TechnologyHome} exact path='/technology' />
+                            <Route component={TechnologyProducts} exact path='/technology/products' />
 
-                            <Route exact path='/ai' component={Landing} />
-                            <Route exact path='/cosmos' component={Landing} />
-                            <Route exact path='/energy' component={Landing} />
-                            <Route exact path='/finance' component={Landing} />
-                            <Route exact path='/health' component={Landing} />
-                            <Route exact path='/legal' component={Landing} />
-                            <Route exact path='/media' component={Landing} />
-                            <Route exact path='/transport' component={Landing} />
+                            <Route component={Landing} exact path='/ai' />
+                            <Route component={Landing} exact path='/cosmos' />
+                            <Route component={Landing} exact path='/energy' />
+                            <Route component={Landing} exact path='/finance' />
+                            <Route component={Landing} exact path='/health' />
+                            <Route component={Landing} exact path='/legal' />
+                            <Route component={Landing} exact path='/media' />
+                            <Route component={Landing} exact path='/transport' />
 
-                            <Route exact path='/login' component={Login} />
-                            <Route exact path='/signup' component={Signup} />
+                            <Route component={Login} exact path='/login' />
+                            <Route component={Signup} exact path='/signup' />
 
                             <Route component={NotFound} />
                           </Switch>

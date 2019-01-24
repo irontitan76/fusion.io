@@ -52,7 +52,7 @@ class ReportContent extends Component {
 
     return (
       <Grid className={classes.root} container justify='center'>
-        <Grid item xl={5} md={6} xs={12}>
+        <Grid item md={6} xl={5} xs={12}>
           <Typography
             className={classes.contentBody}
             component='div'

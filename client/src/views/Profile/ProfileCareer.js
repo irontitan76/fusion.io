@@ -261,10 +261,10 @@ class ProfileCareer extends Component {
     return (
       <ReportForm
         cancelButton={isExist ? 'Delete Career' : null}
+        fields={fields}
         onCancel={isExist ? this.onDelete : null}
         onChange={this.onChange}
         onSubmit={isExist ? this.onUpdate : this.onCreate}
-        fields={fields}
         submitButton={text}
         title={text}
       />

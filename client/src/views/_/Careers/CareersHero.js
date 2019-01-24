@@ -65,7 +65,7 @@ class CareersHero extends Component {
         directon='column'
         justify='center'
       >
-        <Grid item xl={4} md={6} xs={12}>
+        <Grid item md={6} xl={4} xs={12}>
           {this.renderMotto()}
         </Grid>
       </Grid>

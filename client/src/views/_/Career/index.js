@@ -49,7 +49,7 @@ class Career extends Component {
 
     return (
       <>
-        <Grid container component='main' justify='space-around'>
+        <Grid component='main' container justify='space-around'>
           <Grid item md={1} />
           <Grid item md={6} xs={12}>
             <Typography align='left' className={classes.heading} variant='h4'>
@@ -70,8 +70,8 @@ class Career extends Component {
             </Typography>
             <Typography
               align='left'
-              component={Markdown}
               className={classes.description}
+              component={Markdown}
               variant='body2'
             >
               {career.description}

@@ -215,6 +215,10 @@
       "react/jsx-no-duplicate-props": ["error", {
         "ignoreCase": false
       }],
+      "react/jsx-sort-props": ["error", {
+        "ignoreCase": true,
+        "reservedFirst": false
+      }],
       "semi": "error",
       "semi-style": ["error", "last"],
       "spaced-comment": "error",

@@ -19,14 +19,14 @@ class Nav extends Component {
     return (
       <nav>
         <NavBar
-          onClick={this._onClick}
           items={secondary}
+          onClick={this._onClick}
           title={title}
         />
         <NavMainMenu
+          items={primary}
           onClose={this._onClick}
           open={isNavOpen}
-          items={primary}
         />
       </nav>
     );

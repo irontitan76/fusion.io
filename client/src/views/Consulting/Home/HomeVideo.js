@@ -41,7 +41,7 @@ class HomeVideo extends Component {
           </Typography>
         </Grid>
         <Grid className={classes.homeVideoContainer} item>
-          <video height='100%' controls>
+          <video controls height='100%'>
             <source src='./fusion-full.mov' type='video/mp4' />
           </video>
         </Grid>

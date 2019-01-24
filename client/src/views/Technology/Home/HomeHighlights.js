@@ -100,7 +100,7 @@ class HomeHighlights extends Component {
   render() {
     return (
       <Grid container justify='center'>
-        <Grid item md={11} xs={12} xl={8}>
+        <Grid item md={11} xl={8} xs={12}>
           <Grid container justify='space-between' spacing={40}>
             {this.renderCards()}
           </Grid>

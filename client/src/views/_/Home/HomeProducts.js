@@ -161,7 +161,7 @@ class HomeProducts extends Component {
           </Typography>
         </Grid>
 
-        <Grid item xs={12} className={classes.product}>
+        <Grid className={classes.product} item xs={12}>
           <Grid
             className={classes.productContainer}
             container

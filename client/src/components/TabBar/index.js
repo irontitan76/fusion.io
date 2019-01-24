@@ -93,7 +93,7 @@ class TabBar extends Component {
     return (
       <Grid alignItems='center' container justify='center'>
         <Grid item xs={5}>
-          <Grid container alignItems='center'>
+          <Grid alignItems='center' container>
             <Grid item xs={2}>
               <FontAwesomeIcon className={classes.icon} icon={header.icon} />
             </Grid>

@@ -17,6 +17,9 @@ const styles = theme => ({
     paddingBottom: theme.spacing.unit * 2,
     paddingTop: theme.spacing.unit * 2,
   },
+  logoContainer: {
+    textDecoration: 'none',
+  },
   logoDisabled: {
     paddingBottom: theme.spacing.unit * 2,
     paddingTop: theme.spacing.unit * 2,
@@ -110,9 +113,9 @@ class HomeLogos extends Component {
       >
         <Typography
           align='center'
+          className={classes.logoContainer}
           component={item.disabled ? 'div' : Link}
           to={item.disabled ? null : item.to}
-          style={{ textDecoration: 'none' }}
         >
           <FontAwesomeIcon
             color={item.disabled ? '#bbb' : '#0074D9'}

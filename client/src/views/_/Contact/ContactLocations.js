@@ -33,7 +33,7 @@ class ContactLocations extends Component {
 
     return (
       <Grid className={classes.contactLocations} container justify='center'>
-        <Grid item xs={12} md={6}>
+        <Grid item md={6} xs={12}>
           <Typography gutterBottom variant='h6'>
             <FormattedMessage id='contact.locations.title' />
           </Typography>

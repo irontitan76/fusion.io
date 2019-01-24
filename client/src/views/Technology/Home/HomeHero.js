@@ -63,7 +63,7 @@ class HomeHero extends Component {
 
     return (
       <Grid container justify='center'>
-        <Grid className={classes.hero} item lg={11} md={10} xs={12} xl={8}>
+        <Grid className={classes.hero} item lg={11} md={10} xl={8} xs={12}>
           <Grid
             alignItems='center'
             className={classes.heroContent}
