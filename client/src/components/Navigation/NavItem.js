@@ -44,10 +44,10 @@ const styles = theme => ({
   },
   selected: {
     '&:hover': {
-      backgroundColor: `${theme.palette.blue} !important`,
+      backgroundColor: `${theme.palette.primary.main} !important`,
       opacity: .9,
     },
-    backgroundColor: `${theme.palette.blue} !important`,
+    backgroundColor: `${theme.palette.primary.main} !important`,
     color: `${theme.palette.common.white} !important`,
   },
 });

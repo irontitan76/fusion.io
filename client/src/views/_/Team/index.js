@@ -17,7 +17,7 @@ import Footer from 'components/Footer';
 const styles = theme => ({
   team: {},
   teamButton: {
-    color: theme.palette.blue,
+    color: theme.palette.primary.main,
     paddingLeft: theme.spacing.unit,
     paddingRight: theme.spacing.unit,
   },
@@ -52,7 +52,7 @@ const styles = theme => ({
     paddingRight: 0,
   },
   teamRoleCardHeaderTitle: {
-    color: theme.palette.blue,
+    color: theme.palette.primary.main,
   },
   teamTitle: {
     color: '#fff',

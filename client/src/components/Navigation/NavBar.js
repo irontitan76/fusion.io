@@ -18,7 +18,7 @@ const styles = theme => ({
   },
   menuButton: {
     '&:hover': {
-      color: theme.palette.blue,
+      color: theme.palette.primary.main,
     },
     color: theme.palette.text.primary,
     marginLeft: -12,
@@ -26,7 +26,7 @@ const styles = theme => ({
   },
   title: {
     '&:hover': {
-      color: theme.palette.blue,
+      color: theme.palette.primary.main,
     },
     color: theme.palette.text.primary,
     flexGrow: 1,

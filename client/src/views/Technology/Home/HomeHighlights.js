@@ -18,7 +18,7 @@ const styles = theme => ({
     '&:hover': {
       textDecoration: 'underline',
     },
-    color: theme.palette.blue,
+    color: theme.palette.primary.main,
     fontWeight: 500,
     textDecoration: 'none',
   },

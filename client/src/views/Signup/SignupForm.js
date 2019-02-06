@@ -68,7 +68,7 @@ const styles = theme => ({
     textDecoration: 'none',
   },
   signupFormTitlePaper: {
-    backgroundColor: theme.palette.blue,
+    backgroundColor: theme.palette.primary.main,
     paddingBottom: theme.spacing.unit * 5,
     paddingLeft: theme.spacing.unit * 3,
     paddingRight: theme.spacing.unit * 3,

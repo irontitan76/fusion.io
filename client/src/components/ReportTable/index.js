@@ -22,7 +22,7 @@ const styles = theme => ({
   },
   cell: {
     '& a:visited, a:link': {
-      color: theme.palette.blue,
+      color: theme.palette.primary.main,
     },
   },
   icon: {

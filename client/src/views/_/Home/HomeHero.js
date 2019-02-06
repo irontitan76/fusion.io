@@ -35,7 +35,7 @@ const styles = theme => {
     heroButton: {
       '&:hover': {
         backgroundColor: `${isDark ? palette.dark : palette.light}dd`,
-        color: palette.blue,
+        color: palette.primary.main,
       },
       backgroundColor: `${isDark ? palette.dark : palette.light}80`,
       borderColor: `${isDark ? palette.dark : palette.light}aa`,
@@ -43,7 +43,7 @@ const styles = theme => {
       marginBottom: spacing.unit * 2,
     },
     heroContent: {
-      backgroundColor: 'rgba(0,0,0,.35)',
+      backgroundColor: 'rgba(0,0,0,.15)',
       color: palette.common.white,
       height: '100%',
       padding: `${spacing.unit * 5}px ${spacing.unit * 2}px`,

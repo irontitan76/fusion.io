@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import withStyles from '@material-ui/core/styles/withStyles';
 
 import Footer from 'components/Footer';
+
 import HomeHero from './HomeHero';
 import HomeLogos from './HomeLogos';
 import HomeOverview from './HomeOverview';

@@ -9,7 +9,7 @@ import withStyles from '@material-ui/core/styles/withStyles';
 
 const styles = theme => ({
   hero: {
-    backgroundColor: theme.palette.blue,
+    backgroundColor: theme.palette.primary.main,
     backgroundImage: 'url("/images/city2.jpg")',
     backgroundRepeat: 'no-repeat',
     backgroundSize: '100% 100%',

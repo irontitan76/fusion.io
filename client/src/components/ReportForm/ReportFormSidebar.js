@@ -5,27 +5,29 @@ import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import withStyles from '@material-ui/core/styles/withStyles';
 
-const styles = theme => ({
-  root: {
-    backgroundColor: theme.palette.background.paper,
-    borderLeft: `1px solid ${theme.palette.gray}`,
-  },
-  text: {
-    '& a:link, a:visited': {
-      color: theme.palette.blue,
+const styles = theme => {
+  return {
+    root: {
+      backgroundColor: theme.palette.background.paper,
+      borderLeft: `1px solid ${theme.palette.grey[500]}`,
     },
-    fontWeight: 300,
-    paddingLeft: theme.spacing.unit * 2,
-    paddingRight: theme.spacing.unit * 2,
-  },
-  title: {
-    fontWeight: 400,
-    paddingBottom: theme.spacing.unit,
-    paddingLeft: theme.spacing.unit * 2,
-    paddingRight: theme.spacing.unit * 2,
-    paddingTop: theme.spacing.unit * 3,
-  },
-});
+    text: {
+      '& a:link, a:visited': {
+        color: theme.palette.primary.main,
+      },
+      fontWeight: 300,
+      paddingLeft: theme.spacing.unit * 2,
+      paddingRight: theme.spacing.unit * 2,
+    },
+    title: {
+      fontWeight: 400,
+      paddingBottom: theme.spacing.unit,
+      paddingLeft: theme.spacing.unit * 2,
+      paddingRight: theme.spacing.unit * 2,
+      paddingTop: theme.spacing.unit * 3,
+    },
+  };
+};
 
 class ReportFormSidebar extends Component {
   renderSections = () => {

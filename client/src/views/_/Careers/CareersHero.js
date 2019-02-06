@@ -7,11 +7,11 @@ import withStyles from '@material-ui/core/styles/withStyles';
 
 const styles = theme => ({
   blue: {
-    color: theme.palette.blue,
+    color: theme.palette.primary.main,
     fontWeight: 500,
   },
   green: {
-    color: theme.palette.green,
+    color: theme.palette.primary.green,
     fontWeight: 500,
   },
   hero: {
@@ -22,11 +22,11 @@ const styles = theme => ({
     padding: `${theme.spacing.unit * 12}px ${theme.spacing.unit * 3}px`,
   },
   red: {
-    color: theme.palette.red,
+    color: theme.palette.primary.red,
     fontWeight: 500,
   },
   yellow: {
-    color: theme.palette.yellow,
+    color: theme.palette.primary.yellow,
     fontWeight: 500,
   },
 });

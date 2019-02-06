@@ -17,7 +17,7 @@ const styles = theme => ({
     },
   },
   sidebarHeading: {
-    color: theme.palette.blue,
+    color: theme.palette.primary.main,
     paddingBottom: theme.spacing.unit * 3,
     paddingLeft: theme.spacing.unit * 2,
     paddingRight: theme.spacing.unit * 2,

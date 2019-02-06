@@ -55,6 +55,8 @@ import PrivacyPolicy from 'views/Policy/Privacy2';
 import SiteMap from 'views/Policy/sitemap';
 import TermsOfUse from 'views/Policy/terms';
 
+import Demo from 'views/Demo';
+
 // Maintenance
 import Landing from 'views/Landing';
 import i8n from '../i8n';
@@ -137,6 +139,8 @@ const App = () => {
 
                             <Route component={Login} exact path='/login' />
                             <Route component={Signup} exact path='/signup' />
+
+                            <Route component={Demo} exact path='/demo' />
 
                             <Route component={NotFound} />
                           </Switch>

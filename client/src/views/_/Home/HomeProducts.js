@@ -9,7 +9,7 @@ import withStyles from '@material-ui/core/styles/withStyles';
 
 const styles = theme => ({
   light: {
-    color: `${theme.palette.light} !important`,
+    color: `${theme.palette.grey} !important`,
   },
   product: {
     paddingBottom: theme.spacing.unit * 5,

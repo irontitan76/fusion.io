@@ -15,7 +15,7 @@ const styles = theme => {
   return {
     footer: {
       backgroundColor: theme.palette.background.default,
-      borderTop: '1px solid #dedede',
+      borderTop: `1px solid ${theme.palette.background.paper}`,
       paddingBottom: theme.spacing.unit * 3,
       paddingLeft: theme.spacing.unit * 4,
       paddingRight: theme.spacing.unit * 4,
@@ -30,7 +30,7 @@ const styles = theme => {
     },
     footerLink: {
       '&:hover': {
-        color: theme.palette.blue,
+        color: theme.palette.primary.main,
       },
       color: theme.palette.text.primary,
       textDecoration: 'none',
@@ -55,7 +55,7 @@ const styles = theme => {
     },
     footerSocialIcon: {
       '&:hover': {
-        color: theme.palette.blue,
+        color: theme.palette.primary.main,
       },
     },
     footerText: {

@@ -19,7 +19,7 @@ const styles = theme => ({
     borderTop: '1px solid #aaa',
   },
   bannerContent: {
-    color: theme.palette.navy,
+    color: theme.palette.primary.dark,
     padding: theme.spacing.unit * 5,
     [theme.breakpoints.down('sm')]: {
       paddingBottom: 0,

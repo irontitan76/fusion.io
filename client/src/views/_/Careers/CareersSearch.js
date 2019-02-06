@@ -28,11 +28,11 @@ const styles = theme => ({
   },
   searchField: {
     backgroundColor: theme.palette.background.paper,
-    border: `1px solid ${theme.palette.lightgray}`,
+    border: `1px solid ${theme.palette.grey['A100']}`,
     padding: `${theme.spacing.unit * .75}px 0px`,
   },
   searchIcon: {
-    color: theme.palette.gray,
+    color: theme.palette.grey[500],
     paddingLeft: 12,
   },
   searchInput: {

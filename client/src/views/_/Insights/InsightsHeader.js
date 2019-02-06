@@ -24,7 +24,7 @@ const styles = theme => ({
     },
   },
   headerBar: {
-    backgroundColor: theme.palette.blue,
+    backgroundColor: theme.palette.primary.main,
     [theme.breakpoints.down('sm')]: {
       paddingBottom: theme.spacing.unit * 2,
     },
